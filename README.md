@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.com/VMWSolutions/vmware-go-sdk.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/VMWSolutions/vmware-go-sdk.svg?token=eW5FVD71iyte6tTby8gr&branch=main)
+[![Build Status](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# go sdk for VMware service on IBM cloud 0.0.1
-Go client library to interact with the various [IBM Cloud VMware Solutions on IBM cloud APIs](https://cloud.ibm.com/apidocs?category=vmware).
+# IBM VMware service Go SDK Version 0.0.1
+Go client library to interact with the various [IBM Cloud MySDK Service APIs](https://cloud.ibm.com/apidocs?category=<service-category>).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -25,6 +25,10 @@ Changes might occur which impact applications that use this SDK.
 - [Installation](#installation)
   * [Go modules](#go-modules)
   * [`go get` command](#go-get-command)
+- [Authentication](#Authentication)
+  * [Authentication with environment variables](#authentication-with-environment-variables)
+  * [Authentication with external configuration](#authentication-with-external-configuration)
+  * [Programmatic authentication](#programmatic-authentication)
 - [Using the SDK](#using-the-sdk)
 - [Questions](#questions)
 - [Issues](#issues)
@@ -36,11 +40,11 @@ Changes might occur which impact applications that use this SDK.
 
 ## Overview
 
-The IBM Cloud VMware Solutions on IBM cloud Go SDK allows developers to programmatically interact with the following IBM Cloud services:
+The IBM Cloud MySDK Go SDK allows developers to programmatically interact with the following IBM Cloud services:
 
 Service Name | Package name 
 --- | --- 
-<!-- [Example Service](https://cloud.ibm.com/apidocs/example-service) | exampleservicev1 -->
+[VMware service](https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service) | vmwareasaserviceapiv1
 
 ## Prerequisites
 
@@ -60,25 +64,66 @@ Here is an example:
 
 ```go
 import (
-	"github.ibm.com/VMWSolutions/vmware-go-sdk/exampleservicev1"
+	"github.com/IBM/vmware-go-sdk/vmwareasaserviceapiv1"
 )
 ```
 Next, run `go build` or `go mod tidy` to download and install the new dependencies and update your application's
 `go.mod` file.  
 
-In the example above, the `exampleservicev1` part of the import path is the package name
-associated with the Example Service service.
-See the service table above to find the approprate package name for the services used by your application.
+In the example above, the `vmwareasaserviceapiv1` part of the import path is the package name
+associated with the VMware service.
+See the service table above to find the appropriate package name for the services used by your application.
 
 ### `go get` command  
 Alternatively, you can use the `go get` command to download and install the appropriate packages needed by your application:
 ```
-go get -u github.ibm.com/VMWSolutions/vmware-go-sdk/exampleservicev1
+go get -u github.com/IBM/vmware-go-sdk/vmwareasaserviceapiv1
 ```
 Be sure to use the appropriate package name from the service table above for the services used by your application.
 
+## Authentication
+
+[authenticator-properties]: https://github.com/IBM/go-sdk-core/blob/main/Authentication.md#properties-2
+[endpoint-urls]: https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service-endpoint-urls
+[external-configuration]: https://github.com/IBM/ibm-cloud-sdk-common#using-external-configuration
+[programmatic-configuration]: https://github.com/IBM/go-sdk-core/blob/main/Authentication.md
+
+There are several ways to **set** these properties:
+1. As [environment variables](#authentication-with-environment-variables)
+1. The [programmatic approach](#programmatic-authentication)
+1. With an [external credentials file](#authentication-with-external-configuration)
+
+### Authentication with environment variables
+
+#### IAM authentication
+
+For *IAM authentication*, set the following environmental variables by
+replacing the `<url>`, `<apikey>` and `<auth_url>` with your proper
+[authenticator properties][authenticator-properties] and [endpoint URLs][endpoint-urls].
+
+```bash
+V_MWARE_AS_A_SERVICE_API_AUTH_TYPE=iam
+V_MWARE_AS_A_SERVICE_API_URL=<url>
+V_MWARE_AS_A_SERVICE_API_APIKEY=<apikey>
+V_MWARE_AS_A_SERVICE_API_AUTH_URL=<auth_url>
+```
+
+### Authentication with external configuration
+
+To use an external configuration file, the
+[general SDK usage information][external-configuration] will guide you.
+
+### Programmatic authentication
+
+To learn more about how to use programmatic authentication, see the related
+documentation in the
+[Go SDK Core document][programmatic-configuration] about authentication.
+
 ## Using the SDK
-For general SDK usage information, please see [this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md)
+For general SDK usage information, please see [this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md).
+
+See [examples](https://github.ibm.com/VMWSolutions/go-sdk/tree/master/examples) for examples on using service operations.
+
 
 ## Questions
 
@@ -88,7 +133,7 @@ please ask a question at
 
 ## Issues
 If you encounter an issue with the project, you are welcome to submit a
-[bug report](https://github.ibm.com/VMWSolutions/vmware-go-sdk/issues).
+[bug report](<github-repo-url>/issues).
 Before that, please search for similar issues. It's possible that someone has already reported the problem.
 
 ## Open source @ IBM
