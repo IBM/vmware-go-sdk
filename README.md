@@ -1,7 +1,7 @@
 [![Build Status](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# IBM VMware service Go SDK Version 0.0.1
+# IBM Cloud MySDK Go SDK Version 0.0.1
 Go client library to interact with the various [IBM Cloud MySDK Service APIs](https://cloud.ibm.com/apidocs?category=<service-category>).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -133,7 +133,7 @@ please ask a question at
 
 ## Issues
 If you encounter an issue with the project, you are welcome to submit a
-[bug report](<github-repo-url>/issues).
+[bug report](https://github.ibm.com/VMWSolutions/vmware-go-sdk/issues).
 Before that, please search for similar issues. It's possible that someone has already reported the problem.
 
 ## Open source @ IBM
