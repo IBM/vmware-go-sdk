@@ -44,7 +44,7 @@ The IBM Cloud MySDK Go SDK allows developers to programmatically interact with t
 
 Service Name | Package name 
 --- | --- 
-[VMware service](https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service) | vmwareasaserviceapiv1
+[VMware](https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service) | vmwareasaserviceapiv1
 
 ## Prerequisites
 
