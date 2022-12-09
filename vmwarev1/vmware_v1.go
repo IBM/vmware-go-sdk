@@ -30,8 +30,8 @@ import (
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	common "github.com/IBM/vmware-go-sdk/common"
 	"github.com/go-openapi/strfmt"
+	common "github.ibm.com/VMWSolutions/vmware-go-sdk/common"
 )
 
 // VmwareV1 : IBM Cloud for VMware as a Service API

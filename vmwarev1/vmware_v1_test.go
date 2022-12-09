@@ -27,11 +27,11 @@ import (
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/IBM/vmware-go-sdk/vmwarev1"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
 	. "github.com/onsi/gomega/gstruct"
+	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
 )
 
 var _ = Describe(`VmwareV1`, func() {

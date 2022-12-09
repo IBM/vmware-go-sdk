@@ -25,9 +25,9 @@ import (
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/IBM/vmware-go-sdk/vmwarev1"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
 )
 
 /**
