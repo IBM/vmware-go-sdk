@@ -44,7 +44,7 @@ The IBM Cloud MySDK Go SDK allows developers to programmatically interact with t
 
 Service Name | Package name 
 --- | --- 
-[VMware service](https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service) | vmwareasaserviceapiv1
+[VMware](https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service) | vmwarev1
 
 ## Prerequisites
 
@@ -64,20 +64,20 @@ Here is an example:
 
 ```go
 import (
-	"github.com/IBM/vmware-go-sdk/vmwareasaserviceapiv1"
+	"github.com/IBM/vmware-go-sdk/vmwarev1"
 )
 ```
 Next, run `go build` or `go mod tidy` to download and install the new dependencies and update your application's
 `go.mod` file.  
 
-In the example above, the `vmwareasaserviceapiv1` part of the import path is the package name
+In the example above, the `vmwarev1` part of the import path is the package name
 associated with the VMware service.
 See the service table above to find the appropriate package name for the services used by your application.
 
 ### `go get` command  
 Alternatively, you can use the `go get` command to download and install the appropriate packages needed by your application:
 ```
-go get -u github.com/IBM/vmware-go-sdk/vmwareasaserviceapiv1
+go get -u github.com/IBM/vmware-go-sdk/vmwarev1
 ```
 Be sure to use the appropriate package name from the service table above for the services used by your application.
 
@@ -102,10 +102,10 @@ replacing the `<url>`, `<apikey>` and `<auth_url>` with your proper
 [authenticator properties][authenticator-properties] and [endpoint URLs][endpoint-urls].
 
 ```bash
-V_MWARE_AS_A_SERVICE_API_AUTH_TYPE=iam
-V_MWARE_AS_A_SERVICE_API_URL=<url>
-V_MWARE_AS_A_SERVICE_API_APIKEY=<apikey>
-V_MWARE_AS_A_SERVICE_API_AUTH_URL=<auth_url>
+VMWARE_API_AUTH_TYPE=iam
+VMWARE_API_URL=<url>
+VMWARE_API_APIKEY=<apikey>
+VMWARE_API_AUTH_URL=<auth_url>
 ```
 
 ### Authentication with external configuration
