@@ -1,0 +1,4 @@
+{ 
+  "pruneModels": true,
+  "generateOperationIds": true
+}
