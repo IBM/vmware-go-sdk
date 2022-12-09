@@ -122,7 +122,7 @@ documentation in the
 ## Using the SDK
 For general SDK usage information, please see [this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md).
 
-See [examples](https://github.ibm.com/VMWSolutions/go-sdk/tree/master/examples) for examples on using service operations.
+See [examples](https://github.ibm.com/VMWSolutions/vmware-go-sdk/tree/main/examples/) for examples on using service operations.
 
 
 ## Questions
