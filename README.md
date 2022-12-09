@@ -1,8 +1,8 @@
 [![Build Status](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# IBM VMware Go SDK Version 0.0.1
-Go client library to interact with the various [IBM Cloud MySDK Service APIs](https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service).
+# IBM Cloud VMware Go SDK Version 0.0.1
+Go client library to interact with the various [IBM Cloud VMware Service APIs](https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
 Changes might occur which impact applications that use this SDK.
@@ -40,7 +40,7 @@ Changes might occur which impact applications that use this SDK.
 
 ## Overview
 
-The IBM Cloud MySDK Go SDK allows developers to programmatically interact with the following IBM Cloud services:
+The IBM Cloud VMware Go SDK allows developers to programmatically interact with the following IBM Cloud services:
 
 Service Name | Package name 
 --- | --- 
