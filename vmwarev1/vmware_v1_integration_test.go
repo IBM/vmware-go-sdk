@@ -1,46 +1,24 @@
 //go:build integration
 // +build integration
 
-/**
- * (C) Copyright IBM Corp. 2022.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
-package vmwarev1
+package vmwarev1_test
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	. "github.com/onsi/ginkgo"
+	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
 )
 
-/**
- * This file contains an integration test for the vmwarev1 package.
- *
- * Notes:
- *
- * The integration test will automatically skip tests if the required config file is not available.
- */
-
-var _ = Describe(`VmwareV1 Integration Tests`, func() {
+var _ = Describe("vmware integration test", Ordered, func() {
 	const externalConfigFile = "../vmware_v1.env"
+	createdInstanceID := "3a54fa9c-3f79-495f-922b-cbb8bab1b31e"
 
 	var (
 		err           error
@@ -97,32 +75,43 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateDirectorSites(createDirectorSitesOptions *CreateDirectorSitesOptions)`, func() {
-			fileSharesModel := &vmwarev1.FileShares{}
+			fileSharesModel := &vmwarev1.FileShares{
+				STORAGETWOIOPSGB: core.Int64Ptr(int64(24000)),
+			}
 
 			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
-				Name:        core.StringPtr("testString"),
+				Name:        core.StringPtr("cluster_1"),
 				StorageType: core.StringPtr("nfs"),
 				HostCount:   core.Int64Ptr(int64(2)),
 				FileShares:  fileSharesModel,
-				HostProfile: core.StringPtr("testString"),
+				HostProfile: core.StringPtr("BM_2S_32_CORES_192_GB"),
 			}
 
 			pvdcOrderInfoModel := &vmwarev1.PVDCOrderInfo{
-				Name:       core.StringPtr("testString"),
-				DataCenter: core.StringPtr("testString"),
+				Name:       core.StringPtr("pvdc_1"),
+				DataCenter: core.StringPtr("tok02"),
 				Clusters:   []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
 			}
 
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
-				Name:          core.StringPtr("testString"),
-				ResourceGroup: core.StringPtr("testString"),
-				Pvdcs:         []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
+				Name:                core.StringPtr("sdk_test_4"),
+				ResourceGroup:       core.StringPtr("Default"),
+				Pvdcs:               []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
+				IBMAuthRefreshToken: core.StringPtr(config["AUTH_REFRESH_TOKEN"]),
 			}
 
+			res2B, _ := json.Marshal(createDirectorSitesOptions)
+			fmt.Println(string(res2B))
+
 			directorSite, response, err := vmwareService.CreateDirectorSites(createDirectorSitesOptions)
+			result, _ := json.Marshal(directorSite)
+			fmt.Println(string(result))
+
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(directorSite).ToNot(BeNil())
+			Expect(directorSite.ID).ToNot(BeNil())
+			createdInstanceID = *directorSite.ID
 		})
 	})
 
@@ -137,6 +126,14 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(listDirectorSites).ToNot(BeNil())
+
+			created := vmwarev1.DirectorSite{}
+			for _, ds := range listDirectorSites.DirectorSites {
+				if *(ds.ID) == createdInstanceID {
+					created = ds
+				}
+			}
+			Expect(*(created.ID)).To(Equal(createdInstanceID))
 		})
 	})
 
@@ -146,290 +143,14 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`GetDirectorSite(getDirectorSiteOptions *GetDirectorSiteOptions)`, func() {
 			getDirectorSiteOptions := &vmwarev1.GetDirectorSiteOptions{
-				SiteID: core.StringPtr("testString"),
+				SiteID: core.StringPtr(createdInstanceID),
 			}
 
 			directorSite, response, err := vmwareService.GetDirectorSite(getDirectorSiteOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSite).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ListDirectorSitesPvdcs - List the provider virtual data centers in a director site instance`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions)`, func() {
-			listDirectorSitesPvdcsOptions := &vmwarev1.ListDirectorSitesPvdcsOptions{
-				SiteID: core.StringPtr("testString"),
-			}
-
-			listPvdCs, response, err := vmwareService.ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(listPvdCs).ToNot(BeNil())
-		})
-	})
-
-	Describe(`CreateDirectorSitesPvdcs - Create a provider virtual data center instance in a specified director site`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions)`, func() {
-			fileSharesModel := &vmwarev1.FileShares{}
-
-			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
-				Name:        core.StringPtr("testString"),
-				StorageType: core.StringPtr("nfs"),
-				HostCount:   core.Int64Ptr(int64(2)),
-				FileShares:  fileSharesModel,
-				HostProfile: core.StringPtr("testString"),
-			}
-
-			createDirectorSitesPvdcsOptions := &vmwarev1.CreateDirectorSitesPvdcsOptions{
-				SiteID:     core.StringPtr("testString"),
-				Name:       core.StringPtr("testString"),
-				DataCenter: core.StringPtr("testString"),
-				Clusters:   []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
-			}
-
-			pvdcResponse, response, err := vmwareService.CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(pvdcResponse).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetDirectorSitesPvdcs - Get the specified provider virtual data center in a director site instance`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions)`, func() {
-			getDirectorSitesPvdcsOptions := &vmwarev1.GetDirectorSitesPvdcsOptions{
-				SiteID: core.StringPtr("testString"),
-				PvdcID: core.StringPtr("testString"),
-			}
-
-			pvdcSummary, response, err := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(pvdcSummary).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ListDirectorSitesPvdcsClusters - List clusters`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions *ListDirectorSitesPvdcsClustersOptions)`, func() {
-			listDirectorSitesPvdcsClustersOptions := &vmwarev1.ListDirectorSitesPvdcsClustersOptions{
-				SiteID: core.StringPtr("testString"),
-				PvdcID: core.StringPtr("testString"),
-			}
-
-			listClusters, response, err := vmwareService.ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(listClusters).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetDirectorInstancesPvdcsCluster - Get a cluster`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptions *GetDirectorInstancesPvdcsClusterOptions)`, func() {
-			getDirectorInstancesPvdcsClusterOptions := &vmwarev1.GetDirectorInstancesPvdcsClusterOptions{
-				SiteID:    core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
-				PvdcID:    core.StringPtr("testString"),
-			}
-
-			cluster, response, err := vmwareService.GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(cluster).ToNot(BeNil())
-		})
-	})
-
-	Describe(`UpdateDirectorSitesPvdcsCluster - Update a cluster`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions)`, func() {
-			jsonPatchOperationModel := &vmwarev1.JSONPatchOperation{
-				Op:   core.StringPtr("add"),
-				Path: core.StringPtr("testString"),
-			}
-
-			updateDirectorSitesPvdcsClusterOptions := &vmwarev1.UpdateDirectorSitesPvdcsClusterOptions{
-				SiteID:    core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
-				PvdcID:    core.StringPtr("testString"),
-				Body:      []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel},
-			}
-
-			updateClusterResponse, response, err := vmwareService.UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(updateClusterResponse).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ListDirectorSiteRegions - List regions`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ListDirectorSiteRegions(listDirectorSiteRegionsOptions *ListDirectorSiteRegionsOptions)`, func() {
-			listDirectorSiteRegionsOptions := &vmwarev1.ListDirectorSiteRegionsOptions{}
-
-			directorSiteRegions, response, err := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(directorSiteRegions).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ListDirectorSiteHostProfiles - List host profiles`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions *ListDirectorSiteHostProfilesOptions)`, func() {
-			listDirectorSiteHostProfilesOptions := &vmwarev1.ListDirectorSiteHostProfilesOptions{}
-
-			listHostProfiles, response, err := vmwareService.ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(listHostProfiles).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ReplaceOrgAdminPassword - Replace the password of VMware Cloud Director tenant portal`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ReplaceOrgAdminPassword(replaceOrgAdminPasswordOptions *ReplaceOrgAdminPasswordOptions)`, func() {
-			replaceOrgAdminPasswordOptions := &vmwarev1.ReplaceOrgAdminPasswordOptions{
-				SiteID: core.StringPtr("testString"),
-			}
-
-			newPassword, response, err := vmwareService.ReplaceOrgAdminPassword(replaceOrgAdminPasswordOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(newPassword).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ListPrices - List billing metrics`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ListPrices(listPricesOptions *ListPricesOptions)`, func() {
-			listPricesOptions := &vmwarev1.ListPricesOptions{}
-
-			directorSitePricingInfo, response, err := vmwareService.ListPrices(listPricesOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(directorSitePricingInfo).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetVcddPrice - Quote price`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetVcddPrice(getVcddPriceOptions *GetVcddPriceOptions)`, func() {
-			fileSharesModel := &vmwarev1.FileShares{}
-
-			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
-				Name:        core.StringPtr("testString"),
-				StorageType: core.StringPtr("nfs"),
-				HostCount:   core.Int64Ptr(int64(2)),
-				FileShares:  fileSharesModel,
-				HostProfile: core.StringPtr("testString"),
-			}
-
-			pvdcOrderInfoModel := &vmwarev1.PVDCOrderInfo{
-				Name:       core.StringPtr("testString"),
-				DataCenter: core.StringPtr("testString"),
-				Clusters:   []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
-			}
-
-			getVcddPriceOptions := &vmwarev1.GetVcddPriceOptions{
-				Name:          core.StringPtr("testString"),
-				ResourceGroup: core.StringPtr("testString"),
-				Pvdcs:         []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
-			}
-
-			directorSitePriceQuoteResponse, response, err := vmwareService.GetVcddPrice(getVcddPriceOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(directorSitePriceQuoteResponse).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ListVdcs - List Virtual Data Centers`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`ListVdcs(listVdcsOptions *ListVdcsOptions)`, func() {
-			listVdcsOptions := &vmwarev1.ListVdcsOptions{}
-
-			listVdCs, response, err := vmwareService.ListVdcs(listVdcsOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(listVdCs).ToNot(BeNil())
-		})
-	})
-
-	Describe(`CreateVdc - Create a Virtual Data Center`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`CreateVdc(createVdcOptions *CreateVdcOptions)`, func() {
-			vdcDirectorSiteClusterModel := &vmwarev1.VDCDirectorSiteCluster{
-				ID: core.StringPtr("testString"),
-			}
-
-			newVdcDirectorSiteModel := &vmwarev1.NewVDCDirectorSite{
-				ID:      core.StringPtr("testString"),
-				Cluster: vdcDirectorSiteClusterModel,
-			}
-
-			newVdcEdgeModel := &vmwarev1.NewVDCEdge{
-				Type: core.StringPtr("dedicated"),
-			}
-
-			newVdcResourceGroupModel := &vmwarev1.NewVDCResourceGroup{
-				ID: core.StringPtr("testString"),
-			}
-
-			createVdcOptions := &vmwarev1.CreateVdcOptions{
-				Name:         core.StringPtr("testString"),
-				DirectorSite: newVdcDirectorSiteModel,
-			}
-
-			vdc, response, err := vmwareService.CreateVdc(createVdcOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(vdc).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetVdc - Get a Virtual Data Center`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetVdc(getVdcOptions *GetVdcOptions)`, func() {
-			getVdcOptions := &vmwarev1.GetVdcOptions{
-				VdcID: core.StringPtr("testString"),
-			}
-
-			vdc, response, err := vmwareService.GetVdc(getVdcOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(vdc).ToNot(BeNil())
+			Expect(*(directorSite.Status)).To(Equal(vmwarev1.DirectorSite_Status_Creating))
 		})
 	})
 
@@ -439,7 +160,8 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
 			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
-				SiteID: core.StringPtr("testString"),
+				SiteID:              core.StringPtr("e42668d0-7f1f-434b-a710-e96a15de15e6"),
+				IBMAuthRefreshToken: core.StringPtr(config["AUTH_REFRESH_TOKEN"]),
 			}
 
 			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
@@ -449,41 +171,4 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteDirectorSitesPvdcsCluster - Delete a cluster`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions *DeleteDirectorSitesPvdcsClusterOptions)`, func() {
-			deleteDirectorSitesPvdcsClusterOptions := &vmwarev1.DeleteDirectorSitesPvdcsClusterOptions{
-				SiteID:    core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
-				PvdcID:    core.StringPtr("testString"),
-			}
-
-			pvdcResponse, response, err := vmwareService.DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(pvdcResponse).ToNot(BeNil())
-		})
-	})
-
-	Describe(`DeleteVdc - Delete a Virtual Data Center`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
-			deleteVdcOptions := &vmwarev1.DeleteVdcOptions{
-				VdcID: core.StringPtr("testString"),
-			}
-
-			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(vdc).ToNot(BeNil())
-		})
-	})
 })
-
-//
-// Utility functions are declared in the unit test file
-//
