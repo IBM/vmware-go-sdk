@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.54.2-6c0e29d4-20220824-204545
+ * IBM OpenAPI SDK Code Generator Version: 99-SNAPSHOT-df265cd0-20221201-141156
  */
 
 // Package vmwarev1 : Operations and models for the VmwareV1 service
@@ -198,6 +198,9 @@ func (vmware *VmwareV1) CreateDirectorSitesWithContext(ctx context.Context, crea
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
+	if createDirectorSitesOptions.IBMAuthRefreshToken != nil {
+		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*createDirectorSitesOptions.IBMAuthRefreshToken))
+	}
 	if createDirectorSitesOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*createDirectorSitesOptions.AcceptLanguage))
 	}
@@ -403,6 +406,9 @@ func (vmware *VmwareV1) DeleteDirectorSiteWithContext(ctx context.Context, delet
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
+	if deleteDirectorSiteOptions.IBMAuthRefreshToken != nil {
+		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*deleteDirectorSiteOptions.IBMAuthRefreshToken))
+	}
 	if deleteDirectorSiteOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*deleteDirectorSiteOptions.AcceptLanguage))
 	}
@@ -539,6 +545,9 @@ func (vmware *VmwareV1) CreateDirectorSitesPvdcsWithContext(ctx context.Context,
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
+	if createDirectorSitesPvdcsOptions.IBMAuthRefreshToken != nil {
+		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*createDirectorSitesPvdcsOptions.IBMAuthRefreshToken))
+	}
 	if createDirectorSitesPvdcsOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*createDirectorSitesPvdcsOptions.AcceptLanguage))
 	}
@@ -825,6 +834,9 @@ func (vmware *VmwareV1) DeleteDirectorSitesPvdcsClusterWithContext(ctx context.C
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
+	if deleteDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken != nil {
+		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*deleteDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken))
+	}
 	if deleteDirectorSitesPvdcsClusterOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*deleteDirectorSitesPvdcsClusterOptions.AcceptLanguage))
 	}
@@ -895,6 +907,9 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json-patch+json")
+	if updateDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken != nil {
+		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*updateDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken))
+	}
 	if updateDirectorSitesPvdcsClusterOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*updateDirectorSitesPvdcsClusterOptions.AcceptLanguage))
 	}
@@ -1542,7 +1557,7 @@ type Cluster struct {
 	BillingPlan *string `json:"billing_plan,omitempty"`
 
 	// The chosen storage policies and their sizes.
-	FileShares interface{} `json:"file_shares,omitempty"`
+	FileShares map[string]interface{} `json:"file_shares,omitempty"`
 }
 
 // Constants associated with the Cluster.StorageType property.
@@ -1751,6 +1766,9 @@ func UnmarshalClusterSummary(m map[string]json.RawMessage, result interface{}) (
 
 // CreateDirectorSitesOptions : The CreateDirectorSites options.
 type CreateDirectorSitesOptions struct {
+	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
+	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+
 	// Name of the director site instance. Use a name that is unique to your region and meaningful. Names cannot be changed
 	// after initial creation.
 	Name *string `json:"name" validate:"required"`
@@ -1772,12 +1790,19 @@ type CreateDirectorSitesOptions struct {
 }
 
 // NewCreateDirectorSitesOptions : Instantiate CreateDirectorSitesOptions
-func (*VmwareV1) NewCreateDirectorSitesOptions(name string, resourceGroup string, pvdcs []PVDCOrderInfo) *CreateDirectorSitesOptions {
+func (*VmwareV1) NewCreateDirectorSitesOptions(iBMAuthRefreshToken string, name string, resourceGroup string, pvdcs []PVDCOrderInfo) *CreateDirectorSitesOptions {
 	return &CreateDirectorSitesOptions{
+		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
 		Name: core.StringPtr(name),
 		ResourceGroup: core.StringPtr(resourceGroup),
 		Pvdcs: pvdcs,
 	}
+}
+
+// SetIBMAuthRefreshToken : Allow user to set IBMAuthRefreshToken
+func (_options *CreateDirectorSitesOptions) SetIBMAuthRefreshToken(iBMAuthRefreshToken string) *CreateDirectorSitesOptions {
+	_options.IBMAuthRefreshToken = core.StringPtr(iBMAuthRefreshToken)
+	return _options
 }
 
 // SetName : Allow user to set Name
@@ -1821,6 +1846,9 @@ type CreateDirectorSitesPvdcsOptions struct {
 	// A unique identifier for the director site in which the virtual data center was created.
 	SiteID *string `json:"site_id" validate:"required,ne="`
 
+	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
+	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+
 	// Name of the provider virtual data center. Provider virtual data center names must be unique per director site
 	// instance. Provider virtual data center names cannot be changed after creation.
 	Name *string `json:"name" validate:"required"`
@@ -1842,9 +1870,10 @@ type CreateDirectorSitesPvdcsOptions struct {
 }
 
 // NewCreateDirectorSitesPvdcsOptions : Instantiate CreateDirectorSitesPvdcsOptions
-func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, name string, dataCenter string, clusters []ClusterOrderInfo) *CreateDirectorSitesPvdcsOptions {
+func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, iBMAuthRefreshToken string, name string, dataCenter string, clusters []ClusterOrderInfo) *CreateDirectorSitesPvdcsOptions {
 	return &CreateDirectorSitesPvdcsOptions{
 		SiteID: core.StringPtr(siteID),
+		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
 		Name: core.StringPtr(name),
 		DataCenter: core.StringPtr(dataCenter),
 		Clusters: clusters,
@@ -1854,6 +1883,12 @@ func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, name string, 
 // SetSiteID : Allow user to set SiteID
 func (_options *CreateDirectorSitesPvdcsOptions) SetSiteID(siteID string) *CreateDirectorSitesPvdcsOptions {
 	_options.SiteID = core.StringPtr(siteID)
+	return _options
+}
+
+// SetIBMAuthRefreshToken : Allow user to set IBMAuthRefreshToken
+func (_options *CreateDirectorSitesPvdcsOptions) SetIBMAuthRefreshToken(iBMAuthRefreshToken string) *CreateDirectorSitesPvdcsOptions {
+	_options.IBMAuthRefreshToken = core.StringPtr(iBMAuthRefreshToken)
 	return _options
 }
 
@@ -1995,6 +2030,9 @@ type DeleteDirectorSiteOptions struct {
 	// A unique identifier for the director site in which the virtual data center was created.
 	SiteID *string `json:"site_id" validate:"required,ne="`
 
+	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
+	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
@@ -2006,15 +2044,22 @@ type DeleteDirectorSiteOptions struct {
 }
 
 // NewDeleteDirectorSiteOptions : Instantiate DeleteDirectorSiteOptions
-func (*VmwareV1) NewDeleteDirectorSiteOptions(siteID string) *DeleteDirectorSiteOptions {
+func (*VmwareV1) NewDeleteDirectorSiteOptions(siteID string, iBMAuthRefreshToken string) *DeleteDirectorSiteOptions {
 	return &DeleteDirectorSiteOptions{
 		SiteID: core.StringPtr(siteID),
+		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
 	}
 }
 
 // SetSiteID : Allow user to set SiteID
 func (_options *DeleteDirectorSiteOptions) SetSiteID(siteID string) *DeleteDirectorSiteOptions {
 	_options.SiteID = core.StringPtr(siteID)
+	return _options
+}
+
+// SetIBMAuthRefreshToken : Allow user to set IBMAuthRefreshToken
+func (_options *DeleteDirectorSiteOptions) SetIBMAuthRefreshToken(iBMAuthRefreshToken string) *DeleteDirectorSiteOptions {
+	_options.IBMAuthRefreshToken = core.StringPtr(iBMAuthRefreshToken)
 	return _options
 }
 
@@ -2047,6 +2092,9 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 	// A unique identifier for the provider virtual data center in a director site.
 	PvdcID *string `json:"pvdc_id" validate:"required,ne="`
 
+	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
+	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
@@ -2058,11 +2106,12 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 }
 
 // NewDeleteDirectorSitesPvdcsClusterOptions : Instantiate DeleteDirectorSitesPvdcsClusterOptions
-func (*VmwareV1) NewDeleteDirectorSitesPvdcsClusterOptions(siteID string, clusterID string, pvdcID string) *DeleteDirectorSitesPvdcsClusterOptions {
+func (*VmwareV1) NewDeleteDirectorSitesPvdcsClusterOptions(siteID string, clusterID string, pvdcID string, iBMAuthRefreshToken string) *DeleteDirectorSitesPvdcsClusterOptions {
 	return &DeleteDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
 		ClusterID: core.StringPtr(clusterID),
 		PvdcID: core.StringPtr(pvdcID),
+		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
 	}
 }
 
@@ -2081,6 +2130,12 @@ func (_options *DeleteDirectorSitesPvdcsClusterOptions) SetClusterID(clusterID s
 // SetPvdcID : Allow user to set PvdcID
 func (_options *DeleteDirectorSitesPvdcsClusterOptions) SetPvdcID(pvdcID string) *DeleteDirectorSitesPvdcsClusterOptions {
 	_options.PvdcID = core.StringPtr(pvdcID)
+	return _options
+}
+
+// SetIBMAuthRefreshToken : Allow user to set IBMAuthRefreshToken
+func (_options *DeleteDirectorSitesPvdcsClusterOptions) SetIBMAuthRefreshToken(iBMAuthRefreshToken string) *DeleteDirectorSitesPvdcsClusterOptions {
+	_options.IBMAuthRefreshToken = core.StringPtr(iBMAuthRefreshToken)
 	return _options
 }
 
@@ -3811,6 +3866,9 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 	// A unique identifier for the provider virtual data center in a director site.
 	PvdcID *string `json:"pvdc_id" validate:"required,ne="`
 
+	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
+	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+
 	// Array of patch operations as defined in RFC 6902.
 	Body []JSONPatchOperation `json:"body" validate:"required"`
 
@@ -3825,11 +3883,12 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 }
 
 // NewUpdateDirectorSitesPvdcsClusterOptions : Instantiate UpdateDirectorSitesPvdcsClusterOptions
-func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, clusterID string, pvdcID string, body []JSONPatchOperation) *UpdateDirectorSitesPvdcsClusterOptions {
+func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, clusterID string, pvdcID string, iBMAuthRefreshToken string, body []JSONPatchOperation) *UpdateDirectorSitesPvdcsClusterOptions {
 	return &UpdateDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
 		ClusterID: core.StringPtr(clusterID),
 		PvdcID: core.StringPtr(pvdcID),
+		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
 		Body: body,
 	}
 }
@@ -3849,6 +3908,12 @@ func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetClusterID(clusterID s
 // SetPvdcID : Allow user to set PvdcID
 func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetPvdcID(pvdcID string) *UpdateDirectorSitesPvdcsClusterOptions {
 	_options.PvdcID = core.StringPtr(pvdcID)
+	return _options
+}
+
+// SetIBMAuthRefreshToken : Allow user to set IBMAuthRefreshToken
+func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetIBMAuthRefreshToken(iBMAuthRefreshToken string) *UpdateDirectorSitesPvdcsClusterOptions {
+	_options.IBMAuthRefreshToken = core.StringPtr(iBMAuthRefreshToken)
 	return _options
 }
 

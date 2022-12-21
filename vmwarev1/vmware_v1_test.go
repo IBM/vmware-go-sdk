@@ -174,6 +174,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPath))
 					Expect(req.Method).To(Equal("POST"))
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -214,6 +216,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
+				createDirectorSitesOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
@@ -265,6 +268,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -310,6 +315,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
+				createDirectorSitesOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
@@ -367,6 +373,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -414,6 +422,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
+				createDirectorSitesOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
@@ -459,6 +468,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
+				createDirectorSitesOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
@@ -525,6 +535,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
+				createDirectorSitesOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
@@ -1011,6 +1022,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitePath))
 					Expect(req.Method).To(Equal("DELETE"))
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1031,6 +1044,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
 				deleteDirectorSiteOptionsModel.SiteID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1063,6 +1077,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitePath))
 					Expect(req.Method).To(Equal("DELETE"))
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1088,6 +1104,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
 				deleteDirectorSiteOptionsModel.SiteID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1126,6 +1143,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitePath))
 					Expect(req.Method).To(Equal("DELETE"))
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1153,6 +1172,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
 				deleteDirectorSiteOptionsModel.SiteID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1175,6 +1195,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
 				deleteDirectorSiteOptionsModel.SiteID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1218,6 +1239,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
 				deleteDirectorSiteOptionsModel.SiteID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1479,6 +1501,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPvdcsPath))
 					Expect(req.Method).To(Equal("POST"))
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1514,6 +1538,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
@@ -1565,6 +1590,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1605,6 +1632,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
@@ -1662,6 +1690,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1704,6 +1734,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
@@ -1744,6 +1775,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
@@ -1805,6 +1837,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
@@ -2557,6 +2590,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("DELETE"))
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2579,6 +2614,7 @@ var _ = Describe(`VmwareV1`, func() {
 				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2611,6 +2647,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2638,6 +2676,7 @@ var _ = Describe(`VmwareV1`, func() {
 				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2676,6 +2715,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2705,6 +2746,7 @@ var _ = Describe(`VmwareV1`, func() {
 				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2729,6 +2771,7 @@ var _ = Describe(`VmwareV1`, func() {
 				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2774,6 +2817,7 @@ var _ = Describe(`VmwareV1`, func() {
 				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2801,6 +2845,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("PATCH"))
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2830,6 +2876,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
@@ -2879,6 +2926,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2913,6 +2962,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
@@ -2968,6 +3018,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
+					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -3004,6 +3056,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
@@ -3036,6 +3089,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
@@ -3089,6 +3143,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.ClusterID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
@@ -5439,10 +5494,12 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(pvdcOrderInfoModel.Clusters).To(Equal([]vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}))
 
 				// Construct an instance of the CreateDirectorSitesOptions model
+				ibmAuthRefreshToken := "testString"
 				createDirectorSitesOptionsName := "testString"
 				createDirectorSitesOptionsResourceGroup := "testString"
 				createDirectorSitesOptionsPvdcs := []vmwarev1.PVDCOrderInfo{}
-				createDirectorSitesOptionsModel := vmwareService.NewCreateDirectorSitesOptions(createDirectorSitesOptionsName, createDirectorSitesOptionsResourceGroup, createDirectorSitesOptionsPvdcs)
+				createDirectorSitesOptionsModel := vmwareService.NewCreateDirectorSitesOptions(ibmAuthRefreshToken, createDirectorSitesOptionsName, createDirectorSitesOptionsResourceGroup, createDirectorSitesOptionsPvdcs)
+				createDirectorSitesOptionsModel.SetIBMAuthRefreshToken("testString")
 				createDirectorSitesOptionsModel.SetName("testString")
 				createDirectorSitesOptionsModel.SetResourceGroup("testString")
 				createDirectorSitesOptionsModel.SetPvdcs([]vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel})
@@ -5450,6 +5507,7 @@ var _ = Describe(`VmwareV1`, func() {
 				createDirectorSitesOptionsModel.SetXGlobalTransactionID("testString")
 				createDirectorSitesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createDirectorSitesOptionsModel).ToNot(BeNil())
+				Expect(createDirectorSitesOptionsModel.IBMAuthRefreshToken).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesOptionsModel.ResourceGroup).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesOptionsModel.Pvdcs).To(Equal([]vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}))
@@ -5486,11 +5544,13 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				siteID := "testString"
+				ibmAuthRefreshToken := "testString"
 				createDirectorSitesPvdcsOptionsName := "testString"
 				createDirectorSitesPvdcsOptionsDataCenter := "testString"
 				createDirectorSitesPvdcsOptionsClusters := []vmwarev1.ClusterOrderInfo{}
-				createDirectorSitesPvdcsOptionsModel := vmwareService.NewCreateDirectorSitesPvdcsOptions(siteID, createDirectorSitesPvdcsOptionsName, createDirectorSitesPvdcsOptionsDataCenter, createDirectorSitesPvdcsOptionsClusters)
+				createDirectorSitesPvdcsOptionsModel := vmwareService.NewCreateDirectorSitesPvdcsOptions(siteID, ibmAuthRefreshToken, createDirectorSitesPvdcsOptionsName, createDirectorSitesPvdcsOptionsDataCenter, createDirectorSitesPvdcsOptionsClusters)
 				createDirectorSitesPvdcsOptionsModel.SetSiteID("testString")
+				createDirectorSitesPvdcsOptionsModel.SetIBMAuthRefreshToken("testString")
 				createDirectorSitesPvdcsOptionsModel.SetName("testString")
 				createDirectorSitesPvdcsOptionsModel.SetDataCenter("testString")
 				createDirectorSitesPvdcsOptionsModel.SetClusters([]vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel})
@@ -5499,6 +5559,7 @@ var _ = Describe(`VmwareV1`, func() {
 				createDirectorSitesPvdcsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createDirectorSitesPvdcsOptionsModel).ToNot(BeNil())
 				Expect(createDirectorSitesPvdcsOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsOptionsModel.IBMAuthRefreshToken).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesPvdcsOptionsModel.Name).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesPvdcsOptionsModel.DataCenter).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesPvdcsOptionsModel.Clusters).To(Equal([]vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}))
@@ -5556,13 +5617,16 @@ var _ = Describe(`VmwareV1`, func() {
 			It(`Invoke NewDeleteDirectorSiteOptions successfully`, func() {
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				siteID := "testString"
-				deleteDirectorSiteOptionsModel := vmwareService.NewDeleteDirectorSiteOptions(siteID)
+				ibmAuthRefreshToken := "testString"
+				deleteDirectorSiteOptionsModel := vmwareService.NewDeleteDirectorSiteOptions(siteID, ibmAuthRefreshToken)
 				deleteDirectorSiteOptionsModel.SetSiteID("testString")
+				deleteDirectorSiteOptionsModel.SetIBMAuthRefreshToken("testString")
 				deleteDirectorSiteOptionsModel.SetAcceptLanguage("testString")
 				deleteDirectorSiteOptionsModel.SetXGlobalTransactionID("testString")
 				deleteDirectorSiteOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteDirectorSiteOptionsModel).ToNot(BeNil())
 				Expect(deleteDirectorSiteOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteDirectorSiteOptionsModel.IBMAuthRefreshToken).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDirectorSiteOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDirectorSiteOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDirectorSiteOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -5572,10 +5636,12 @@ var _ = Describe(`VmwareV1`, func() {
 				siteID := "testString"
 				clusterID := "testString"
 				pvdcID := "testString"
-				deleteDirectorSitesPvdcsClusterOptionsModel := vmwareService.NewDeleteDirectorSitesPvdcsClusterOptions(siteID, clusterID, pvdcID)
+				ibmAuthRefreshToken := "testString"
+				deleteDirectorSitesPvdcsClusterOptionsModel := vmwareService.NewDeleteDirectorSitesPvdcsClusterOptions(siteID, clusterID, pvdcID, ibmAuthRefreshToken)
 				deleteDirectorSitesPvdcsClusterOptionsModel.SetSiteID("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.SetClusterID("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.SetPvdcID("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SetIBMAuthRefreshToken("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.SetAcceptLanguage("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.SetXGlobalTransactionID("testString")
 				deleteDirectorSitesPvdcsClusterOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -5583,6 +5649,7 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.ClusterID).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -5882,11 +5949,13 @@ var _ = Describe(`VmwareV1`, func() {
 				siteID := "testString"
 				clusterID := "testString"
 				pvdcID := "testString"
+				ibmAuthRefreshToken := "testString"
 				body := []vmwarev1.JSONPatchOperation{}
-				updateDirectorSitesPvdcsClusterOptionsModel := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(siteID, clusterID, pvdcID, body)
+				updateDirectorSitesPvdcsClusterOptionsModel := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(siteID, clusterID, pvdcID, ibmAuthRefreshToken, body)
 				updateDirectorSitesPvdcsClusterOptionsModel.SetSiteID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetClusterID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetPvdcID("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.SetIBMAuthRefreshToken("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetBody([]vmwarev1.JSONPatchOperation{*jsonPatchOperationModel})
 				updateDirectorSitesPvdcsClusterOptionsModel.SetAcceptLanguage("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetXGlobalTransactionID("testString")
@@ -5895,6 +5964,7 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.ClusterID).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
+				Expect(updateDirectorSitesPvdcsClusterOptionsModel.IBMAuthRefreshToken).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Body).To(Equal([]vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
