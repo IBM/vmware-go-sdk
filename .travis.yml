@@ -40,5 +40,5 @@ deploy:
     script: npx semantic-release
     skip_cleanup: true
     on:
-      go: '1.16.x'
-      branch: main
+      go: '1.18.x'
+      branch: master
