@@ -67,14 +67,13 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_URL": "https://vmwarev1/api",
+				"VMWARE_URL":       "https://vmwarev1/api",
 				"VMWARE_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
-				})
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
 				Expect(vmwareService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -103,8 +102,7 @@ var _ = Describe(`VmwareV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
-				})
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
 				err := vmwareService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
@@ -122,13 +120,12 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_URL": "https://vmwarev1/api",
+				"VMWARE_URL":       "https://vmwarev1/api",
 				"VMWARE_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
-			})
+			vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(vmwareService).To(BeNil())
@@ -139,7 +136,7 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_AUTH_TYPE":   "NOAuth",
+				"VMWARE_AUTH_TYPE": "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -174,8 +171,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPath))
 					Expect(req.Method).To(Equal("POST"))
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -268,8 +265,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -373,8 +370,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1022,8 +1019,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitePath))
 					Expect(req.Method).To(Equal("DELETE"))
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1077,8 +1074,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitePath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1143,8 +1140,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitePath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1501,8 +1498,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPvdcsPath))
 					Expect(req.Method).To(Equal("POST"))
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1590,8 +1587,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -1690,8 +1687,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2590,8 +2587,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("DELETE"))
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2647,8 +2644,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2715,8 +2712,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("DELETE"))
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2845,8 +2842,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("PATCH"))
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -2926,8 +2923,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -3018,8 +3015,8 @@ var _ = Describe(`VmwareV1`, func() {
 					}
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
-					Expect(req.Header["Ibm-Auth-Refresh-Token"]).ToNot(BeNil())
-					Expect(req.Header["Ibm-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Auth-Refresh-Token"]).ToNot(BeNil())
+					Expect(req.Header["X-Auth-Refresh-Token"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
@@ -5924,11 +5921,11 @@ var _ = Describe(`VmwareV1`, func() {
 					return *op.(vmwarev1.JSONPatchOperation).Path
 				}
 				Expect(updateClusterResponsePatch).To(MatchAllElements(_path, Elements{
-				"/message": MatchAllFields(Fields{
-					"Op": PointTo(Equal(vmwarev1.JSONPatchOperation_Op_Add)),
-					"Path": PointTo(Equal("/message")),
-					"From": BeNil(),
-					"Value": Equal(updateClusterResponse.Message),
+					"/message": MatchAllFields(Fields{
+						"Op":    PointTo(Equal(vmwarev1.JSONPatchOperation_Op_Add)),
+						"Path":  PointTo(Equal("/message")),
+						"From":  BeNil(),
+						"Value": Equal(updateClusterResponse.Message),
 					}),
 				}))
 			})

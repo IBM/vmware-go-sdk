@@ -199,7 +199,7 @@ func (vmware *VmwareV1) CreateDirectorSitesWithContext(ctx context.Context, crea
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 	if createDirectorSitesOptions.IBMAuthRefreshToken != nil {
-		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*createDirectorSitesOptions.IBMAuthRefreshToken))
+		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*createDirectorSitesOptions.IBMAuthRefreshToken))
 	}
 	if createDirectorSitesOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*createDirectorSitesOptions.AcceptLanguage))
@@ -407,7 +407,7 @@ func (vmware *VmwareV1) DeleteDirectorSiteWithContext(ctx context.Context, delet
 	}
 	builder.AddHeader("Accept", "application/json")
 	if deleteDirectorSiteOptions.IBMAuthRefreshToken != nil {
-		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*deleteDirectorSiteOptions.IBMAuthRefreshToken))
+		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*deleteDirectorSiteOptions.IBMAuthRefreshToken))
 	}
 	if deleteDirectorSiteOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*deleteDirectorSiteOptions.AcceptLanguage))
@@ -546,7 +546,7 @@ func (vmware *VmwareV1) CreateDirectorSitesPvdcsWithContext(ctx context.Context,
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
 	if createDirectorSitesPvdcsOptions.IBMAuthRefreshToken != nil {
-		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*createDirectorSitesPvdcsOptions.IBMAuthRefreshToken))
+		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*createDirectorSitesPvdcsOptions.IBMAuthRefreshToken))
 	}
 	if createDirectorSitesPvdcsOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*createDirectorSitesPvdcsOptions.AcceptLanguage))
@@ -743,9 +743,9 @@ func (vmware *VmwareV1) GetDirectorInstancesPvdcsClusterWithContext(ctx context.
 	}
 
 	pathParamsMap := map[string]string{
-		"site_id": *getDirectorInstancesPvdcsClusterOptions.SiteID,
+		"site_id":    *getDirectorInstancesPvdcsClusterOptions.SiteID,
 		"cluster_id": *getDirectorInstancesPvdcsClusterOptions.ClusterID,
-		"pvdc_id": *getDirectorInstancesPvdcsClusterOptions.PvdcID,
+		"pvdc_id":    *getDirectorInstancesPvdcsClusterOptions.PvdcID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -812,9 +812,9 @@ func (vmware *VmwareV1) DeleteDirectorSitesPvdcsClusterWithContext(ctx context.C
 	}
 
 	pathParamsMap := map[string]string{
-		"site_id": *deleteDirectorSitesPvdcsClusterOptions.SiteID,
+		"site_id":    *deleteDirectorSitesPvdcsClusterOptions.SiteID,
 		"cluster_id": *deleteDirectorSitesPvdcsClusterOptions.ClusterID,
-		"pvdc_id": *deleteDirectorSitesPvdcsClusterOptions.PvdcID,
+		"pvdc_id":    *deleteDirectorSitesPvdcsClusterOptions.PvdcID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -835,7 +835,7 @@ func (vmware *VmwareV1) DeleteDirectorSitesPvdcsClusterWithContext(ctx context.C
 	}
 	builder.AddHeader("Accept", "application/json")
 	if deleteDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken != nil {
-		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*deleteDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken))
+		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*deleteDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken))
 	}
 	if deleteDirectorSitesPvdcsClusterOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*deleteDirectorSitesPvdcsClusterOptions.AcceptLanguage))
@@ -884,9 +884,9 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 	}
 
 	pathParamsMap := map[string]string{
-		"site_id": *updateDirectorSitesPvdcsClusterOptions.SiteID,
+		"site_id":    *updateDirectorSitesPvdcsClusterOptions.SiteID,
 		"cluster_id": *updateDirectorSitesPvdcsClusterOptions.ClusterID,
-		"pvdc_id": *updateDirectorSitesPvdcsClusterOptions.PvdcID,
+		"pvdc_id":    *updateDirectorSitesPvdcsClusterOptions.PvdcID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -908,7 +908,7 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json-patch+json")
 	if updateDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken != nil {
-		builder.AddHeader("IBM-Auth-Refresh-Token", fmt.Sprint(*updateDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken))
+		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*updateDirectorSitesPvdcsClusterOptions.IBMAuthRefreshToken))
 	}
 	if updateDirectorSitesPvdcsClusterOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*updateDirectorSitesPvdcsClusterOptions.AcceptLanguage))
@@ -1660,10 +1660,10 @@ const (
 // NewClusterOrderInfo : Instantiate ClusterOrderInfo (Generic Model Constructor)
 func (*VmwareV1) NewClusterOrderInfo(name string, storageType string, hostCount int64, fileShares *FileShares, hostProfile string) (_model *ClusterOrderInfo, err error) {
 	_model = &ClusterOrderInfo{
-		Name: core.StringPtr(name),
+		Name:        core.StringPtr(name),
 		StorageType: core.StringPtr(storageType),
-		HostCount: core.Int64Ptr(hostCount),
-		FileShares: fileShares,
+		HostCount:   core.Int64Ptr(hostCount),
+		FileShares:  fileShares,
 		HostProfile: core.StringPtr(hostProfile),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -1767,7 +1767,7 @@ func UnmarshalClusterSummary(m map[string]json.RawMessage, result interface{}) (
 // CreateDirectorSitesOptions : The CreateDirectorSites options.
 type CreateDirectorSitesOptions struct {
 	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
-	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+	IBMAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
 
 	// Name of the director site instance. Use a name that is unique to your region and meaningful. Names cannot be changed
 	// after initial creation.
@@ -1793,9 +1793,9 @@ type CreateDirectorSitesOptions struct {
 func (*VmwareV1) NewCreateDirectorSitesOptions(iBMAuthRefreshToken string, name string, resourceGroup string, pvdcs []PVDCOrderInfo) *CreateDirectorSitesOptions {
 	return &CreateDirectorSitesOptions{
 		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
-		Name: core.StringPtr(name),
-		ResourceGroup: core.StringPtr(resourceGroup),
-		Pvdcs: pvdcs,
+		Name:                core.StringPtr(name),
+		ResourceGroup:       core.StringPtr(resourceGroup),
+		Pvdcs:               pvdcs,
 	}
 }
 
@@ -1847,7 +1847,7 @@ type CreateDirectorSitesPvdcsOptions struct {
 	SiteID *string `json:"site_id" validate:"required,ne="`
 
 	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
-	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+	IBMAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
 
 	// Name of the provider virtual data center. Provider virtual data center names must be unique per director site
 	// instance. Provider virtual data center names cannot be changed after creation.
@@ -1872,11 +1872,11 @@ type CreateDirectorSitesPvdcsOptions struct {
 // NewCreateDirectorSitesPvdcsOptions : Instantiate CreateDirectorSitesPvdcsOptions
 func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, iBMAuthRefreshToken string, name string, dataCenter string, clusters []ClusterOrderInfo) *CreateDirectorSitesPvdcsOptions {
 	return &CreateDirectorSitesPvdcsOptions{
-		SiteID: core.StringPtr(siteID),
+		SiteID:              core.StringPtr(siteID),
 		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
-		Name: core.StringPtr(name),
-		DataCenter: core.StringPtr(dataCenter),
-		Clusters: clusters,
+		Name:                core.StringPtr(name),
+		DataCenter:          core.StringPtr(dataCenter),
+		Clusters:            clusters,
 	}
 }
 
@@ -1953,7 +1953,7 @@ type CreateVdcOptions struct {
 // NewCreateVdcOptions : Instantiate CreateVdcOptions
 func (*VmwareV1) NewCreateVdcOptions(name string, directorSite *NewVDCDirectorSite) *CreateVdcOptions {
 	return &CreateVdcOptions{
-		Name: core.StringPtr(name),
+		Name:         core.StringPtr(name),
 		DirectorSite: directorSite,
 	}
 }
@@ -2031,7 +2031,7 @@ type DeleteDirectorSiteOptions struct {
 	SiteID *string `json:"site_id" validate:"required,ne="`
 
 	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
-	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+	IBMAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -2046,7 +2046,7 @@ type DeleteDirectorSiteOptions struct {
 // NewDeleteDirectorSiteOptions : Instantiate DeleteDirectorSiteOptions
 func (*VmwareV1) NewDeleteDirectorSiteOptions(siteID string, iBMAuthRefreshToken string) *DeleteDirectorSiteOptions {
 	return &DeleteDirectorSiteOptions{
-		SiteID: core.StringPtr(siteID),
+		SiteID:              core.StringPtr(siteID),
 		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
 	}
 }
@@ -2093,7 +2093,7 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 	PvdcID *string `json:"pvdc_id" validate:"required,ne="`
 
 	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
-	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+	IBMAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -2108,9 +2108,9 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 // NewDeleteDirectorSitesPvdcsClusterOptions : Instantiate DeleteDirectorSitesPvdcsClusterOptions
 func (*VmwareV1) NewDeleteDirectorSitesPvdcsClusterOptions(siteID string, clusterID string, pvdcID string, iBMAuthRefreshToken string) *DeleteDirectorSitesPvdcsClusterOptions {
 	return &DeleteDirectorSitesPvdcsClusterOptions{
-		SiteID: core.StringPtr(siteID),
-		ClusterID: core.StringPtr(clusterID),
-		PvdcID: core.StringPtr(pvdcID),
+		SiteID:              core.StringPtr(siteID),
+		ClusterID:           core.StringPtr(clusterID),
+		PvdcID:              core.StringPtr(pvdcID),
 		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
 	}
 }
@@ -2237,11 +2237,11 @@ type DirectorSite struct {
 // Constants associated with the DirectorSite.Status property.
 // The status of director site.
 const (
-	DirectorSite_Status_Creating = "Creating"
-	DirectorSite_Status_Deleted = "Deleted"
-	DirectorSite_Status_Deleting = "Deleting"
+	DirectorSite_Status_Creating   = "Creating"
+	DirectorSite_Status_Deleted    = "Deleted"
+	DirectorSite_Status_Deleting   = "Deleting"
 	DirectorSite_Status_Readytouse = "ReadyToUse"
-	DirectorSite_Status_Updating = "Updating"
+	DirectorSite_Status_Updating   = "Updating"
 )
 
 // UnmarshalDirectorSite unmarshals an instance of DirectorSite from the specified map of raw messages.
@@ -2486,8 +2486,8 @@ type Edge struct {
 // which the Virtual Data Center was created to be deployed.
 const (
 	Edge_Size_ExtraLarge = "extra_large"
-	Edge_Size_Large = "large"
-	Edge_Size_Medium = "medium"
+	Edge_Size_Large      = "large"
+	Edge_Size_Medium     = "medium"
 )
 
 // Constants associated with the Edge.Type property.
@@ -2497,7 +2497,7 @@ const (
 // VDCs.
 const (
 	Edge_Type_Dedicated = "dedicated"
-	Edge_Type_Shared = "shared"
+	Edge_Type_Shared    = "shared"
 )
 
 // UnmarshalEdge unmarshals an instance of Edge from the specified map of raw messages.
@@ -2616,9 +2616,9 @@ type GetDirectorInstancesPvdcsClusterOptions struct {
 // NewGetDirectorInstancesPvdcsClusterOptions : Instantiate GetDirectorInstancesPvdcsClusterOptions
 func (*VmwareV1) NewGetDirectorInstancesPvdcsClusterOptions(siteID string, clusterID string, pvdcID string) *GetDirectorInstancesPvdcsClusterOptions {
 	return &GetDirectorInstancesPvdcsClusterOptions{
-		SiteID: core.StringPtr(siteID),
+		SiteID:    core.StringPtr(siteID),
 		ClusterID: core.StringPtr(clusterID),
-		PvdcID: core.StringPtr(pvdcID),
+		PvdcID:    core.StringPtr(pvdcID),
 	}
 }
 
@@ -2785,9 +2785,9 @@ type GetVcddPriceOptions struct {
 // NewGetVcddPriceOptions : Instantiate GetVcddPriceOptions
 func (*VmwareV1) NewGetVcddPriceOptions(name string, resourceGroup string, pvdcs []PVDCOrderInfo) *GetVcddPriceOptions {
 	return &GetVcddPriceOptions{
-		Name: core.StringPtr(name),
+		Name:          core.StringPtr(name),
 		ResourceGroup: core.StringPtr(resourceGroup),
-		Pvdcs: pvdcs,
+		Pvdcs:         pvdcs,
 	}
 }
 
@@ -2955,18 +2955,18 @@ type JSONPatchOperation struct {
 // Constants associated with the JSONPatchOperation.Op property.
 // The operation to be performed.
 const (
-	JSONPatchOperation_Op_Add = "add"
-	JSONPatchOperation_Op_Copy = "copy"
-	JSONPatchOperation_Op_Move = "move"
-	JSONPatchOperation_Op_Remove = "remove"
+	JSONPatchOperation_Op_Add     = "add"
+	JSONPatchOperation_Op_Copy    = "copy"
+	JSONPatchOperation_Op_Move    = "move"
+	JSONPatchOperation_Op_Remove  = "remove"
 	JSONPatchOperation_Op_Replace = "replace"
-	JSONPatchOperation_Op_Test = "test"
+	JSONPatchOperation_Op_Test    = "test"
 )
 
 // NewJSONPatchOperation : Instantiate JSONPatchOperation (Generic Model Constructor)
 func (*VmwareV1) NewJSONPatchOperation(op string, path string) (_model *JSONPatchOperation, err error) {
 	_model = &JSONPatchOperation{
-		Op: core.StringPtr(op),
+		Op:   core.StringPtr(op),
 		Path: core.StringPtr(path),
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -3380,7 +3380,7 @@ type NewVDCDirectorSite struct {
 // NewNewVDCDirectorSite : Instantiate NewVDCDirectorSite (Generic Model Constructor)
 func (*VmwareV1) NewNewVDCDirectorSite(id string, cluster *VDCDirectorSiteCluster) (_model *NewVDCDirectorSite, err error) {
 	_model = &NewVDCDirectorSite{
-		ID: core.StringPtr(id),
+		ID:      core.StringPtr(id),
 		Cluster: cluster,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -3415,15 +3415,15 @@ type NewVDCEdge struct {
 // The size of the Edge. Only used for Edges of type dedicated.
 const (
 	NewVDCEdge_Size_ExtraLarge = "extra_large"
-	NewVDCEdge_Size_Large = "large"
-	NewVDCEdge_Size_Medium = "medium"
+	NewVDCEdge_Size_Large      = "large"
+	NewVDCEdge_Size_Medium     = "medium"
 )
 
 // Constants associated with the NewVDCEdge.Type property.
 // The type of Edge to be deployed on the Virtual Data Center.
 const (
 	NewVDCEdge_Type_Dedicated = "dedicated"
-	NewVDCEdge_Type_Shared = "shared"
+	NewVDCEdge_Type_Shared    = "shared"
 )
 
 // NewNewVDCEdge : Instantiate NewVDCEdge (Generic Model Constructor)
@@ -3493,9 +3493,9 @@ type PVDCOrderInfo struct {
 // NewPVDCOrderInfo : Instantiate PVDCOrderInfo (Generic Model Constructor)
 func (*VmwareV1) NewPVDCOrderInfo(name string, dataCenter string, clusters []ClusterOrderInfo) (_model *PVDCOrderInfo, err error) {
 	_model = &PVDCOrderInfo{
-		Name: core.StringPtr(name),
+		Name:       core.StringPtr(name),
 		DataCenter: core.StringPtr(dataCenter),
-		Clusters: clusters,
+		Clusters:   clusters,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -3545,11 +3545,11 @@ type PVDCResponse struct {
 // Constants associated with the PVDCResponse.Status property.
 // The provider virtual data center ordering status.
 const (
-	PVDCResponse_Status_Creating = "Creating"
-	PVDCResponse_Status_Deleted = "Deleted"
-	PVDCResponse_Status_Deleting = "Deleting"
-	PVDCResponse_Status_Failed = "Failed"
-	PVDCResponse_Status_Modifying = "Modifying"
+	PVDCResponse_Status_Creating   = "Creating"
+	PVDCResponse_Status_Deleted    = "Deleted"
+	PVDCResponse_Status_Deleting   = "Deleting"
+	PVDCResponse_Status_Failed     = "Failed"
+	PVDCResponse_Status_Modifying  = "Modifying"
 	PVDCResponse_Status_Readytouse = "ReadyToUse"
 )
 
@@ -3845,10 +3845,10 @@ func UnmarshalUpdateClusterResponse(m map[string]json.RawMessage, result interfa
 }
 
 func (*VmwareV1) NewUpdateClusterResponsePatch(updateClusterResponse *UpdateClusterResponse) (_patch []JSONPatchOperation) {
-	if (updateClusterResponse.Message != nil) {
+	if updateClusterResponse.Message != nil {
 		_patch = append(_patch, JSONPatchOperation{
-			Op: core.StringPtr(JSONPatchOperation_Op_Add),
-			Path: core.StringPtr("/message"),
+			Op:    core.StringPtr(JSONPatchOperation_Op_Add),
+			Path:  core.StringPtr("/message"),
 			Value: updateClusterResponse.Message,
 		})
 	}
@@ -3867,7 +3867,7 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 	PvdcID *string `json:"pvdc_id" validate:"required,ne="`
 
 	// Your IBM Cloud Identity and Access Management (IAM) refresh token.
-	IBMAuthRefreshToken *string `json:"IBM-Auth-Refresh-Token" validate:"required"`
+	IBMAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
 
 	// Array of patch operations as defined in RFC 6902.
 	Body []JSONPatchOperation `json:"body" validate:"required"`
@@ -3885,11 +3885,11 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 // NewUpdateDirectorSitesPvdcsClusterOptions : Instantiate UpdateDirectorSitesPvdcsClusterOptions
 func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, clusterID string, pvdcID string, iBMAuthRefreshToken string, body []JSONPatchOperation) *UpdateDirectorSitesPvdcsClusterOptions {
 	return &UpdateDirectorSitesPvdcsClusterOptions{
-		SiteID: core.StringPtr(siteID),
-		ClusterID: core.StringPtr(clusterID),
-		PvdcID: core.StringPtr(pvdcID),
+		SiteID:              core.StringPtr(siteID),
+		ClusterID:           core.StringPtr(clusterID),
+		PvdcID:              core.StringPtr(pvdcID),
 		IBMAuthRefreshToken: core.StringPtr(iBMAuthRefreshToken),
-		Body: body,
+		Body:                body,
 	}
 }
 
@@ -4009,11 +4009,11 @@ const (
 // Constants associated with the VDC.Status property.
 // Determines the state the Virtual Data Center is currently in.
 const (
-	VDC_Status_Creating = "Creating"
-	VDC_Status_Deleted = "Deleted"
-	VDC_Status_Deleting = "Deleting"
-	VDC_Status_Failed = "Failed"
-	VDC_Status_Modifying = "Modifying"
+	VDC_Status_Creating   = "Creating"
+	VDC_Status_Deleted    = "Deleted"
+	VDC_Status_Deleting   = "Deleting"
+	VDC_Status_Failed     = "Failed"
+	VDC_Status_Modifying  = "Modifying"
 	VDC_Status_Readytouse = "ReadyToUse"
 )
 
