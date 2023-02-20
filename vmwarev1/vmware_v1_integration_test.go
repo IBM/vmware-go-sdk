@@ -1,7 +1,7 @@
 // +build integration
 
 /**
- * (C) Copyright IBM Corp. 2022.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -105,7 +105,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 
 			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
 				Name: core.StringPtr("testString"),
-				StorageType: core.StringPtr("nfs"),
 				HostCount: core.Int64Ptr(int64(2)),
 				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
@@ -118,7 +117,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				Name: core.StringPtr("testString"),
 				ResourceGroup: core.StringPtr("testString"),
 				Pvdcs: []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
@@ -156,7 +155,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`GetDirectorSite(getDirectorSiteOptions *GetDirectorSiteOptions)`, func() {
 			getDirectorSiteOptions := &vmwarev1.GetDirectorSiteOptions{
-				SiteID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
@@ -200,7 +199,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 
 			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
 				Name: core.StringPtr("testString"),
-				StorageType: core.StringPtr("nfs"),
 				HostCount: core.Int64Ptr(int64(2)),
 				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
@@ -208,7 +206,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 
 			createDirectorSitesPvdcsOptions := &vmwarev1.CreateDirectorSitesPvdcsOptions{
 				SiteID: core.StringPtr("testString"),
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				Name: core.StringPtr("testString"),
 				DataCenter: core.StringPtr("testString"),
 				Clusters: []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
@@ -230,15 +228,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions)`, func() {
 			getDirectorSitesPvdcsOptions := &vmwarev1.GetDirectorSitesPvdcsOptions{
 				SiteID: core.StringPtr("testString"),
-				PvdcID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			pvdcSummary, response, err := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions)
+			pvdcResponse, response, err := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(pvdcSummary).ToNot(BeNil())
+			Expect(pvdcResponse).ToNot(BeNil())
 		})
 	})
 
@@ -268,7 +266,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptions *GetDirectorInstancesPvdcsClusterOptions)`, func() {
 			getDirectorInstancesPvdcsClusterOptions := &vmwarev1.GetDirectorInstancesPvdcsClusterOptions{
 				SiteID: core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				PvdcID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
@@ -295,9 +293,9 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 
 			updateDirectorSitesPvdcsClusterOptions := &vmwarev1.UpdateDirectorSitesPvdcsClusterOptions{
 				SiteID: core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				PvdcID: core.StringPtr("testString"),
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				Body: []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel},
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
@@ -391,7 +389,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 
 			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
 				Name: core.StringPtr("testString"),
-				StorageType: core.StringPtr("nfs"),
 				HostCount: core.Int64Ptr(int64(2)),
 				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
@@ -407,6 +404,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				Name: core.StringPtr("testString"),
 				ResourceGroup: core.StringPtr("testString"),
 				Pvdcs: []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
+				Country: core.StringPtr("USA"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
@@ -439,13 +437,13 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateVdc(createVdcOptions *CreateVdcOptions)`, func() {
-			vdcDirectorSiteClusterModel := &vmwarev1.VDCDirectorSiteCluster{
+			directorSitePvdcModel := &vmwarev1.DirectorSitePVDC{
 				ID: core.StringPtr("testString"),
 			}
 
 			newVdcDirectorSiteModel := &vmwarev1.NewVDCDirectorSite{
 				ID: core.StringPtr("testString"),
-				Cluster: vdcDirectorSiteClusterModel,
+				Pvdc: directorSitePvdcModel,
 			}
 
 			newVdcEdgeModel := &vmwarev1.NewVDCEdge{
@@ -478,7 +476,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`GetVdc(getVdcOptions *GetVdcOptions)`, func() {
 			getVdcOptions := &vmwarev1.GetVdcOptions{
-				VdcID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 			}
 
@@ -489,22 +487,20 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteDirectorSite - Delete a director site instance`, func() {
+	Describe(`DeleteVdc - Delete a Virtual Data Center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
-			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
-				SiteID: core.StringPtr("testString"),
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+		It(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
+			deleteVdcOptions := &vmwarev1.DeleteVdcOptions{
+				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
-				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
+			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(directorSite).ToNot(BeNil())
+			Expect(vdc).ToNot(BeNil())
 		})
 	})
 
@@ -515,34 +511,36 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions *DeleteDirectorSitesPvdcsClusterOptions)`, func() {
 			deleteDirectorSitesPvdcsClusterOptions := &vmwarev1.DeleteDirectorSitesPvdcsClusterOptions{
 				SiteID: core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				PvdcID: core.StringPtr("testString"),
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			pvdcResponse, response, err := vmwareService.DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions)
+			clusterSummary, response, err := vmwareService.DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(pvdcResponse).ToNot(BeNil())
+			Expect(clusterSummary).ToNot(BeNil())
 		})
 	})
 
-	Describe(`DeleteVdc - Delete a Virtual Data Center`, func() {
+	Describe(`DeleteDirectorSite - Delete a director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
-			deleteVdcOptions := &vmwarev1.DeleteVdcOptions{
-				VdcID: core.StringPtr("testString"),
+		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
+			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
+				ID: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
+				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
+			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(vdc).ToNot(BeNil())
+			Expect(directorSite).ToNot(BeNil())
 		})
 	})
 })
