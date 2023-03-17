@@ -2517,7 +2517,7 @@ func UnmarshalDirectorSitePricingInfo(m map[string]json.RawMessage, result inter
 // DirectorSiteRegions : Success. The request was successfully processed.
 type DirectorSiteRegions struct {
 	// regions of director sites.
-	DirectorSiteRegions []map[string]RegionDetail `json:"director_site_regions" validate:"required"`
+	DirectorSiteRegions []RegionDetail `json:"director_site_regions" validate:"required"`
 }
 
 // UnmarshalDirectorSiteRegions unmarshals an instance of DirectorSiteRegions from the specified map of raw messages.
@@ -3784,16 +3784,23 @@ func UnmarshalPriceInfoClusterSubItem(m map[string]json.RawMessage, result inter
 
 // RegionDetail : The region details.
 type RegionDetail struct {
+	// Name the region.
+	Region *string `json:"region,omitempty"`
+
 	// The data center details.
 	DataCenters []DataCenterInfo `json:"data_centers,omitempty"`
 
-	// Accessable endpoint of the region.
+	// Accessible endpoint of the region.
 	Endpoint *string `json:"endpoint,omitempty"`
 }
 
 // UnmarshalRegionDetail unmarshals an instance of RegionDetail from the specified map of raw messages.
 func UnmarshalRegionDetail(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(RegionDetail)
+	err = core.UnmarshalPrimitive(m, "region", &obj.Region)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalModel(m, "data_centers", &obj.DataCenters, UnmarshalDataCenterInfo)
 	if err != nil {
 		return

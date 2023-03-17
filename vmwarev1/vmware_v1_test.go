@@ -3223,7 +3223,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_site_regions": [{"mapKey": {"data_centers": [{"display_name": "DisplayName", "name": "Name", "uplink_speed": "UplinkSpeed"}], "endpoint": "Endpoint"}}]}`)
+					fmt.Fprintf(res, "%s", `{"director_site_regions": [{"region": "Region", "data_centers": [{"display_name": "DisplayName", "name": "Name", "uplink_speed": "UplinkSpeed"}], "endpoint": "Endpoint"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSiteRegions successfully with retries`, func() {
@@ -3282,7 +3282,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_site_regions": [{"mapKey": {"data_centers": [{"display_name": "DisplayName", "name": "Name", "uplink_speed": "UplinkSpeed"}], "endpoint": "Endpoint"}}]}`)
+					fmt.Fprintf(res, "%s", `{"director_site_regions": [{"region": "Region", "data_centers": [{"display_name": "DisplayName", "name": "Name", "uplink_speed": "UplinkSpeed"}], "endpoint": "Endpoint"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSiteRegions successfully`, func() {
