@@ -1,7 +1,7 @@
 // +build integration
 
 /**
- * (C) Copyright IBM Corp. 2022.
+ * (C) Copyright IBM Corp. 2023.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -96,32 +96,35 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateDirectorSites(createDirectorSitesOptions *CreateDirectorSitesOptions)`, func() {
-			fileSharesModel := &vmwarev1.FileShares{
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
 			}
 
-			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
+			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
 				Name: core.StringPtr("testString"),
-				StorageType: core.StringPtr("nfs"),
 				HostCount: core.Int64Ptr(int64(2)),
-				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
+				FileShares: fileSharesPrototypeModel,
 			}
 
-			pvdcOrderInfoModel := &vmwarev1.PVDCOrderInfo{
+			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
 				Name: core.StringPtr("testString"),
-				DataCenter: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
+				DataCenterName: core.StringPtr("testString"),
+				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
+			}
+
+			resourceGroupIdentityModel := &vmwarev1.ResourceGroupIdentity{
+				ID: core.StringPtr("testString"),
 			}
 
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				Name: core.StringPtr("testString"),
-				ResourceGroup: core.StringPtr("testString"),
-				Pvdcs: []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
+				Pvdcs: []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
+				ResourceGroup: resourceGroupIdentityModel,
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
@@ -143,10 +146,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			listDirectorSites, response, err := vmwareService.ListDirectorSites(listDirectorSitesOptions)
+			directorSiteCollection, response, err := vmwareService.ListDirectorSites(listDirectorSitesOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listDirectorSites).ToNot(BeNil())
+			Expect(directorSiteCollection).ToNot(BeNil())
 		})
 	})
 
@@ -156,7 +159,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`GetDirectorSite(getDirectorSiteOptions *GetDirectorSiteOptions)`, func() {
 			getDirectorSiteOptions := &vmwarev1.GetDirectorSiteOptions{
-				SiteID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
@@ -179,10 +182,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			listPvdCs, response, err := vmwareService.ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions)
+			pvdcCollection, response, err := vmwareService.ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listPvdCs).ToNot(BeNil())
+			Expect(pvdcCollection).ToNot(BeNil())
 		})
 	})
 
@@ -191,35 +194,34 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions)`, func() {
-			fileSharesModel := &vmwarev1.FileShares{
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
 			}
 
-			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
+			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
 				Name: core.StringPtr("testString"),
-				StorageType: core.StringPtr("nfs"),
 				HostCount: core.Int64Ptr(int64(2)),
-				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
+				FileShares: fileSharesPrototypeModel,
 			}
 
 			createDirectorSitesPvdcsOptions := &vmwarev1.CreateDirectorSitesPvdcsOptions{
 				SiteID: core.StringPtr("testString"),
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				Name: core.StringPtr("testString"),
-				DataCenter: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
+				DataCenterName: core.StringPtr("testString"),
+				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			pvdcResponse, response, err := vmwareService.CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions)
+			pvdc, response, err := vmwareService.CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(pvdcResponse).ToNot(BeNil())
+			Expect(pvdc).ToNot(BeNil())
 		})
 	})
 
@@ -230,15 +232,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions)`, func() {
 			getDirectorSitesPvdcsOptions := &vmwarev1.GetDirectorSitesPvdcsOptions{
 				SiteID: core.StringPtr("testString"),
-				PvdcID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			pvdcSummary, response, err := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions)
+			pvdc, response, err := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(pvdcSummary).ToNot(BeNil())
+			Expect(pvdc).ToNot(BeNil())
 		})
 	})
 
@@ -254,10 +256,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			listClusters, response, err := vmwareService.ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions)
+			clusterCollection, response, err := vmwareService.ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listClusters).ToNot(BeNil())
+			Expect(clusterCollection).ToNot(BeNil())
 		})
 	})
 
@@ -268,7 +270,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptions *GetDirectorInstancesPvdcsClusterOptions)`, func() {
 			getDirectorInstancesPvdcsClusterOptions := &vmwarev1.GetDirectorInstancesPvdcsClusterOptions{
 				SiteID: core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				PvdcID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
@@ -286,27 +288,34 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions)`, func() {
-			jsonPatchOperationModel := &vmwarev1.JSONPatchOperation{
-				Op: core.StringPtr("add"),
-				Path: core.StringPtr("testString"),
-				From: core.StringPtr("testString"),
-				Value: core.StringPtr("testString"),
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
+				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
 			}
+
+			clusterPatchModel := &vmwarev1.ClusterPatch{
+				FileShares: fileSharesPrototypeModel,
+				HostCount: core.Int64Ptr(int64(2)),
+			}
+			clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
+			Expect(asPatchErr).To(BeNil())
 
 			updateDirectorSitesPvdcsClusterOptions := &vmwarev1.UpdateDirectorSitesPvdcsClusterOptions{
 				SiteID: core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				PvdcID: core.StringPtr("testString"),
-				IBMAuthRefreshToken: core.StringPtr("testString"),
-				Body: []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel},
+				XAuthRefreshToken: core.StringPtr("testString"),
+				Body: clusterPatchModelAsPatch,
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			updateClusterResponse, response, err := vmwareService.UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions)
+			updateCluster, response, err := vmwareService.UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(updateClusterResponse).ToNot(BeNil())
+			Expect(updateCluster).ToNot(BeNil())
 		})
 	})
 
@@ -320,10 +329,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			directorSiteRegions, response, err := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptions)
+			directorSiteRegionCollection, response, err := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(directorSiteRegions).ToNot(BeNil())
+			Expect(directorSiteRegionCollection).ToNot(BeNil())
 		})
 	})
 
@@ -337,10 +346,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			listHostProfiles, response, err := vmwareService.ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions)
+			directorSiteHostProfileCollection, response, err := vmwareService.ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listHostProfiles).ToNot(BeNil())
+			Expect(directorSiteHostProfileCollection).ToNot(BeNil())
 		})
 	})
 
@@ -370,10 +379,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			directorSitePricingInfo, response, err := vmwareService.ListPrices(listPricesOptions)
+			directorSitePricing, response, err := vmwareService.ListPrices(listPricesOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(directorSitePricingInfo).ToNot(BeNil())
+			Expect(directorSitePricing).ToNot(BeNil())
 		})
 	})
 
@@ -382,39 +391,43 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`GetVcddPrice(getVcddPriceOptions *GetVcddPriceOptions)`, func() {
-			fileSharesModel := &vmwarev1.FileShares{
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
 				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
 			}
 
-			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
+			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
 				Name: core.StringPtr("testString"),
-				StorageType: core.StringPtr("nfs"),
 				HostCount: core.Int64Ptr(int64(2)),
-				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
+				FileShares: fileSharesPrototypeModel,
 			}
 
-			pvdcOrderInfoModel := &vmwarev1.PVDCOrderInfo{
+			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
 				Name: core.StringPtr("testString"),
-				DataCenter: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
+				DataCenterName: core.StringPtr("testString"),
+				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
+			}
+
+			resourceGroupIdentityModel := &vmwarev1.ResourceGroupIdentity{
+				ID: core.StringPtr("testString"),
 			}
 
 			getVcddPriceOptions := &vmwarev1.GetVcddPriceOptions{
 				Name: core.StringPtr("testString"),
-				ResourceGroup: core.StringPtr("testString"),
-				Pvdcs: []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
+				Pvdcs: []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
+				Country: core.StringPtr("USA"),
+				ResourceGroup: resourceGroupIdentityModel,
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			directorSitePriceQuoteResponse, response, err := vmwareService.GetVcddPrice(getVcddPriceOptions)
+			directorSitePriceQuote, response, err := vmwareService.GetVcddPrice(getVcddPriceOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
-			Expect(directorSitePriceQuoteResponse).ToNot(BeNil())
+			Expect(directorSitePriceQuote).ToNot(BeNil())
 		})
 	})
 
@@ -427,10 +440,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				AcceptLanguage: core.StringPtr("testString"),
 			}
 
-			listVdCs, response, err := vmwareService.ListVdcs(listVdcsOptions)
+			vdcCollection, response, err := vmwareService.ListVdcs(listVdcsOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listVdCs).ToNot(BeNil())
+			Expect(vdcCollection).ToNot(BeNil())
 		})
 	})
 
@@ -439,29 +452,29 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateVdc(createVdcOptions *CreateVdcOptions)`, func() {
-			vdcDirectorSiteClusterModel := &vmwarev1.VDCDirectorSiteCluster{
+			directorSitePvdcModel := &vmwarev1.DirectorSitePVDC{
 				ID: core.StringPtr("testString"),
 			}
 
-			newVdcDirectorSiteModel := &vmwarev1.NewVDCDirectorSite{
+			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
 				ID: core.StringPtr("testString"),
-				Cluster: vdcDirectorSiteClusterModel,
+				Pvdc: directorSitePvdcModel,
 			}
 
-			newVdcEdgeModel := &vmwarev1.NewVDCEdge{
+			vdcEdgePrototypeModel := &vmwarev1.VDCEdgePrototype{
 				Size: core.StringPtr("medium"),
 				Type: core.StringPtr("dedicated"),
 			}
 
-			newVdcResourceGroupModel := &vmwarev1.NewVDCResourceGroup{
+			resourceGroupIdentityModel := &vmwarev1.ResourceGroupIdentity{
 				ID: core.StringPtr("testString"),
 			}
 
 			createVdcOptions := &vmwarev1.CreateVdcOptions{
 				Name: core.StringPtr("testString"),
-				DirectorSite: newVdcDirectorSiteModel,
-				Edge: newVdcEdgeModel,
-				ResourceGroup: newVdcResourceGroupModel,
+				DirectorSite: vdcDirectorSitePrototypeModel,
+				Edge: vdcEdgePrototypeModel,
+				ResourceGroup: resourceGroupIdentityModel,
 				AcceptLanguage: core.StringPtr("testString"),
 			}
 
@@ -478,7 +491,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`GetVdc(getVdcOptions *GetVdcOptions)`, func() {
 			getVdcOptions := &vmwarev1.GetVdcOptions{
-				VdcID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 			}
 
@@ -489,22 +502,20 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteDirectorSite - Delete a director site instance`, func() {
+	Describe(`DeleteVdc - Delete a Virtual Data Center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
-			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
-				SiteID: core.StringPtr("testString"),
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+		It(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
+			deleteVdcOptions := &vmwarev1.DeleteVdcOptions{
+				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
-				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
+			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(directorSite).ToNot(BeNil())
+			Expect(vdc).ToNot(BeNil())
 		})
 	})
 
@@ -515,34 +526,36 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions *DeleteDirectorSitesPvdcsClusterOptions)`, func() {
 			deleteDirectorSitesPvdcsClusterOptions := &vmwarev1.DeleteDirectorSitesPvdcsClusterOptions{
 				SiteID: core.StringPtr("testString"),
-				ClusterID: core.StringPtr("testString"),
+				ID: core.StringPtr("testString"),
 				PvdcID: core.StringPtr("testString"),
-				IBMAuthRefreshToken: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			pvdcResponse, response, err := vmwareService.DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions)
+			clusterSummary, response, err := vmwareService.DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(pvdcResponse).ToNot(BeNil())
+			Expect(clusterSummary).ToNot(BeNil())
 		})
 	})
 
-	Describe(`DeleteVdc - Delete a Virtual Data Center`, func() {
+	Describe(`DeleteDirectorSite - Delete a director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
-			deleteVdcOptions := &vmwarev1.DeleteVdcOptions{
-				VdcID: core.StringPtr("testString"),
+		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
+			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
+				ID: core.StringPtr("testString"),
+				XAuthRefreshToken: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
+				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
+			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(vdc).ToNot(BeNil())
+			Expect(directorSite).ToNot(BeNil())
 		})
 	})
 })
