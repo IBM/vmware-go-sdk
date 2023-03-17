@@ -106,27 +106,26 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nCreateDirectorSites() result:")
 			// begin-create_director_sites
 
-			fileSharesModel := &vmwarev1.FileShares{
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 			}
 
-			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
+			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
 				Name: core.StringPtr("testString"),
 				HostCount: core.Int64Ptr(int64(2)),
-				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
+				FileShares: fileSharesPrototypeModel,
 			}
 
-			pvdcOrderInfoModel := &vmwarev1.PVDCOrderInfo{
+			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
 				Name: core.StringPtr("testString"),
-				DataCenter: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
+				DataCenterName: core.StringPtr("testString"),
+				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 			}
 
 			createDirectorSitesOptions := vmwareService.NewCreateDirectorSitesOptions(
 				"testString",
 				"testString",
-				"testString",
-				[]vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
+				[]vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
 			)
 
 			directorSite, response, err := vmwareService.CreateDirectorSites(createDirectorSitesOptions)
@@ -148,18 +147,18 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			listDirectorSitesOptions := vmwareService.NewListDirectorSitesOptions()
 
-			listDirectorSites, response, err := vmwareService.ListDirectorSites(listDirectorSitesOptions)
+			directorSiteCollection, response, err := vmwareService.ListDirectorSites(listDirectorSitesOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(listDirectorSites, "", "  ")
+			b, _ := json.MarshalIndent(directorSiteCollection, "", "  ")
 			fmt.Println(string(b))
 
 			// end-list_director_sites
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listDirectorSites).ToNot(BeNil())
+			Expect(directorSiteCollection).ToNot(BeNil())
 		})
 		It(`GetDirectorSite request example`, func() {
 			fmt.Println("\nGetDirectorSite() result:")
@@ -190,31 +189,31 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 				"testString",
 			)
 
-			listPvdCs, response, err := vmwareService.ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions)
+			pvdcCollection, response, err := vmwareService.ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(listPvdCs, "", "  ")
+			b, _ := json.MarshalIndent(pvdcCollection, "", "  ")
 			fmt.Println(string(b))
 
 			// end-list_director_sites_pvdcs
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listPvdCs).ToNot(BeNil())
+			Expect(pvdcCollection).ToNot(BeNil())
 		})
 		It(`CreateDirectorSitesPvdcs request example`, func() {
 			fmt.Println("\nCreateDirectorSitesPvdcs() result:")
 			// begin-create_director_sites_pvdcs
 
-			fileSharesModel := &vmwarev1.FileShares{
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 			}
 
-			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
+			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
 				Name: core.StringPtr("testString"),
 				HostCount: core.Int64Ptr(int64(2)),
-				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
+				FileShares: fileSharesPrototypeModel,
 			}
 
 			createDirectorSitesPvdcsOptions := vmwareService.NewCreateDirectorSitesPvdcsOptions(
@@ -222,21 +221,21 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 				"testString",
 				"testString",
 				"testString",
-				[]vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
+				[]vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 			)
 
-			pvdcResponse, response, err := vmwareService.CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions)
+			pvdc, response, err := vmwareService.CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(pvdcResponse, "", "  ")
+			b, _ := json.MarshalIndent(pvdc, "", "  ")
 			fmt.Println(string(b))
 
 			// end-create_director_sites_pvdcs
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(pvdcResponse).ToNot(BeNil())
+			Expect(pvdc).ToNot(BeNil())
 		})
 		It(`GetDirectorSitesPvdcs request example`, func() {
 			fmt.Println("\nGetDirectorSitesPvdcs() result:")
@@ -247,18 +246,18 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 				"testString",
 			)
 
-			pvdcResponse, response, err := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions)
+			pvdc, response, err := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(pvdcResponse, "", "  ")
+			b, _ := json.MarshalIndent(pvdc, "", "  ")
 			fmt.Println(string(b))
 
 			// end-get_director_sites_pvdcs
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(pvdcResponse).ToNot(BeNil())
+			Expect(pvdc).ToNot(BeNil())
 		})
 		It(`ListDirectorSitesPvdcsClusters request example`, func() {
 			fmt.Println("\nListDirectorSitesPvdcsClusters() result:")
@@ -269,18 +268,18 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 				"testString",
 			)
 
-			listClusters, response, err := vmwareService.ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions)
+			clusterCollection, response, err := vmwareService.ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(listClusters, "", "  ")
+			b, _ := json.MarshalIndent(clusterCollection, "", "  ")
 			fmt.Println(string(b))
 
 			// end-list_director_sites_pvdcs_clusters
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listClusters).ToNot(BeNil())
+			Expect(clusterCollection).ToNot(BeNil())
 		})
 		It(`GetDirectorInstancesPvdcsCluster request example`, func() {
 			fmt.Println("\nGetDirectorInstancesPvdcsCluster() result:")
@@ -309,31 +308,31 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nUpdateDirectorSitesPvdcsCluster() result:")
 			// begin-update_director_sites_pvdcs_cluster
 
-			jsonPatchOperationModel := &vmwarev1.JSONPatchOperation{
-				Op: core.StringPtr("add"),
-				Path: core.StringPtr("testString"),
+			clusterPatchModel := &vmwarev1.ClusterPatch{
 			}
+			clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
+			Expect(asPatchErr).To(BeNil())
 
 			updateDirectorSitesPvdcsClusterOptions := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(
 				"testString",
 				"testString",
 				"testString",
 				"testString",
-				[]vmwarev1.JSONPatchOperation{*jsonPatchOperationModel},
+				clusterPatchModelAsPatch,
 			)
 
-			updateClusterResponse, response, err := vmwareService.UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions)
+			updateCluster, response, err := vmwareService.UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(updateClusterResponse, "", "  ")
+			b, _ := json.MarshalIndent(updateCluster, "", "  ")
 			fmt.Println(string(b))
 
 			// end-update_director_sites_pvdcs_cluster
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(updateClusterResponse).ToNot(BeNil())
+			Expect(updateCluster).ToNot(BeNil())
 		})
 		It(`ListDirectorSiteRegions request example`, func() {
 			fmt.Println("\nListDirectorSiteRegions() result:")
@@ -341,18 +340,18 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			listDirectorSiteRegionsOptions := vmwareService.NewListDirectorSiteRegionsOptions()
 
-			directorSiteRegions, response, err := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptions)
+			directorSiteRegionCollection, response, err := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(directorSiteRegions, "", "  ")
+			b, _ := json.MarshalIndent(directorSiteRegionCollection, "", "  ")
 			fmt.Println(string(b))
 
 			// end-list_director_site_regions
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(directorSiteRegions).ToNot(BeNil())
+			Expect(directorSiteRegionCollection).ToNot(BeNil())
 		})
 		It(`ListDirectorSiteHostProfiles request example`, func() {
 			fmt.Println("\nListDirectorSiteHostProfiles() result:")
@@ -360,18 +359,18 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			listDirectorSiteHostProfilesOptions := vmwareService.NewListDirectorSiteHostProfilesOptions()
 
-			listHostProfiles, response, err := vmwareService.ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions)
+			directorSiteHostProfileCollection, response, err := vmwareService.ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(listHostProfiles, "", "  ")
+			b, _ := json.MarshalIndent(directorSiteHostProfileCollection, "", "  ")
 			fmt.Println(string(b))
 
 			// end-list_director_site_host_profiles
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listHostProfiles).ToNot(BeNil())
+			Expect(directorSiteHostProfileCollection).ToNot(BeNil())
 		})
 		It(`ReplaceOrgAdminPassword request example`, func() {
 			fmt.Println("\nReplaceOrgAdminPassword() result:")
@@ -400,58 +399,57 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			listPricesOptions := vmwareService.NewListPricesOptions()
 
-			directorSitePricingInfo, response, err := vmwareService.ListPrices(listPricesOptions)
+			directorSitePricing, response, err := vmwareService.ListPrices(listPricesOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(directorSitePricingInfo, "", "  ")
+			b, _ := json.MarshalIndent(directorSitePricing, "", "  ")
 			fmt.Println(string(b))
 
 			// end-list_prices
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(directorSitePricingInfo).ToNot(BeNil())
+			Expect(directorSitePricing).ToNot(BeNil())
 		})
 		It(`GetVcddPrice request example`, func() {
 			fmt.Println("\nGetVcddPrice() result:")
 			// begin-get_vcdd_price
 
-			fileSharesModel := &vmwarev1.FileShares{
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 			}
 
-			clusterOrderInfoModel := &vmwarev1.ClusterOrderInfo{
+			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
 				Name: core.StringPtr("testString"),
 				HostCount: core.Int64Ptr(int64(2)),
-				FileShares: fileSharesModel,
 				HostProfile: core.StringPtr("testString"),
+				FileShares: fileSharesPrototypeModel,
 			}
 
-			pvdcOrderInfoModel := &vmwarev1.PVDCOrderInfo{
+			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
 				Name: core.StringPtr("testString"),
-				DataCenter: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel},
+				DataCenterName: core.StringPtr("testString"),
+				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 			}
 
 			getVcddPriceOptions := vmwareService.NewGetVcddPriceOptions(
 				"testString",
-				"testString",
-				[]vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel},
+				[]vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
 				"USA",
 			)
 
-			directorSitePriceQuoteResponse, response, err := vmwareService.GetVcddPrice(getVcddPriceOptions)
+			directorSitePriceQuote, response, err := vmwareService.GetVcddPrice(getVcddPriceOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(directorSitePriceQuoteResponse, "", "  ")
+			b, _ := json.MarshalIndent(directorSitePriceQuote, "", "  ")
 			fmt.Println(string(b))
 
 			// end-get_vcdd_price
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(201))
-			Expect(directorSitePriceQuoteResponse).ToNot(BeNil())
+			Expect(directorSitePriceQuote).ToNot(BeNil())
 		})
 		It(`ListVdcs request example`, func() {
 			fmt.Println("\nListVdcs() result:")
@@ -459,18 +457,18 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			listVdcsOptions := vmwareService.NewListVdcsOptions()
 
-			listVdCs, response, err := vmwareService.ListVdcs(listVdcsOptions)
+			vdcCollection, response, err := vmwareService.ListVdcs(listVdcsOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(listVdCs, "", "  ")
+			b, _ := json.MarshalIndent(vdcCollection, "", "  ")
 			fmt.Println(string(b))
 
 			// end-list_vdcs
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(listVdCs).ToNot(BeNil())
+			Expect(vdcCollection).ToNot(BeNil())
 		})
 		It(`CreateVdc request example`, func() {
 			fmt.Println("\nCreateVdc() result:")
@@ -480,14 +478,14 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 				ID: core.StringPtr("testString"),
 			}
 
-			newVdcDirectorSiteModel := &vmwarev1.NewVDCDirectorSite{
+			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
 				ID: core.StringPtr("testString"),
 				Pvdc: directorSitePvdcModel,
 			}
 
 			createVdcOptions := vmwareService.NewCreateVdcOptions(
 				"testString",
-				newVdcDirectorSiteModel,
+				vdcDirectorSitePrototypeModel,
 			)
 
 			vdc, response, err := vmwareService.CreateVdc(createVdcOptions)

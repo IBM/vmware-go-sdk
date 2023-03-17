@@ -30,7 +30,6 @@ import (
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	. "github.com/onsi/gomega/gstruct"
 	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
 )
 
@@ -193,32 +192,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
 				createDirectorSitesOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
+				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -279,7 +282,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully with retries`, func() {
@@ -291,32 +294,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(vmwareService).ToNot(BeNil())
 				vmwareService.EnableRetries(0, 0)
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
 				createDirectorSitesOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
+				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -380,7 +387,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully`, func() {
@@ -397,32 +404,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
 				createDirectorSitesOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
+				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -442,32 +453,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
 				createDirectorSitesOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
+				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -508,32 +523,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
 				createDirectorSitesOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.ResourceGroup = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
+				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -622,7 +641,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "instance_ordered": "2019-01-01T12:00:00.000Z", "instance_created": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": "ResourceGroup", "creator": "Creator", "resource_group_id": "ResourceGroupID", "resource_group_crn": "ResourceGroupCrn", "pvdcs": [{"name": "Name", "data_center": "DataCenter", "id": "ID", "href": "Href", "status": "creating", "clusters": [{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully with retries`, func() {
@@ -681,7 +700,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "instance_ordered": "2019-01-01T12:00:00.000Z", "instance_created": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": "ResourceGroup", "creator": "Creator", "resource_group_id": "ResourceGroupID", "resource_group_crn": "ResourceGroupCrn", "pvdcs": [{"name": "Name", "data_center": "DataCenter", "id": "ID", "href": "Href", "status": "creating", "clusters": [{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}]}]}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully`, func() {
@@ -845,7 +864,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully with retries`, func() {
@@ -905,7 +924,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully`, func() {
@@ -1084,7 +1103,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully with retries`, func() {
@@ -1147,7 +1166,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully`, func() {
@@ -1324,7 +1343,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"pvdcs": [{"name": "Name", "data_center": "DataCenter", "id": "ID", "href": "Href", "status": "creating", "clusters": [{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcs successfully with retries`, func() {
@@ -1384,7 +1403,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"pvdcs": [{"name": "Name", "data_center": "DataCenter", "id": "ID", "href": "Href", "status": "creating", "clusters": [{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcs successfully`, func() {
@@ -1515,27 +1534,27 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1596,7 +1615,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center": "DataCenter", "id": "ID", "href": "Href", "status": "creating", "clusters": [{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSitesPvdcs successfully with retries`, func() {
@@ -1608,27 +1627,27 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(vmwareService).ToNot(BeNil())
 				vmwareService.EnableRetries(0, 0)
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1692,7 +1711,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center": "DataCenter", "id": "ID", "href": "Href", "status": "creating", "clusters": [{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSitesPvdcs successfully`, func() {
@@ -1709,27 +1728,27 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1749,27 +1768,27 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1810,27 +1829,27 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
 				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenter = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -1921,7 +1940,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center": "DataCenter", "id": "ID", "href": "Href", "status": "creating", "clusters": [{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}`)
 				}))
 			})
 			It(`Invoke GetDirectorSitesPvdcs successfully with retries`, func() {
@@ -1982,7 +2001,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center": "DataCenter", "id": "ID", "href": "Href", "status": "creating", "clusters": [{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}`)
 				}))
 			})
 			It(`Invoke GetDirectorSitesPvdcs successfully`, func() {
@@ -2160,7 +2179,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "instance_ordered": "2019-01-01T12:00:00.000Z", "instance_created": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center": "DataCenter", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
+					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcsClusters successfully with retries`, func() {
@@ -2221,7 +2240,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "instance_ordered": "2019-01-01T12:00:00.000Z", "instance_created": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center": "DataCenter", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
+					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcsClusters successfully`, func() {
@@ -2400,7 +2419,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "instance_ordered": "2019-01-01T12:00:00.000Z", "instance_created": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center": "DataCenter", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke GetDirectorInstancesPvdcsCluster successfully with retries`, func() {
@@ -2462,7 +2481,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "instance_ordered": "2019-01-01T12:00:00.000Z", "instance_created": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center": "DataCenter", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke GetDirectorInstancesPvdcsCluster successfully`, func() {
@@ -2649,7 +2668,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSitesPvdcsCluster successfully with retries`, func() {
@@ -2714,7 +2733,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "host_count": 2, "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "host_profile": "HostProfile", "id": "ID", "data_center": "DataCenter", "status": "Status", "href": "Href"}`)
+					fmt.Fprintf(res, "%s", `{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSitesPvdcsCluster successfully`, func() {
@@ -2854,12 +2873,19 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the JSONPatchOperation model
-				jsonPatchOperationModel := new(vmwarev1.JSONPatchOperation)
-				jsonPatchOperationModel.Op = core.StringPtr("add")
-				jsonPatchOperationModel.Path = core.StringPtr("testString")
-				jsonPatchOperationModel.From = core.StringPtr("testString")
-				jsonPatchOperationModel.Value = core.StringPtr("testString")
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the ClusterPatch model
+				clusterPatchModel := new(vmwarev1.ClusterPatch)
+				clusterPatchModel.FileShares = fileSharesPrototypeModel
+				clusterPatchModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
+				Expect(asPatchErr).To(BeNil())
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
@@ -2867,7 +2893,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
+				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -2928,7 +2954,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"message": "The request has been accepted."}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
 				}))
 			})
 			It(`Invoke UpdateDirectorSitesPvdcsCluster successfully with retries`, func() {
@@ -2940,12 +2966,19 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(vmwareService).ToNot(BeNil())
 				vmwareService.EnableRetries(0, 0)
 
-				// Construct an instance of the JSONPatchOperation model
-				jsonPatchOperationModel := new(vmwarev1.JSONPatchOperation)
-				jsonPatchOperationModel.Op = core.StringPtr("add")
-				jsonPatchOperationModel.Path = core.StringPtr("testString")
-				jsonPatchOperationModel.From = core.StringPtr("testString")
-				jsonPatchOperationModel.Value = core.StringPtr("testString")
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the ClusterPatch model
+				clusterPatchModel := new(vmwarev1.ClusterPatch)
+				clusterPatchModel.FileShares = fileSharesPrototypeModel
+				clusterPatchModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
+				Expect(asPatchErr).To(BeNil())
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
@@ -2953,7 +2986,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
+				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3017,7 +3050,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"message": "The request has been accepted."}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
 				}))
 			})
 			It(`Invoke UpdateDirectorSitesPvdcsCluster successfully`, func() {
@@ -3034,12 +3067,19 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the JSONPatchOperation model
-				jsonPatchOperationModel := new(vmwarev1.JSONPatchOperation)
-				jsonPatchOperationModel.Op = core.StringPtr("add")
-				jsonPatchOperationModel.Path = core.StringPtr("testString")
-				jsonPatchOperationModel.From = core.StringPtr("testString")
-				jsonPatchOperationModel.Value = core.StringPtr("testString")
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the ClusterPatch model
+				clusterPatchModel := new(vmwarev1.ClusterPatch)
+				clusterPatchModel.FileShares = fileSharesPrototypeModel
+				clusterPatchModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
+				Expect(asPatchErr).To(BeNil())
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
@@ -3047,7 +3087,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
+				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3067,12 +3107,19 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the JSONPatchOperation model
-				jsonPatchOperationModel := new(vmwarev1.JSONPatchOperation)
-				jsonPatchOperationModel.Op = core.StringPtr("add")
-				jsonPatchOperationModel.Path = core.StringPtr("testString")
-				jsonPatchOperationModel.From = core.StringPtr("testString")
-				jsonPatchOperationModel.Value = core.StringPtr("testString")
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the ClusterPatch model
+				clusterPatchModel := new(vmwarev1.ClusterPatch)
+				clusterPatchModel.FileShares = fileSharesPrototypeModel
+				clusterPatchModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
+				Expect(asPatchErr).To(BeNil())
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
@@ -3080,7 +3127,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
+				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3121,12 +3168,19 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the JSONPatchOperation model
-				jsonPatchOperationModel := new(vmwarev1.JSONPatchOperation)
-				jsonPatchOperationModel.Op = core.StringPtr("add")
-				jsonPatchOperationModel.Path = core.StringPtr("testString")
-				jsonPatchOperationModel.From = core.StringPtr("testString")
-				jsonPatchOperationModel.Value = core.StringPtr("testString")
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the ClusterPatch model
+				clusterPatchModel := new(vmwarev1.ClusterPatch)
+				clusterPatchModel.FileShares = fileSharesPrototypeModel
+				clusterPatchModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
+				Expect(asPatchErr).To(BeNil())
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
@@ -3134,7 +3188,7 @@ var _ = Describe(`VmwareV1`, func() {
 				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XAuthRefreshToken = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.Body = []vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}
+				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
 				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -3223,7 +3277,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_site_regions": [{"region": "Region", "data_centers": [{"display_name": "DisplayName", "name": "Name", "uplink_speed": "UplinkSpeed"}], "endpoint": "Endpoint"}]}`)
+					fmt.Fprintf(res, "%s", `{"director_site_regions": [{"name": "Name", "data_centers": [{"display_name": "DisplayName", "name": "Name", "uplink_speed": "UplinkSpeed"}], "endpoint": "Endpoint"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSiteRegions successfully with retries`, func() {
@@ -3282,7 +3336,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_site_regions": [{"region": "Region", "data_centers": [{"display_name": "DisplayName", "name": "Name", "uplink_speed": "UplinkSpeed"}], "endpoint": "Endpoint"}]}`)
+					fmt.Fprintf(res, "%s", `{"director_site_regions": [{"name": "Name", "data_centers": [{"display_name": "DisplayName", "name": "Name", "uplink_speed": "UplinkSpeed"}], "endpoint": "Endpoint"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSiteRegions successfully`, func() {
@@ -4060,32 +4114,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the GetVcddPriceOptions model
 				getVcddPriceOptionsModel := new(vmwarev1.GetVcddPriceOptions)
 				getVcddPriceOptionsModel.Name = core.StringPtr("testString")
-				getVcddPriceOptionsModel.ResourceGroup = core.StringPtr("testString")
-				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				getVcddPriceOptionsModel.Country = core.StringPtr("USA")
+				getVcddPriceOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				getVcddPriceOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				getVcddPriceOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				getVcddPriceOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4156,32 +4214,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(vmwareService).ToNot(BeNil())
 				vmwareService.EnableRetries(0, 0)
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the GetVcddPriceOptions model
 				getVcddPriceOptionsModel := new(vmwarev1.GetVcddPriceOptions)
 				getVcddPriceOptionsModel.Name = core.StringPtr("testString")
-				getVcddPriceOptionsModel.ResourceGroup = core.StringPtr("testString")
-				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				getVcddPriceOptionsModel.Country = core.StringPtr("USA")
+				getVcddPriceOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				getVcddPriceOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				getVcddPriceOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				getVcddPriceOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4260,32 +4322,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(response).To(BeNil())
 				Expect(result).To(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the GetVcddPriceOptions model
 				getVcddPriceOptionsModel := new(vmwarev1.GetVcddPriceOptions)
 				getVcddPriceOptionsModel.Name = core.StringPtr("testString")
-				getVcddPriceOptionsModel.ResourceGroup = core.StringPtr("testString")
-				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				getVcddPriceOptionsModel.Country = core.StringPtr("USA")
+				getVcddPriceOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				getVcddPriceOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				getVcddPriceOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				getVcddPriceOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4305,32 +4371,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the GetVcddPriceOptions model
 				getVcddPriceOptionsModel := new(vmwarev1.GetVcddPriceOptions)
 				getVcddPriceOptionsModel.Name = core.StringPtr("testString")
-				getVcddPriceOptionsModel.ResourceGroup = core.StringPtr("testString")
-				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				getVcddPriceOptionsModel.Country = core.StringPtr("USA")
+				getVcddPriceOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				getVcddPriceOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				getVcddPriceOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				getVcddPriceOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4371,32 +4441,36 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceErr).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
 
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the GetVcddPriceOptions model
 				getVcddPriceOptionsModel := new(vmwarev1.GetVcddPriceOptions)
 				getVcddPriceOptionsModel.Name = core.StringPtr("testString")
-				getVcddPriceOptionsModel.ResourceGroup = core.StringPtr("testString")
-				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}
+				getVcddPriceOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				getVcddPriceOptionsModel.Country = core.StringPtr("USA")
+				getVcddPriceOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				getVcddPriceOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				getVcddPriceOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
 				getVcddPriceOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -4480,7 +4554,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_time": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_time": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "errors": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_time": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully with retries`, func() {
@@ -4536,7 +4610,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_time": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_time": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "errors": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_time": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully`, func() {
@@ -4654,26 +4728,26 @@ var _ = Describe(`VmwareV1`, func() {
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
 				directorSitePvdcModel.ID = core.StringPtr("testString")
 
-				// Construct an instance of the NewVDCDirectorSite model
-				newVdcDirectorSiteModel := new(vmwarev1.NewVDCDirectorSite)
-				newVdcDirectorSiteModel.ID = core.StringPtr("testString")
-				newVdcDirectorSiteModel.Pvdc = directorSitePvdcModel
+				// Construct an instance of the VDCDirectorSitePrototype model
+				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
-				// Construct an instance of the NewVDCEdge model
-				newVdcEdgeModel := new(vmwarev1.NewVDCEdge)
-				newVdcEdgeModel.Size = core.StringPtr("medium")
-				newVdcEdgeModel.Type = core.StringPtr("dedicated")
+				// Construct an instance of the VDCEdgePrototype model
+				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
+				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
+				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
 
-				// Construct an instance of the NewVDCResourceGroup model
-				newVdcResourceGroupModel := new(vmwarev1.NewVDCResourceGroup)
-				newVdcResourceGroupModel.ID = core.StringPtr("testString")
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
 				createVdcOptionsModel.Name = core.StringPtr("testString")
-				createVdcOptionsModel.DirectorSite = newVdcDirectorSiteModel
-				createVdcOptionsModel.Edge = newVdcEdgeModel
-				createVdcOptionsModel.ResourceGroup = newVdcResourceGroupModel
+				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
+				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
+				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -4729,7 +4803,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_time": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_time": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "errors": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_time": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully with retries`, func() {
@@ -4745,26 +4819,26 @@ var _ = Describe(`VmwareV1`, func() {
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
 				directorSitePvdcModel.ID = core.StringPtr("testString")
 
-				// Construct an instance of the NewVDCDirectorSite model
-				newVdcDirectorSiteModel := new(vmwarev1.NewVDCDirectorSite)
-				newVdcDirectorSiteModel.ID = core.StringPtr("testString")
-				newVdcDirectorSiteModel.Pvdc = directorSitePvdcModel
+				// Construct an instance of the VDCDirectorSitePrototype model
+				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
-				// Construct an instance of the NewVDCEdge model
-				newVdcEdgeModel := new(vmwarev1.NewVDCEdge)
-				newVdcEdgeModel.Size = core.StringPtr("medium")
-				newVdcEdgeModel.Type = core.StringPtr("dedicated")
+				// Construct an instance of the VDCEdgePrototype model
+				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
+				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
+				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
 
-				// Construct an instance of the NewVDCResourceGroup model
-				newVdcResourceGroupModel := new(vmwarev1.NewVDCResourceGroup)
-				newVdcResourceGroupModel.ID = core.StringPtr("testString")
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
 				createVdcOptionsModel.Name = core.StringPtr("testString")
-				createVdcOptionsModel.DirectorSite = newVdcDirectorSiteModel
-				createVdcOptionsModel.Edge = newVdcEdgeModel
-				createVdcOptionsModel.ResourceGroup = newVdcResourceGroupModel
+				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
+				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
+				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4823,7 +4897,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_time": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_time": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "errors": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_time": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully`, func() {
@@ -4844,26 +4918,26 @@ var _ = Describe(`VmwareV1`, func() {
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
 				directorSitePvdcModel.ID = core.StringPtr("testString")
 
-				// Construct an instance of the NewVDCDirectorSite model
-				newVdcDirectorSiteModel := new(vmwarev1.NewVDCDirectorSite)
-				newVdcDirectorSiteModel.ID = core.StringPtr("testString")
-				newVdcDirectorSiteModel.Pvdc = directorSitePvdcModel
+				// Construct an instance of the VDCDirectorSitePrototype model
+				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
-				// Construct an instance of the NewVDCEdge model
-				newVdcEdgeModel := new(vmwarev1.NewVDCEdge)
-				newVdcEdgeModel.Size = core.StringPtr("medium")
-				newVdcEdgeModel.Type = core.StringPtr("dedicated")
+				// Construct an instance of the VDCEdgePrototype model
+				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
+				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
+				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
 
-				// Construct an instance of the NewVDCResourceGroup model
-				newVdcResourceGroupModel := new(vmwarev1.NewVDCResourceGroup)
-				newVdcResourceGroupModel.ID = core.StringPtr("testString")
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
 				createVdcOptionsModel.Name = core.StringPtr("testString")
-				createVdcOptionsModel.DirectorSite = newVdcDirectorSiteModel
-				createVdcOptionsModel.Edge = newVdcEdgeModel
-				createVdcOptionsModel.ResourceGroup = newVdcResourceGroupModel
+				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
+				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
+				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4886,26 +4960,26 @@ var _ = Describe(`VmwareV1`, func() {
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
 				directorSitePvdcModel.ID = core.StringPtr("testString")
 
-				// Construct an instance of the NewVDCDirectorSite model
-				newVdcDirectorSiteModel := new(vmwarev1.NewVDCDirectorSite)
-				newVdcDirectorSiteModel.ID = core.StringPtr("testString")
-				newVdcDirectorSiteModel.Pvdc = directorSitePvdcModel
+				// Construct an instance of the VDCDirectorSitePrototype model
+				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
-				// Construct an instance of the NewVDCEdge model
-				newVdcEdgeModel := new(vmwarev1.NewVDCEdge)
-				newVdcEdgeModel.Size = core.StringPtr("medium")
-				newVdcEdgeModel.Type = core.StringPtr("dedicated")
+				// Construct an instance of the VDCEdgePrototype model
+				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
+				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
+				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
 
-				// Construct an instance of the NewVDCResourceGroup model
-				newVdcResourceGroupModel := new(vmwarev1.NewVDCResourceGroup)
-				newVdcResourceGroupModel.ID = core.StringPtr("testString")
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
 				createVdcOptionsModel.Name = core.StringPtr("testString")
-				createVdcOptionsModel.DirectorSite = newVdcDirectorSiteModel
-				createVdcOptionsModel.Edge = newVdcEdgeModel
-				createVdcOptionsModel.ResourceGroup = newVdcResourceGroupModel
+				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
+				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
+				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -4949,26 +5023,26 @@ var _ = Describe(`VmwareV1`, func() {
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
 				directorSitePvdcModel.ID = core.StringPtr("testString")
 
-				// Construct an instance of the NewVDCDirectorSite model
-				newVdcDirectorSiteModel := new(vmwarev1.NewVDCDirectorSite)
-				newVdcDirectorSiteModel.ID = core.StringPtr("testString")
-				newVdcDirectorSiteModel.Pvdc = directorSitePvdcModel
+				// Construct an instance of the VDCDirectorSitePrototype model
+				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
-				// Construct an instance of the NewVDCEdge model
-				newVdcEdgeModel := new(vmwarev1.NewVDCEdge)
-				newVdcEdgeModel.Size = core.StringPtr("medium")
-				newVdcEdgeModel.Type = core.StringPtr("dedicated")
+				// Construct an instance of the VDCEdgePrototype model
+				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
+				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
+				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
 
-				// Construct an instance of the NewVDCResourceGroup model
-				newVdcResourceGroupModel := new(vmwarev1.NewVDCResourceGroup)
-				newVdcResourceGroupModel.ID = core.StringPtr("testString")
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
 				createVdcOptionsModel.Name = core.StringPtr("testString")
-				createVdcOptionsModel.DirectorSite = newVdcDirectorSiteModel
-				createVdcOptionsModel.Edge = newVdcEdgeModel
-				createVdcOptionsModel.ResourceGroup = newVdcResourceGroupModel
+				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
+				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
+				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -5052,7 +5126,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_time": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_time": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "errors": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_time": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully with retries`, func() {
@@ -5109,7 +5183,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_time": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_time": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "errors": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_time": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully`, func() {
@@ -5275,7 +5349,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_time": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_time": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "errors": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_time": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully with retries`, func() {
@@ -5332,7 +5406,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_time": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_time": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "errors": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_time": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "Code", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully`, func() {
@@ -5437,108 +5511,113 @@ var _ = Describe(`VmwareV1`, func() {
 				URL:           "http://vmwarev1modelgenerator.com",
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
-			It(`Invoke NewClusterOrderInfo successfully`, func() {
+			It(`Invoke NewClusterPrototype successfully`, func() {
 				name := "testString"
 				hostCount := int64(2)
-				var fileShares *vmwarev1.FileShares = nil
 				hostProfile := "testString"
-				_, err := vmwareService.NewClusterOrderInfo(name, hostCount, fileShares, hostProfile)
+				var fileShares *vmwarev1.FileSharesPrototype = nil
+				_, err := vmwareService.NewClusterPrototype(name, hostCount, hostProfile, fileShares)
 				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewCreateDirectorSitesOptions successfully`, func() {
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				Expect(fileSharesModel).ToNot(BeNil())
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
-				Expect(fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGETWOIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGEFOURIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGETENIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				Expect(fileSharesPrototypeModel).ToNot(BeNil())
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				Expect(fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGETWOIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGEFOURIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGETENIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				Expect(clusterOrderInfoModel).ToNot(BeNil())
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
-				Expect(clusterOrderInfoModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(clusterOrderInfoModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
-				Expect(clusterOrderInfoModel.FileShares).To(Equal(fileSharesModel))
-				Expect(clusterOrderInfoModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				Expect(clusterPrototypeModel).ToNot(BeNil())
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
+				Expect(clusterPrototypeModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
+				Expect(clusterPrototypeModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.FileShares).To(Equal(fileSharesPrototypeModel))
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				Expect(pvdcOrderInfoModel).ToNot(BeNil())
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
-				Expect(pvdcOrderInfoModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(pvdcOrderInfoModel.DataCenter).To(Equal(core.StringPtr("testString")))
-				Expect(pvdcOrderInfoModel.Clusters).To(Equal([]vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}))
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				Expect(pvdcPrototypeModel).ToNot(BeNil())
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+				Expect(pvdcPrototypeModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(pvdcPrototypeModel.DataCenterName).To(Equal(core.StringPtr("testString")))
+				Expect(pvdcPrototypeModel.Clusters).To(Equal([]vmwarev1.ClusterPrototype{*clusterPrototypeModel}))
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				Expect(resourceGroupIdentityModel).ToNot(BeNil())
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				Expect(resourceGroupIdentityModel.ID).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				xAuthRefreshToken := "testString"
 				createDirectorSitesOptionsName := "testString"
-				createDirectorSitesOptionsResourceGroup := "testString"
-				createDirectorSitesOptionsPvdcs := []vmwarev1.PVDCOrderInfo{}
-				createDirectorSitesOptionsModel := vmwareService.NewCreateDirectorSitesOptions(xAuthRefreshToken, createDirectorSitesOptionsName, createDirectorSitesOptionsResourceGroup, createDirectorSitesOptionsPvdcs)
+				createDirectorSitesOptionsPvdcs := []vmwarev1.PVDCPrototype{}
+				createDirectorSitesOptionsModel := vmwareService.NewCreateDirectorSitesOptions(xAuthRefreshToken, createDirectorSitesOptionsName, createDirectorSitesOptionsPvdcs)
 				createDirectorSitesOptionsModel.SetXAuthRefreshToken("testString")
 				createDirectorSitesOptionsModel.SetName("testString")
-				createDirectorSitesOptionsModel.SetResourceGroup("testString")
-				createDirectorSitesOptionsModel.SetPvdcs([]vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel})
+				createDirectorSitesOptionsModel.SetPvdcs([]vmwarev1.PVDCPrototype{*pvdcPrototypeModel})
+				createDirectorSitesOptionsModel.SetResourceGroup(resourceGroupIdentityModel)
 				createDirectorSitesOptionsModel.SetAcceptLanguage("testString")
 				createDirectorSitesOptionsModel.SetXGlobalTransactionID("testString")
 				createDirectorSitesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createDirectorSitesOptionsModel).ToNot(BeNil())
 				Expect(createDirectorSitesOptionsModel.XAuthRefreshToken).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesOptionsModel.ResourceGroup).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesOptionsModel.Pvdcs).To(Equal([]vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}))
+				Expect(createDirectorSitesOptionsModel.Pvdcs).To(Equal([]vmwarev1.PVDCPrototype{*pvdcPrototypeModel}))
+				Expect(createDirectorSitesOptionsModel.ResourceGroup).To(Equal(resourceGroupIdentityModel))
 				Expect(createDirectorSitesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateDirectorSitesPvdcsOptions successfully`, func() {
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				Expect(fileSharesModel).ToNot(BeNil())
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
-				Expect(fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGETWOIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGEFOURIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGETENIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				Expect(fileSharesPrototypeModel).ToNot(BeNil())
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				Expect(fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGETWOIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGEFOURIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGETENIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				Expect(clusterOrderInfoModel).ToNot(BeNil())
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
-				Expect(clusterOrderInfoModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(clusterOrderInfoModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
-				Expect(clusterOrderInfoModel.FileShares).To(Equal(fileSharesModel))
-				Expect(clusterOrderInfoModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				Expect(clusterPrototypeModel).ToNot(BeNil())
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
+				Expect(clusterPrototypeModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
+				Expect(clusterPrototypeModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.FileShares).To(Equal(fileSharesPrototypeModel))
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				siteID := "testString"
 				xAuthRefreshToken := "testString"
 				createDirectorSitesPvdcsOptionsName := "testString"
-				createDirectorSitesPvdcsOptionsDataCenter := "testString"
-				createDirectorSitesPvdcsOptionsClusters := []vmwarev1.ClusterOrderInfo{}
-				createDirectorSitesPvdcsOptionsModel := vmwareService.NewCreateDirectorSitesPvdcsOptions(siteID, xAuthRefreshToken, createDirectorSitesPvdcsOptionsName, createDirectorSitesPvdcsOptionsDataCenter, createDirectorSitesPvdcsOptionsClusters)
+				createDirectorSitesPvdcsOptionsDataCenterName := "testString"
+				createDirectorSitesPvdcsOptionsClusters := []vmwarev1.ClusterPrototype{}
+				createDirectorSitesPvdcsOptionsModel := vmwareService.NewCreateDirectorSitesPvdcsOptions(siteID, xAuthRefreshToken, createDirectorSitesPvdcsOptionsName, createDirectorSitesPvdcsOptionsDataCenterName, createDirectorSitesPvdcsOptionsClusters)
 				createDirectorSitesPvdcsOptionsModel.SetSiteID("testString")
 				createDirectorSitesPvdcsOptionsModel.SetXAuthRefreshToken("testString")
 				createDirectorSitesPvdcsOptionsModel.SetName("testString")
-				createDirectorSitesPvdcsOptionsModel.SetDataCenter("testString")
-				createDirectorSitesPvdcsOptionsModel.SetClusters([]vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel})
+				createDirectorSitesPvdcsOptionsModel.SetDataCenterName("testString")
+				createDirectorSitesPvdcsOptionsModel.SetClusters([]vmwarev1.ClusterPrototype{*clusterPrototypeModel})
 				createDirectorSitesPvdcsOptionsModel.SetAcceptLanguage("testString")
 				createDirectorSitesPvdcsOptionsModel.SetXGlobalTransactionID("testString")
 				createDirectorSitesPvdcsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -5546,8 +5625,8 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(createDirectorSitesPvdcsOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesPvdcsOptionsModel.XAuthRefreshToken).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesPvdcsOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesPvdcsOptionsModel.DataCenter).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesPvdcsOptionsModel.Clusters).To(Equal([]vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}))
+				Expect(createDirectorSitesPvdcsOptionsModel.DataCenterName).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsOptionsModel.Clusters).To(Equal([]vmwarev1.ClusterPrototype{*clusterPrototypeModel}))
 				Expect(createDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesPvdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -5559,43 +5638,43 @@ var _ = Describe(`VmwareV1`, func() {
 				directorSitePvdcModel.ID = core.StringPtr("testString")
 				Expect(directorSitePvdcModel.ID).To(Equal(core.StringPtr("testString")))
 
-				// Construct an instance of the NewVDCDirectorSite model
-				newVdcDirectorSiteModel := new(vmwarev1.NewVDCDirectorSite)
-				Expect(newVdcDirectorSiteModel).ToNot(BeNil())
-				newVdcDirectorSiteModel.ID = core.StringPtr("testString")
-				newVdcDirectorSiteModel.Pvdc = directorSitePvdcModel
-				Expect(newVdcDirectorSiteModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(newVdcDirectorSiteModel.Pvdc).To(Equal(directorSitePvdcModel))
+				// Construct an instance of the VDCDirectorSitePrototype model
+				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
+				Expect(vdcDirectorSitePrototypeModel).ToNot(BeNil())
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
+				Expect(vdcDirectorSitePrototypeModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(vdcDirectorSitePrototypeModel.Pvdc).To(Equal(directorSitePvdcModel))
 
-				// Construct an instance of the NewVDCEdge model
-				newVdcEdgeModel := new(vmwarev1.NewVDCEdge)
-				Expect(newVdcEdgeModel).ToNot(BeNil())
-				newVdcEdgeModel.Size = core.StringPtr("medium")
-				newVdcEdgeModel.Type = core.StringPtr("dedicated")
-				Expect(newVdcEdgeModel.Size).To(Equal(core.StringPtr("medium")))
-				Expect(newVdcEdgeModel.Type).To(Equal(core.StringPtr("dedicated")))
+				// Construct an instance of the VDCEdgePrototype model
+				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
+				Expect(vdcEdgePrototypeModel).ToNot(BeNil())
+				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
+				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
+				Expect(vdcEdgePrototypeModel.Size).To(Equal(core.StringPtr("medium")))
+				Expect(vdcEdgePrototypeModel.Type).To(Equal(core.StringPtr("dedicated")))
 
-				// Construct an instance of the NewVDCResourceGroup model
-				newVdcResourceGroupModel := new(vmwarev1.NewVDCResourceGroup)
-				Expect(newVdcResourceGroupModel).ToNot(BeNil())
-				newVdcResourceGroupModel.ID = core.StringPtr("testString")
-				Expect(newVdcResourceGroupModel.ID).To(Equal(core.StringPtr("testString")))
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				Expect(resourceGroupIdentityModel).ToNot(BeNil())
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				Expect(resourceGroupIdentityModel.ID).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsName := "testString"
-				var createVdcOptionsDirectorSite *vmwarev1.NewVDCDirectorSite = nil
+				var createVdcOptionsDirectorSite *vmwarev1.VDCDirectorSitePrototype = nil
 				createVdcOptionsModel := vmwareService.NewCreateVdcOptions(createVdcOptionsName, createVdcOptionsDirectorSite)
 				createVdcOptionsModel.SetName("testString")
-				createVdcOptionsModel.SetDirectorSite(newVdcDirectorSiteModel)
-				createVdcOptionsModel.SetEdge(newVdcEdgeModel)
-				createVdcOptionsModel.SetResourceGroup(newVdcResourceGroupModel)
+				createVdcOptionsModel.SetDirectorSite(vdcDirectorSitePrototypeModel)
+				createVdcOptionsModel.SetEdge(vdcEdgePrototypeModel)
+				createVdcOptionsModel.SetResourceGroup(resourceGroupIdentityModel)
 				createVdcOptionsModel.SetAcceptLanguage("testString")
 				createVdcOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createVdcOptionsModel).ToNot(BeNil())
 				Expect(createVdcOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(createVdcOptionsModel.DirectorSite).To(Equal(newVdcDirectorSiteModel))
-				Expect(createVdcOptionsModel.Edge).To(Equal(newVdcEdgeModel))
-				Expect(createVdcOptionsModel.ResourceGroup).To(Equal(newVdcResourceGroupModel))
+				Expect(createVdcOptionsModel.DirectorSite).To(Equal(vdcDirectorSitePrototypeModel))
+				Expect(createVdcOptionsModel.Edge).To(Equal(vdcEdgePrototypeModel))
+				Expect(createVdcOptionsModel.ResourceGroup).To(Equal(resourceGroupIdentityModel))
 				Expect(createVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(createVdcOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -5709,58 +5788,63 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(getDirectorSitesPvdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetVcddPriceOptions successfully`, func() {
-				// Construct an instance of the FileShares model
-				fileSharesModel := new(vmwarev1.FileShares)
-				Expect(fileSharesModel).ToNot(BeNil())
-				fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
-				fileSharesModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
-				Expect(fileSharesModel.STORAGEPOINTTWOFIVEIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGETWOIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGEFOURIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
-				Expect(fileSharesModel.STORAGETENIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				Expect(fileSharesPrototypeModel).ToNot(BeNil())
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				Expect(fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGETWOIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGEFOURIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGETENIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
 
-				// Construct an instance of the ClusterOrderInfo model
-				clusterOrderInfoModel := new(vmwarev1.ClusterOrderInfo)
-				Expect(clusterOrderInfoModel).ToNot(BeNil())
-				clusterOrderInfoModel.Name = core.StringPtr("testString")
-				clusterOrderInfoModel.HostCount = core.Int64Ptr(int64(2))
-				clusterOrderInfoModel.FileShares = fileSharesModel
-				clusterOrderInfoModel.HostProfile = core.StringPtr("testString")
-				Expect(clusterOrderInfoModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(clusterOrderInfoModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
-				Expect(clusterOrderInfoModel.FileShares).To(Equal(fileSharesModel))
-				Expect(clusterOrderInfoModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				// Construct an instance of the ClusterPrototype model
+				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
+				Expect(clusterPrototypeModel).ToNot(BeNil())
+				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
+				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
+				Expect(clusterPrototypeModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
+				Expect(clusterPrototypeModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.FileShares).To(Equal(fileSharesPrototypeModel))
 
-				// Construct an instance of the PVDCOrderInfo model
-				pvdcOrderInfoModel := new(vmwarev1.PVDCOrderInfo)
-				Expect(pvdcOrderInfoModel).ToNot(BeNil())
-				pvdcOrderInfoModel.Name = core.StringPtr("testString")
-				pvdcOrderInfoModel.DataCenter = core.StringPtr("testString")
-				pvdcOrderInfoModel.Clusters = []vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}
-				Expect(pvdcOrderInfoModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(pvdcOrderInfoModel.DataCenter).To(Equal(core.StringPtr("testString")))
-				Expect(pvdcOrderInfoModel.Clusters).To(Equal([]vmwarev1.ClusterOrderInfo{*clusterOrderInfoModel}))
+				// Construct an instance of the PVDCPrototype model
+				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
+				Expect(pvdcPrototypeModel).ToNot(BeNil())
+				pvdcPrototypeModel.Name = core.StringPtr("testString")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
+				Expect(pvdcPrototypeModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(pvdcPrototypeModel.DataCenterName).To(Equal(core.StringPtr("testString")))
+				Expect(pvdcPrototypeModel.Clusters).To(Equal([]vmwarev1.ClusterPrototype{*clusterPrototypeModel}))
+
+				// Construct an instance of the ResourceGroupIdentity model
+				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
+				Expect(resourceGroupIdentityModel).ToNot(BeNil())
+				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				Expect(resourceGroupIdentityModel.ID).To(Equal(core.StringPtr("testString")))
 
 				// Construct an instance of the GetVcddPriceOptions model
 				getVcddPriceOptionsName := "testString"
-				getVcddPriceOptionsResourceGroup := "testString"
-				getVcddPriceOptionsPvdcs := []vmwarev1.PVDCOrderInfo{}
+				getVcddPriceOptionsPvdcs := []vmwarev1.PVDCPrototype{}
 				getVcddPriceOptionsCountry := "USA"
-				getVcddPriceOptionsModel := vmwareService.NewGetVcddPriceOptions(getVcddPriceOptionsName, getVcddPriceOptionsResourceGroup, getVcddPriceOptionsPvdcs, getVcddPriceOptionsCountry)
+				getVcddPriceOptionsModel := vmwareService.NewGetVcddPriceOptions(getVcddPriceOptionsName, getVcddPriceOptionsPvdcs, getVcddPriceOptionsCountry)
 				getVcddPriceOptionsModel.SetName("testString")
-				getVcddPriceOptionsModel.SetResourceGroup("testString")
-				getVcddPriceOptionsModel.SetPvdcs([]vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel})
+				getVcddPriceOptionsModel.SetPvdcs([]vmwarev1.PVDCPrototype{*pvdcPrototypeModel})
 				getVcddPriceOptionsModel.SetCountry("USA")
+				getVcddPriceOptionsModel.SetResourceGroup(resourceGroupIdentityModel)
 				getVcddPriceOptionsModel.SetAcceptLanguage("testString")
 				getVcddPriceOptionsModel.SetXGlobalTransactionID("testString")
 				getVcddPriceOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getVcddPriceOptionsModel).ToNot(BeNil())
 				Expect(getVcddPriceOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(getVcddPriceOptionsModel.ResourceGroup).To(Equal(core.StringPtr("testString")))
-				Expect(getVcddPriceOptionsModel.Pvdcs).To(Equal([]vmwarev1.PVDCOrderInfo{*pvdcOrderInfoModel}))
+				Expect(getVcddPriceOptionsModel.Pvdcs).To(Equal([]vmwarev1.PVDCPrototype{*pvdcPrototypeModel}))
 				Expect(getVcddPriceOptionsModel.Country).To(Equal(core.StringPtr("USA")))
+				Expect(getVcddPriceOptionsModel.ResourceGroup).To(Equal(resourceGroupIdentityModel))
 				Expect(getVcddPriceOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(getVcddPriceOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(getVcddPriceOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -5776,13 +5860,6 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(getVdcOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(getVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(getVdcOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
-			})
-			It(`Invoke NewJSONPatchOperation successfully`, func() {
-				op := "add"
-				path := "testString"
-				_model, err := vmwareService.NewJSONPatchOperation(op, path)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewListDirectorSiteHostProfilesOptions successfully`, func() {
 				// Construct an instance of the ListDirectorSiteHostProfilesOptions model
@@ -5868,29 +5945,11 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(listVdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(listVdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewNewVDCDirectorSite successfully`, func() {
-				id := "testString"
-				var pvdc *vmwarev1.DirectorSitePVDC = nil
-				_, err := vmwareService.NewNewVDCDirectorSite(id, pvdc)
-				Expect(err).ToNot(BeNil())
-			})
-			It(`Invoke NewNewVDCEdge successfully`, func() {
-				typeVar := "dedicated"
-				_model, err := vmwareService.NewNewVDCEdge(typeVar)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
-			It(`Invoke NewNewVDCResourceGroup successfully`, func() {
-				id := "testString"
-				_model, err := vmwareService.NewNewVDCResourceGroup(id)
-				Expect(_model).ToNot(BeNil())
-				Expect(err).To(BeNil())
-			})
-			It(`Invoke NewPVDCOrderInfo successfully`, func() {
+			It(`Invoke NewPVDCPrototype successfully`, func() {
 				name := "testString"
-				dataCenter := "testString"
-				clusters := []vmwarev1.ClusterOrderInfo{}
-				_model, err := vmwareService.NewPVDCOrderInfo(name, dataCenter, clusters)
+				dataCenterName := "testString"
+				clusters := []vmwarev1.ClusterPrototype{}
+				_model, err := vmwareService.NewPVDCPrototype(name, dataCenterName, clusters)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
@@ -5904,51 +5963,25 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(replaceOrgAdminPasswordOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
 				Expect(replaceOrgAdminPasswordOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
-			It(`Invoke NewUpdateClusterResponsePatch successfully`, func() {
-				// Construct an instance of the UpdateClusterResponse model
-				updateClusterResponse := new(vmwarev1.UpdateClusterResponse)
-				updateClusterResponse.Message = core.StringPtr("The request has been accepted.")
-
-				updateClusterResponsePatch := vmwareService.NewUpdateClusterResponsePatch(updateClusterResponse)
-				Expect(updateClusterResponsePatch).ToNot(BeNil())
-
-				_path := func(op interface{}) string {
-					return *op.(vmwarev1.JSONPatchOperation).Path
-				}
-				Expect(updateClusterResponsePatch).To(MatchAllElements(_path, Elements{
-				"/message": MatchAllFields(Fields{
-					"Op": PointTo(Equal(vmwarev1.JSONPatchOperation_Op_Add)),
-					"Path": PointTo(Equal("/message")),
-					"From": BeNil(),
-					"Value": Equal(updateClusterResponse.Message),
-					}),
-				}))
+			It(`Invoke NewResourceGroupIdentity successfully`, func() {
+				id := "testString"
+				_model, err := vmwareService.NewResourceGroupIdentity(id)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewUpdateDirectorSitesPvdcsClusterOptions successfully`, func() {
-				// Construct an instance of the JSONPatchOperation model
-				jsonPatchOperationModel := new(vmwarev1.JSONPatchOperation)
-				Expect(jsonPatchOperationModel).ToNot(BeNil())
-				jsonPatchOperationModel.Op = core.StringPtr("add")
-				jsonPatchOperationModel.Path = core.StringPtr("testString")
-				jsonPatchOperationModel.From = core.StringPtr("testString")
-				jsonPatchOperationModel.Value = core.StringPtr("testString")
-				Expect(jsonPatchOperationModel.Op).To(Equal(core.StringPtr("add")))
-				Expect(jsonPatchOperationModel.Path).To(Equal(core.StringPtr("testString")))
-				Expect(jsonPatchOperationModel.From).To(Equal(core.StringPtr("testString")))
-				Expect(jsonPatchOperationModel.Value).To(Equal(core.StringPtr("testString")))
-
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				siteID := "testString"
 				id := "testString"
 				pvdcID := "testString"
 				xAuthRefreshToken := "testString"
-				body := []vmwarev1.JSONPatchOperation{}
+				body := make(map[string]interface{})
 				updateDirectorSitesPvdcsClusterOptionsModel := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(siteID, id, pvdcID, xAuthRefreshToken, body)
 				updateDirectorSitesPvdcsClusterOptionsModel.SetSiteID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetPvdcID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetXAuthRefreshToken("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.SetBody([]vmwarev1.JSONPatchOperation{*jsonPatchOperationModel})
+				updateDirectorSitesPvdcsClusterOptionsModel.SetBody(make(map[string]interface{}))
 				updateDirectorSitesPvdcsClusterOptionsModel.SetAcceptLanguage("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetXGlobalTransactionID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -5957,10 +5990,22 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.XAuthRefreshToken).To(Equal(core.StringPtr("testString")))
-				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Body).To(Equal([]vmwarev1.JSONPatchOperation{*jsonPatchOperationModel}))
+				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Body).To(Equal(make(map[string]interface{})))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewVDCDirectorSitePrototype successfully`, func() {
+				id := "testString"
+				var pvdc *vmwarev1.DirectorSitePVDC = nil
+				_, err := vmwareService.NewVDCDirectorSitePrototype(id, pvdc)
+				Expect(err).ToNot(BeNil())
+			})
+			It(`Invoke NewVDCEdgePrototype successfully`, func() {
+				typeVar := "dedicated"
+				_model, err := vmwareService.NewVDCEdgePrototype(typeVar)
+				Expect(_model).ToNot(BeNil())
+				Expect(err).To(BeNil())
 			})
 		})
 	})

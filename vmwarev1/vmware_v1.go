@@ -212,11 +212,11 @@ func (vmware *VmwareV1) CreateDirectorSitesWithContext(ctx context.Context, crea
 	if createDirectorSitesOptions.Name != nil {
 		body["name"] = createDirectorSitesOptions.Name
 	}
-	if createDirectorSitesOptions.ResourceGroup != nil {
-		body["resource_group"] = createDirectorSitesOptions.ResourceGroup
-	}
 	if createDirectorSitesOptions.Pvdcs != nil {
 		body["pvdcs"] = createDirectorSitesOptions.Pvdcs
+	}
+	if createDirectorSitesOptions.ResourceGroup != nil {
+		body["resource_group"] = createDirectorSitesOptions.ResourceGroup
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -234,7 +234,7 @@ func (vmware *VmwareV1) CreateDirectorSitesWithContext(ctx context.Context, crea
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCreateDirectorSite)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSite)
 		if err != nil {
 			return
 		}
@@ -246,12 +246,12 @@ func (vmware *VmwareV1) CreateDirectorSitesWithContext(ctx context.Context, crea
 
 // ListDirectorSites : List director site instances
 // List all VMware director site instances that the user can access in the cloud account.
-func (vmware *VmwareV1) ListDirectorSites(listDirectorSitesOptions *ListDirectorSitesOptions) (result *ListDirectorSites, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSites(listDirectorSitesOptions *ListDirectorSitesOptions) (result *DirectorSiteCollection, response *core.DetailedResponse, err error) {
 	return vmware.ListDirectorSitesWithContext(context.Background(), listDirectorSitesOptions)
 }
 
 // ListDirectorSitesWithContext is an alternate form of the ListDirectorSites method which supports a Context parameter
-func (vmware *VmwareV1) ListDirectorSitesWithContext(ctx context.Context, listDirectorSitesOptions *ListDirectorSitesOptions) (result *ListDirectorSites, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSitesWithContext(ctx context.Context, listDirectorSitesOptions *ListDirectorSitesOptions) (result *DirectorSiteCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listDirectorSitesOptions, "listDirectorSitesOptions")
 	if err != nil {
 		return
@@ -292,7 +292,7 @@ func (vmware *VmwareV1) ListDirectorSitesWithContext(ctx context.Context, listDi
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListDirectorSites)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSiteCollection)
 		if err != nil {
 			return
 		}
@@ -358,7 +358,7 @@ func (vmware *VmwareV1) GetDirectorSiteWithContext(ctx context.Context, getDirec
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCreateDirectorSite)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSite)
 		if err != nil {
 			return
 		}
@@ -427,7 +427,7 @@ func (vmware *VmwareV1) DeleteDirectorSiteWithContext(ctx context.Context, delet
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDeleteDirectorSite)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSite)
 		if err != nil {
 			return
 		}
@@ -439,12 +439,12 @@ func (vmware *VmwareV1) DeleteDirectorSiteWithContext(ctx context.Context, delet
 
 // ListDirectorSitesPvdcs : List the provider virtual data centers in a director site instance
 // List the provider virtual data centers in a specified director site.
-func (vmware *VmwareV1) ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions) (result *ListPVDCs, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions) (result *PVDCCollection, response *core.DetailedResponse, err error) {
 	return vmware.ListDirectorSitesPvdcsWithContext(context.Background(), listDirectorSitesPvdcsOptions)
 }
 
 // ListDirectorSitesPvdcsWithContext is an alternate form of the ListDirectorSitesPvdcs method which supports a Context parameter
-func (vmware *VmwareV1) ListDirectorSitesPvdcsWithContext(ctx context.Context, listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions) (result *ListPVDCs, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSitesPvdcsWithContext(ctx context.Context, listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions) (result *PVDCCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listDirectorSitesPvdcsOptions, "listDirectorSitesPvdcsOptions cannot be nil")
 	if err != nil {
 		return
@@ -493,7 +493,7 @@ func (vmware *VmwareV1) ListDirectorSitesPvdcsWithContext(ctx context.Context, l
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListPVDCs)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPVDCCollection)
 		if err != nil {
 			return
 		}
@@ -504,16 +504,16 @@ func (vmware *VmwareV1) ListDirectorSitesPvdcsWithContext(ctx context.Context, l
 }
 
 // CreateDirectorSitesPvdcs : Create a provider virtual data center instance in a specified director site
-// Create a new instance of a provider virtual datacentre with specified configurations. The director site instance is
+// Create a new instance of a provider virtual datacenter with specified configurations. The director site instance is
 // the infrastructure and associated VMware software stack consisting of vCenter, NSX-T, and VMware Cloud Director.
 // VMware platform management and operations are performed with VMware Cloud Director. The minimum initial order size is
 // 2 hosts (2-Socket 32 Cores, 192 GB RAM) with 24 TB of 2.0 IOPS/GB storage.
-func (vmware *VmwareV1) CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions) (result *PVDCResponse, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions) (result *PVDC, response *core.DetailedResponse, err error) {
 	return vmware.CreateDirectorSitesPvdcsWithContext(context.Background(), createDirectorSitesPvdcsOptions)
 }
 
 // CreateDirectorSitesPvdcsWithContext is an alternate form of the CreateDirectorSitesPvdcs method which supports a Context parameter
-func (vmware *VmwareV1) CreateDirectorSitesPvdcsWithContext(ctx context.Context, createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions) (result *PVDCResponse, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) CreateDirectorSitesPvdcsWithContext(ctx context.Context, createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions) (result *PVDC, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(createDirectorSitesPvdcsOptions, "createDirectorSitesPvdcsOptions cannot be nil")
 	if err != nil {
 		return
@@ -559,8 +559,8 @@ func (vmware *VmwareV1) CreateDirectorSitesPvdcsWithContext(ctx context.Context,
 	if createDirectorSitesPvdcsOptions.Name != nil {
 		body["name"] = createDirectorSitesPvdcsOptions.Name
 	}
-	if createDirectorSitesPvdcsOptions.DataCenter != nil {
-		body["data_center"] = createDirectorSitesPvdcsOptions.DataCenter
+	if createDirectorSitesPvdcsOptions.DataCenterName != nil {
+		body["data_center_name"] = createDirectorSitesPvdcsOptions.DataCenterName
 	}
 	if createDirectorSitesPvdcsOptions.Clusters != nil {
 		body["clusters"] = createDirectorSitesPvdcsOptions.Clusters
@@ -581,7 +581,7 @@ func (vmware *VmwareV1) CreateDirectorSitesPvdcsWithContext(ctx context.Context,
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPVDCResponse)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPVDC)
 		if err != nil {
 			return
 		}
@@ -593,12 +593,12 @@ func (vmware *VmwareV1) CreateDirectorSitesPvdcsWithContext(ctx context.Context,
 
 // GetDirectorSitesPvdcs : Get the specified provider virtual data center in a director site instance
 // Get the specified provider virtual data centers in a specified director site.
-func (vmware *VmwareV1) GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions) (result *PVDCResponse, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions) (result *PVDC, response *core.DetailedResponse, err error) {
 	return vmware.GetDirectorSitesPvdcsWithContext(context.Background(), getDirectorSitesPvdcsOptions)
 }
 
 // GetDirectorSitesPvdcsWithContext is an alternate form of the GetDirectorSitesPvdcs method which supports a Context parameter
-func (vmware *VmwareV1) GetDirectorSitesPvdcsWithContext(ctx context.Context, getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions) (result *PVDCResponse, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) GetDirectorSitesPvdcsWithContext(ctx context.Context, getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions) (result *PVDC, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getDirectorSitesPvdcsOptions, "getDirectorSitesPvdcsOptions cannot be nil")
 	if err != nil {
 		return
@@ -648,7 +648,7 @@ func (vmware *VmwareV1) GetDirectorSitesPvdcsWithContext(ctx context.Context, ge
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPVDCResponse)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalPVDC)
 		if err != nil {
 			return
 		}
@@ -660,12 +660,12 @@ func (vmware *VmwareV1) GetDirectorSitesPvdcsWithContext(ctx context.Context, ge
 
 // ListDirectorSitesPvdcsClusters : List clusters
 // List all VMware clusters of a director site instance by specifying the ID of the instance.
-func (vmware *VmwareV1) ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions *ListDirectorSitesPvdcsClustersOptions) (result *ListClusters, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions *ListDirectorSitesPvdcsClustersOptions) (result *ClusterCollection, response *core.DetailedResponse, err error) {
 	return vmware.ListDirectorSitesPvdcsClustersWithContext(context.Background(), listDirectorSitesPvdcsClustersOptions)
 }
 
 // ListDirectorSitesPvdcsClustersWithContext is an alternate form of the ListDirectorSitesPvdcsClusters method which supports a Context parameter
-func (vmware *VmwareV1) ListDirectorSitesPvdcsClustersWithContext(ctx context.Context, listDirectorSitesPvdcsClustersOptions *ListDirectorSitesPvdcsClustersOptions) (result *ListClusters, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSitesPvdcsClustersWithContext(ctx context.Context, listDirectorSitesPvdcsClustersOptions *ListDirectorSitesPvdcsClustersOptions) (result *ClusterCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(listDirectorSitesPvdcsClustersOptions, "listDirectorSitesPvdcsClustersOptions cannot be nil")
 	if err != nil {
 		return
@@ -715,7 +715,7 @@ func (vmware *VmwareV1) ListDirectorSitesPvdcsClustersWithContext(ctx context.Co
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListClusters)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalClusterCollection)
 		if err != nil {
 			return
 		}
@@ -868,12 +868,12 @@ func (vmware *VmwareV1) DeleteDirectorSitesPvdcsClusterWithContext(ctx context.C
 // UpdateDirectorSitesPvdcsCluster : Update a cluster
 // Update the number of hosts or file storage shares of a specific cluster in a specific director site instance. VMware
 // clusters must have between [2-25] hosts.
-func (vmware *VmwareV1) UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions) (result *UpdateClusterResponse, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions) (result *UpdateCluster, response *core.DetailedResponse, err error) {
 	return vmware.UpdateDirectorSitesPvdcsClusterWithContext(context.Background(), updateDirectorSitesPvdcsClusterOptions)
 }
 
 // UpdateDirectorSitesPvdcsClusterWithContext is an alternate form of the UpdateDirectorSitesPvdcsCluster method which supports a Context parameter
-func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.Context, updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions) (result *UpdateClusterResponse, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.Context, updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions) (result *UpdateCluster, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(updateDirectorSitesPvdcsClusterOptions, "updateDirectorSitesPvdcsClusterOptions cannot be nil")
 	if err != nil {
 		return
@@ -906,7 +906,7 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json-patch+json")
+	builder.AddHeader("Content-Type", "application/merge-patch+json")
 	if updateDirectorSitesPvdcsClusterOptions.XAuthRefreshToken != nil {
 		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*updateDirectorSitesPvdcsClusterOptions.XAuthRefreshToken))
 	}
@@ -933,7 +933,7 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUpdateClusterResponse)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUpdateCluster)
 		if err != nil {
 			return
 		}
@@ -945,12 +945,12 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 
 // ListDirectorSiteRegions : List regions
 // List all IBM Cloud regions enabled for users to create a new director site instance.
-func (vmware *VmwareV1) ListDirectorSiteRegions(listDirectorSiteRegionsOptions *ListDirectorSiteRegionsOptions) (result *DirectorSiteRegions, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSiteRegions(listDirectorSiteRegionsOptions *ListDirectorSiteRegionsOptions) (result *DirectorSiteRegionCollection, response *core.DetailedResponse, err error) {
 	return vmware.ListDirectorSiteRegionsWithContext(context.Background(), listDirectorSiteRegionsOptions)
 }
 
 // ListDirectorSiteRegionsWithContext is an alternate form of the ListDirectorSiteRegions method which supports a Context parameter
-func (vmware *VmwareV1) ListDirectorSiteRegionsWithContext(ctx context.Context, listDirectorSiteRegionsOptions *ListDirectorSiteRegionsOptions) (result *DirectorSiteRegions, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSiteRegionsWithContext(ctx context.Context, listDirectorSiteRegionsOptions *ListDirectorSiteRegionsOptions) (result *DirectorSiteRegionCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listDirectorSiteRegionsOptions, "listDirectorSiteRegionsOptions")
 	if err != nil {
 		return
@@ -991,7 +991,7 @@ func (vmware *VmwareV1) ListDirectorSiteRegionsWithContext(ctx context.Context, 
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSiteRegions)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSiteRegionCollection)
 		if err != nil {
 			return
 		}
@@ -1005,12 +1005,12 @@ func (vmware *VmwareV1) ListDirectorSiteRegionsWithContext(ctx context.Context, 
 // List available host profiles that could be used when creating a director site instance. IBM Cloud offers several
 // different host types. Typically, the host type is selected based on the properties of the workload to be run in the
 // VMware cluster.
-func (vmware *VmwareV1) ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions *ListDirectorSiteHostProfilesOptions) (result *ListHostProfiles, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions *ListDirectorSiteHostProfilesOptions) (result *DirectorSiteHostProfileCollection, response *core.DetailedResponse, err error) {
 	return vmware.ListDirectorSiteHostProfilesWithContext(context.Background(), listDirectorSiteHostProfilesOptions)
 }
 
 // ListDirectorSiteHostProfilesWithContext is an alternate form of the ListDirectorSiteHostProfiles method which supports a Context parameter
-func (vmware *VmwareV1) ListDirectorSiteHostProfilesWithContext(ctx context.Context, listDirectorSiteHostProfilesOptions *ListDirectorSiteHostProfilesOptions) (result *ListHostProfiles, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListDirectorSiteHostProfilesWithContext(ctx context.Context, listDirectorSiteHostProfilesOptions *ListDirectorSiteHostProfilesOptions) (result *DirectorSiteHostProfileCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listDirectorSiteHostProfilesOptions, "listDirectorSiteHostProfilesOptions")
 	if err != nil {
 		return
@@ -1051,7 +1051,7 @@ func (vmware *VmwareV1) ListDirectorSiteHostProfilesWithContext(ctx context.Cont
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListHostProfiles)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSiteHostProfileCollection)
 		if err != nil {
 			return
 		}
@@ -1125,12 +1125,12 @@ func (vmware *VmwareV1) ReplaceOrgAdminPasswordWithContext(ctx context.Context, 
 
 // ListPrices : List billing metrics
 // List all billing metrics and associated prices.
-func (vmware *VmwareV1) ListPrices(listPricesOptions *ListPricesOptions) (result *DirectorSitePricingInfo, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListPrices(listPricesOptions *ListPricesOptions) (result *DirectorSitePricing, response *core.DetailedResponse, err error) {
 	return vmware.ListPricesWithContext(context.Background(), listPricesOptions)
 }
 
 // ListPricesWithContext is an alternate form of the ListPrices method which supports a Context parameter
-func (vmware *VmwareV1) ListPricesWithContext(ctx context.Context, listPricesOptions *ListPricesOptions) (result *DirectorSitePricingInfo, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListPricesWithContext(ctx context.Context, listPricesOptions *ListPricesOptions) (result *DirectorSitePricing, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listPricesOptions, "listPricesOptions")
 	if err != nil {
 		return
@@ -1171,7 +1171,7 @@ func (vmware *VmwareV1) ListPricesWithContext(ctx context.Context, listPricesOpt
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSitePricingInfo)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSitePricing)
 		if err != nil {
 			return
 		}
@@ -1183,12 +1183,12 @@ func (vmware *VmwareV1) ListPricesWithContext(ctx context.Context, listPricesOpt
 
 // GetVcddPrice : Quote price
 // Quote price for a specific director site instance configuration.
-func (vmware *VmwareV1) GetVcddPrice(getVcddPriceOptions *GetVcddPriceOptions) (result *DirectorSitePriceQuoteResponse, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) GetVcddPrice(getVcddPriceOptions *GetVcddPriceOptions) (result *DirectorSitePriceQuote, response *core.DetailedResponse, err error) {
 	return vmware.GetVcddPriceWithContext(context.Background(), getVcddPriceOptions)
 }
 
 // GetVcddPriceWithContext is an alternate form of the GetVcddPrice method which supports a Context parameter
-func (vmware *VmwareV1) GetVcddPriceWithContext(ctx context.Context, getVcddPriceOptions *GetVcddPriceOptions) (result *DirectorSitePriceQuoteResponse, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) GetVcddPriceWithContext(ctx context.Context, getVcddPriceOptions *GetVcddPriceOptions) (result *DirectorSitePriceQuote, response *core.DetailedResponse, err error) {
 	err = core.ValidateNotNil(getVcddPriceOptions, "getVcddPriceOptions cannot be nil")
 	if err != nil {
 		return
@@ -1227,14 +1227,14 @@ func (vmware *VmwareV1) GetVcddPriceWithContext(ctx context.Context, getVcddPric
 	if getVcddPriceOptions.Name != nil {
 		body["name"] = getVcddPriceOptions.Name
 	}
-	if getVcddPriceOptions.ResourceGroup != nil {
-		body["resource_group"] = getVcddPriceOptions.ResourceGroup
-	}
 	if getVcddPriceOptions.Pvdcs != nil {
 		body["pvdcs"] = getVcddPriceOptions.Pvdcs
 	}
 	if getVcddPriceOptions.Country != nil {
 		body["country"] = getVcddPriceOptions.Country
+	}
+	if getVcddPriceOptions.ResourceGroup != nil {
+		body["resource_group"] = getVcddPriceOptions.ResourceGroup
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -1252,7 +1252,7 @@ func (vmware *VmwareV1) GetVcddPriceWithContext(ctx context.Context, getVcddPric
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSitePriceQuoteResponse)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSitePriceQuote)
 		if err != nil {
 			return
 		}
@@ -1264,12 +1264,12 @@ func (vmware *VmwareV1) GetVcddPriceWithContext(ctx context.Context, getVcddPric
 
 // ListVdcs : List Virtual Data Centers
 // List all Virtual Data Centers that user has access to in the cloud account.
-func (vmware *VmwareV1) ListVdcs(listVdcsOptions *ListVdcsOptions) (result *ListVDCs, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListVdcs(listVdcsOptions *ListVdcsOptions) (result *VDCCollection, response *core.DetailedResponse, err error) {
 	return vmware.ListVdcsWithContext(context.Background(), listVdcsOptions)
 }
 
 // ListVdcsWithContext is an alternate form of the ListVdcs method which supports a Context parameter
-func (vmware *VmwareV1) ListVdcsWithContext(ctx context.Context, listVdcsOptions *ListVdcsOptions) (result *ListVDCs, response *core.DetailedResponse, err error) {
+func (vmware *VmwareV1) ListVdcsWithContext(ctx context.Context, listVdcsOptions *ListVdcsOptions) (result *VDCCollection, response *core.DetailedResponse, err error) {
 	err = core.ValidateStruct(listVdcsOptions, "listVdcsOptions")
 	if err != nil {
 		return
@@ -1307,7 +1307,7 @@ func (vmware *VmwareV1) ListVdcsWithContext(ctx context.Context, listVdcsOptions
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalListVDCs)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalVDCCollection)
 		if err != nil {
 			return
 		}
@@ -1530,13 +1530,13 @@ type Cluster struct {
 	Name *string `json:"name" validate:"required"`
 
 	// The hyperlink of the cluster resource.
-	Href *string `json:"href,omitempty"`
+	Href *string `json:"href" validate:"required"`
 
 	// The time that the instance is ordered.
-	InstanceOrdered *strfmt.DateTime `json:"instance_ordered" validate:"required"`
+	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
 
 	// The time that the instance is created.
-	InstanceCreated *strfmt.DateTime `json:"instance_created" validate:"required"`
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
 	// The number of hosts in the cluster.
 	HostCount *int64 `json:"host_count" validate:"required"`
@@ -1545,10 +1545,10 @@ type Cluster struct {
 	Status *string `json:"status" validate:"required"`
 
 	// The location of deployed cluster.
-	DataCenter *string `json:"data_center" validate:"required"`
+	DataCenterName *string `json:"data_center_name" validate:"required"`
 
 	// Back link to associated director site resource.
-	DirectorSite *DirectorSiteBackLink `json:"director_site" validate:"required"`
+	DirectorSite *DirectorSiteReference `json:"director_site" validate:"required"`
 
 	// The name of the host profile.
 	HostProfile *string `json:"host_profile" validate:"required"`
@@ -1590,11 +1590,11 @@ func UnmarshalCluster(m map[string]json.RawMessage, result interface{}) (err err
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "instance_ordered", &obj.InstanceOrdered)
+	err = core.UnmarshalPrimitive(m, "ordered_at", &obj.OrderedAt)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "instance_created", &obj.InstanceCreated)
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		return
 	}
@@ -1606,11 +1606,11 @@ func UnmarshalCluster(m map[string]json.RawMessage, result interface{}) (err err
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "data_center", &obj.DataCenter)
+	err = core.UnmarshalPrimitive(m, "data_center_name", &obj.DataCenterName)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "director_site", &obj.DirectorSite, UnmarshalDirectorSiteBackLink)
+	err = core.UnmarshalModel(m, "director_site", &obj.DirectorSite, UnmarshalDirectorSiteReference)
 	if err != nil {
 		return
 	}
@@ -1634,8 +1634,59 @@ func UnmarshalCluster(m map[string]json.RawMessage, result interface{}) (err err
 	return
 }
 
-// ClusterOrderInfo : VMware Cluster order information. Clusters form VMware workload availibility boundaries.
-type ClusterOrderInfo struct {
+// ClusterCollection : Return all clusters instances.
+type ClusterCollection struct {
+	// list of cluster objects.
+	Clusters []Cluster `json:"clusters" validate:"required"`
+}
+
+// UnmarshalClusterCollection unmarshals an instance of ClusterCollection from the specified map of raw messages.
+func UnmarshalClusterCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ClusterCollection)
+	err = core.UnmarshalModel(m, "clusters", &obj.Clusters, UnmarshalCluster)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ClusterPatch : The cluster patch. Specifying both file_shares and host_count in one call is currently not supported.
+type ClusterPatch struct {
+	// Chosen storage policies and their sizes.
+	FileShares *FileSharesPrototype `json:"file_shares,omitempty"`
+
+	// count of hosts to add or remove on cluster.
+	HostCount *int64 `json:"host_count,omitempty"`
+}
+
+// UnmarshalClusterPatch unmarshals an instance of ClusterPatch from the specified map of raw messages.
+func UnmarshalClusterPatch(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ClusterPatch)
+	err = core.UnmarshalModel(m, "file_shares", &obj.FileShares, UnmarshalFileSharesPrototype)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "host_count", &obj.HostCount)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// AsPatch returns a generic map representation of the ClusterPatch
+func (clusterPatch *ClusterPatch) AsPatch() (_patch map[string]interface{}, err error) {
+	var jsonData []byte
+	jsonData, err = json.Marshal(clusterPatch)
+	if err == nil {
+		err = json.Unmarshal(jsonData, &_patch)
+	}
+	return
+}
+
+// ClusterPrototype : VMware Cluster order information. Clusters form VMware workload availibility boundaries.
+type ClusterPrototype struct {
 	// Name of the VMware cluster. Cluster names must be unique per director site instance. Cluster names cannot be changed
 	// after creation.
 	Name *string `json:"name" validate:"required"`
@@ -1643,29 +1694,29 @@ type ClusterOrderInfo struct {
 	// Number of hosts in the VMware cluster.
 	HostCount *int64 `json:"host_count" validate:"required"`
 
-	// Chosen storage policies and their sizes.
-	FileShares *FileShares `json:"file_shares" validate:"required"`
-
 	// The host type. IBM Cloud offers several different host types. Typically, the host type is selected based on the
 	// properties of the workload to be run in the VMware cluster.
 	HostProfile *string `json:"host_profile" validate:"required"`
+
+	// Chosen storage policies and their sizes.
+	FileShares *FileSharesPrototype `json:"file_shares" validate:"required"`
 }
 
-// NewClusterOrderInfo : Instantiate ClusterOrderInfo (Generic Model Constructor)
-func (*VmwareV1) NewClusterOrderInfo(name string, hostCount int64, fileShares *FileShares, hostProfile string) (_model *ClusterOrderInfo, err error) {
-	_model = &ClusterOrderInfo{
+// NewClusterPrototype : Instantiate ClusterPrototype (Generic Model Constructor)
+func (*VmwareV1) NewClusterPrototype(name string, hostCount int64, hostProfile string, fileShares *FileSharesPrototype) (_model *ClusterPrototype, err error) {
+	_model = &ClusterPrototype{
 		Name: core.StringPtr(name),
 		HostCount: core.Int64Ptr(hostCount),
-		FileShares: fileShares,
 		HostProfile: core.StringPtr(hostProfile),
+		FileShares: fileShares,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
 }
 
-// UnmarshalClusterOrderInfo unmarshals an instance of ClusterOrderInfo from the specified map of raw messages.
-func UnmarshalClusterOrderInfo(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ClusterOrderInfo)
+// UnmarshalClusterPrototype unmarshals an instance of ClusterPrototype from the specified map of raw messages.
+func UnmarshalClusterPrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ClusterPrototype)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		return
@@ -1674,11 +1725,11 @@ func UnmarshalClusterOrderInfo(m map[string]json.RawMessage, result interface{})
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "file_shares", &obj.FileShares, UnmarshalFileShares)
+	err = core.UnmarshalPrimitive(m, "host_profile", &obj.HostProfile)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "host_profile", &obj.HostProfile)
+	err = core.UnmarshalModel(m, "file_shares", &obj.FileShares, UnmarshalFileSharesPrototype)
 	if err != nil {
 		return
 	}
@@ -1686,7 +1737,7 @@ func UnmarshalClusterOrderInfo(m map[string]json.RawMessage, result interface{})
 	return
 }
 
-// ClusterSummary : VMware Cluster order information. Clusters form VMware workload availibility boundaries.
+// ClusterSummary : VMware Cluster basic information.
 type ClusterSummary struct {
 	// Name of the VMware cluster. Cluster names must be unique per director site instance. Cluster names cannot be changed
 	// after creation.
@@ -1694,9 +1745,6 @@ type ClusterSummary struct {
 
 	// Number of hosts in the VMware cluster.
 	HostCount *int64 `json:"host_count" validate:"required"`
-
-	// Chosen storage policies and their sizes.
-	FileShares *FileShares `json:"file_shares" validate:"required"`
 
 	// The host type. IBM Cloud offers several different host types. Typically, the host type is selected based on the
 	// properties of the workload to be run in the VMware cluster.
@@ -1706,13 +1754,16 @@ type ClusterSummary struct {
 	ID *string `json:"id" validate:"required"`
 
 	// THe location of the deployed cluster.
-	DataCenter *string `json:"data_center" validate:"required"`
+	DataCenterName *string `json:"data_center_name" validate:"required"`
 
 	// The status of the cluster.
 	Status *string `json:"status" validate:"required"`
 
 	// The hyperlink of the cluster resource.
-	Href *string `json:"href,omitempty"`
+	Href *string `json:"href" validate:"required"`
+
+	// Chosen storage policies and their sizes.
+	FileShares *FileShares `json:"file_shares" validate:"required"`
 }
 
 // UnmarshalClusterSummary unmarshals an instance of ClusterSummary from the specified map of raw messages.
@@ -1726,10 +1777,6 @@ func UnmarshalClusterSummary(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "file_shares", &obj.FileShares, UnmarshalFileShares)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "host_profile", &obj.HostProfile)
 	if err != nil {
 		return
@@ -1738,7 +1785,7 @@ func UnmarshalClusterSummary(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "data_center", &obj.DataCenter)
+	err = core.UnmarshalPrimitive(m, "data_center_name", &obj.DataCenterName)
 	if err != nil {
 		return
 	}
@@ -1750,17 +1797,10 @@ func UnmarshalClusterSummary(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// CreateDirectorSite : CreateDirectorSite struct
-type CreateDirectorSite struct {
-}
-
-// UnmarshalCreateDirectorSite unmarshals an instance of CreateDirectorSite from the specified map of raw messages.
-func UnmarshalCreateDirectorSite(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(CreateDirectorSite)
+	err = core.UnmarshalModel(m, "file_shares", &obj.FileShares, UnmarshalFileShares)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -1777,11 +1817,12 @@ type CreateDirectorSitesOptions struct {
 	// after initial creation.
 	Name *string `json:"name" validate:"required"`
 
-	// The name or ID of the IBM resource group where the instance is deployed.
-	ResourceGroup *string `json:"resource_group" validate:"required"`
-
 	// List of VMware provider virtual data centers to deploy on the instance.
-	Pvdcs []PVDCOrderInfo `json:"pvdcs" validate:"required"`
+	Pvdcs []PVDCPrototype `json:"pvdcs" validate:"required"`
+
+	// The resource group to associate with the resource instance.
+	// If not specified, the default resource group in the account is used.
+	ResourceGroup *ResourceGroupIdentity `json:"resource_group,omitempty"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -1794,11 +1835,10 @@ type CreateDirectorSitesOptions struct {
 }
 
 // NewCreateDirectorSitesOptions : Instantiate CreateDirectorSitesOptions
-func (*VmwareV1) NewCreateDirectorSitesOptions(xAuthRefreshToken string, name string, resourceGroup string, pvdcs []PVDCOrderInfo) *CreateDirectorSitesOptions {
+func (*VmwareV1) NewCreateDirectorSitesOptions(xAuthRefreshToken string, name string, pvdcs []PVDCPrototype) *CreateDirectorSitesOptions {
 	return &CreateDirectorSitesOptions{
 		XAuthRefreshToken: core.StringPtr(xAuthRefreshToken),
 		Name: core.StringPtr(name),
-		ResourceGroup: core.StringPtr(resourceGroup),
 		Pvdcs: pvdcs,
 	}
 }
@@ -1815,15 +1855,15 @@ func (_options *CreateDirectorSitesOptions) SetName(name string) *CreateDirector
 	return _options
 }
 
-// SetResourceGroup : Allow user to set ResourceGroup
-func (_options *CreateDirectorSitesOptions) SetResourceGroup(resourceGroup string) *CreateDirectorSitesOptions {
-	_options.ResourceGroup = core.StringPtr(resourceGroup)
+// SetPvdcs : Allow user to set Pvdcs
+func (_options *CreateDirectorSitesOptions) SetPvdcs(pvdcs []PVDCPrototype) *CreateDirectorSitesOptions {
+	_options.Pvdcs = pvdcs
 	return _options
 }
 
-// SetPvdcs : Allow user to set Pvdcs
-func (_options *CreateDirectorSitesOptions) SetPvdcs(pvdcs []PVDCOrderInfo) *CreateDirectorSitesOptions {
-	_options.Pvdcs = pvdcs
+// SetResourceGroup : Allow user to set ResourceGroup
+func (_options *CreateDirectorSitesOptions) SetResourceGroup(resourceGroup *ResourceGroupIdentity) *CreateDirectorSitesOptions {
+	_options.ResourceGroup = resourceGroup
 	return _options
 }
 
@@ -1861,10 +1901,10 @@ type CreateDirectorSitesPvdcsOptions struct {
 	Name *string `json:"name" validate:"required"`
 
 	// Data center location to deploy the cluster. See `GET /director_site_regions` for supported data center locations.
-	DataCenter *string `json:"data_center" validate:"required"`
+	DataCenterName *string `json:"data_center_name" validate:"required"`
 
 	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availibility boundaries.
-	Clusters []ClusterOrderInfo `json:"clusters" validate:"required"`
+	Clusters []ClusterPrototype `json:"clusters" validate:"required"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -1877,12 +1917,12 @@ type CreateDirectorSitesPvdcsOptions struct {
 }
 
 // NewCreateDirectorSitesPvdcsOptions : Instantiate CreateDirectorSitesPvdcsOptions
-func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, xAuthRefreshToken string, name string, dataCenter string, clusters []ClusterOrderInfo) *CreateDirectorSitesPvdcsOptions {
+func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, xAuthRefreshToken string, name string, dataCenterName string, clusters []ClusterPrototype) *CreateDirectorSitesPvdcsOptions {
 	return &CreateDirectorSitesPvdcsOptions{
 		SiteID: core.StringPtr(siteID),
 		XAuthRefreshToken: core.StringPtr(xAuthRefreshToken),
 		Name: core.StringPtr(name),
-		DataCenter: core.StringPtr(dataCenter),
+		DataCenterName: core.StringPtr(dataCenterName),
 		Clusters: clusters,
 	}
 }
@@ -1905,14 +1945,14 @@ func (_options *CreateDirectorSitesPvdcsOptions) SetName(name string) *CreateDir
 	return _options
 }
 
-// SetDataCenter : Allow user to set DataCenter
-func (_options *CreateDirectorSitesPvdcsOptions) SetDataCenter(dataCenter string) *CreateDirectorSitesPvdcsOptions {
-	_options.DataCenter = core.StringPtr(dataCenter)
+// SetDataCenterName : Allow user to set DataCenterName
+func (_options *CreateDirectorSitesPvdcsOptions) SetDataCenterName(dataCenterName string) *CreateDirectorSitesPvdcsOptions {
+	_options.DataCenterName = core.StringPtr(dataCenterName)
 	return _options
 }
 
 // SetClusters : Allow user to set Clusters
-func (_options *CreateDirectorSitesPvdcsOptions) SetClusters(clusters []ClusterOrderInfo) *CreateDirectorSitesPvdcsOptions {
+func (_options *CreateDirectorSitesPvdcsOptions) SetClusters(clusters []ClusterPrototype) *CreateDirectorSitesPvdcsOptions {
 	_options.Clusters = clusters
 	return _options
 }
@@ -1941,14 +1981,14 @@ type CreateVdcOptions struct {
 	Name *string `json:"name" validate:"required"`
 
 	// The director site in which to deploy the Virtual Data Center.
-	DirectorSite *NewVDCDirectorSite `json:"director_site" validate:"required"`
+	DirectorSite *VDCDirectorSitePrototype `json:"director_site" validate:"required"`
 
 	// The networking Edge to be deployed on the Virtual Data Center.
-	Edge *NewVDCEdge `json:"edge,omitempty"`
+	Edge *VDCEdgePrototype `json:"edge,omitempty"`
 
-	// The resource group to associate with the Virtual Data Center.
+	// The resource group to associate with the resource instance.
 	// If not specified, the default resource group in the account is used.
-	ResourceGroup *NewVDCResourceGroup `json:"resource_group,omitempty"`
+	ResourceGroup *ResourceGroupIdentity `json:"resource_group,omitempty"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -1958,7 +1998,7 @@ type CreateVdcOptions struct {
 }
 
 // NewCreateVdcOptions : Instantiate CreateVdcOptions
-func (*VmwareV1) NewCreateVdcOptions(name string, directorSite *NewVDCDirectorSite) *CreateVdcOptions {
+func (*VmwareV1) NewCreateVdcOptions(name string, directorSite *VDCDirectorSitePrototype) *CreateVdcOptions {
 	return &CreateVdcOptions{
 		Name: core.StringPtr(name),
 		DirectorSite: directorSite,
@@ -1972,19 +2012,19 @@ func (_options *CreateVdcOptions) SetName(name string) *CreateVdcOptions {
 }
 
 // SetDirectorSite : Allow user to set DirectorSite
-func (_options *CreateVdcOptions) SetDirectorSite(directorSite *NewVDCDirectorSite) *CreateVdcOptions {
+func (_options *CreateVdcOptions) SetDirectorSite(directorSite *VDCDirectorSitePrototype) *CreateVdcOptions {
 	_options.DirectorSite = directorSite
 	return _options
 }
 
 // SetEdge : Allow user to set Edge
-func (_options *CreateVdcOptions) SetEdge(edge *NewVDCEdge) *CreateVdcOptions {
+func (_options *CreateVdcOptions) SetEdge(edge *VDCEdgePrototype) *CreateVdcOptions {
 	_options.Edge = edge
 	return _options
 }
 
 // SetResourceGroup : Allow user to set ResourceGroup
-func (_options *CreateVdcOptions) SetResourceGroup(resourceGroup *NewVDCResourceGroup) *CreateVdcOptions {
+func (_options *CreateVdcOptions) SetResourceGroup(resourceGroup *ResourceGroupIdentity) *CreateVdcOptions {
 	_options.ResourceGroup = resourceGroup
 	return _options
 }
@@ -2001,21 +2041,21 @@ func (options *CreateVdcOptions) SetHeaders(param map[string]string) *CreateVdcO
 	return options
 }
 
-// DataCenterInfo : Details of the data center.
-type DataCenterInfo struct {
+// DataCenter : Details of the data center.
+type DataCenter struct {
 	// The display name of the data center.
-	DisplayName *string `json:"display_name,omitempty"`
+	DisplayName *string `json:"display_name" validate:"required"`
 
 	// The name of the data center.
-	Name *string `json:"name,omitempty"`
+	Name *string `json:"name" validate:"required"`
 
 	// The speed available per data center.
-	UplinkSpeed *string `json:"uplink_speed,omitempty"`
+	UplinkSpeed *string `json:"uplink_speed" validate:"required"`
 }
 
-// UnmarshalDataCenterInfo unmarshals an instance of DataCenterInfo from the specified map of raw messages.
-func UnmarshalDataCenterInfo(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DataCenterInfo)
+// UnmarshalDataCenter unmarshals an instance of DataCenter from the specified map of raw messages.
+func UnmarshalDataCenter(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DataCenter)
 	err = core.UnmarshalPrimitive(m, "display_name", &obj.DisplayName)
 	if err != nil {
 		return
@@ -2028,17 +2068,6 @@ func UnmarshalDataCenterInfo(m map[string]json.RawMessage, result interface{}) (
 	if err != nil {
 		return
 	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// DeleteDirectorSite : DeleteDirectorSite struct
-type DeleteDirectorSite struct {
-}
-
-// UnmarshalDeleteDirectorSite unmarshals an instance of DeleteDirectorSite from the specified map of raw messages.
-func UnmarshalDeleteDirectorSite(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DeleteDirectorSite)
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -2222,19 +2251,19 @@ func (options *DeleteVdcOptions) SetHeaders(param map[string]string) *DeleteVdcO
 // consisting of vCenter, NSX-T and VMware Cloud Director.
 type DirectorSite struct {
 	// A unique identifier for the director site in IBM Cloud.
-	Crn *string `json:"crn,omitempty"`
+	Crn *string `json:"crn" validate:"required"`
 
 	// The hyperlink of the director site resource.
-	Href *string `json:"href,omitempty"`
+	Href *string `json:"href" validate:"required"`
 
 	// ID of the director site.
 	ID *string `json:"id" validate:"required"`
 
 	// The time that the instance is ordered.
-	InstanceOrdered *strfmt.DateTime `json:"instance_ordered" validate:"required"`
+	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
 
 	// The time that the instance is created and available to use.
-	InstanceCreated *strfmt.DateTime `json:"instance_created" validate:"required"`
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
 	// The name of director site. The name of the director site cannot be changed after creation.
 	Name *string `json:"name" validate:"required"`
@@ -2242,20 +2271,11 @@ type DirectorSite struct {
 	// The status of director site.
 	Status *string `json:"status" validate:"required"`
 
-	// The name of the IBM resource group.
-	ResourceGroup *string `json:"resource_group" validate:"required"`
-
-	// The email identity of the user that ordered the VMware as a Service director site instance.
-	Creator *string `json:"creator" validate:"required"`
-
-	// The ID of the resource group.
-	ResourceGroupID *string `json:"resource_group_id" validate:"required"`
-
-	// The CRN of the resource group.
-	ResourceGroupCrn *string `json:"resource_group_crn" validate:"required"`
+	// The resource group information to associate with the resource instance.
+	ResourceGroup *ResourceGroupReference `json:"resource_group" validate:"required"`
 
 	// List of VMware provider virtual data centers to deploy on the instance.
-	Pvdcs []PVDCResponse `json:"pvdcs" validate:"required"`
+	Pvdcs []PVDC `json:"pvdcs" validate:"required"`
 }
 
 // Constants associated with the DirectorSite.Status property.
@@ -2283,11 +2303,11 @@ func UnmarshalDirectorSite(m map[string]json.RawMessage, result interface{}) (er
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "instance_ordered", &obj.InstanceOrdered)
+	err = core.UnmarshalPrimitive(m, "ordered_at", &obj.OrderedAt)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "instance_created", &obj.InstanceCreated)
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		return
 	}
@@ -2299,23 +2319,11 @@ func UnmarshalDirectorSite(m map[string]json.RawMessage, result interface{}) (er
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "resource_group", &obj.ResourceGroup)
+	err = core.UnmarshalModel(m, "resource_group", &obj.ResourceGroup, UnmarshalResourceGroupReference)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "creator", &obj.Creator)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "resource_group_id", &obj.ResourceGroupID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "resource_group_crn", &obj.ResourceGroupCrn)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "pvdcs", &obj.Pvdcs, UnmarshalPVDCResponse)
+	err = core.UnmarshalModel(m, "pvdcs", &obj.Pvdcs, UnmarshalPVDC)
 	if err != nil {
 		return
 	}
@@ -2323,30 +2331,106 @@ func UnmarshalDirectorSite(m map[string]json.RawMessage, result interface{}) (er
 	return
 }
 
-// DirectorSiteBackLink : Back link to associated director site resource.
-type DirectorSiteBackLink struct {
-	// A unique identifier for the director site in IBM Cloud.
-	Crn *string `json:"crn" validate:"required"`
-
-	// The hyperlink of the director site resource.
-	Href *string `json:"href" validate:"required"`
-
-	// ID of the director site.
-	ID *string `json:"id" validate:"required"`
+// DirectorSiteCollection : Return all director site instances.
+type DirectorSiteCollection struct {
+	// List of director site instances.
+	DirectorSites []DirectorSite `json:"director_sites" validate:"required"`
 }
 
-// UnmarshalDirectorSiteBackLink unmarshals an instance of DirectorSiteBackLink from the specified map of raw messages.
-func UnmarshalDirectorSiteBackLink(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSiteBackLink)
-	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+// UnmarshalDirectorSiteCollection unmarshals an instance of DirectorSiteCollection from the specified map of raw messages.
+func UnmarshalDirectorSiteCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSiteCollection)
+	err = core.UnmarshalModel(m, "director_sites", &obj.DirectorSites, UnmarshalDirectorSite)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
-	if err != nil {
-		return
-	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DirectorSiteHostProfile : Host profile template.
+type DirectorSiteHostProfile struct {
+	// The id for this host profile.
+	ID *string `json:"id" validate:"required"`
+
+	// The number CPU cores for this host profile.
+	Cpu *int64 `json:"cpu" validate:"required"`
+
+	// The CPU family for this host profile.
+	Family *string `json:"family" validate:"required"`
+
+	// The CPU type for this host profile.
+	Processor *string `json:"processor" validate:"required"`
+
+	// The RAM for this host profile in GB (1024^3 bytes).
+	Ram *int64 `json:"ram" validate:"required"`
+
+	// The number of CPU sockets available for this host profile.
+	Socket *int64 `json:"socket" validate:"required"`
+
+	// The CPU clock speed.
+	Speed *string `json:"speed" validate:"required"`
+
+	// The manufacturer for this host profile.
+	Manufacturer *string `json:"manufacturer" validate:"required"`
+
+	// Additional features for this host profile.
+	Features []string `json:"features" validate:"required"`
+}
+
+// UnmarshalDirectorSiteHostProfile unmarshals an instance of DirectorSiteHostProfile from the specified map of raw messages.
+func UnmarshalDirectorSiteHostProfile(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSiteHostProfile)
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "cpu", &obj.Cpu)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "family", &obj.Family)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "processor", &obj.Processor)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ram", &obj.Ram)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "socket", &obj.Socket)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "speed", &obj.Speed)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "manufacturer", &obj.Manufacturer)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "features", &obj.Features)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DirectorSiteHostProfileCollection : Success. The request was successfully processed.
+type DirectorSiteHostProfileCollection struct {
+	// The list of available host profiles.
+	DirectorSiteHostProfiles []DirectorSiteHostProfile `json:"director_site_host_profiles" validate:"required"`
+}
+
+// UnmarshalDirectorSiteHostProfileCollection unmarshals an instance of DirectorSiteHostProfileCollection from the specified map of raw messages.
+func UnmarshalDirectorSiteHostProfileCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSiteHostProfileCollection)
+	err = core.UnmarshalModel(m, "director_site_host_profiles", &obj.DirectorSiteHostProfiles, UnmarshalDirectorSiteHostProfile)
 	if err != nil {
 		return
 	}
@@ -2406,10 +2490,10 @@ func UnmarshalDirectorSitePriceItem(m map[string]json.RawMessage, result interfa
 
 // DirectorSitePriceListItem : items for a metric and associated prices.
 type DirectorSitePriceListItem struct {
-	// The country for which this price applies.
+	// The country for which this price applies. The code should follow ISO-3166.
 	Country *string `json:"country" validate:"required"`
 
-	// The unit of currency for this price.
+	// The unit of currency for this price. The code should follow ISO-4217.
 	Currency *string `json:"currency" validate:"required"`
 
 	// A list of prices.
@@ -2466,8 +2550,8 @@ func UnmarshalDirectorSitePriceMetric(m map[string]json.RawMessage, result inter
 	return
 }
 
-// DirectorSitePriceQuoteResponse : Return price information for a VCDD instance.
-type DirectorSitePriceQuoteResponse struct {
+// DirectorSitePriceQuote : Return price information for a VCDD instance.
+type DirectorSitePriceQuote struct {
 	// A list of the clusters with price information.
 	Clusters []PriceInfoClusterCharge `json:"clusters" validate:"required"`
 
@@ -2478,9 +2562,9 @@ type DirectorSitePriceQuoteResponse struct {
 	Total *float64 `json:"total" validate:"required"`
 }
 
-// UnmarshalDirectorSitePriceQuoteResponse unmarshals an instance of DirectorSitePriceQuoteResponse from the specified map of raw messages.
-func UnmarshalDirectorSitePriceQuoteResponse(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSitePriceQuoteResponse)
+// UnmarshalDirectorSitePriceQuote unmarshals an instance of DirectorSitePriceQuote from the specified map of raw messages.
+func UnmarshalDirectorSitePriceQuote(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSitePriceQuote)
 	err = core.UnmarshalModel(m, "clusters", &obj.Clusters, UnmarshalPriceInfoClusterCharge)
 	if err != nil {
 		return
@@ -2497,15 +2581,15 @@ func UnmarshalDirectorSitePriceQuoteResponse(m map[string]json.RawMessage, resul
 	return
 }
 
-// DirectorSitePricingInfo : Return all metrics with associate prices.
-type DirectorSitePricingInfo struct {
+// DirectorSitePricing : Return all metrics with associate prices.
+type DirectorSitePricing struct {
 	// A list of metrics and associated prices.
 	DirectorSitePricing []DirectorSitePriceMetric `json:"director_site_pricing" validate:"required"`
 }
 
-// UnmarshalDirectorSitePricingInfo unmarshals an instance of DirectorSitePricingInfo from the specified map of raw messages.
-func UnmarshalDirectorSitePricingInfo(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSitePricingInfo)
+// UnmarshalDirectorSitePricing unmarshals an instance of DirectorSitePricing from the specified map of raw messages.
+func UnmarshalDirectorSitePricing(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSitePricing)
 	err = core.UnmarshalModel(m, "director_site_pricing", &obj.DirectorSitePricing, UnmarshalDirectorSitePriceMetric)
 	if err != nil {
 		return
@@ -2514,16 +2598,78 @@ func UnmarshalDirectorSitePricingInfo(m map[string]json.RawMessage, result inter
 	return
 }
 
-// DirectorSiteRegions : Success. The request was successfully processed.
-type DirectorSiteRegions struct {
-	// regions of director sites.
-	DirectorSiteRegions []RegionDetail `json:"director_site_regions" validate:"required"`
+// DirectorSiteReference : Back link to associated director site resource.
+type DirectorSiteReference struct {
+	// A unique identifier for the director site in IBM Cloud.
+	Crn *string `json:"crn" validate:"required"`
+
+	// The hyperlink of the director site resource.
+	Href *string `json:"href" validate:"required"`
+
+	// ID of the director site.
+	ID *string `json:"id" validate:"required"`
 }
 
-// UnmarshalDirectorSiteRegions unmarshals an instance of DirectorSiteRegions from the specified map of raw messages.
-func UnmarshalDirectorSiteRegions(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSiteRegions)
-	err = core.UnmarshalModel(m, "director_site_regions", &obj.DirectorSiteRegions, UnmarshalRegionDetail)
+// UnmarshalDirectorSiteReference unmarshals an instance of DirectorSiteReference from the specified map of raw messages.
+func UnmarshalDirectorSiteReference(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSiteReference)
+	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DirectorSiteRegion : The region details.
+type DirectorSiteRegion struct {
+	// Name the region.
+	Name *string `json:"name" validate:"required"`
+
+	// The data center details.
+	DataCenters []DataCenter `json:"data_centers" validate:"required"`
+
+	// Accessible endpoint of the region.
+	Endpoint *string `json:"endpoint" validate:"required"`
+}
+
+// UnmarshalDirectorSiteRegion unmarshals an instance of DirectorSiteRegion from the specified map of raw messages.
+func UnmarshalDirectorSiteRegion(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSiteRegion)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "data_centers", &obj.DataCenters, UnmarshalDataCenter)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "endpoint", &obj.Endpoint)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DirectorSiteRegionCollection : Success. The request was successfully processed.
+type DirectorSiteRegionCollection struct {
+	// regions of director sites.
+	DirectorSiteRegions []DirectorSiteRegion `json:"director_site_regions" validate:"required"`
+}
+
+// UnmarshalDirectorSiteRegionCollection unmarshals an instance of DirectorSiteRegionCollection from the specified map of raw messages.
+func UnmarshalDirectorSiteRegionCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSiteRegionCollection)
+	err = core.UnmarshalModel(m, "director_site_regions", &obj.DirectorSiteRegions, UnmarshalDirectorSiteRegion)
 	if err != nil {
 		return
 	}
@@ -2647,6 +2793,44 @@ type FileShares struct {
 // UnmarshalFileShares unmarshals an instance of FileShares from the specified map of raw messages.
 func UnmarshalFileShares(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(FileShares)
+	err = core.UnmarshalPrimitive(m, "STORAGE_POINT_TWO_FIVE_IOPS_GB", &obj.STORAGEPOINTTWOFIVEIOPSGB)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "STORAGE_TWO_IOPS_GB", &obj.STORAGETWOIOPSGB)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "STORAGE_FOUR_IOPS_GB", &obj.STORAGEFOURIOPSGB)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "STORAGE_TEN_IOPS_GB", &obj.STORAGETENIOPSGB)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// FileSharesPrototype : Chosen storage policies and their sizes.
+type FileSharesPrototype struct {
+	// The amount of 0.25 IOPS/GB storage in GB (1024^3 bytes).
+	STORAGEPOINTTWOFIVEIOPSGB *int64 `json:"STORAGE_POINT_TWO_FIVE_IOPS_GB,omitempty"`
+
+	// The amount of 2 IOPS/GB storage in GB (1024^3 bytes).
+	STORAGETWOIOPSGB *int64 `json:"STORAGE_TWO_IOPS_GB,omitempty"`
+
+	// The amount of 4 IOPS/GB storage in GB (1024^3 bytes).
+	STORAGEFOURIOPSGB *int64 `json:"STORAGE_FOUR_IOPS_GB,omitempty"`
+
+	// The amount of 10 IOPS/GB storage in GB (1024^3 bytes).
+	STORAGETENIOPSGB *int64 `json:"STORAGE_TEN_IOPS_GB,omitempty"`
+}
+
+// UnmarshalFileSharesPrototype unmarshals an instance of FileSharesPrototype from the specified map of raw messages.
+func UnmarshalFileSharesPrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(FileSharesPrototype)
 	err = core.UnmarshalPrimitive(m, "STORAGE_POINT_TWO_FIVE_IOPS_GB", &obj.STORAGEPOINTTWOFIVEIOPSGB)
 	if err != nil {
 		return
@@ -2841,14 +3025,15 @@ type GetVcddPriceOptions struct {
 	// after initial creation.
 	Name *string `json:"name" validate:"required"`
 
-	// The name or ID of the IBM resource group where the instance is deployed.
-	ResourceGroup *string `json:"resource_group" validate:"required"`
-
 	// List of VMware provider virtual data centers to deploy on the instance.
-	Pvdcs []PVDCOrderInfo `json:"pvdcs" validate:"required"`
+	Pvdcs []PVDCPrototype `json:"pvdcs" validate:"required"`
 
 	// String representing the billing country.
 	Country *string `json:"country" validate:"required"`
+
+	// The resource group to associate with the resource instance.
+	// If not specified, the default resource group in the account is used.
+	ResourceGroup *ResourceGroupIdentity `json:"resource_group,omitempty"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -2861,10 +3046,9 @@ type GetVcddPriceOptions struct {
 }
 
 // NewGetVcddPriceOptions : Instantiate GetVcddPriceOptions
-func (*VmwareV1) NewGetVcddPriceOptions(name string, resourceGroup string, pvdcs []PVDCOrderInfo, country string) *GetVcddPriceOptions {
+func (*VmwareV1) NewGetVcddPriceOptions(name string, pvdcs []PVDCPrototype, country string) *GetVcddPriceOptions {
 	return &GetVcddPriceOptions{
 		Name: core.StringPtr(name),
-		ResourceGroup: core.StringPtr(resourceGroup),
 		Pvdcs: pvdcs,
 		Country: core.StringPtr(country),
 	}
@@ -2876,14 +3060,8 @@ func (_options *GetVcddPriceOptions) SetName(name string) *GetVcddPriceOptions {
 	return _options
 }
 
-// SetResourceGroup : Allow user to set ResourceGroup
-func (_options *GetVcddPriceOptions) SetResourceGroup(resourceGroup string) *GetVcddPriceOptions {
-	_options.ResourceGroup = core.StringPtr(resourceGroup)
-	return _options
-}
-
 // SetPvdcs : Allow user to set Pvdcs
-func (_options *GetVcddPriceOptions) SetPvdcs(pvdcs []PVDCOrderInfo) *GetVcddPriceOptions {
+func (_options *GetVcddPriceOptions) SetPvdcs(pvdcs []PVDCPrototype) *GetVcddPriceOptions {
 	_options.Pvdcs = pvdcs
 	return _options
 }
@@ -2891,6 +3069,12 @@ func (_options *GetVcddPriceOptions) SetPvdcs(pvdcs []PVDCOrderInfo) *GetVcddPri
 // SetCountry : Allow user to set Country
 func (_options *GetVcddPriceOptions) SetCountry(country string) *GetVcddPriceOptions {
 	_options.Country = core.StringPtr(country)
+	return _options
+}
+
+// SetResourceGroup : Allow user to set ResourceGroup
+func (_options *GetVcddPriceOptions) SetResourceGroup(resourceGroup *ResourceGroupIdentity) *GetVcddPriceOptions {
+	_options.ResourceGroup = resourceGroup
 	return _options
 }
 
@@ -2947,155 +3131,6 @@ func (_options *GetVdcOptions) SetAcceptLanguage(acceptLanguage string) *GetVdcO
 func (options *GetVdcOptions) SetHeaders(param map[string]string) *GetVdcOptions {
 	options.Headers = param
 	return options
-}
-
-// HostProfile : Host profile template.
-type HostProfile struct {
-	// The id for this host profile.
-	ID *string `json:"id" validate:"required"`
-
-	// The number CPU cores for this host profile.
-	Cpu *int64 `json:"cpu" validate:"required"`
-
-	// The CPU family for this host profile.
-	Family *string `json:"family" validate:"required"`
-
-	// The CPU type for this host profile.
-	Processor *string `json:"processor" validate:"required"`
-
-	// The RAM for this host profile in GB (1024^3 bytes).
-	Ram *int64 `json:"ram" validate:"required"`
-
-	// The number of CPU sockets available for this host profile.
-	Socket *int64 `json:"socket" validate:"required"`
-
-	// The CPU clock speed.
-	Speed *string `json:"speed" validate:"required"`
-
-	// The manufacturer for this host profile.
-	Manufacturer *string `json:"manufacturer" validate:"required"`
-
-	// Additional features for this host profile.
-	Features []string `json:"features" validate:"required"`
-}
-
-// UnmarshalHostProfile unmarshals an instance of HostProfile from the specified map of raw messages.
-func UnmarshalHostProfile(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(HostProfile)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "cpu", &obj.Cpu)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "family", &obj.Family)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "processor", &obj.Processor)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "ram", &obj.Ram)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "socket", &obj.Socket)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "speed", &obj.Speed)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "manufacturer", &obj.Manufacturer)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "features", &obj.Features)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// JSONPatchOperation : This model represents an individual patch operation to be performed on a JSON document, as defined by RFC 6902.
-type JSONPatchOperation struct {
-	// The operation to be performed.
-	Op *string `json:"op" validate:"required"`
-
-	// The JSON Pointer that identifies the field that is the target of the operation.
-	Path *string `json:"path" validate:"required"`
-
-	// The JSON Pointer that identifies the field that is the source of the operation.
-	From *string `json:"from,omitempty"`
-
-	// The value to be used within the operation.
-	Value interface{} `json:"value,omitempty"`
-}
-
-// Constants associated with the JSONPatchOperation.Op property.
-// The operation to be performed.
-const (
-	JSONPatchOperation_Op_Add = "add"
-	JSONPatchOperation_Op_Copy = "copy"
-	JSONPatchOperation_Op_Move = "move"
-	JSONPatchOperation_Op_Remove = "remove"
-	JSONPatchOperation_Op_Replace = "replace"
-	JSONPatchOperation_Op_Test = "test"
-)
-
-// NewJSONPatchOperation : Instantiate JSONPatchOperation (Generic Model Constructor)
-func (*VmwareV1) NewJSONPatchOperation(op string, path string) (_model *JSONPatchOperation, err error) {
-	_model = &JSONPatchOperation{
-		Op: core.StringPtr(op),
-		Path: core.StringPtr(path),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalJSONPatchOperation unmarshals an instance of JSONPatchOperation from the specified map of raw messages.
-func UnmarshalJSONPatchOperation(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(JSONPatchOperation)
-	err = core.UnmarshalPrimitive(m, "op", &obj.Op)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "path", &obj.Path)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "from", &obj.From)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// ListClusters : Return all clusters instances.
-type ListClusters struct {
-	// list of cluster objects.
-	Clusters []Cluster `json:"clusters" validate:"required"`
-}
-
-// UnmarshalListClusters unmarshals an instance of ListClusters from the specified map of raw messages.
-func UnmarshalListClusters(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ListClusters)
-	err = core.UnmarshalModel(m, "clusters", &obj.Clusters, UnmarshalCluster)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
 }
 
 // ListDirectorSiteHostProfilesOptions : The ListDirectorSiteHostProfiles options.
@@ -3166,23 +3201,6 @@ func (_options *ListDirectorSiteRegionsOptions) SetXGlobalTransactionID(xGlobalT
 func (options *ListDirectorSiteRegionsOptions) SetHeaders(param map[string]string) *ListDirectorSiteRegionsOptions {
 	options.Headers = param
 	return options
-}
-
-// ListDirectorSites : Return all director site instances.
-type ListDirectorSites struct {
-	// List of director site instances.
-	DirectorSites []DirectorSite `json:"director_sites" validate:"required"`
-}
-
-// UnmarshalListDirectorSites unmarshals an instance of ListDirectorSites from the specified map of raw messages.
-func UnmarshalListDirectorSites(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ListDirectorSites)
-	err = core.UnmarshalModel(m, "director_sites", &obj.DirectorSites, UnmarshalDirectorSite)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
 }
 
 // ListDirectorSitesOptions : The ListDirectorSites options.
@@ -3322,40 +3340,6 @@ func (options *ListDirectorSitesPvdcsOptions) SetHeaders(param map[string]string
 	return options
 }
 
-// ListHostProfiles : Success. The request was successfully processed.
-type ListHostProfiles struct {
-	// The list of available host profiles.
-	DirectorSiteHostProfiles []HostProfile `json:"director_site_host_profiles" validate:"required"`
-}
-
-// UnmarshalListHostProfiles unmarshals an instance of ListHostProfiles from the specified map of raw messages.
-func UnmarshalListHostProfiles(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ListHostProfiles)
-	err = core.UnmarshalModel(m, "director_site_host_profiles", &obj.DirectorSiteHostProfiles, UnmarshalHostProfile)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// ListPVDCs : Return all provider virtual data center instances.
-type ListPVDCs struct {
-	// List of provider virtual data center instances.
-	Pvdcs []PVDCResponse `json:"pvdcs" validate:"required"`
-}
-
-// UnmarshalListPVDCs unmarshals an instance of ListPVDCs from the specified map of raw messages.
-func UnmarshalListPVDCs(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ListPVDCs)
-	err = core.UnmarshalModel(m, "pvdcs", &obj.Pvdcs, UnmarshalPVDCResponse)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // ListPricesOptions : The ListPrices options.
 type ListPricesOptions struct {
 	// Language.
@@ -3389,23 +3373,6 @@ func (_options *ListPricesOptions) SetXGlobalTransactionID(xGlobalTransactionID 
 func (options *ListPricesOptions) SetHeaders(param map[string]string) *ListPricesOptions {
 	options.Headers = param
 	return options
-}
-
-// ListVDCs : A list of Virtual Data Centers.
-type ListVDCs struct {
-	// A List of Virtual Data Centers.
-	Vdcs []VDC `json:"vdcs" validate:"required"`
-}
-
-// UnmarshalListVDCs unmarshals an instance of ListVDCs from the specified map of raw messages.
-func UnmarshalListVDCs(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(ListVDCs)
-	err = core.UnmarshalModel(m, "vdcs", &obj.Vdcs, UnmarshalVDC)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
 }
 
 // ListVdcsOptions : The ListVdcs options.
@@ -3453,166 +3420,14 @@ func UnmarshalNewPassword(m map[string]json.RawMessage, result interface{}) (err
 	return
 }
 
-// NewVDCDirectorSite : The director site in which to deploy the Virtual Data Center.
-type NewVDCDirectorSite struct {
-	// A unique identifier for the director site.
-	ID *string `json:"id" validate:"required"`
-
-	// The PVDC within the Director Site in which to deploy the Virtual Data Center.
-	Pvdc *DirectorSitePVDC `json:"pvdc" validate:"required"`
-}
-
-// NewNewVDCDirectorSite : Instantiate NewVDCDirectorSite (Generic Model Constructor)
-func (*VmwareV1) NewNewVDCDirectorSite(id string, pvdc *DirectorSitePVDC) (_model *NewVDCDirectorSite, err error) {
-	_model = &NewVDCDirectorSite{
-		ID: core.StringPtr(id),
-		Pvdc: pvdc,
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalNewVDCDirectorSite unmarshals an instance of NewVDCDirectorSite from the specified map of raw messages.
-func UnmarshalNewVDCDirectorSite(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(NewVDCDirectorSite)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "pvdc", &obj.Pvdc, UnmarshalDirectorSitePVDC)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// NewVDCEdge : The networking Edge to be deployed on the Virtual Data Center.
-type NewVDCEdge struct {
-	// The size of the Edge. Only used for Edges of type dedicated.
-	Size *string `json:"size,omitempty"`
-
-	// The type of Edge to be deployed on the Virtual Data Center.
-	Type *string `json:"type" validate:"required"`
-}
-
-// Constants associated with the NewVDCEdge.Size property.
-// The size of the Edge. Only used for Edges of type dedicated.
-const (
-	NewVDCEdge_Size_ExtraLarge = "extra_large"
-	NewVDCEdge_Size_Large = "large"
-	NewVDCEdge_Size_Medium = "medium"
-)
-
-// Constants associated with the NewVDCEdge.Type property.
-// The type of Edge to be deployed on the Virtual Data Center.
-const (
-	NewVDCEdge_Type_Dedicated = "dedicated"
-	NewVDCEdge_Type_Shared = "shared"
-)
-
-// NewNewVDCEdge : Instantiate NewVDCEdge (Generic Model Constructor)
-func (*VmwareV1) NewNewVDCEdge(typeVar string) (_model *NewVDCEdge, err error) {
-	_model = &NewVDCEdge{
-		Type: core.StringPtr(typeVar),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalNewVDCEdge unmarshals an instance of NewVDCEdge from the specified map of raw messages.
-func UnmarshalNewVDCEdge(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(NewVDCEdge)
-	err = core.UnmarshalPrimitive(m, "size", &obj.Size)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// NewVDCResourceGroup : The resource group to associate with the Virtual Data Center. If not specified, the default resource group in the
-// account is used.
-type NewVDCResourceGroup struct {
-	// A unique identifier for the resource group.
-	ID *string `json:"id" validate:"required"`
-}
-
-// NewNewVDCResourceGroup : Instantiate NewVDCResourceGroup (Generic Model Constructor)
-func (*VmwareV1) NewNewVDCResourceGroup(id string) (_model *NewVDCResourceGroup, err error) {
-	_model = &NewVDCResourceGroup{
-		ID: core.StringPtr(id),
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalNewVDCResourceGroup unmarshals an instance of NewVDCResourceGroup from the specified map of raw messages.
-func UnmarshalNewVDCResourceGroup(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(NewVDCResourceGroup)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// PVDCOrderInfo : VMware provider virtual data center order information.
-type PVDCOrderInfo struct {
+// PVDC : VMware provider virtual data center information.
+type PVDC struct {
 	// Name of the provider virtual data center. Provider virtual data center names must be unique per director site
 	// instance. Provider virtual data center names cannot be changed after creation.
 	Name *string `json:"name" validate:"required"`
 
 	// Data center location to deploy the cluster. See `GET /director_site_regions` for supported data center locations.
-	DataCenter *string `json:"data_center" validate:"required"`
-
-	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availibility boundaries.
-	Clusters []ClusterOrderInfo `json:"clusters" validate:"required"`
-}
-
-// NewPVDCOrderInfo : Instantiate PVDCOrderInfo (Generic Model Constructor)
-func (*VmwareV1) NewPVDCOrderInfo(name string, dataCenter string, clusters []ClusterOrderInfo) (_model *PVDCOrderInfo, err error) {
-	_model = &PVDCOrderInfo{
-		Name: core.StringPtr(name),
-		DataCenter: core.StringPtr(dataCenter),
-		Clusters: clusters,
-	}
-	err = core.ValidateStruct(_model, "required parameters")
-	return
-}
-
-// UnmarshalPVDCOrderInfo unmarshals an instance of PVDCOrderInfo from the specified map of raw messages.
-func UnmarshalPVDCOrderInfo(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(PVDCOrderInfo)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "data_center", &obj.DataCenter)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "clusters", &obj.Clusters, UnmarshalClusterOrderInfo)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// PVDCResponse : VMware provider virtual data center create information.
-type PVDCResponse struct {
-	// Name of the provider virtual data center. Provider virtual data center names must be unique per director site
-	// instance. Provider virtual data center names cannot be changed after creation.
-	Name *string `json:"name" validate:"required"`
-
-	// Data center location to deploy the cluster. See `GET /director_site_regions` for supported data center locations.
-	DataCenter *string `json:"data_center" validate:"required"`
+	DataCenterName *string `json:"data_center_name" validate:"required"`
 
 	// The provider virtual data center ID.
 	ID *string `json:"id" validate:"required"`
@@ -3620,31 +3435,31 @@ type PVDCResponse struct {
 	// The hyperlink of the provider virtual data center resource.
 	Href *string `json:"href" validate:"required"`
 
-	// The provider virtual data center ordering status.
-	Status *string `json:"status" validate:"required"`
-
 	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availibility boundaries.
 	Clusters []ClusterSummary `json:"clusters" validate:"required"`
+
+	// The provider virtual data center ordering status.
+	Status *string `json:"status" validate:"required"`
 }
 
-// Constants associated with the PVDCResponse.Status property.
+// Constants associated with the PVDC.Status property.
 // The provider virtual data center ordering status.
 const (
-	PVDCResponse_Status_Creating = "creating"
-	PVDCResponse_Status_Deleted = "deleted"
-	PVDCResponse_Status_Deleting = "deleting"
-	PVDCResponse_Status_ReadyToUse = "ready_to_use"
-	PVDCResponse_Status_Updating = "updating"
+	PVDC_Status_Creating = "creating"
+	PVDC_Status_Deleted = "deleted"
+	PVDC_Status_Deleting = "deleting"
+	PVDC_Status_ReadyToUse = "ready_to_use"
+	PVDC_Status_Updating = "updating"
 )
 
-// UnmarshalPVDCResponse unmarshals an instance of PVDCResponse from the specified map of raw messages.
-func UnmarshalPVDCResponse(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(PVDCResponse)
+// UnmarshalPVDC unmarshals an instance of PVDC from the specified map of raw messages.
+func UnmarshalPVDC(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PVDC)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "data_center", &obj.DataCenter)
+	err = core.UnmarshalPrimitive(m, "data_center_name", &obj.DataCenterName)
 	if err != nil {
 		return
 	}
@@ -3656,11 +3471,71 @@ func UnmarshalPVDCResponse(m map[string]json.RawMessage, result interface{}) (er
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalModel(m, "clusters", &obj.Clusters, UnmarshalClusterSummary)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "clusters", &obj.Clusters, UnmarshalClusterSummary)
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PVDCCollection : Return all provider virtual data center instances.
+type PVDCCollection struct {
+	// List of provider virtual data center instances.
+	Pvdcs []PVDC `json:"pvdcs" validate:"required"`
+}
+
+// UnmarshalPVDCCollection unmarshals an instance of PVDCCollection from the specified map of raw messages.
+func UnmarshalPVDCCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PVDCCollection)
+	err = core.UnmarshalModel(m, "pvdcs", &obj.Pvdcs, UnmarshalPVDC)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// PVDCPrototype : VMware provider virtual data center order information.
+type PVDCPrototype struct {
+	// Name of the provider virtual data center. Provider virtual data center names must be unique per director site
+	// instance. Provider virtual data center names cannot be changed after creation.
+	Name *string `json:"name" validate:"required"`
+
+	// Data center location to deploy the cluster. See `GET /director_site_regions` for supported data center locations.
+	DataCenterName *string `json:"data_center_name" validate:"required"`
+
+	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availibility boundaries.
+	Clusters []ClusterPrototype `json:"clusters" validate:"required"`
+}
+
+// NewPVDCPrototype : Instantiate PVDCPrototype (Generic Model Constructor)
+func (*VmwareV1) NewPVDCPrototype(name string, dataCenterName string, clusters []ClusterPrototype) (_model *PVDCPrototype, err error) {
+	_model = &PVDCPrototype{
+		Name: core.StringPtr(name),
+		DataCenterName: core.StringPtr(dataCenterName),
+		Clusters: clusters,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalPVDCPrototype unmarshals an instance of PVDCPrototype from the specified map of raw messages.
+func UnmarshalPVDCPrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(PVDCPrototype)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "data_center_name", &obj.DataCenterName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "clusters", &obj.Clusters, UnmarshalClusterPrototype)
 	if err != nil {
 		return
 	}
@@ -3782,37 +3657,6 @@ func UnmarshalPriceInfoClusterSubItem(m map[string]json.RawMessage, result inter
 	return
 }
 
-// RegionDetail : The region details.
-type RegionDetail struct {
-	// Name the region.
-	Region *string `json:"region,omitempty"`
-
-	// The data center details.
-	DataCenters []DataCenterInfo `json:"data_centers,omitempty"`
-
-	// Accessible endpoint of the region.
-	Endpoint *string `json:"endpoint,omitempty"`
-}
-
-// UnmarshalRegionDetail unmarshals an instance of RegionDetail from the specified map of raw messages.
-func UnmarshalRegionDetail(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(RegionDetail)
-	err = core.UnmarshalPrimitive(m, "region", &obj.Region)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "data_centers", &obj.DataCenters, UnmarshalDataCenterInfo)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "endpoint", &obj.Endpoint)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // ReplaceOrgAdminPasswordOptions : The ReplaceOrgAdminPassword options.
 type ReplaceOrgAdminPasswordOptions struct {
 	// A unique identifier for the director site.
@@ -3841,16 +3685,26 @@ func (options *ReplaceOrgAdminPasswordOptions) SetHeaders(param map[string]strin
 	return options
 }
 
-// UpdateClusterResponse : Response of cluster update.
-type UpdateClusterResponse struct {
-	// Information of request accepted.
-	Message *string `json:"message" validate:"required"`
+// ResourceGroupIdentity : The resource group to associate with the resource instance. If not specified, the default resource group in the
+// account is used.
+type ResourceGroupIdentity struct {
+	// A unique identifier for the resource group.
+	ID *string `json:"id" validate:"required"`
 }
 
-// UnmarshalUpdateClusterResponse unmarshals an instance of UpdateClusterResponse from the specified map of raw messages.
-func UnmarshalUpdateClusterResponse(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(UpdateClusterResponse)
-	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+// NewResourceGroupIdentity : Instantiate ResourceGroupIdentity (Generic Model Constructor)
+func (*VmwareV1) NewResourceGroupIdentity(id string) (_model *ResourceGroupIdentity, err error) {
+	_model = &ResourceGroupIdentity{
+		ID: core.StringPtr(id),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalResourceGroupIdentity unmarshals an instance of ResourceGroupIdentity from the specified map of raw messages.
+func UnmarshalResourceGroupIdentity(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ResourceGroupIdentity)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		return
 	}
@@ -3858,14 +3712,161 @@ func UnmarshalUpdateClusterResponse(m map[string]json.RawMessage, result interfa
 	return
 }
 
-func (*VmwareV1) NewUpdateClusterResponsePatch(updateClusterResponse *UpdateClusterResponse) (_patch []JSONPatchOperation) {
-	if (updateClusterResponse.Message != nil) {
-		_patch = append(_patch, JSONPatchOperation{
-			Op: core.StringPtr(JSONPatchOperation_Op_Add),
-			Path: core.StringPtr("/message"),
-			Value: updateClusterResponse.Message,
-		})
+// ResourceGroupReference : The resource group information to associate with the resource instance.
+type ResourceGroupReference struct {
+	// A unique identifier for the resource group.
+	ID *string `json:"id" validate:"required"`
+
+	// the name for the resource group.
+	Name *string `json:"name" validate:"required"`
+
+	// the Cloud Reference Name for the resource group.
+	Crn *string `json:"crn" validate:"required"`
+}
+
+// UnmarshalResourceGroupReference unmarshals an instance of ResourceGroupReference from the specified map of raw messages.
+func UnmarshalResourceGroupReference(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ResourceGroupReference)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
 	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UpdateCluster : Response of cluster update.
+type UpdateCluster struct {
+	// The cluster ID.
+	ID *string `json:"id" validate:"required"`
+
+	// The cluster name.
+	Name *string `json:"name" validate:"required"`
+
+	// The hyperlink of the cluster resource.
+	Href *string `json:"href" validate:"required"`
+
+	// The time that the instance is ordered.
+	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
+
+	// The time that the instance is created.
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The number of hosts in the cluster.
+	HostCount *int64 `json:"host_count" validate:"required"`
+
+	// The status of the director site cluster.
+	Status *string `json:"status" validate:"required"`
+
+	// The location of deployed cluster.
+	DataCenterName *string `json:"data_center_name" validate:"required"`
+
+	// Back link to associated director site resource.
+	DirectorSite *DirectorSiteReference `json:"director_site" validate:"required"`
+
+	// The name of the host profile.
+	HostProfile *string `json:"host_profile" validate:"required"`
+
+	// The storage type of the cluster.
+	StorageType *string `json:"storage_type" validate:"required"`
+
+	// The billing plan for the cluster.
+	BillingPlan *string `json:"billing_plan" validate:"required"`
+
+	// Chosen storage policies and their sizes.
+	FileShares *FileShares `json:"file_shares" validate:"required"`
+
+	// Information of request accepted.
+	Message *string `json:"message" validate:"required"`
+
+	// id to track the update operation of cluster.
+	OperationID *string `json:"operation_id" validate:"required"`
+}
+
+// Constants associated with the UpdateCluster.StorageType property.
+// The storage type of the cluster.
+const (
+	UpdateCluster_StorageType_Nfs = "nfs"
+)
+
+// Constants associated with the UpdateCluster.BillingPlan property.
+// The billing plan for the cluster.
+const (
+	UpdateCluster_BillingPlan_Monthly = "monthly"
+)
+
+// UnmarshalUpdateCluster unmarshals an instance of UpdateCluster from the specified map of raw messages.
+func UnmarshalUpdateCluster(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UpdateCluster)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ordered_at", &obj.OrderedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "host_count", &obj.HostCount)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "data_center_name", &obj.DataCenterName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "director_site", &obj.DirectorSite, UnmarshalDirectorSiteReference)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "host_profile", &obj.HostProfile)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "storage_type", &obj.StorageType)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "billing_plan", &obj.BillingPlan)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "file_shares", &obj.FileShares, UnmarshalFileShares)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "operation_id", &obj.OperationID)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
 
@@ -3886,8 +3887,8 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 	// request form parameter when calling this IAM API.
 	XAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
 
-	// Array of patch operations as defined in RFC 6902.
-	Body []JSONPatchOperation `json:"body" validate:"required"`
+	// JSON Merge-Patch content for update_director_sites_pvdcs_cluster.
+	Body map[string]interface{} `json:"body" validate:"required"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -3900,7 +3901,7 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 }
 
 // NewUpdateDirectorSitesPvdcsClusterOptions : Instantiate UpdateDirectorSitesPvdcsClusterOptions
-func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string, xAuthRefreshToken string, body []JSONPatchOperation) *UpdateDirectorSitesPvdcsClusterOptions {
+func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string, xAuthRefreshToken string, body map[string]interface{}) *UpdateDirectorSitesPvdcsClusterOptions {
 	return &UpdateDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
 		ID: core.StringPtr(id),
@@ -3935,7 +3936,7 @@ func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetXAuthRefreshToken(xAu
 }
 
 // SetBody : Allow user to set Body
-func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetBody(body []JSONPatchOperation) *UpdateDirectorSitesPvdcsClusterOptions {
+func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetBody(body map[string]interface{}) *UpdateDirectorSitesPvdcsClusterOptions {
 	_options.Body = body
 	return _options
 }
@@ -3966,7 +3967,7 @@ func (options *UpdateDirectorSitesPvdcsClusterOptions) SetHeaders(param map[stri
 // are added to the cluster.
 type VDC struct {
 	// The URL of this Virtual Data Center.
-	Href *string `json:"href,omitempty"`
+	Href *string `json:"href" validate:"required"`
 
 	// A unique identifier for the Virtual Data Center.
 	ID *string `json:"id" validate:"required"`
@@ -3979,13 +3980,13 @@ type VDC struct {
 	AllocationModel *string `json:"allocation_model" validate:"required"`
 
 	// The time after which the Virtual Data Center is considered usable.
-	CreatedTime *strfmt.DateTime `json:"created_time" validate:"required"`
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
 
 	// A unique identifier for the Virtual Data Center in IBM Cloud.
 	Crn *string `json:"crn" validate:"required"`
 
 	// The time after which the Virtual Data Center is no longer considered usable.
-	DeletedTime *strfmt.DateTime `json:"deleted_time" validate:"required"`
+	DeletedAt *strfmt.DateTime `json:"deleted_at" validate:"required"`
 
 	// The director site in which to deploy the Virtual Data Center.
 	DirectorSite *VDCDirectorSite `json:"director_site" validate:"required"`
@@ -3995,13 +3996,13 @@ type VDC struct {
 	Edges []Edge `json:"edges" validate:"required"`
 
 	// Information about why the request to create the Virtual Data Center cannot be completed.
-	Errors []Error `json:"errors" validate:"required"`
+	StatusReasons []Error `json:"status_reasons" validate:"required"`
 
 	// A human readable identifier for the Virtual Data Center.
 	Name *string `json:"name" validate:"required"`
 
 	// The time at which the request to create the Virtual Data Center was made.
-	OrderedTime *strfmt.DateTime `json:"ordered_time" validate:"required"`
+	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
 
 	// The name of the VMware Cloud Director organization containing this Virtual Data Center. VMware Cloud Director
 	// organizations are used to create strong boundaries between virtual data centers. There is a complete isolation of
@@ -4058,7 +4059,7 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "created_time", &obj.CreatedTime)
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		return
 	}
@@ -4066,7 +4067,7 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "deleted_time", &obj.DeletedTime)
+	err = core.UnmarshalPrimitive(m, "deleted_at", &obj.DeletedAt)
 	if err != nil {
 		return
 	}
@@ -4078,7 +4079,7 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "errors", &obj.Errors, UnmarshalError)
+	err = core.UnmarshalModel(m, "status_reasons", &obj.StatusReasons, UnmarshalError)
 	if err != nil {
 		return
 	}
@@ -4086,7 +4087,7 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "ordered_time", &obj.OrderedTime)
+	err = core.UnmarshalPrimitive(m, "ordered_at", &obj.OrderedAt)
 	if err != nil {
 		return
 	}
@@ -4099,6 +4100,23 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// VDCCollection : A list of Virtual Data Centers.
+type VDCCollection struct {
+	// A List of Virtual Data Centers.
+	Vdcs []VDC `json:"vdcs" validate:"required"`
+}
+
+// UnmarshalVDCCollection unmarshals an instance of VDCCollection from the specified map of raw messages.
+func UnmarshalVDCCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VDCCollection)
+	err = core.UnmarshalModel(m, "vdcs", &obj.Vdcs, UnmarshalVDC)
 	if err != nil {
 		return
 	}
@@ -4130,6 +4148,88 @@ func UnmarshalVDCDirectorSite(m map[string]json.RawMessage, result interface{}) 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "url", &obj.URL)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// VDCDirectorSitePrototype : The director site in which to deploy the Virtual Data Center.
+type VDCDirectorSitePrototype struct {
+	// A unique identifier for the director site.
+	ID *string `json:"id" validate:"required"`
+
+	// The PVDC within the Director Site in which to deploy the Virtual Data Center.
+	Pvdc *DirectorSitePVDC `json:"pvdc" validate:"required"`
+}
+
+// NewVDCDirectorSitePrototype : Instantiate VDCDirectorSitePrototype (Generic Model Constructor)
+func (*VmwareV1) NewVDCDirectorSitePrototype(id string, pvdc *DirectorSitePVDC) (_model *VDCDirectorSitePrototype, err error) {
+	_model = &VDCDirectorSitePrototype{
+		ID: core.StringPtr(id),
+		Pvdc: pvdc,
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalVDCDirectorSitePrototype unmarshals an instance of VDCDirectorSitePrototype from the specified map of raw messages.
+func UnmarshalVDCDirectorSitePrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VDCDirectorSitePrototype)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "pvdc", &obj.Pvdc, UnmarshalDirectorSitePVDC)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// VDCEdgePrototype : The networking Edge to be deployed on the Virtual Data Center.
+type VDCEdgePrototype struct {
+	// The size of the Edge. Only used for Edges of type dedicated.
+	Size *string `json:"size,omitempty"`
+
+	// The type of Edge to be deployed on the Virtual Data Center.
+	Type *string `json:"type" validate:"required"`
+}
+
+// Constants associated with the VDCEdgePrototype.Size property.
+// The size of the Edge. Only used for Edges of type dedicated.
+const (
+	VDCEdgePrototype_Size_ExtraLarge = "extra_large"
+	VDCEdgePrototype_Size_Large = "large"
+	VDCEdgePrototype_Size_Medium = "medium"
+)
+
+// Constants associated with the VDCEdgePrototype.Type property.
+// The type of Edge to be deployed on the Virtual Data Center.
+const (
+	VDCEdgePrototype_Type_Dedicated = "dedicated"
+	VDCEdgePrototype_Type_Shared = "shared"
+)
+
+// NewVDCEdgePrototype : Instantiate VDCEdgePrototype (Generic Model Constructor)
+func (*VmwareV1) NewVDCEdgePrototype(typeVar string) (_model *VDCEdgePrototype, err error) {
+	_model = &VDCEdgePrototype{
+		Type: core.StringPtr(typeVar),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalVDCEdgePrototype unmarshals an instance of VDCEdgePrototype from the specified map of raw messages.
+func UnmarshalVDCEdgePrototype(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VDCEdgePrototype)
+	err = core.UnmarshalPrimitive(m, "size", &obj.Size)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		return
 	}
