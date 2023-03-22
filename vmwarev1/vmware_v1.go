@@ -2743,38 +2743,6 @@ func UnmarshalEdge(m map[string]json.RawMessage, result interface{}) (err error)
 	return
 }
 
-// Error : Information about why a request cannot be completed or why a resource could not be created.
-type Error struct {
-	// An error code specific to the error encountered. One of "INSUFFICIENT_CPU", "INSUFFICIENT_RAM", or
-	// "INSUFFICIENT_CPU_AND_RAM".
-	Code *string `json:"code" validate:"required"`
-
-	// A message describing why the error ocurred.
-	Message *string `json:"message" validate:"required"`
-
-	// A URL that links to a page with more information about this error.
-	MoreInfo *string `json:"more_info,omitempty"`
-}
-
-// UnmarshalError unmarshals an instance of Error from the specified map of raw messages.
-func UnmarshalError(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(Error)
-	err = core.UnmarshalPrimitive(m, "code", &obj.Code)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "more_info", &obj.MoreInfo)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // FileShares : Chosen storage policies and their sizes.
 type FileShares struct {
 	// The amount of 0.25 IOPS/GB storage in GB (1024^3 bytes).
@@ -3743,6 +3711,45 @@ func UnmarshalResourceGroupReference(m map[string]json.RawMessage, result interf
 	return
 }
 
+// StatusReason : Information about why a request cannot be completed or why a resource could not be created.
+type StatusReason struct {
+	// An error code specific to the error encountered.
+	Code *string `json:"code" validate:"required"`
+
+	// A message describing why the error ocurred.
+	Message *string `json:"message" validate:"required"`
+
+	// A URL that links to a page with more information about this error.
+	MoreInfo *string `json:"more_info,omitempty"`
+}
+
+// Constants associated with the StatusReason.Code property.
+// An error code specific to the error encountered.
+const (
+	StatusReason_Code_InsufficentCpu = "insufficent_cpu"
+	StatusReason_Code_InsufficentCpuAndRam = "insufficent_cpu_and_ram"
+	StatusReason_Code_InsufficentRam = "insufficent_ram"
+)
+
+// UnmarshalStatusReason unmarshals an instance of StatusReason from the specified map of raw messages.
+func UnmarshalStatusReason(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(StatusReason)
+	err = core.UnmarshalPrimitive(m, "code", &obj.Code)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "more_info", &obj.MoreInfo)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // UpdateCluster : Response of cluster update.
 type UpdateCluster struct {
 	// The cluster ID.
@@ -3996,7 +4003,7 @@ type VDC struct {
 	Edges []Edge `json:"edges" validate:"required"`
 
 	// Information about why the request to create the Virtual Data Center cannot be completed.
-	StatusReasons []Error `json:"status_reasons" validate:"required"`
+	StatusReasons []StatusReason `json:"status_reasons" validate:"required"`
 
 	// A human readable identifier for the Virtual Data Center.
 	Name *string `json:"name" validate:"required"`
@@ -4079,7 +4086,7 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalModel(m, "status_reasons", &obj.StatusReasons, UnmarshalError)
+	err = core.UnmarshalModel(m, "status_reasons", &obj.StatusReasons, UnmarshalStatusReason)
 	if err != nil {
 		return
 	}
