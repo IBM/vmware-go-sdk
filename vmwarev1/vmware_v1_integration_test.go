@@ -121,7 +121,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
-				XAuthRefreshToken: core.StringPtr("testString"),
 				Name: core.StringPtr("testString"),
 				Pvdcs: []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
 				ResourceGroup: resourceGroupIdentityModel,
@@ -210,7 +209,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 
 			createDirectorSitesPvdcsOptions := &vmwarev1.CreateDirectorSitesPvdcsOptions{
 				SiteID: core.StringPtr("testString"),
-				XAuthRefreshToken: core.StringPtr("testString"),
 				Name: core.StringPtr("testString"),
 				DataCenterName: core.StringPtr("testString"),
 				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
@@ -306,7 +304,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				SiteID: core.StringPtr("testString"),
 				ID: core.StringPtr("testString"),
 				PvdcID: core.StringPtr("testString"),
-				XAuthRefreshToken: core.StringPtr("testString"),
 				Body: clusterPatchModelAsPatch,
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
@@ -528,7 +525,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				SiteID: core.StringPtr("testString"),
 				ID: core.StringPtr("testString"),
 				PvdcID: core.StringPtr("testString"),
-				XAuthRefreshToken: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
@@ -547,7 +543,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
 			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
 				ID: core.StringPtr("testString"),
-				XAuthRefreshToken: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
