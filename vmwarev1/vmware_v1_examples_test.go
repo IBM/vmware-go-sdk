@@ -124,7 +124,6 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			createDirectorSitesOptions := vmwareService.NewCreateDirectorSitesOptions(
 				"testString",
-				"testString",
 				[]vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
 			)
 
@@ -217,7 +216,6 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			}
 
 			createDirectorSitesPvdcsOptions := vmwareService.NewCreateDirectorSitesPvdcsOptions(
-				"testString",
 				"testString",
 				"testString",
 				"testString",
@@ -314,7 +312,6 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(asPatchErr).To(BeNil())
 
 			updateDirectorSitesPvdcsClusterOptions := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(
-				"testString",
 				"testString",
 				"testString",
 				"testString",
@@ -551,7 +548,6 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 				"testString",
 				"testString",
 				"testString",
-				"testString",
 			)
 
 			clusterSummary, response, err := vmwareService.DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions)
@@ -572,7 +568,6 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-delete_director_site
 
 			deleteDirectorSiteOptions := vmwareService.NewDeleteDirectorSiteOptions(
-				"testString",
 				"testString",
 			)
 

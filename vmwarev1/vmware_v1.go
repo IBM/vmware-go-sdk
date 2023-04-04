@@ -198,9 +198,6 @@ func (vmware *VmwareV1) CreateDirectorSitesWithContext(ctx context.Context, crea
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
-	if createDirectorSitesOptions.XAuthRefreshToken != nil {
-		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*createDirectorSitesOptions.XAuthRefreshToken))
-	}
 	if createDirectorSitesOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*createDirectorSitesOptions.AcceptLanguage))
 	}
@@ -406,9 +403,6 @@ func (vmware *VmwareV1) DeleteDirectorSiteWithContext(ctx context.Context, delet
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
-	if deleteDirectorSiteOptions.XAuthRefreshToken != nil {
-		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*deleteDirectorSiteOptions.XAuthRefreshToken))
-	}
 	if deleteDirectorSiteOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*deleteDirectorSiteOptions.AcceptLanguage))
 	}
@@ -545,9 +539,6 @@ func (vmware *VmwareV1) CreateDirectorSitesPvdcsWithContext(ctx context.Context,
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
-	if createDirectorSitesPvdcsOptions.XAuthRefreshToken != nil {
-		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*createDirectorSitesPvdcsOptions.XAuthRefreshToken))
-	}
 	if createDirectorSitesPvdcsOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*createDirectorSitesPvdcsOptions.AcceptLanguage))
 	}
@@ -834,9 +825,6 @@ func (vmware *VmwareV1) DeleteDirectorSitesPvdcsClusterWithContext(ctx context.C
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
-	if deleteDirectorSitesPvdcsClusterOptions.XAuthRefreshToken != nil {
-		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*deleteDirectorSitesPvdcsClusterOptions.XAuthRefreshToken))
-	}
 	if deleteDirectorSitesPvdcsClusterOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*deleteDirectorSitesPvdcsClusterOptions.AcceptLanguage))
 	}
@@ -907,9 +895,6 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/merge-patch+json")
-	if updateDirectorSitesPvdcsClusterOptions.XAuthRefreshToken != nil {
-		builder.AddHeader("X-Auth-Refresh-Token", fmt.Sprint(*updateDirectorSitesPvdcsClusterOptions.XAuthRefreshToken))
-	}
 	if updateDirectorSitesPvdcsClusterOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*updateDirectorSitesPvdcsClusterOptions.AcceptLanguage))
 	}
@@ -1807,12 +1792,6 @@ func UnmarshalClusterSummary(m map[string]json.RawMessage, result interface{}) (
 
 // CreateDirectorSitesOptions : The CreateDirectorSites options.
 type CreateDirectorSitesOptions struct {
-	// Your IBM Cloud Identity and Access Management (IAM) delegated refresh token.  See [IAM Identity Services
-	// API](https://cloud.ibm.com/apidocs/iam-identity-token-api#gettoken-apikey-delegatedrefreshtoken) for how to generate
-	// delegated refresh token from an API key.  Make sure `vmware` being specified as the value of `receiver_client_ids`
-	// request form parameter when calling this IAM API.
-	XAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
-
 	// Name of the director site instance. Use a name that is unique to your region and meaningful. Names cannot be changed
 	// after initial creation.
 	Name *string `json:"name" validate:"required"`
@@ -1835,18 +1814,11 @@ type CreateDirectorSitesOptions struct {
 }
 
 // NewCreateDirectorSitesOptions : Instantiate CreateDirectorSitesOptions
-func (*VmwareV1) NewCreateDirectorSitesOptions(xAuthRefreshToken string, name string, pvdcs []PVDCPrototype) *CreateDirectorSitesOptions {
+func (*VmwareV1) NewCreateDirectorSitesOptions(name string, pvdcs []PVDCPrototype) *CreateDirectorSitesOptions {
 	return &CreateDirectorSitesOptions{
-		XAuthRefreshToken: core.StringPtr(xAuthRefreshToken),
 		Name: core.StringPtr(name),
 		Pvdcs: pvdcs,
 	}
-}
-
-// SetXAuthRefreshToken : Allow user to set XAuthRefreshToken
-func (_options *CreateDirectorSitesOptions) SetXAuthRefreshToken(xAuthRefreshToken string) *CreateDirectorSitesOptions {
-	_options.XAuthRefreshToken = core.StringPtr(xAuthRefreshToken)
-	return _options
 }
 
 // SetName : Allow user to set Name
@@ -1890,12 +1862,6 @@ type CreateDirectorSitesPvdcsOptions struct {
 	// A unique identifier for the director site in which the virtual data center was created.
 	SiteID *string `json:"site_id" validate:"required,ne="`
 
-	// Your IBM Cloud Identity and Access Management (IAM) delegated refresh token.  See [IAM Identity Services
-	// API](https://cloud.ibm.com/apidocs/iam-identity-token-api#gettoken-apikey-delegatedrefreshtoken) for how to generate
-	// delegated refresh token from an API key.  Make sure `vmware` being specified as the value of `receiver_client_ids`
-	// request form parameter when calling this IAM API.
-	XAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
-
 	// Name of the provider virtual data center. Provider virtual data center names must be unique per director site
 	// instance. Provider virtual data center names cannot be changed after creation.
 	Name *string `json:"name" validate:"required"`
@@ -1917,10 +1883,9 @@ type CreateDirectorSitesPvdcsOptions struct {
 }
 
 // NewCreateDirectorSitesPvdcsOptions : Instantiate CreateDirectorSitesPvdcsOptions
-func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, xAuthRefreshToken string, name string, dataCenterName string, clusters []ClusterPrototype) *CreateDirectorSitesPvdcsOptions {
+func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, name string, dataCenterName string, clusters []ClusterPrototype) *CreateDirectorSitesPvdcsOptions {
 	return &CreateDirectorSitesPvdcsOptions{
 		SiteID: core.StringPtr(siteID),
-		XAuthRefreshToken: core.StringPtr(xAuthRefreshToken),
 		Name: core.StringPtr(name),
 		DataCenterName: core.StringPtr(dataCenterName),
 		Clusters: clusters,
@@ -1930,12 +1895,6 @@ func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, xAuthRefreshT
 // SetSiteID : Allow user to set SiteID
 func (_options *CreateDirectorSitesPvdcsOptions) SetSiteID(siteID string) *CreateDirectorSitesPvdcsOptions {
 	_options.SiteID = core.StringPtr(siteID)
-	return _options
-}
-
-// SetXAuthRefreshToken : Allow user to set XAuthRefreshToken
-func (_options *CreateDirectorSitesPvdcsOptions) SetXAuthRefreshToken(xAuthRefreshToken string) *CreateDirectorSitesPvdcsOptions {
-	_options.XAuthRefreshToken = core.StringPtr(xAuthRefreshToken)
 	return _options
 }
 
@@ -2077,12 +2036,6 @@ type DeleteDirectorSiteOptions struct {
 	// A unique identifier for the director site in which the virtual data center was created.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Your IBM Cloud Identity and Access Management (IAM) delegated refresh token.  See [IAM Identity Services
-	// API](https://cloud.ibm.com/apidocs/iam-identity-token-api#gettoken-apikey-delegatedrefreshtoken) for how to generate
-	// delegated refresh token from an API key.  Make sure `vmware` being specified as the value of `receiver_client_ids`
-	// request form parameter when calling this IAM API.
-	XAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
-
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
@@ -2094,22 +2047,15 @@ type DeleteDirectorSiteOptions struct {
 }
 
 // NewDeleteDirectorSiteOptions : Instantiate DeleteDirectorSiteOptions
-func (*VmwareV1) NewDeleteDirectorSiteOptions(id string, xAuthRefreshToken string) *DeleteDirectorSiteOptions {
+func (*VmwareV1) NewDeleteDirectorSiteOptions(id string) *DeleteDirectorSiteOptions {
 	return &DeleteDirectorSiteOptions{
 		ID: core.StringPtr(id),
-		XAuthRefreshToken: core.StringPtr(xAuthRefreshToken),
 	}
 }
 
 // SetID : Allow user to set ID
 func (_options *DeleteDirectorSiteOptions) SetID(id string) *DeleteDirectorSiteOptions {
 	_options.ID = core.StringPtr(id)
-	return _options
-}
-
-// SetXAuthRefreshToken : Allow user to set XAuthRefreshToken
-func (_options *DeleteDirectorSiteOptions) SetXAuthRefreshToken(xAuthRefreshToken string) *DeleteDirectorSiteOptions {
-	_options.XAuthRefreshToken = core.StringPtr(xAuthRefreshToken)
 	return _options
 }
 
@@ -2142,12 +2088,6 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 	// A unique identifier for the provider virtual data center in a director site.
 	PvdcID *string `json:"pvdc_id" validate:"required,ne="`
 
-	// Your IBM Cloud Identity and Access Management (IAM) delegated refresh token.  See [IAM Identity Services
-	// API](https://cloud.ibm.com/apidocs/iam-identity-token-api#gettoken-apikey-delegatedrefreshtoken) for how to generate
-	// delegated refresh token from an API key.  Make sure `vmware` being specified as the value of `receiver_client_ids`
-	// request form parameter when calling this IAM API.
-	XAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
-
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
@@ -2159,12 +2099,11 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 }
 
 // NewDeleteDirectorSitesPvdcsClusterOptions : Instantiate DeleteDirectorSitesPvdcsClusterOptions
-func (*VmwareV1) NewDeleteDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string, xAuthRefreshToken string) *DeleteDirectorSitesPvdcsClusterOptions {
+func (*VmwareV1) NewDeleteDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string) *DeleteDirectorSitesPvdcsClusterOptions {
 	return &DeleteDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
 		ID: core.StringPtr(id),
 		PvdcID: core.StringPtr(pvdcID),
-		XAuthRefreshToken: core.StringPtr(xAuthRefreshToken),
 	}
 }
 
@@ -2183,12 +2122,6 @@ func (_options *DeleteDirectorSitesPvdcsClusterOptions) SetID(id string) *Delete
 // SetPvdcID : Allow user to set PvdcID
 func (_options *DeleteDirectorSitesPvdcsClusterOptions) SetPvdcID(pvdcID string) *DeleteDirectorSitesPvdcsClusterOptions {
 	_options.PvdcID = core.StringPtr(pvdcID)
-	return _options
-}
-
-// SetXAuthRefreshToken : Allow user to set XAuthRefreshToken
-func (_options *DeleteDirectorSitesPvdcsClusterOptions) SetXAuthRefreshToken(xAuthRefreshToken string) *DeleteDirectorSitesPvdcsClusterOptions {
-	_options.XAuthRefreshToken = core.StringPtr(xAuthRefreshToken)
 	return _options
 }
 
@@ -3888,12 +3821,6 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 	// A unique identifier for the provider virtual data center in a director site.
 	PvdcID *string `json:"pvdc_id" validate:"required,ne="`
 
-	// Your IBM Cloud Identity and Access Management (IAM) delegated refresh token.  See [IAM Identity Services
-	// API](https://cloud.ibm.com/apidocs/iam-identity-token-api#gettoken-apikey-delegatedrefreshtoken) for how to generate
-	// delegated refresh token from an API key.  Make sure `vmware` being specified as the value of `receiver_client_ids`
-	// request form parameter when calling this IAM API.
-	XAuthRefreshToken *string `json:"X-Auth-Refresh-Token" validate:"required"`
-
 	// JSON Merge-Patch content for update_director_sites_pvdcs_cluster.
 	Body map[string]interface{} `json:"body" validate:"required"`
 
@@ -3908,12 +3835,11 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 }
 
 // NewUpdateDirectorSitesPvdcsClusterOptions : Instantiate UpdateDirectorSitesPvdcsClusterOptions
-func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string, xAuthRefreshToken string, body map[string]interface{}) *UpdateDirectorSitesPvdcsClusterOptions {
+func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string, body map[string]interface{}) *UpdateDirectorSitesPvdcsClusterOptions {
 	return &UpdateDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
 		ID: core.StringPtr(id),
 		PvdcID: core.StringPtr(pvdcID),
-		XAuthRefreshToken: core.StringPtr(xAuthRefreshToken),
 		Body: body,
 	}
 }
@@ -3933,12 +3859,6 @@ func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetID(id string) *Update
 // SetPvdcID : Allow user to set PvdcID
 func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetPvdcID(pvdcID string) *UpdateDirectorSitesPvdcsClusterOptions {
 	_options.PvdcID = core.StringPtr(pvdcID)
-	return _options
-}
-
-// SetXAuthRefreshToken : Allow user to set XAuthRefreshToken
-func (_options *UpdateDirectorSitesPvdcsClusterOptions) SetXAuthRefreshToken(xAuthRefreshToken string) *UpdateDirectorSitesPvdcsClusterOptions {
-	_options.XAuthRefreshToken = core.StringPtr(xAuthRefreshToken)
 	return _options
 }
 
