@@ -460,7 +460,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 
 			vdcEdgePrototypeModel := &vmwarev1.VDCEdgePrototype{
 				Size: core.StringPtr("medium"),
-				Type: core.StringPtr("dedicated"),
+				Type: core.StringPtr("performance"),
 			}
 
 			resourceGroupIdentityModel := &vmwarev1.ResourceGroupIdentity{
