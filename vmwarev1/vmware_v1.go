@@ -1520,8 +1520,8 @@ type Cluster struct {
 	// The time that the instance is ordered.
 	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
 
-	// The time that the instance is created.
-	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+	// The time that the instance is provisioned.
+	ProvisionedAt *strfmt.DateTime `json:"provisioned_at,omitempty"`
 
 	// The number of hosts in the cluster.
 	HostCount *int64 `json:"host_count" validate:"required"`
@@ -1579,7 +1579,7 @@ func UnmarshalCluster(m map[string]json.RawMessage, result interface{}) (err err
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	err = core.UnmarshalPrimitive(m, "provisioned_at", &obj.ProvisionedAt)
 	if err != nil {
 		return
 	}
@@ -2195,8 +2195,8 @@ type DirectorSite struct {
 	// The time that the instance is ordered.
 	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
 
-	// The time that the instance is created and available to use.
-	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+	// The time that the instance is provisioned and available to use.
+	ProvisionedAt *strfmt.DateTime `json:"provisioned_at,omitempty"`
 
 	// The name of director site. The name of the director site cannot be changed after creation.
 	Name *string `json:"name" validate:"required"`
@@ -2240,7 +2240,7 @@ func UnmarshalDirectorSite(m map[string]json.RawMessage, result interface{}) (er
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	err = core.UnmarshalPrimitive(m, "provisioned_at", &obj.ProvisionedAt)
 	if err != nil {
 		return
 	}
@@ -2621,21 +2621,21 @@ type Edge struct {
 
 	// The size of the Edge.
 	//
-	// The size can only be specified for dedicated Edges. Larger sizes require more capacity from the director site in
+	// The size can only be specified for performance Edges. Larger sizes require more capacity from the director site in
 	// which the Virtual Data Center was created to be deployed.
 	Size *string `json:"size,omitempty"`
 
 	// The type of Edge to be deployed.
 	//
-	// Shared Edges allow for multiple VDCs to share some Edge resources. Dedicated Edges do not share resources between
-	// VDCs.
+	// Efficiency Edges allow for multiple VDCs to share some Edge resources. Performance Edges do not share resources
+	// between VDCs.
 	Type *string `json:"type" validate:"required"`
 }
 
 // Constants associated with the Edge.Size property.
 // The size of the Edge.
 //
-// The size can only be specified for dedicated Edges. Larger sizes require more capacity from the director site in
+// The size can only be specified for performance Edges. Larger sizes require more capacity from the director site in
 // which the Virtual Data Center was created to be deployed.
 const (
 	Edge_Size_ExtraLarge = "extra_large"
@@ -2646,11 +2646,11 @@ const (
 // Constants associated with the Edge.Type property.
 // The type of Edge to be deployed.
 //
-// Shared Edges allow for multiple VDCs to share some Edge resources. Dedicated Edges do not share resources between
-// VDCs.
+// Efficiency Edges allow for multiple VDCs to share some Edge resources. Performance Edges do not share resources
+// between VDCs.
 const (
-	Edge_Type_Dedicated = "dedicated"
-	Edge_Type_Shared = "shared"
+	Edge_Type_Efficiency = "efficiency"
+	Edge_Type_Performance = "performance"
 )
 
 // UnmarshalEdge unmarshals an instance of Edge from the specified map of raw messages.
@@ -3697,8 +3697,8 @@ type UpdateCluster struct {
 	// The time that the instance is ordered.
 	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
 
-	// The time that the instance is created.
-	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+	// The time that the instance is provisioned.
+	ProvisionedAt *strfmt.DateTime `json:"provisioned_at,omitempty"`
 
 	// The number of hosts in the cluster.
 	HostCount *int64 `json:"host_count" validate:"required"`
@@ -3762,7 +3762,7 @@ func UnmarshalUpdateCluster(m map[string]json.RawMessage, result interface{}) (e
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	err = core.UnmarshalPrimitive(m, "provisioned_at", &obj.ProvisionedAt)
 	if err != nil {
 		return
 	}
@@ -3907,13 +3907,13 @@ type VDC struct {
 	AllocationModel *string `json:"allocation_model" validate:"required"`
 
 	// The time after which the Virtual Data Center is considered usable.
-	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+	ProvisionedAt *strfmt.DateTime `json:"provisioned_at,omitempty"`
 
 	// A unique identifier for the Virtual Data Center in IBM Cloud.
 	Crn *string `json:"crn" validate:"required"`
 
 	// The time after which the Virtual Data Center is no longer considered usable.
-	DeletedAt *strfmt.DateTime `json:"deleted_at" validate:"required"`
+	DeletedAt *strfmt.DateTime `json:"deleted_at,omitempty"`
 
 	// The director site in which to deploy the Virtual Data Center.
 	DirectorSite *VDCDirectorSite `json:"director_site" validate:"required"`
@@ -3986,7 +3986,7 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	err = core.UnmarshalPrimitive(m, "provisioned_at", &obj.ProvisionedAt)
 	if err != nil {
 		return
 	}
@@ -4118,7 +4118,7 @@ func UnmarshalVDCDirectorSitePrototype(m map[string]json.RawMessage, result inte
 
 // VDCEdgePrototype : The networking Edge to be deployed on the Virtual Data Center.
 type VDCEdgePrototype struct {
-	// The size of the Edge. Only used for Edges of type dedicated.
+	// The size of the Edge. Only used for Edges of type performance.
 	Size *string `json:"size,omitempty"`
 
 	// The type of Edge to be deployed on the Virtual Data Center.
@@ -4126,7 +4126,7 @@ type VDCEdgePrototype struct {
 }
 
 // Constants associated with the VDCEdgePrototype.Size property.
-// The size of the Edge. Only used for Edges of type dedicated.
+// The size of the Edge. Only used for Edges of type performance.
 const (
 	VDCEdgePrototype_Size_ExtraLarge = "extra_large"
 	VDCEdgePrototype_Size_Large = "large"
@@ -4136,8 +4136,8 @@ const (
 // Constants associated with the VDCEdgePrototype.Type property.
 // The type of Edge to be deployed on the Virtual Data Center.
 const (
-	VDCEdgePrototype_Type_Dedicated = "dedicated"
-	VDCEdgePrototype_Type_Shared = "shared"
+	VDCEdgePrototype_Type_Efficiency = "efficiency"
+	VDCEdgePrototype_Type_Performance = "performance"
 )
 
 // NewVDCEdgePrototype : Instantiate VDCEdgePrototype (Generic Model Constructor)
