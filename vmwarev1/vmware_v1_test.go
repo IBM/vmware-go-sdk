@@ -277,7 +277,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully with retries`, func() {
@@ -379,7 +379,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully`, func() {
@@ -630,7 +630,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully with retries`, func() {
@@ -689,7 +689,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully`, func() {
@@ -853,7 +853,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully with retries`, func() {
@@ -913,7 +913,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully`, func() {
@@ -1087,7 +1087,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully with retries`, func() {
@@ -1147,7 +1147,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating"}]}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully`, func() {
@@ -2146,7 +2146,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
+					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcsClusters successfully with retries`, func() {
@@ -2207,7 +2207,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
+					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcsClusters successfully`, func() {
@@ -2386,7 +2386,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke GetDirectorInstancesPvdcsCluster successfully with retries`, func() {
@@ -2448,7 +2448,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke GetDirectorInstancesPvdcsCluster successfully`, func() {
@@ -2905,7 +2905,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
 				}))
 			})
 			It(`Invoke UpdateDirectorSitesPvdcsCluster successfully with retries`, func() {
@@ -2998,7 +2998,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "created_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
 				}))
 			})
 			It(`Invoke UpdateDirectorSitesPvdcsCluster successfully`, func() {
@@ -4499,7 +4499,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "allocation_model": "paygo", "provisioned_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully with retries`, func() {
@@ -4555,7 +4555,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "allocation_model": "paygo", "provisioned_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully`, func() {
@@ -4681,7 +4681,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the VDCEdgePrototype model
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
-				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
+				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -4748,7 +4748,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "provisioned_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully with retries`, func() {
@@ -4772,7 +4772,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the VDCEdgePrototype model
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
-				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
+				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -4842,7 +4842,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "provisioned_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully`, func() {
@@ -4871,7 +4871,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the VDCEdgePrototype model
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
-				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
+				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -4913,7 +4913,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the VDCEdgePrototype model
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
-				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
+				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -4976,7 +4976,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the VDCEdgePrototype model
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
-				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
+				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -5071,7 +5071,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "provisioned_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully with retries`, func() {
@@ -5128,7 +5128,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "provisioned_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully`, func() {
@@ -5294,7 +5294,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "provisioned_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully with retries`, func() {
@@ -5351,7 +5351,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "created_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "dedicated"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "allocation_model": "paygo", "provisioned_at": "2019-01-01T12:00:00.000Z", "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID"}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "status": "creating", "type": "dedicated"}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully`, func() {
@@ -5589,9 +5589,9 @@ var _ = Describe(`VmwareV1`, func() {
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				Expect(vdcEdgePrototypeModel).ToNot(BeNil())
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
-				vdcEdgePrototypeModel.Type = core.StringPtr("dedicated")
+				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
 				Expect(vdcEdgePrototypeModel.Size).To(Equal(core.StringPtr("medium")))
-				Expect(vdcEdgePrototypeModel.Type).To(Equal(core.StringPtr("dedicated")))
+				Expect(vdcEdgePrototypeModel.Type).To(Equal(core.StringPtr("performance")))
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -5932,7 +5932,7 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(err).ToNot(BeNil())
 			})
 			It(`Invoke NewVDCEdgePrototype successfully`, func() {
-				typeVar := "dedicated"
+				typeVar := "performance"
 				_model, err := vmwareService.NewVDCEdgePrototype(typeVar)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
