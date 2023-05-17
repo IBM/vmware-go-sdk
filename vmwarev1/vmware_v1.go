@@ -36,16 +36,22 @@ import (
 
 // VmwareV1 : IBM Cloud for VMware as a Service API
 //
-// API Version: 1.0
+// API Version: 1.1.0
 type VmwareV1 struct {
 	Service *core.BaseService
 }
 
 // DefaultServiceURL is the default URL to make service requests to.
-const DefaultServiceURL = "https://vmware.cloud.ibm.com/v1"
+const DefaultServiceURL = "https://api.us-south.vmware.cloud.ibm.com/v1"
 
 // DefaultServiceName is the default key used to find external configuration information.
 const DefaultServiceName = "vmware"
+
+const ParameterizedServiceURL = "https://api.{region}.vmware.cloud.ibm.com/v1"
+
+var defaultUrlVariables = map[string]string{
+	"region": "us-south",
+}
 
 // VmwareV1Options : Service options
 type VmwareV1Options struct {
@@ -124,6 +130,11 @@ func (vmware *VmwareV1) Clone() *VmwareV1 {
 	return &clone
 }
 
+// ConstructServiceURL constructs a service URL from the parameterized URL.
+func ConstructServiceURL(providedUrlVariables map[string]string) (string, error) {
+	return core.ConstructServiceURL(ParameterizedServiceURL, defaultUrlVariables, providedUrlVariables)
+}
+
 // SetServiceURL sets the service URL
 func (vmware *VmwareV1) SetServiceURL(url string) error {
 	return vmware.Service.SetServiceURL(url)
@@ -161,10 +172,10 @@ func (vmware *VmwareV1) DisableRetries() {
 }
 
 // CreateDirectorSites : Create a director site instance
-// Create a new instance of a director site with specified configurations. The director site instance is the
-// infrastructure and associated VMware software stack consisting of vCenter, NSX-T, and VMware Cloud Director. VMware
-// platform management and operations are performed with VMware Cloud Director. The minimum initial order size is 2
-// hosts (2-Socket 32 Cores, 192 GB RAM) with 24 TB of 2.0 IOPS/GB storage.
+// Create an instance of a director site with specified configurations. The director site instance is the infrastructure
+// and associated VMware software stack, which consists of VMware vCenter Server, VMware NSX-T, and VMware Cloud
+// Director. VMware platform management and operations are performed with Cloud Director. The minimum initial order size
+// is 2 hosts (2-Socket 32 Cores, 192 GB RAM) with 24 TB of 2.0 IOPS/GB storage.
 func (vmware *VmwareV1) CreateDirectorSites(createDirectorSitesOptions *CreateDirectorSitesOptions) (result *DirectorSite, response *core.DetailedResponse, err error) {
 	return vmware.CreateDirectorSitesWithContext(context.Background(), createDirectorSitesOptions)
 }
@@ -214,6 +225,9 @@ func (vmware *VmwareV1) CreateDirectorSitesWithContext(ctx context.Context, crea
 	}
 	if createDirectorSitesOptions.ResourceGroup != nil {
 		body["resource_group"] = createDirectorSitesOptions.ResourceGroup
+	}
+	if createDirectorSitesOptions.Services != nil {
+		body["services"] = createDirectorSitesOptions.Services
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -498,10 +512,10 @@ func (vmware *VmwareV1) ListDirectorSitesPvdcsWithContext(ctx context.Context, l
 }
 
 // CreateDirectorSitesPvdcs : Create a provider virtual data center instance in a specified director site
-// Create a new instance of a provider virtual datacenter with specified configurations. The director site instance is
-// the infrastructure and associated VMware software stack consisting of vCenter, NSX-T, and VMware Cloud Director.
-// VMware platform management and operations are performed with VMware Cloud Director. The minimum initial order size is
-// 2 hosts (2-Socket 32 Cores, 192 GB RAM) with 24 TB of 2.0 IOPS/GB storage.
+// Create an instance of a provider virtual data center with specified configurations. The director site instance is the
+// infrastructure and associated VMware software stack, which consists of VMware vCenter Server, VMware NSX-T, and
+// VMware Cloud Director. VMware platform management and operations are performed with Cloud Director. The minimum
+// initial order size is 2 hosts (2-Socket 32 Cores, 192 GB RAM) with 24 TB of 2.0 IOPS/GB storage.
 func (vmware *VmwareV1) CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions) (result *PVDC, response *core.DetailedResponse, err error) {
 	return vmware.CreateDirectorSitesPvdcsWithContext(context.Background(), createDirectorSitesPvdcsOptions)
 }
@@ -987,7 +1001,7 @@ func (vmware *VmwareV1) ListDirectorSiteRegionsWithContext(ctx context.Context, 
 }
 
 // ListDirectorSiteHostProfiles : List host profiles
-// List available host profiles that could be used when creating a director site instance. IBM Cloud offers several
+// List available host profiles that can be used when you create a director site instance. IBM Cloud offers several
 // different host types. Typically, the host type is selected based on the properties of the workload to be run in the
 // VMware cluster.
 func (vmware *VmwareV1) ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions *ListDirectorSiteHostProfilesOptions) (result *DirectorSiteHostProfileCollection, response *core.DetailedResponse, err error) {
@@ -1046,77 +1060,19 @@ func (vmware *VmwareV1) ListDirectorSiteHostProfilesWithContext(ctx context.Cont
 	return
 }
 
-// ReplaceOrgAdminPassword : Replace the password of VMware Cloud Director tenant portal
-// Replace the admin password used to log on to the VMware Cloud Director tenant portal and return the new value. VMware
-// Cloud Director has its own authentication and authorization model. The first time that you access the VMware Cloud
-// Director console you must set the admin credentials to generate an initial, complex, and random password. After the
-// first admin password is generated, the VMware Cloud Director console option is enabled on the VDC details page. IBM
-// Cloud does not capture the password. If the password is lost it needs to be reset.
-func (vmware *VmwareV1) ReplaceOrgAdminPassword(replaceOrgAdminPasswordOptions *ReplaceOrgAdminPasswordOptions) (result *NewPassword, response *core.DetailedResponse, err error) {
-	return vmware.ReplaceOrgAdminPasswordWithContext(context.Background(), replaceOrgAdminPasswordOptions)
+// GetOidcConfiguration : Get an OpenID Connect (OIDC) configuration
+// Return the details of an OIDC configuration on a specified director site.
+func (vmware *VmwareV1) GetOidcConfiguration(getOidcConfigurationOptions *GetOidcConfigurationOptions) (result *OIDC, response *core.DetailedResponse, err error) {
+	return vmware.GetOidcConfigurationWithContext(context.Background(), getOidcConfigurationOptions)
 }
 
-// ReplaceOrgAdminPasswordWithContext is an alternate form of the ReplaceOrgAdminPassword method which supports a Context parameter
-func (vmware *VmwareV1) ReplaceOrgAdminPasswordWithContext(ctx context.Context, replaceOrgAdminPasswordOptions *ReplaceOrgAdminPasswordOptions) (result *NewPassword, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(replaceOrgAdminPasswordOptions, "replaceOrgAdminPasswordOptions cannot be nil")
+// GetOidcConfigurationWithContext is an alternate form of the GetOidcConfiguration method which supports a Context parameter
+func (vmware *VmwareV1) GetOidcConfigurationWithContext(ctx context.Context, getOidcConfigurationOptions *GetOidcConfigurationOptions) (result *OIDC, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getOidcConfigurationOptions, "getOidcConfigurationOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(replaceOrgAdminPasswordOptions, "replaceOrgAdminPasswordOptions")
-	if err != nil {
-		return
-	}
-
-	builder := core.NewRequestBuilder(core.PUT)
-	builder = builder.WithContext(ctx)
-	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/director_site_password`, nil)
-	if err != nil {
-		return
-	}
-
-	for headerName, headerValue := range replaceOrgAdminPasswordOptions.Headers {
-		builder.AddHeader(headerName, headerValue)
-	}
-
-	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "ReplaceOrgAdminPassword")
-	for headerName, headerValue := range sdkHeaders {
-		builder.AddHeader(headerName, headerValue)
-	}
-	builder.AddHeader("Accept", "application/json")
-
-	builder.AddQuery("site_id", fmt.Sprint(*replaceOrgAdminPasswordOptions.SiteID))
-
-	request, err := builder.Build()
-	if err != nil {
-		return
-	}
-
-	var rawResponse map[string]json.RawMessage
-	response, err = vmware.Service.Request(request, &rawResponse)
-	if err != nil {
-		return
-	}
-	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalNewPassword)
-		if err != nil {
-			return
-		}
-		response.Result = result
-	}
-
-	return
-}
-
-// ListPrices : List billing metrics
-// List all billing metrics and associated prices.
-func (vmware *VmwareV1) ListPrices(listPricesOptions *ListPricesOptions) (result *DirectorSitePricing, response *core.DetailedResponse, err error) {
-	return vmware.ListPricesWithContext(context.Background(), listPricesOptions)
-}
-
-// ListPricesWithContext is an alternate form of the ListPrices method which supports a Context parameter
-func (vmware *VmwareV1) ListPricesWithContext(ctx context.Context, listPricesOptions *ListPricesOptions) (result *DirectorSitePricing, response *core.DetailedResponse, err error) {
-	err = core.ValidateStruct(listPricesOptions, "listPricesOptions")
+	err = core.ValidateStruct(getOidcConfigurationOptions, "getOidcConfigurationOptions")
 	if err != nil {
 		return
 	}
@@ -1124,26 +1080,22 @@ func (vmware *VmwareV1) ListPricesWithContext(ctx context.Context, listPricesOpt
 	builder := core.NewRequestBuilder(core.GET)
 	builder = builder.WithContext(ctx)
 	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/director_site_pricing`, nil)
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/director_site_oidc`, nil)
 	if err != nil {
 		return
 	}
 
-	for headerName, headerValue := range listPricesOptions.Headers {
+	for headerName, headerValue := range getOidcConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "ListPrices")
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "GetOidcConfiguration")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
-	if listPricesOptions.AcceptLanguage != nil {
-		builder.AddHeader("Accept-Language", fmt.Sprint(*listPricesOptions.AcceptLanguage))
-	}
-	if listPricesOptions.XGlobalTransactionID != nil {
-		builder.AddHeader("X-Global-Transaction-ID", fmt.Sprint(*listPricesOptions.XGlobalTransactionID))
-	}
+
+	builder.AddQuery("site_id", fmt.Sprint(*getOidcConfigurationOptions.SiteID))
 
 	request, err := builder.Build()
 	if err != nil {
@@ -1156,7 +1108,7 @@ func (vmware *VmwareV1) ListPricesWithContext(ctx context.Context, listPricesOpt
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSitePricing)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOIDC)
 		if err != nil {
 			return
 		}
@@ -1166,19 +1118,19 @@ func (vmware *VmwareV1) ListPricesWithContext(ctx context.Context, listPricesOpt
 	return
 }
 
-// GetVcddPrice : Quote price
-// Quote price for a specific director site instance configuration.
-func (vmware *VmwareV1) GetVcddPrice(getVcddPriceOptions *GetVcddPriceOptions) (result *DirectorSitePriceQuote, response *core.DetailedResponse, err error) {
-	return vmware.GetVcddPriceWithContext(context.Background(), getVcddPriceOptions)
+// SetOidcConfiguration : Create an OpenID Connect (OIDC) configuration
+// Request to configure OIDC on a specified director site.
+func (vmware *VmwareV1) SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions) (result *OIDC, response *core.DetailedResponse, err error) {
+	return vmware.SetOidcConfigurationWithContext(context.Background(), setOidcConfigurationOptions)
 }
 
-// GetVcddPriceWithContext is an alternate form of the GetVcddPrice method which supports a Context parameter
-func (vmware *VmwareV1) GetVcddPriceWithContext(ctx context.Context, getVcddPriceOptions *GetVcddPriceOptions) (result *DirectorSitePriceQuote, response *core.DetailedResponse, err error) {
-	err = core.ValidateNotNil(getVcddPriceOptions, "getVcddPriceOptions cannot be nil")
+// SetOidcConfigurationWithContext is an alternate form of the SetOidcConfiguration method which supports a Context parameter
+func (vmware *VmwareV1) SetOidcConfigurationWithContext(ctx context.Context, setOidcConfigurationOptions *SetOidcConfigurationOptions) (result *OIDC, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(setOidcConfigurationOptions, "setOidcConfigurationOptions cannot be nil")
 	if err != nil {
 		return
 	}
-	err = core.ValidateStruct(getVcddPriceOptions, "getVcddPriceOptions")
+	err = core.ValidateStruct(setOidcConfigurationOptions, "setOidcConfigurationOptions")
 	if err != nil {
 		return
 	}
@@ -1186,45 +1138,22 @@ func (vmware *VmwareV1) GetVcddPriceWithContext(ctx context.Context, getVcddPric
 	builder := core.NewRequestBuilder(core.POST)
 	builder = builder.WithContext(ctx)
 	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
-	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/director_site_price_quote`, nil)
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/director_site_oidc`, nil)
 	if err != nil {
 		return
 	}
 
-	for headerName, headerValue := range getVcddPriceOptions.Headers {
+	for headerName, headerValue := range setOidcConfigurationOptions.Headers {
 		builder.AddHeader(headerName, headerValue)
 	}
 
-	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "GetVcddPrice")
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "SetOidcConfiguration")
 	for headerName, headerValue := range sdkHeaders {
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
-	builder.AddHeader("Content-Type", "application/json")
-	if getVcddPriceOptions.AcceptLanguage != nil {
-		builder.AddHeader("Accept-Language", fmt.Sprint(*getVcddPriceOptions.AcceptLanguage))
-	}
-	if getVcddPriceOptions.XGlobalTransactionID != nil {
-		builder.AddHeader("X-Global-Transaction-ID", fmt.Sprint(*getVcddPriceOptions.XGlobalTransactionID))
-	}
 
-	body := make(map[string]interface{})
-	if getVcddPriceOptions.Name != nil {
-		body["name"] = getVcddPriceOptions.Name
-	}
-	if getVcddPriceOptions.Pvdcs != nil {
-		body["pvdcs"] = getVcddPriceOptions.Pvdcs
-	}
-	if getVcddPriceOptions.Country != nil {
-		body["country"] = getVcddPriceOptions.Country
-	}
-	if getVcddPriceOptions.ResourceGroup != nil {
-		body["resource_group"] = getVcddPriceOptions.ResourceGroup
-	}
-	_, err = builder.SetBodyContentJSON(body)
-	if err != nil {
-		return
-	}
+	builder.AddQuery("site_id", fmt.Sprint(*setOidcConfigurationOptions.SiteID))
 
 	request, err := builder.Build()
 	if err != nil {
@@ -1237,7 +1166,7 @@ func (vmware *VmwareV1) GetVcddPriceWithContext(ctx context.Context, getVcddPric
 		return
 	}
 	if rawResponse != nil {
-		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalDirectorSitePriceQuote)
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalOIDC)
 		if err != nil {
 			return
 		}
@@ -1351,8 +1280,17 @@ func (vmware *VmwareV1) CreateVdcWithContext(ctx context.Context, createVdcOptio
 	if createVdcOptions.Edge != nil {
 		body["edge"] = createVdcOptions.Edge
 	}
+	if createVdcOptions.FastProvisioningEnabled != nil {
+		body["fast_provisioning_enabled"] = createVdcOptions.FastProvisioningEnabled
+	}
 	if createVdcOptions.ResourceGroup != nil {
 		body["resource_group"] = createVdcOptions.ResourceGroup
+	}
+	if createVdcOptions.Cpu != nil {
+		body["cpu"] = createVdcOptions.Cpu
+	}
+	if createVdcOptions.Ram != nil {
+		body["ram"] = createVdcOptions.Ram
 	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
@@ -1506,6 +1444,76 @@ func (vmware *VmwareV1) DeleteVdcWithContext(ctx context.Context, deleteVdcOptio
 	return
 }
 
+// UpdateVdc : Update a virtual data center with the specified ID
+// Request to update a virtual data center. Currently, the only supported modification is to change the fast
+// provisioning.
+func (vmware *VmwareV1) UpdateVdc(updateVdcOptions *UpdateVdcOptions) (result *VDC, response *core.DetailedResponse, err error) {
+	return vmware.UpdateVdcWithContext(context.Background(), updateVdcOptions)
+}
+
+// UpdateVdcWithContext is an alternate form of the UpdateVdc method which supports a Context parameter
+func (vmware *VmwareV1) UpdateVdcWithContext(ctx context.Context, updateVdcOptions *UpdateVdcOptions) (result *VDC, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(updateVdcOptions, "updateVdcOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(updateVdcOptions, "updateVdcOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"id": *updateVdcOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/vdcs/{id}`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range updateVdcOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "UpdateVdc")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/merge-patch+json")
+	if updateVdcOptions.AcceptLanguage != nil {
+		builder.AddHeader("Accept-Language", fmt.Sprint(*updateVdcOptions.AcceptLanguage))
+	}
+
+	_, err = builder.SetBodyContentJSON(updateVdcOptions.VDCPatch)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = vmware.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalVDC)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // Cluster : A cluster resource.
 type Cluster struct {
 	// The cluster ID.
@@ -1636,7 +1644,7 @@ func UnmarshalClusterCollection(m map[string]json.RawMessage, result interface{}
 	return
 }
 
-// ClusterPatch : The cluster patch. Specifying both file_shares and host_count in one call is currently not supported.
+// ClusterPatch : The cluster patch. Currently, specifying both file_shares and host_count in one call is not supported.
 type ClusterPatch struct {
 	// Chosen storage policies and their sizes.
 	FileShares *FileSharesPrototype `json:"file_shares,omitempty"`
@@ -1803,10 +1811,13 @@ type CreateDirectorSitesOptions struct {
 	// If not specified, the default resource group in the account is used.
 	ResourceGroup *ResourceGroupIdentity `json:"resource_group,omitempty"`
 
+	// List of services to deploy on the instance. Optional field.
+	Services []ServiceIdentity `json:"services,omitempty"`
+
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -1836,6 +1847,12 @@ func (_options *CreateDirectorSitesOptions) SetPvdcs(pvdcs []PVDCPrototype) *Cre
 // SetResourceGroup : Allow user to set ResourceGroup
 func (_options *CreateDirectorSitesOptions) SetResourceGroup(resourceGroup *ResourceGroupIdentity) *CreateDirectorSitesOptions {
 	_options.ResourceGroup = resourceGroup
+	return _options
+}
+
+// SetServices : Allow user to set Services
+func (_options *CreateDirectorSitesOptions) SetServices(services []ServiceIdentity) *CreateDirectorSitesOptions {
+	_options.Services = services
 	return _options
 }
 
@@ -1875,7 +1892,7 @@ type CreateDirectorSitesPvdcsOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -1945,9 +1962,20 @@ type CreateVdcOptions struct {
 	// The networking Edge to be deployed on the Virtual Data Center.
 	Edge *VDCEdgePrototype `json:"edge,omitempty"`
 
+	// Flag to determine whether to enable or not fast provisioning.
+	FastProvisioningEnabled *bool `json:"fast_provisioning_enabled,omitempty"`
+
 	// The resource group to associate with the resource instance.
 	// If not specified, the default resource group in the account is used.
 	ResourceGroup *ResourceGroupIdentity `json:"resource_group,omitempty"`
+
+	// The vCPU usage limit on the Virtual Data Center. Required for Virtual Data Centers deployed on a multitenant
+	// director site.
+	Cpu *int64 `json:"cpu,omitempty"`
+
+	// The RAM usage limit on the Virtual Data Center in GB (1024^3 bytes). Required for Virtual Data Centers deployed on a
+	// multitenant director site.
+	Ram *int64 `json:"ram,omitempty"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -1982,9 +2010,27 @@ func (_options *CreateVdcOptions) SetEdge(edge *VDCEdgePrototype) *CreateVdcOpti
 	return _options
 }
 
+// SetFastProvisioningEnabled : Allow user to set FastProvisioningEnabled
+func (_options *CreateVdcOptions) SetFastProvisioningEnabled(fastProvisioningEnabled bool) *CreateVdcOptions {
+	_options.FastProvisioningEnabled = core.BoolPtr(fastProvisioningEnabled)
+	return _options
+}
+
 // SetResourceGroup : Allow user to set ResourceGroup
 func (_options *CreateVdcOptions) SetResourceGroup(resourceGroup *ResourceGroupIdentity) *CreateVdcOptions {
 	_options.ResourceGroup = resourceGroup
+	return _options
+}
+
+// SetCpu : Allow user to set Cpu
+func (_options *CreateVdcOptions) SetCpu(cpu int64) *CreateVdcOptions {
+	_options.Cpu = core.Int64Ptr(cpu)
+	return _options
+}
+
+// SetRam : Allow user to set Ram
+func (_options *CreateVdcOptions) SetRam(ram int64) *CreateVdcOptions {
+	_options.Ram = core.Int64Ptr(ram)
 	return _options
 }
 
@@ -2039,7 +2085,7 @@ type DeleteDirectorSiteOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -2091,7 +2137,7 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -2145,7 +2191,7 @@ func (options *DeleteDirectorSitesPvdcsClusterOptions) SetHeaders(param map[stri
 
 // DeleteVdcOptions : The DeleteVdc options.
 type DeleteVdcOptions struct {
-	// A unique identifier for a given Virtual Data Center.
+	// A unique identifier for a speficied virtual data center.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Language.
@@ -2180,8 +2226,8 @@ func (options *DeleteVdcOptions) SetHeaders(param map[string]string) *DeleteVdcO
 	return options
 }
 
-// DirectorSite : A director site resource. The director site instance is the infrastructure and associated VMware software stack
-// consisting of vCenter, NSX-T and VMware Cloud Director.
+// DirectorSite : A director site resource. The director site instance is the infrastructure and the associated VMware software stack,
+// which consists of VMware vCenter Server, VMware NSX-T, and VMware Cloud Director.
 type DirectorSite struct {
 	// A unique identifier for the director site in IBM Cloud.
 	Crn *string `json:"crn" validate:"required"`
@@ -2201,24 +2247,40 @@ type DirectorSite struct {
 	// The name of director site. The name of the director site cannot be changed after creation.
 	Name *string `json:"name" validate:"required"`
 
-	// The status of director site.
-	Status *string `json:"status" validate:"required"`
+	// The status of director site. Optional field.
+	Status *string `json:"status,omitempty"`
 
 	// The resource group information to associate with the resource instance.
 	ResourceGroup *ResourceGroupReference `json:"resource_group" validate:"required"`
 
 	// List of VMware provider virtual data centers to deploy on the instance.
 	Pvdcs []PVDC `json:"pvdcs" validate:"required"`
+
+	// Workload domain type.
+	Type *string `json:"type" validate:"required"`
+
+	// services on workload domain. Optional field.
+	Services []Service `json:"services" validate:"required"`
+
+	// rhel_activation_key. Optional field.
+	RhelVmActivationKey interface{} `json:"rhel_vm_activation_key,omitempty"`
 }
 
 // Constants associated with the DirectorSite.Status property.
-// The status of director site.
+// The status of director site. Optional field.
 const (
 	DirectorSite_Status_Creating = "creating"
 	DirectorSite_Status_Deleted = "deleted"
 	DirectorSite_Status_Deleting = "deleting"
 	DirectorSite_Status_ReadyToUse = "ready_to_use"
 	DirectorSite_Status_Updating = "updating"
+)
+
+// Constants associated with the DirectorSite.Type property.
+// Workload domain type.
+const (
+	DirectorSite_Type_MultiTenant = "multi_tenant"
+	DirectorSite_Type_SingleTenant = "single_tenant"
 )
 
 // UnmarshalDirectorSite unmarshals an instance of DirectorSite from the specified map of raw messages.
@@ -2260,6 +2322,18 @@ func UnmarshalDirectorSite(m map[string]json.RawMessage, result interface{}) (er
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "services", &obj.Services, UnmarshalService)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rhel_vm_activation_key", &obj.RhelVmActivationKey)
+	if err != nil {
+		return
+	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
 }
@@ -2283,7 +2357,7 @@ func UnmarshalDirectorSiteCollection(m map[string]json.RawMessage, result interf
 
 // DirectorSiteHostProfile : Host profile template.
 type DirectorSiteHostProfile struct {
-	// The id for this host profile.
+	// The ID for this host profile.
 	ID *string `json:"id" validate:"required"`
 
 	// The number CPU cores for this host profile.
@@ -2375,6 +2449,10 @@ func UnmarshalDirectorSiteHostProfileCollection(m map[string]json.RawMessage, re
 type DirectorSitePVDC struct {
 	// A unique identifier for the PVDC.
 	ID *string `json:"id" validate:"required"`
+
+	// Determines how resources are made available to the Virtual Data Center. Required for Virtual Data Centers deployed
+	// on a multitenant director site.
+	ProviderType *VDCProviderType `json:"provider_type,omitempty"`
 }
 
 // NewDirectorSitePVDC : Instantiate DirectorSitePVDC (Generic Model Constructor)
@@ -2393,137 +2471,7 @@ func UnmarshalDirectorSitePVDC(m map[string]json.RawMessage, result interface{})
 	if err != nil {
 		return
 	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// DirectorSitePriceItem : sub items for a metric and associated prices.
-type DirectorSitePriceItem struct {
-	// The price for the metric.
-	Price *float64 `json:"price" validate:"required"`
-
-	// Quantity tier.
-	QuantityTier *int64 `json:"quantity_tier" validate:"required"`
-}
-
-// UnmarshalDirectorSitePriceItem unmarshals an instance of DirectorSitePriceItem from the specified map of raw messages.
-func UnmarshalDirectorSitePriceItem(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSitePriceItem)
-	err = core.UnmarshalPrimitive(m, "price", &obj.Price)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "quantity_tier", &obj.QuantityTier)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// DirectorSitePriceListItem : items for a metric and associated prices.
-type DirectorSitePriceListItem struct {
-	// The country for which this price applies. The code should follow ISO-3166.
-	Country *string `json:"country" validate:"required"`
-
-	// The unit of currency for this price. The code should follow ISO-4217.
-	Currency *string `json:"currency" validate:"required"`
-
-	// A list of prices.
-	Prices []DirectorSitePriceItem `json:"prices" validate:"required"`
-}
-
-// UnmarshalDirectorSitePriceListItem unmarshals an instance of DirectorSitePriceListItem from the specified map of raw messages.
-func UnmarshalDirectorSitePriceListItem(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSitePriceListItem)
-	err = core.UnmarshalPrimitive(m, "country", &obj.Country)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "currency", &obj.Currency)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "prices", &obj.Prices, UnmarshalDirectorSitePriceItem)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// DirectorSitePriceMetric : A metric and associated prices.
-type DirectorSitePriceMetric struct {
-	// The metric name.
-	Metric *string `json:"metric" validate:"required"`
-
-	// The metric description.
-	Description *string `json:"description" validate:"required"`
-
-	// A list of prices for each country.
-	PriceList []DirectorSitePriceListItem `json:"price_list" validate:"required"`
-}
-
-// UnmarshalDirectorSitePriceMetric unmarshals an instance of DirectorSitePriceMetric from the specified map of raw messages.
-func UnmarshalDirectorSitePriceMetric(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSitePriceMetric)
-	err = core.UnmarshalPrimitive(m, "metric", &obj.Metric)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "description", &obj.Description)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "price_list", &obj.PriceList, UnmarshalDirectorSitePriceListItem)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// DirectorSitePriceQuote : Return price information for a VCDD instance.
-type DirectorSitePriceQuote struct {
-	// A list of the clusters with price information.
-	Clusters []PriceInfoClusterCharge `json:"clusters" validate:"required"`
-
-	// The currency unit for this price.
-	Currency *string `json:"currency" validate:"required"`
-
-	// The total price for the instance.
-	Total *float64 `json:"total" validate:"required"`
-}
-
-// UnmarshalDirectorSitePriceQuote unmarshals an instance of DirectorSitePriceQuote from the specified map of raw messages.
-func UnmarshalDirectorSitePriceQuote(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSitePriceQuote)
-	err = core.UnmarshalModel(m, "clusters", &obj.Clusters, UnmarshalPriceInfoClusterCharge)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "currency", &obj.Currency)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "total", &obj.Total)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// DirectorSitePricing : Return all metrics with associate prices.
-type DirectorSitePricing struct {
-	// A list of metrics and associated prices.
-	DirectorSitePricing []DirectorSitePriceMetric `json:"director_site_pricing" validate:"required"`
-}
-
-// UnmarshalDirectorSitePricing unmarshals an instance of DirectorSitePricing from the specified map of raw messages.
-func UnmarshalDirectorSitePricing(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSitePricing)
-	err = core.UnmarshalModel(m, "director_site_pricing", &obj.DirectorSitePricing, UnmarshalDirectorSitePriceMetric)
+	err = core.UnmarshalModel(m, "provider_type", &obj.ProviderType, UnmarshalVDCProviderType)
 	if err != nil {
 		return
 	}
@@ -2597,12 +2545,19 @@ func UnmarshalDirectorSiteRegion(m map[string]json.RawMessage, result interface{
 type DirectorSiteRegionCollection struct {
 	// regions of director sites.
 	DirectorSiteRegions []DirectorSiteRegion `json:"director_site_regions" validate:"required"`
+
+	// Regions of multitenant director sites. Optional field, which is used by DevOps.
+	MultiTenantDirectorSites []MultiTenantDirectorSiteRegion `json:"multi_tenant_director_sites,omitempty"`
 }
 
 // UnmarshalDirectorSiteRegionCollection unmarshals an instance of DirectorSiteRegionCollection from the specified map of raw messages.
 func UnmarshalDirectorSiteRegionCollection(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DirectorSiteRegionCollection)
 	err = core.UnmarshalModel(m, "director_site_regions", &obj.DirectorSiteRegions, UnmarshalDirectorSiteRegion)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "multi_tenant_director_sites", &obj.MultiTenantDirectorSites, UnmarshalMultiTenantDirectorSiteRegion)
 	if err != nil {
 		return
 	}
@@ -2621,13 +2576,16 @@ type Edge struct {
 
 	// The size of the Edge.
 	//
-	// The size can only be specified for performance Edges. Larger sizes require more capacity from the director site in
+	// The size can be specified only for performance Edges. Larger sizes require more capacity from the director site in
 	// which the Virtual Data Center was created to be deployed.
 	Size *string `json:"size,omitempty"`
 
-	// The type of Edge to be deployed.
+	// Determines the state of the edge.
+	Status *string `json:"status" validate:"required"`
+
+	// The type of edge to be deployed.
 	//
-	// Efficiency Edges allow for multiple VDCs to share some Edge resources. Performance Edges do not share resources
+	// Efficiency edges allow for multiple VDCs to share some edge resources. Performance edges do not share resources
 	// between VDCs.
 	Type *string `json:"type" validate:"required"`
 }
@@ -2635,7 +2593,7 @@ type Edge struct {
 // Constants associated with the Edge.Size property.
 // The size of the Edge.
 //
-// The size can only be specified for performance Edges. Larger sizes require more capacity from the director site in
+// The size can be specified only for performance Edges. Larger sizes require more capacity from the director site in
 // which the Virtual Data Center was created to be deployed.
 const (
 	Edge_Size_ExtraLarge = "extra_large"
@@ -2643,10 +2601,19 @@ const (
 	Edge_Size_Medium = "medium"
 )
 
+// Constants associated with the Edge.Status property.
+// Determines the state of the edge.
+const (
+	Edge_Status_Creating = "creating"
+	Edge_Status_Deleted = "deleted"
+	Edge_Status_Deleting = "deleting"
+	Edge_Status_ReadyToUse = "ready_to_use"
+)
+
 // Constants associated with the Edge.Type property.
-// The type of Edge to be deployed.
+// The type of edge to be deployed.
 //
-// Efficiency Edges allow for multiple VDCs to share some Edge resources. Performance Edges do not share resources
+// Efficiency edges allow for multiple VDCs to share some edge resources. Performance edges do not share resources
 // between VDCs.
 const (
 	Edge_Type_Efficiency = "efficiency"
@@ -2665,6 +2632,10 @@ func UnmarshalEdge(m map[string]json.RawMessage, result interface{}) (err error)
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "size", &obj.Size)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
 	}
@@ -2766,7 +2737,7 @@ type GetDirectorInstancesPvdcsClusterOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -2826,7 +2797,7 @@ type GetDirectorSiteOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -2875,7 +2846,7 @@ type GetDirectorSitesPvdcsOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -2920,86 +2891,37 @@ func (options *GetDirectorSitesPvdcsOptions) SetHeaders(param map[string]string)
 	return options
 }
 
-// GetVcddPriceOptions : The GetVcddPrice options.
-type GetVcddPriceOptions struct {
-	// Name of the director site instance. Use a name that is unique to your region and meaningful. Names cannot be changed
-	// after initial creation.
-	Name *string `json:"name" validate:"required"`
-
-	// List of VMware provider virtual data centers to deploy on the instance.
-	Pvdcs []PVDCPrototype `json:"pvdcs" validate:"required"`
-
-	// String representing the billing country.
-	Country *string `json:"country" validate:"required"`
-
-	// The resource group to associate with the resource instance.
-	// If not specified, the default resource group in the account is used.
-	ResourceGroup *ResourceGroupIdentity `json:"resource_group,omitempty"`
-
-	// Language.
-	AcceptLanguage *string `json:"Accept-Language,omitempty"`
-
-	// Transaction id.
-	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
+// GetOidcConfigurationOptions : The GetOidcConfiguration options.
+type GetOidcConfigurationOptions struct {
+	// A unique identifier for the director site.
+	SiteID *string `json:"site_id" validate:"required"`
 
 	// Allows users to set headers on API requests
 	Headers map[string]string
 }
 
-// NewGetVcddPriceOptions : Instantiate GetVcddPriceOptions
-func (*VmwareV1) NewGetVcddPriceOptions(name string, pvdcs []PVDCPrototype, country string) *GetVcddPriceOptions {
-	return &GetVcddPriceOptions{
-		Name: core.StringPtr(name),
-		Pvdcs: pvdcs,
-		Country: core.StringPtr(country),
+// NewGetOidcConfigurationOptions : Instantiate GetOidcConfigurationOptions
+func (*VmwareV1) NewGetOidcConfigurationOptions(siteID string) *GetOidcConfigurationOptions {
+	return &GetOidcConfigurationOptions{
+		SiteID: core.StringPtr(siteID),
 	}
 }
 
-// SetName : Allow user to set Name
-func (_options *GetVcddPriceOptions) SetName(name string) *GetVcddPriceOptions {
-	_options.Name = core.StringPtr(name)
-	return _options
-}
-
-// SetPvdcs : Allow user to set Pvdcs
-func (_options *GetVcddPriceOptions) SetPvdcs(pvdcs []PVDCPrototype) *GetVcddPriceOptions {
-	_options.Pvdcs = pvdcs
-	return _options
-}
-
-// SetCountry : Allow user to set Country
-func (_options *GetVcddPriceOptions) SetCountry(country string) *GetVcddPriceOptions {
-	_options.Country = core.StringPtr(country)
-	return _options
-}
-
-// SetResourceGroup : Allow user to set ResourceGroup
-func (_options *GetVcddPriceOptions) SetResourceGroup(resourceGroup *ResourceGroupIdentity) *GetVcddPriceOptions {
-	_options.ResourceGroup = resourceGroup
-	return _options
-}
-
-// SetAcceptLanguage : Allow user to set AcceptLanguage
-func (_options *GetVcddPriceOptions) SetAcceptLanguage(acceptLanguage string) *GetVcddPriceOptions {
-	_options.AcceptLanguage = core.StringPtr(acceptLanguage)
-	return _options
-}
-
-// SetXGlobalTransactionID : Allow user to set XGlobalTransactionID
-func (_options *GetVcddPriceOptions) SetXGlobalTransactionID(xGlobalTransactionID string) *GetVcddPriceOptions {
-	_options.XGlobalTransactionID = core.StringPtr(xGlobalTransactionID)
+// SetSiteID : Allow user to set SiteID
+func (_options *GetOidcConfigurationOptions) SetSiteID(siteID string) *GetOidcConfigurationOptions {
+	_options.SiteID = core.StringPtr(siteID)
 	return _options
 }
 
 // SetHeaders : Allow user to set Headers
-func (options *GetVcddPriceOptions) SetHeaders(param map[string]string) *GetVcddPriceOptions {
+func (options *GetOidcConfigurationOptions) SetHeaders(param map[string]string) *GetOidcConfigurationOptions {
 	options.Headers = param
 	return options
 }
 
 // GetVdcOptions : The GetVdc options.
 type GetVdcOptions struct {
-	// A unique identifier for a given Virtual Data Center.
+	// A unique identifier for a speficied virtual data center.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Language.
@@ -3039,7 +2961,7 @@ type ListDirectorSiteHostProfilesOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -3074,7 +2996,7 @@ type ListDirectorSiteRegionsOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -3109,7 +3031,7 @@ type ListDirectorSitesOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -3150,7 +3072,7 @@ type ListDirectorSitesPvdcsClustersOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -3203,7 +3125,7 @@ type ListDirectorSitesPvdcsOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -3241,41 +3163,6 @@ func (options *ListDirectorSitesPvdcsOptions) SetHeaders(param map[string]string
 	return options
 }
 
-// ListPricesOptions : The ListPrices options.
-type ListPricesOptions struct {
-	// Language.
-	AcceptLanguage *string `json:"Accept-Language,omitempty"`
-
-	// Transaction id.
-	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewListPricesOptions : Instantiate ListPricesOptions
-func (*VmwareV1) NewListPricesOptions() *ListPricesOptions {
-	return &ListPricesOptions{}
-}
-
-// SetAcceptLanguage : Allow user to set AcceptLanguage
-func (_options *ListPricesOptions) SetAcceptLanguage(acceptLanguage string) *ListPricesOptions {
-	_options.AcceptLanguage = core.StringPtr(acceptLanguage)
-	return _options
-}
-
-// SetXGlobalTransactionID : Allow user to set XGlobalTransactionID
-func (_options *ListPricesOptions) SetXGlobalTransactionID(xGlobalTransactionID string) *ListPricesOptions {
-	_options.XGlobalTransactionID = core.StringPtr(xGlobalTransactionID)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *ListPricesOptions) SetHeaders(param map[string]string) *ListPricesOptions {
-	options.Headers = param
-	return options
-}
-
 // ListVdcsOptions : The ListVdcs options.
 type ListVdcsOptions struct {
 	// Language.
@@ -3302,18 +3189,114 @@ func (options *ListVdcsOptions) SetHeaders(param map[string]string) *ListVdcsOpt
 	return options
 }
 
-// NewPassword : The new admin password used to log in to the VMware Cloud Director tenant portal. VMware Cloud Director has its own
-// internal authentication and authorization model. The previous Director admin password is reset to a newly generated
-// random password.
-type NewPassword struct {
-	// The password used to log in to the VMware Cloud Director tenant portal.
-	Password *string `json:"password" validate:"required"`
+// MultiTenantDirectorSiteRegion : A region detail.
+type MultiTenantDirectorSiteRegion struct {
+	// Region name.
+	Name *string `json:"name,omitempty"`
+
+	// Region display name.
+	DisplayName *string `json:"display_name,omitempty"`
+
+	// Multitenant region ID.
+	ID *string `json:"id,omitempty"`
+
+	// Multitenant region name.
+	Region *string `json:"region,omitempty"`
+
+	// Pvdcs details.
+	Pvdcs []MultiTenantPVDC `json:"pvdcs,omitempty"`
 }
 
-// UnmarshalNewPassword unmarshals an instance of NewPassword from the specified map of raw messages.
-func UnmarshalNewPassword(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(NewPassword)
-	err = core.UnmarshalPrimitive(m, "password", &obj.Password)
+// UnmarshalMultiTenantDirectorSiteRegion unmarshals an instance of MultiTenantDirectorSiteRegion from the specified map of raw messages.
+func UnmarshalMultiTenantDirectorSiteRegion(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(MultiTenantDirectorSiteRegion)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "display_name", &obj.DisplayName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "region", &obj.Region)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "pvdcs", &obj.Pvdcs, UnmarshalMultiTenantPVDC)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// MultiTenantPVDC : A region detail.
+type MultiTenantPVDC struct {
+	// Region name.
+	Name *string `json:"name,omitempty"`
+
+	// Multitenant region ID.
+	ID *string `json:"id,omitempty"`
+
+	// Data center name.
+	DataCenterName *string `json:"data_center_name,omitempty"`
+
+	// Provider types list.
+	ProviderTypes []ProviderType `json:"provider_types,omitempty"`
+}
+
+// UnmarshalMultiTenantPVDC unmarshals an instance of MultiTenantPVDC from the specified map of raw messages.
+func UnmarshalMultiTenantPVDC(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(MultiTenantPVDC)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "data_center_name", &obj.DataCenterName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "provider_types", &obj.ProviderTypes, UnmarshalProviderType)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// OIDC : Details of the OIDC configuration on a specified director site.
+type OIDC struct {
+	// Status of the OIDC configuration for a specified director site.
+	Status *string `json:"status" validate:"required"`
+
+	// The time after which the OIDC configuration is considered enabled.
+	LastSetAt *strfmt.DateTime `json:"last_set_at" validate:"required"`
+}
+
+// Constants associated with the OIDC.Status property.
+// Status of the OIDC configuration for a specified director site.
+const (
+	OIDC_Status_Deleted = "deleted"
+	OIDC_Status_Pending = "pending"
+	OIDC_Status_ReadyToUse = "ready_to_use"
+)
+
+// UnmarshalOIDC unmarshals an instance of OIDC from the specified map of raw messages.
+func UnmarshalOIDC(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(OIDC)
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "last_set_at", &obj.LastSetAt)
 	if err != nil {
 		return
 	}
@@ -3336,15 +3319,19 @@ type PVDC struct {
 	// The hyperlink of the provider virtual data center resource.
 	Href *string `json:"href" validate:"required"`
 
-	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availibility boundaries.
-	Clusters []ClusterSummary `json:"clusters" validate:"required"`
+	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availibility boundaries. Optional
+	// field.
+	Clusters []ClusterSummary `json:"clusters,omitempty"`
 
-	// The provider virtual data center ordering status.
-	Status *string `json:"status" validate:"required"`
+	// The status of the provider virtual data center. Optional field.
+	Status *string `json:"status,omitempty"`
+
+	// Provider types list. Optional field.
+	ProviderTypes []ProviderType `json:"provider_types,omitempty"`
 }
 
 // Constants associated with the PVDC.Status property.
-// The provider virtual data center ordering status.
+// The status of the provider virtual data center. Optional field.
 const (
 	PVDC_Status_Creating = "creating"
 	PVDC_Status_Deleted = "deleted"
@@ -3377,6 +3364,10 @@ func UnmarshalPVDC(m map[string]json.RawMessage, result interface{}) (err error)
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalModel(m, "provider_types", &obj.ProviderTypes, UnmarshalProviderType)
 	if err != nil {
 		return
 	}
@@ -3444,146 +3435,28 @@ func UnmarshalPVDCPrototype(m map[string]json.RawMessage, result interface{}) (e
 	return
 }
 
-// PriceInfoClusterCharge : A cluster for the instance and its price information.
-type PriceInfoClusterCharge struct {
-	// The cluster name.
-	Name *string `json:"name" validate:"required"`
-
-	// The unit of currency for this price.
-	Currency *string `json:"currency" validate:"required"`
-
-	// The total price for this cluster.
-	Price *float64 `json:"price" validate:"required"`
-
-	// A list of items that make up the cluster and their price information.
-	Items []PriceInfoClusterItem `json:"items" validate:"required"`
+// ProviderType : Provider type.
+type ProviderType struct {
+	// Provider type name.
+	Name *string `json:"name,omitempty"`
 }
 
-// UnmarshalPriceInfoClusterCharge unmarshals an instance of PriceInfoClusterCharge from the specified map of raw messages.
-func UnmarshalPriceInfoClusterCharge(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(PriceInfoClusterCharge)
+// Constants associated with the ProviderType.Name property.
+// Provider type name.
+const (
+	ProviderType_Name_OnDemand = "on_demand"
+	ProviderType_Name_Reserved = "reserved"
+)
+
+// UnmarshalProviderType unmarshals an instance of ProviderType from the specified map of raw messages.
+func UnmarshalProviderType(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ProviderType)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "currency", &obj.Currency)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "price", &obj.Price)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "items", &obj.Items, UnmarshalPriceInfoClusterItem)
 	if err != nil {
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
 	return
-}
-
-// PriceInfoClusterItem : items for VCDD instance cluster price information.
-type PriceInfoClusterItem struct {
-	// The item name.
-	Name *string `json:"name" validate:"required"`
-
-	// The unit of currency for this price.
-	Currency *string `json:"currency" validate:"required"`
-
-	// The total price for this item.
-	Price *float64 `json:"price" validate:"required"`
-
-	// A list of subitems and their price information.
-	Items []PriceInfoClusterSubItem `json:"items" validate:"required"`
-}
-
-// UnmarshalPriceInfoClusterItem unmarshals an instance of PriceInfoClusterItem from the specified map of raw messages.
-func UnmarshalPriceInfoClusterItem(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(PriceInfoClusterItem)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "currency", &obj.Currency)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "price", &obj.Price)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalModel(m, "items", &obj.Items, UnmarshalPriceInfoClusterSubItem)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// PriceInfoClusterSubItem : sub items for VCDD instance cluster price information.
-type PriceInfoClusterSubItem struct {
-	// The metric that is being charged.
-	Name *string `json:"name" validate:"required"`
-
-	// The number of items that this metric will be charged.
-	Count *int64 `json:"count" validate:"required"`
-
-	// The unit of currency for this price.
-	Currency *string `json:"currency" validate:"required"`
-
-	// The price for a single charge of this metric.
-	Price *float64 `json:"price" validate:"required"`
-}
-
-// UnmarshalPriceInfoClusterSubItem unmarshals an instance of PriceInfoClusterSubItem from the specified map of raw messages.
-func UnmarshalPriceInfoClusterSubItem(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(PriceInfoClusterSubItem)
-	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "count", &obj.Count)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "currency", &obj.Currency)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "price", &obj.Price)
-	if err != nil {
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
-// ReplaceOrgAdminPasswordOptions : The ReplaceOrgAdminPassword options.
-type ReplaceOrgAdminPasswordOptions struct {
-	// A unique identifier for the director site.
-	SiteID *string `json:"site_id" validate:"required"`
-
-	// Allows users to set headers on API requests
-	Headers map[string]string
-}
-
-// NewReplaceOrgAdminPasswordOptions : Instantiate ReplaceOrgAdminPasswordOptions
-func (*VmwareV1) NewReplaceOrgAdminPasswordOptions(siteID string) *ReplaceOrgAdminPasswordOptions {
-	return &ReplaceOrgAdminPasswordOptions{
-		SiteID: core.StringPtr(siteID),
-	}
-}
-
-// SetSiteID : Allow user to set SiteID
-func (_options *ReplaceOrgAdminPasswordOptions) SetSiteID(siteID string) *ReplaceOrgAdminPasswordOptions {
-	_options.SiteID = core.StringPtr(siteID)
-	return _options
-}
-
-// SetHeaders : Allow user to set Headers
-func (options *ReplaceOrgAdminPasswordOptions) SetHeaders(param map[string]string) *ReplaceOrgAdminPasswordOptions {
-	options.Headers = param
-	return options
 }
 
 // ResourceGroupIdentity : The resource group to associate with the resource instance. If not specified, the default resource group in the
@@ -3618,10 +3491,10 @@ type ResourceGroupReference struct {
 	// A unique identifier for the resource group.
 	ID *string `json:"id" validate:"required"`
 
-	// the name for the resource group.
+	// The name of the resource group.
 	Name *string `json:"name" validate:"required"`
 
-	// the Cloud Reference Name for the resource group.
+	// The cloud reference name for the resource group.
 	Crn *string `json:"crn" validate:"required"`
 }
 
@@ -3644,12 +3517,177 @@ func UnmarshalResourceGroupReference(m map[string]json.RawMessage, result interf
 	return
 }
 
-// StatusReason : Information about why a request cannot be completed or why a resource could not be created.
+// Service : Service response body.
+type Service struct {
+	// Name of the service.
+	Name *string `json:"name" validate:"required"`
+
+	// A unique identifier for the service.
+	ID *string `json:"id" validate:"required"`
+
+	// The time that the instance is ordered.
+	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
+
+	// The time that the instance is created.
+	ProvisionedAt *strfmt.DateTime `json:"provisioned_at,omitempty"`
+
+	// A unique identifier for the Director site.
+	DirectorSiteID *string `json:"director_site_id" validate:"required"`
+
+	// A unique identifier for the sddc domain.
+	SddcDomainID *string `json:"sddc_domain_id" validate:"required"`
+
+	// Management network.
+	ManagementNetwork *string `json:"management_network" validate:"required"`
+
+	// THe cluster status.
+	Status *string `json:"status" validate:"required"`
+
+	// Management subnet identifier.
+	ManagementSubnetID *string `json:"management_subnet_id" validate:"required"`
+
+	// Storage network.
+	StorageNetwork *string `json:"storage_network" validate:"required"`
+
+	// Storage network identifier.
+	StorageSubnetID *string `json:"storage_subnet_id" validate:"required"`
+
+	// Veeam console url.
+	VeeamConsoleURL *string `json:"veeam_console_url" validate:"required"`
+
+	// Veeam url.
+	VeeamURL *string `json:"veeam_url" validate:"required"`
+}
+
+// Constants associated with the Service.Status property.
+// THe cluster status.
+const (
+	Service_Status_Creating = "creating"
+	Service_Status_Deleted = "deleted"
+	Service_Status_Deleting = "deleting"
+	Service_Status_ReadyToUse = "ready_to_use"
+	Service_Status_Updating = "updating"
+)
+
+// UnmarshalService unmarshals an instance of Service from the specified map of raw messages.
+func UnmarshalService(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(Service)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ordered_at", &obj.OrderedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "provisioned_at", &obj.ProvisionedAt)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "director_site_id", &obj.DirectorSiteID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "sddc_domain_id", &obj.SddcDomainID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "management_network", &obj.ManagementNetwork)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "management_subnet_id", &obj.ManagementSubnetID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "storage_network", &obj.StorageNetwork)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "storage_subnet_id", &obj.StorageSubnetID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "veeam_console_url", &obj.VeeamConsoleURL)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "veeam_url", &obj.VeeamURL)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// ServiceIdentity : Create Service request body.
+type ServiceIdentity struct {
+	// Name of the service.
+	Name *string `json:"name" validate:"required"`
+}
+
+// NewServiceIdentity : Instantiate ServiceIdentity (Generic Model Constructor)
+func (*VmwareV1) NewServiceIdentity(name string) (_model *ServiceIdentity, err error) {
+	_model = &ServiceIdentity{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalServiceIdentity unmarshals an instance of ServiceIdentity from the specified map of raw messages.
+func UnmarshalServiceIdentity(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(ServiceIdentity)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SetOidcConfigurationOptions : The SetOidcConfiguration options.
+type SetOidcConfigurationOptions struct {
+	// A unique identifier for the director site.
+	SiteID *string `json:"site_id" validate:"required"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewSetOidcConfigurationOptions : Instantiate SetOidcConfigurationOptions
+func (*VmwareV1) NewSetOidcConfigurationOptions(siteID string) *SetOidcConfigurationOptions {
+	return &SetOidcConfigurationOptions{
+		SiteID: core.StringPtr(siteID),
+	}
+}
+
+// SetSiteID : Allow user to set SiteID
+func (_options *SetOidcConfigurationOptions) SetSiteID(siteID string) *SetOidcConfigurationOptions {
+	_options.SiteID = core.StringPtr(siteID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *SetOidcConfigurationOptions) SetHeaders(param map[string]string) *SetOidcConfigurationOptions {
+	options.Headers = param
+	return options
+}
+
+// StatusReason : Information about why a request cannot be completed or why a resource cannot be created.
 type StatusReason struct {
 	// An error code specific to the error encountered.
 	Code *string `json:"code" validate:"required"`
 
-	// A message describing why the error ocurred.
+	// A message that describes why the error ocurred.
 	Message *string `json:"message" validate:"required"`
 
 	// A URL that links to a page with more information about this error.
@@ -3727,7 +3765,7 @@ type UpdateCluster struct {
 	// Information of request accepted.
 	Message *string `json:"message" validate:"required"`
 
-	// id to track the update operation of cluster.
+	// ID to track the update operation of the cluster.
 	OperationID *string `json:"operation_id" validate:"required"`
 }
 
@@ -3827,7 +3865,7 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Transaction id.
+	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
 	// Allows users to set headers on API requests
@@ -3886,12 +3924,59 @@ func (options *UpdateDirectorSitesPvdcsClusterOptions) SetHeaders(param map[stri
 	return options
 }
 
-// VDC : A VMware Virtual Data Center (VDC). VMware VDCs are used to deploy and run VMware virtualized networking and run
+// UpdateVdcOptions : The UpdateVdc options.
+type UpdateVdcOptions struct {
+	// A unique identifier for a speficied virtual data center.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// JSON Merge-Patch content for update_vdc.
+	VDCPatch map[string]interface{} `json:"VDC_patch" validate:"required"`
+
+	// Language.
+	AcceptLanguage *string `json:"Accept-Language,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewUpdateVdcOptions : Instantiate UpdateVdcOptions
+func (*VmwareV1) NewUpdateVdcOptions(id string, vDCPatch map[string]interface{}) *UpdateVdcOptions {
+	return &UpdateVdcOptions{
+		ID: core.StringPtr(id),
+		VDCPatch: vDCPatch,
+	}
+}
+
+// SetID : Allow user to set ID
+func (_options *UpdateVdcOptions) SetID(id string) *UpdateVdcOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetVDCPatch : Allow user to set VDCPatch
+func (_options *UpdateVdcOptions) SetVDCPatch(vDCPatch map[string]interface{}) *UpdateVdcOptions {
+	_options.VDCPatch = vDCPatch
+	return _options
+}
+
+// SetAcceptLanguage : Allow user to set AcceptLanguage
+func (_options *UpdateVdcOptions) SetAcceptLanguage(acceptLanguage string) *UpdateVdcOptions {
+	_options.AcceptLanguage = core.StringPtr(acceptLanguage)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *UpdateVdcOptions) SetHeaders(param map[string]string) *UpdateVdcOptions {
+	options.Headers = param
+	return options
+}
+
+// VDC : A VMware virtual data center (VDC). VMware VDCs are used to deploy and run VMware virtualized networking and run
 // VMware workloads. VMware VDCs form loose boundaries of networking and workload where networking and workload can be
-// shared or optionally isolated between VDCs. You can deploy one or more VDCs in an instance except when using the
-// minimal instance configuration consisting of 2 hosts (2-Socket 32 Cores, 192 GB RAM). With the minimal instance
-// configuration you can start with just one VDC and a performance network edge of medium size until additional hosts
-// are added to the cluster.
+// shared or optionally isolated between VDCs. You can deploy one or more VDCs in an instance except when you are using
+// the minimal instance configuration, which consists of 2 hosts (2-Socket 32 Cores, 192 GB RAM). With the minimal
+// instance configuration, you can start with just one VDC and a performance network edge of medium size until
+// additional hosts are added to the cluster.
 type VDC struct {
 	// The URL of this Virtual Data Center.
 	Href *string `json:"href" validate:"required"`
@@ -3899,15 +3984,12 @@ type VDC struct {
 	// A unique identifier for the Virtual Data Center.
 	ID *string `json:"id" validate:"required"`
 
-	// Determines how resources are made available to the Virtual Data Center. VMware as a Services uses the VMware Cloud
-	// Director Pay-As-You-Go (paygo) allocation model. With paygo, resources are committed as they are allocated by VMware
-	// vApps and VMs. IaaS resources are not reserved until vApps and VMs are specifically defined to VMware Cloud
-	// Director. The paygo model supports an optimal use of resources where resources are allocated on-demand as needed
-	// rather than prereserved without use.
-	AllocationModel *string `json:"allocation_model" validate:"required"`
-
 	// The time after which the Virtual Data Center is considered usable.
 	ProvisionedAt *strfmt.DateTime `json:"provisioned_at,omitempty"`
+
+	// The vCPU usage limit on the Virtual Data Center. Required for Virtual Data Centers deployed on a multitenant
+	// director site.
+	Cpu *int64 `json:"cpu,omitempty"`
 
 	// A unique identifier for the Virtual Data Center in IBM Cloud.
 	Crn *string `json:"crn" validate:"required"`
@@ -3918,8 +4000,8 @@ type VDC struct {
 	// The director site in which to deploy the Virtual Data Center.
 	DirectorSite *VDCDirectorSite `json:"director_site" validate:"required"`
 
-	// The VMware NSX-T networking Edges deployed on the Virtual Data Center. NSX-T edges are used for bridging virtualize
-	// networking to the physical public-internet and IBM private networking.
+	// The VMware NSX-T networking Edges deployed on the Virtual Data Center. NSX-T edges are used for bridging
+	// virtualization networking to the physical public-internet and IBM private networking.
 	Edges []Edge `json:"edges" validate:"required"`
 
 	// Information about why the request to create the Virtual Data Center cannot be completed.
@@ -3931,31 +4013,28 @@ type VDC struct {
 	// The time at which the request to create the Virtual Data Center was made.
 	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
 
-	// The name of the VMware Cloud Director organization containing this Virtual Data Center. VMware Cloud Director
+	// The name of the VMware Cloud Director organization that contains this Virtual Data Center. VMware Cloud Director
 	// organizations are used to create strong boundaries between virtual data centers. There is a complete isolation of
-	// user administration, networking, workloads and VMware Cloud Director catalogs between different Director
+	// user administration, networking, workloads, and VMware Cloud Director catalogs between different Director
 	// organizations.
 	OrgName *string `json:"org_name" validate:"required"`
 
-	// Determines the state the Virtual Data Center is currently in.
+	// The RAM usage limit on the Virtual Data Center in GB (1024^3 bytes). Required for Virtual Data Centers deployed on a
+	// multitenant director site.
+	Ram *int64 `json:"ram,omitempty"`
+
+	// Determines the state of the virtual data center.
 	Status *string `json:"status" validate:"required"`
 
-	// Determines if this Virtual Data Center is in a single-tenant or multi-tenant director site.
+	// Determines whether this virtual data center is in a single-tenant or multitenant director site.
 	Type *string `json:"type" validate:"required"`
+
+	// Determines whether this virtual data center has fast provisioning enabled or not.
+	FastProvisioningEnabled *bool `json:"fast_provisioning_enabled" validate:"required"`
 }
 
-// Constants associated with the VDC.AllocationModel property.
-// Determines how resources are made available to the Virtual Data Center. VMware as a Services uses the VMware Cloud
-// Director Pay-As-You-Go (paygo) allocation model. With paygo, resources are committed as they are allocated by VMware
-// vApps and VMs. IaaS resources are not reserved until vApps and VMs are specifically defined to VMware Cloud Director.
-// The paygo model supports an optimal use of resources where resources are allocated on-demand as needed rather than
-// prereserved without use.
-const (
-	VDC_AllocationModel_Paygo = "paygo"
-)
-
 // Constants associated with the VDC.Status property.
-// Determines the state the Virtual Data Center is currently in.
+// Determines the state of the virtual data center.
 const (
 	VDC_Status_Creating = "creating"
 	VDC_Status_Deleted = "deleted"
@@ -3966,9 +4045,10 @@ const (
 )
 
 // Constants associated with the VDC.Type property.
-// Determines if this Virtual Data Center is in a single-tenant or multi-tenant director site.
+// Determines whether this virtual data center is in a single-tenant or multitenant director site.
 const (
-	VDC_Type_Dedicated = "dedicated"
+	VDC_Type_MultiTenant = "multi_tenant"
+	VDC_Type_SingleTenant = "single_tenant"
 )
 
 // UnmarshalVDC unmarshals an instance of VDC from the specified map of raw messages.
@@ -3982,11 +4062,11 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "allocation_model", &obj.AllocationModel)
+	err = core.UnmarshalPrimitive(m, "provisioned_at", &obj.ProvisionedAt)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "provisioned_at", &obj.ProvisionedAt)
+	err = core.UnmarshalPrimitive(m, "cpu", &obj.Cpu)
 	if err != nil {
 		return
 	}
@@ -4022,11 +4102,19 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	if err != nil {
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "ram", &obj.Ram)
+	if err != nil {
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "fast_provisioning_enabled", &obj.FastProvisioningEnabled)
 	if err != nil {
 		return
 	}
@@ -4157,6 +4245,84 @@ func UnmarshalVDCEdgePrototype(m map[string]json.RawMessage, result interface{})
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// VDCPatch : Information required to update a Virtual Data Center.
+type VDCPatch struct {
+	// The vCPU usage limit on the Virtual Data Center. Supported for Virtual Data Centers deployed on a multitenant
+	// director site.
+	Cpu *int64 `json:"cpu,omitempty"`
+
+	// Flag to determine whether to enable or not fast provisioning.
+	FastProvisioningEnabled *bool `json:"fast_provisioning_enabled,omitempty"`
+
+	// The RAM usage limit on the Virtual Data Center in GB (1024^3 bytes). Supported for Virtual Data Centers deployed on
+	// a multitenant director site.
+	Ram *int64 `json:"ram,omitempty"`
+}
+
+// UnmarshalVDCPatch unmarshals an instance of VDCPatch from the specified map of raw messages.
+func UnmarshalVDCPatch(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VDCPatch)
+	err = core.UnmarshalPrimitive(m, "cpu", &obj.Cpu)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "fast_provisioning_enabled", &obj.FastProvisioningEnabled)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "ram", &obj.Ram)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// AsPatch returns a generic map representation of the VDCPatch
+func (vDCPatch *VDCPatch) AsPatch() (_patch map[string]interface{}, err error) {
+	var jsonData []byte
+	jsonData, err = json.Marshal(vDCPatch)
+	if err == nil {
+		err = json.Unmarshal(jsonData, &_patch)
+	}
+	return
+}
+
+// VDCProviderType : Determines how resources are made available to the Virtual Data Center. Required for Virtual Data Centers deployed on
+// a multitenant director site.
+type VDCProviderType struct {
+	// The human readable identifier of the provider type.
+	Name *string `json:"name" validate:"required"`
+}
+
+// Constants associated with the VDCProviderType.Name property.
+// The human readable identifier of the provider type.
+const (
+	VDCProviderType_Name_OnDemand = "on_demand"
+	VDCProviderType_Name_Paygo = "paygo"
+	VDCProviderType_Name_Reserved = "reserved"
+)
+
+// NewVDCProviderType : Instantiate VDCProviderType (Generic Model Constructor)
+func (*VmwareV1) NewVDCProviderType(name string) (_model *VDCProviderType, err error) {
+	_model = &VDCProviderType{
+		Name: core.StringPtr(name),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	return
+}
+
+// UnmarshalVDCProviderType unmarshals an instance of VDCProviderType from the specified map of raw messages.
+func UnmarshalVDCProviderType(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VDCProviderType)
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
 	if err != nil {
 		return
 	}
