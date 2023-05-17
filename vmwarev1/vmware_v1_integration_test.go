@@ -120,10 +120,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				ID: core.StringPtr("testString"),
 			}
 
+			serviceIdentityModel := &vmwarev1.ServiceIdentity{
+				Name: core.StringPtr("testString"),
+			}
+
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
 				Name: core.StringPtr("testString"),
 				Pvdcs: []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
 				ResourceGroup: resourceGroupIdentityModel,
+				Services: []vmwarev1.ServiceIdentity{*serviceIdentityModel},
 				AcceptLanguage: core.StringPtr("testString"),
 				XGlobalTransactionID: core.StringPtr("testString"),
 			}
@@ -350,81 +355,35 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`ReplaceOrgAdminPassword - Replace the password of VMware Cloud Director tenant portal`, func() {
+	Describe(`GetOidcConfiguration - Get an OpenID Connect (OIDC) configuration`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ReplaceOrgAdminPassword(replaceOrgAdminPasswordOptions *ReplaceOrgAdminPasswordOptions)`, func() {
-			replaceOrgAdminPasswordOptions := &vmwarev1.ReplaceOrgAdminPasswordOptions{
+		It(`GetOidcConfiguration(getOidcConfigurationOptions *GetOidcConfigurationOptions)`, func() {
+			getOidcConfigurationOptions := &vmwarev1.GetOidcConfigurationOptions{
 				SiteID: core.StringPtr("testString"),
 			}
 
-			newPassword, response, err := vmwareService.ReplaceOrgAdminPassword(replaceOrgAdminPasswordOptions)
+			oidc, response, err := vmwareService.GetOidcConfiguration(getOidcConfigurationOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(newPassword).ToNot(BeNil())
+			Expect(oidc).ToNot(BeNil())
 		})
 	})
 
-	Describe(`ListPrices - List billing metrics`, func() {
+	Describe(`SetOidcConfiguration - Create an OpenID Connect (OIDC) configuration`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`ListPrices(listPricesOptions *ListPricesOptions)`, func() {
-			listPricesOptions := &vmwarev1.ListPricesOptions{
-				AcceptLanguage: core.StringPtr("testString"),
-				XGlobalTransactionID: core.StringPtr("testString"),
+		It(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions)`, func() {
+			setOidcConfigurationOptions := &vmwarev1.SetOidcConfigurationOptions{
+				SiteID: core.StringPtr("testString"),
 			}
 
-			directorSitePricing, response, err := vmwareService.ListPrices(listPricesOptions)
+			oidc, response, err := vmwareService.SetOidcConfiguration(setOidcConfigurationOptions)
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(directorSitePricing).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetVcddPrice - Quote price`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetVcddPrice(getVcddPriceOptions *GetVcddPriceOptions)`, func() {
-			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
-				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
-				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
-				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
-				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
-			}
-
-			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name: core.StringPtr("testString"),
-				HostCount: core.Int64Ptr(int64(2)),
-				HostProfile: core.StringPtr("testString"),
-				FileShares: fileSharesPrototypeModel,
-			}
-
-			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
-				Name: core.StringPtr("testString"),
-				DataCenterName: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
-			}
-
-			resourceGroupIdentityModel := &vmwarev1.ResourceGroupIdentity{
-				ID: core.StringPtr("testString"),
-			}
-
-			getVcddPriceOptions := &vmwarev1.GetVcddPriceOptions{
-				Name: core.StringPtr("testString"),
-				Pvdcs: []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
-				Country: core.StringPtr("USA"),
-				ResourceGroup: resourceGroupIdentityModel,
-				AcceptLanguage: core.StringPtr("testString"),
-				XGlobalTransactionID: core.StringPtr("testString"),
-			}
-
-			directorSitePriceQuote, response, err := vmwareService.GetVcddPrice(getVcddPriceOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(directorSitePriceQuote).ToNot(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(oidc).ToNot(BeNil())
 		})
 	})
 
@@ -449,8 +408,13 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			shouldSkipTest()
 		})
 		It(`CreateVdc(createVdcOptions *CreateVdcOptions)`, func() {
+			vdcProviderTypeModel := &vmwarev1.VDCProviderType{
+				Name: core.StringPtr("paygo"),
+			}
+
 			directorSitePvdcModel := &vmwarev1.DirectorSitePVDC{
 				ID: core.StringPtr("testString"),
+				ProviderType: vdcProviderTypeModel,
 			}
 
 			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
@@ -471,7 +435,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				Name: core.StringPtr("testString"),
 				DirectorSite: vdcDirectorSitePrototypeModel,
 				Edge: vdcEdgePrototypeModel,
+				FastProvisioningEnabled: core.BoolPtr(true),
 				ResourceGroup: resourceGroupIdentityModel,
+				Cpu: core.Int64Ptr(int64(1)),
+				Ram: core.Int64Ptr(int64(1)),
 				AcceptLanguage: core.StringPtr("testString"),
 			}
 
@@ -495,6 +462,32 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			vdc, response, err := vmwareService.GetVdc(getVdcOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
+			Expect(vdc).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateVdc - Update a virtual data center with the specified ID`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateVdc(updateVdcOptions *UpdateVdcOptions)`, func() {
+			vdcPatchModel := &vmwarev1.VDCPatch{
+				Cpu: core.Int64Ptr(int64(1)),
+				FastProvisioningEnabled: core.BoolPtr(true),
+				Ram: core.Int64Ptr(int64(1)),
+			}
+			vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
+			Expect(asPatchErr).To(BeNil())
+
+			updateVdcOptions := &vmwarev1.UpdateVdcOptions{
+				ID: core.StringPtr("testString"),
+				VDCPatch: vdcPatchModelAsPatch,
+				AcceptLanguage: core.StringPtr("testString"),
+			}
+
+			vdc, response, err := vmwareService.UpdateVdc(updateVdcOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
 			Expect(vdc).ToNot(BeNil())
 		})
 	})
