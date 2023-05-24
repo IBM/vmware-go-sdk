@@ -369,84 +369,47 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSiteHostProfileCollection).ToNot(BeNil())
 		})
-		It(`ReplaceOrgAdminPassword request example`, func() {
-			fmt.Println("\nReplaceOrgAdminPassword() result:")
-			// begin-replace_org_admin_password
+		It(`GetOidcConfiguration request example`, func() {
+			fmt.Println("\nGetOidcConfiguration() result:")
+			// begin-get_oidc_configuration
 
-			replaceOrgAdminPasswordOptions := vmwareService.NewReplaceOrgAdminPasswordOptions(
+			getOidcConfigurationOptions := vmwareService.NewGetOidcConfigurationOptions(
 				"testString",
 			)
 
-			newPassword, response, err := vmwareService.ReplaceOrgAdminPassword(replaceOrgAdminPasswordOptions)
+			oidc, response, err := vmwareService.GetOidcConfiguration(getOidcConfigurationOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(newPassword, "", "  ")
+			b, _ := json.MarshalIndent(oidc, "", "  ")
 			fmt.Println(string(b))
 
-			// end-replace_org_admin_password
+			// end-get_oidc_configuration
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
-			Expect(newPassword).ToNot(BeNil())
+			Expect(oidc).ToNot(BeNil())
 		})
-		It(`ListPrices request example`, func() {
-			fmt.Println("\nListPrices() result:")
-			// begin-list_prices
+		It(`SetOidcConfiguration request example`, func() {
+			fmt.Println("\nSetOidcConfiguration() result:")
+			// begin-set_oidc_configuration
 
-			listPricesOptions := vmwareService.NewListPricesOptions()
-
-			directorSitePricing, response, err := vmwareService.ListPrices(listPricesOptions)
-			if err != nil {
-				panic(err)
-			}
-			b, _ := json.MarshalIndent(directorSitePricing, "", "  ")
-			fmt.Println(string(b))
-
-			// end-list_prices
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(directorSitePricing).ToNot(BeNil())
-		})
-		It(`GetVcddPrice request example`, func() {
-			fmt.Println("\nGetVcddPrice() result:")
-			// begin-get_vcdd_price
-
-			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
-			}
-
-			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name: core.StringPtr("testString"),
-				HostCount: core.Int64Ptr(int64(2)),
-				HostProfile: core.StringPtr("testString"),
-				FileShares: fileSharesPrototypeModel,
-			}
-
-			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
-				Name: core.StringPtr("testString"),
-				DataCenterName: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
-			}
-
-			getVcddPriceOptions := vmwareService.NewGetVcddPriceOptions(
+			setOidcConfigurationOptions := vmwareService.NewSetOidcConfigurationOptions(
 				"testString",
-				[]vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
-				"USA",
 			)
 
-			directorSitePriceQuote, response, err := vmwareService.GetVcddPrice(getVcddPriceOptions)
+			oidc, response, err := vmwareService.SetOidcConfiguration(setOidcConfigurationOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(directorSitePriceQuote, "", "  ")
+			b, _ := json.MarshalIndent(oidc, "", "  ")
 			fmt.Println(string(b))
 
-			// end-get_vcdd_price
+			// end-set_oidc_configuration
 
 			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(201))
-			Expect(directorSitePriceQuote).ToNot(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(oidc).ToNot(BeNil())
 		})
 		It(`ListVdcs request example`, func() {
 			fmt.Println("\nListVdcs() result:")
@@ -517,6 +480,33 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
+			Expect(vdc).ToNot(BeNil())
+		})
+		It(`UpdateVdc request example`, func() {
+			fmt.Println("\nUpdateVdc() result:")
+			// begin-update_vdc
+
+			vdcPatchModel := &vmwarev1.VDCPatch{
+			}
+			vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
+			Expect(asPatchErr).To(BeNil())
+
+			updateVdcOptions := vmwareService.NewUpdateVdcOptions(
+				"testString",
+				vdcPatchModelAsPatch,
+			)
+
+			vdc, response, err := vmwareService.UpdateVdc(updateVdcOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(vdc, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_vdc
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
 			Expect(vdc).ToNot(BeNil())
 		})
 		It(`DeleteVdc request example`, func() {
