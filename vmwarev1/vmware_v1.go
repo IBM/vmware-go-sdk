@@ -36,7 +36,7 @@ import (
 
 // VmwareV1 : IBM Cloud for VMware as a Service API
 //
-// API Version: 1.1.0
+// API Version: 1.2.0
 type VmwareV1 struct {
 	Service *core.BaseService
 }
@@ -445,6 +445,91 @@ func (vmware *VmwareV1) DeleteDirectorSiteWithContext(ctx context.Context, delet
 	return
 }
 
+// CreateDirectorSitesVcdaConnection : Create a VCDA connection
+// Create a new VCDA connection in the director site identified by {site_id}.
+func (vmware *VmwareV1) CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptions *CreateDirectorSitesVcdaConnectionOptions) (result *VcdaConnection, response *core.DetailedResponse, err error) {
+	return vmware.CreateDirectorSitesVcdaConnectionWithContext(context.Background(), createDirectorSitesVcdaConnectionOptions)
+}
+
+// CreateDirectorSitesVcdaConnectionWithContext is an alternate form of the CreateDirectorSitesVcdaConnection method which supports a Context parameter
+func (vmware *VmwareV1) CreateDirectorSitesVcdaConnectionWithContext(ctx context.Context, createDirectorSitesVcdaConnectionOptions *CreateDirectorSitesVcdaConnectionOptions) (result *VcdaConnection, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createDirectorSitesVcdaConnectionOptions, "createDirectorSitesVcdaConnectionOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createDirectorSitesVcdaConnectionOptions, "createDirectorSitesVcdaConnectionOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"site_id": *createDirectorSitesVcdaConnectionOptions.SiteID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/director_sites/{site_id}/vcda_connections`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createDirectorSitesVcdaConnectionOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "CreateDirectorSitesVcdaConnection")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+	if createDirectorSitesVcdaConnectionOptions.AcceptLanguage != nil {
+		builder.AddHeader("Accept-Language", fmt.Sprint(*createDirectorSitesVcdaConnectionOptions.AcceptLanguage))
+	}
+	if createDirectorSitesVcdaConnectionOptions.XGlobalTransactionID != nil {
+		builder.AddHeader("X-Global-Transaction-ID", fmt.Sprint(*createDirectorSitesVcdaConnectionOptions.XGlobalTransactionID))
+	}
+
+	body := make(map[string]interface{})
+	if createDirectorSitesVcdaConnectionOptions.Type != nil {
+		body["type"] = createDirectorSitesVcdaConnectionOptions.Type
+	}
+	if createDirectorSitesVcdaConnectionOptions.DataCenterName != nil {
+		body["data_center_name"] = createDirectorSitesVcdaConnectionOptions.DataCenterName
+	}
+	if createDirectorSitesVcdaConnectionOptions.Speed != nil {
+		body["speed"] = createDirectorSitesVcdaConnectionOptions.Speed
+	}
+	if createDirectorSitesVcdaConnectionOptions.AllowList != nil {
+		body["allow_list"] = createDirectorSitesVcdaConnectionOptions.AllowList
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = vmware.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalVcdaConnection)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
 // ListDirectorSitesPvdcs : List the provider virtual data centers in a director site instance
 // List the provider virtual data centers in a specified director site.
 func (vmware *VmwareV1) ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions) (result *PVDCCollection, response *core.DetailedResponse, err error) {
@@ -721,6 +806,92 @@ func (vmware *VmwareV1) ListDirectorSitesPvdcsClustersWithContext(ctx context.Co
 	}
 	if rawResponse != nil {
 		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalClusterCollection)
+		if err != nil {
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// CreateDirectorSitesPvdcsClusters : Create a cluster
+// Creates a new VMware cluster under specified provider virtual data center in a director site instance.
+func (vmware *VmwareV1) CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions) (result *Cluster, response *core.DetailedResponse, err error) {
+	return vmware.CreateDirectorSitesPvdcsClustersWithContext(context.Background(), createDirectorSitesPvdcsClustersOptions)
+}
+
+// CreateDirectorSitesPvdcsClustersWithContext is an alternate form of the CreateDirectorSitesPvdcsClusters method which supports a Context parameter
+func (vmware *VmwareV1) CreateDirectorSitesPvdcsClustersWithContext(ctx context.Context, createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions) (result *Cluster, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createDirectorSitesPvdcsClustersOptions, "createDirectorSitesPvdcsClustersOptions cannot be nil")
+	if err != nil {
+		return
+	}
+	err = core.ValidateStruct(createDirectorSitesPvdcsClustersOptions, "createDirectorSitesPvdcsClustersOptions")
+	if err != nil {
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"site_id": *createDirectorSitesPvdcsClustersOptions.SiteID,
+		"pvdc_id": *createDirectorSitesPvdcsClustersOptions.PvdcID,
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/director_sites/{site_id}/pvdcs/{pvdc_id}/clusters`, pathParamsMap)
+	if err != nil {
+		return
+	}
+
+	for headerName, headerValue := range createDirectorSitesPvdcsClustersOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "CreateDirectorSitesPvdcsClusters")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+	if createDirectorSitesPvdcsClustersOptions.AcceptLanguage != nil {
+		builder.AddHeader("Accept-Language", fmt.Sprint(*createDirectorSitesPvdcsClustersOptions.AcceptLanguage))
+	}
+	if createDirectorSitesPvdcsClustersOptions.XGlobalTransactionID != nil {
+		builder.AddHeader("X-Global-Transaction-ID", fmt.Sprint(*createDirectorSitesPvdcsClustersOptions.XGlobalTransactionID))
+	}
+
+	body := make(map[string]interface{})
+	if createDirectorSitesPvdcsClustersOptions.Name != nil {
+		body["name"] = createDirectorSitesPvdcsClustersOptions.Name
+	}
+	if createDirectorSitesPvdcsClustersOptions.HostCount != nil {
+		body["host_count"] = createDirectorSitesPvdcsClustersOptions.HostCount
+	}
+	if createDirectorSitesPvdcsClustersOptions.HostProfile != nil {
+		body["host_profile"] = createDirectorSitesPvdcsClustersOptions.HostProfile
+	}
+	if createDirectorSitesPvdcsClustersOptions.FileShares != nil {
+		body["file_shares"] = createDirectorSitesPvdcsClustersOptions.FileShares
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = vmware.Service.Request(request, &rawResponse)
+	if err != nil {
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalCluster)
 		if err != nil {
 			return
 		}
@@ -1176,7 +1347,7 @@ func (vmware *VmwareV1) SetOidcConfigurationWithContext(ctx context.Context, set
 	return
 }
 
-// ListVdcs : List Virtual Data Centers
+// ListVdcs : List virtual data centers
 // List all Virtual Data Centers that user has access to in the cloud account.
 func (vmware *VmwareV1) ListVdcs(listVdcsOptions *ListVdcsOptions) (result *VDCCollection, response *core.DetailedResponse, err error) {
 	return vmware.ListVdcsWithContext(context.Background(), listVdcsOptions)
@@ -1231,7 +1402,7 @@ func (vmware *VmwareV1) ListVdcsWithContext(ctx context.Context, listVdcsOptions
 	return
 }
 
-// CreateVdc : Create a Virtual Data Center
+// CreateVdc : Create a virtual data center
 // Create a new Virtual Data Center with specified configurations.
 func (vmware *VmwareV1) CreateVdc(createVdcOptions *CreateVdcOptions) (result *VDC, response *core.DetailedResponse, err error) {
 	return vmware.CreateVdcWithContext(context.Background(), createVdcOptions)
@@ -1292,6 +1463,12 @@ func (vmware *VmwareV1) CreateVdcWithContext(ctx context.Context, createVdcOptio
 	if createVdcOptions.Ram != nil {
 		body["ram"] = createVdcOptions.Ram
 	}
+	if createVdcOptions.RhelByol != nil {
+		body["rhel_byol"] = createVdcOptions.RhelByol
+	}
+	if createVdcOptions.WindowsByol != nil {
+		body["windows_byol"] = createVdcOptions.WindowsByol
+	}
 	_, err = builder.SetBodyContentJSON(body)
 	if err != nil {
 		return
@@ -1318,7 +1495,7 @@ func (vmware *VmwareV1) CreateVdcWithContext(ctx context.Context, createVdcOptio
 	return
 }
 
-// GetVdc : Get a Virtual Data Center
+// GetVdc : Get a virtual data center
 // Get details about a Virtual Data Center by specifying the VDC ID.
 func (vmware *VmwareV1) GetVdc(getVdcOptions *GetVdcOptions) (result *VDC, response *core.DetailedResponse, err error) {
 	return vmware.GetVdcWithContext(context.Background(), getVdcOptions)
@@ -1381,7 +1558,7 @@ func (vmware *VmwareV1) GetVdcWithContext(ctx context.Context, getVdcOptions *Ge
 	return
 }
 
-// DeleteVdc : Delete a Virtual Data Center
+// DeleteVdc : Delete a virtual data center
 // Delete a Virtual Data Center by specifying the VDC ID.
 func (vmware *VmwareV1) DeleteVdc(deleteVdcOptions *DeleteVdcOptions) (result *VDC, response *core.DetailedResponse, err error) {
 	return vmware.DeleteVdcWithContext(context.Background(), deleteVdcOptions)
@@ -1444,9 +1621,8 @@ func (vmware *VmwareV1) DeleteVdcWithContext(ctx context.Context, deleteVdcOptio
 	return
 }
 
-// UpdateVdc : Update a virtual data center with the specified ID
-// Request to update a virtual data center. Currently, the only supported modification is to change the fast
-// provisioning.
+// UpdateVdc : Update a virtual data center
+// Update a virtual data center with the specified ID.
 func (vmware *VmwareV1) UpdateVdc(updateVdcOptions *UpdateVdcOptions) (result *VDC, response *core.DetailedResponse, err error) {
 	return vmware.UpdateVdcWithContext(context.Background(), updateVdcOptions)
 }
@@ -1874,6 +2050,104 @@ func (options *CreateDirectorSitesOptions) SetHeaders(param map[string]string) *
 	return options
 }
 
+// CreateDirectorSitesPvdcsClustersOptions : The CreateDirectorSitesPvdcsClusters options.
+type CreateDirectorSitesPvdcsClustersOptions struct {
+	// A unique identifier for the director site in which the virtual data center was created.
+	SiteID *string `json:"site_id" validate:"required,ne="`
+
+	// A unique identifier for the provider virtual data center in a director site.
+	PvdcID *string `json:"pvdc_id" validate:"required,ne="`
+
+	// Name of the VMware cluster. Cluster names must be unique per director site instance. Cluster names cannot be changed
+	// after creation.
+	Name *string `json:"name" validate:"required"`
+
+	// Number of hosts in the VMware cluster.
+	HostCount *int64 `json:"host_count" validate:"required"`
+
+	// The host type. IBM Cloud offers several different host types. Typically, the host type is selected based on the
+	// properties of the workload to be run in the VMware cluster.
+	HostProfile *string `json:"host_profile" validate:"required"`
+
+	// Chosen storage policies and their sizes.
+	FileShares *FileSharesPrototype `json:"file_shares" validate:"required"`
+
+	// Language.
+	AcceptLanguage *string `json:"Accept-Language,omitempty"`
+
+	// Transaction ID.
+	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// NewCreateDirectorSitesPvdcsClustersOptions : Instantiate CreateDirectorSitesPvdcsClustersOptions
+func (*VmwareV1) NewCreateDirectorSitesPvdcsClustersOptions(siteID string, pvdcID string, name string, hostCount int64, hostProfile string, fileShares *FileSharesPrototype) *CreateDirectorSitesPvdcsClustersOptions {
+	return &CreateDirectorSitesPvdcsClustersOptions{
+		SiteID: core.StringPtr(siteID),
+		PvdcID: core.StringPtr(pvdcID),
+		Name: core.StringPtr(name),
+		HostCount: core.Int64Ptr(hostCount),
+		HostProfile: core.StringPtr(hostProfile),
+		FileShares: fileShares,
+	}
+}
+
+// SetSiteID : Allow user to set SiteID
+func (_options *CreateDirectorSitesPvdcsClustersOptions) SetSiteID(siteID string) *CreateDirectorSitesPvdcsClustersOptions {
+	_options.SiteID = core.StringPtr(siteID)
+	return _options
+}
+
+// SetPvdcID : Allow user to set PvdcID
+func (_options *CreateDirectorSitesPvdcsClustersOptions) SetPvdcID(pvdcID string) *CreateDirectorSitesPvdcsClustersOptions {
+	_options.PvdcID = core.StringPtr(pvdcID)
+	return _options
+}
+
+// SetName : Allow user to set Name
+func (_options *CreateDirectorSitesPvdcsClustersOptions) SetName(name string) *CreateDirectorSitesPvdcsClustersOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
+}
+
+// SetHostCount : Allow user to set HostCount
+func (_options *CreateDirectorSitesPvdcsClustersOptions) SetHostCount(hostCount int64) *CreateDirectorSitesPvdcsClustersOptions {
+	_options.HostCount = core.Int64Ptr(hostCount)
+	return _options
+}
+
+// SetHostProfile : Allow user to set HostProfile
+func (_options *CreateDirectorSitesPvdcsClustersOptions) SetHostProfile(hostProfile string) *CreateDirectorSitesPvdcsClustersOptions {
+	_options.HostProfile = core.StringPtr(hostProfile)
+	return _options
+}
+
+// SetFileShares : Allow user to set FileShares
+func (_options *CreateDirectorSitesPvdcsClustersOptions) SetFileShares(fileShares *FileSharesPrototype) *CreateDirectorSitesPvdcsClustersOptions {
+	_options.FileShares = fileShares
+	return _options
+}
+
+// SetAcceptLanguage : Allow user to set AcceptLanguage
+func (_options *CreateDirectorSitesPvdcsClustersOptions) SetAcceptLanguage(acceptLanguage string) *CreateDirectorSitesPvdcsClustersOptions {
+	_options.AcceptLanguage = core.StringPtr(acceptLanguage)
+	return _options
+}
+
+// SetXGlobalTransactionID : Allow user to set XGlobalTransactionID
+func (_options *CreateDirectorSitesPvdcsClustersOptions) SetXGlobalTransactionID(xGlobalTransactionID string) *CreateDirectorSitesPvdcsClustersOptions {
+	_options.XGlobalTransactionID = core.StringPtr(xGlobalTransactionID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateDirectorSitesPvdcsClustersOptions) SetHeaders(param map[string]string) *CreateDirectorSitesPvdcsClustersOptions {
+	options.Headers = param
+	return options
+}
+
 // CreateDirectorSitesPvdcsOptions : The CreateDirectorSitesPvdcs options.
 type CreateDirectorSitesPvdcsOptions struct {
 	// A unique identifier for the director site in which the virtual data center was created.
@@ -1951,6 +2225,105 @@ func (options *CreateDirectorSitesPvdcsOptions) SetHeaders(param map[string]stri
 	return options
 }
 
+// CreateDirectorSitesVcdaConnectionOptions : The CreateDirectorSitesVcdaConnection options.
+type CreateDirectorSitesVcdaConnectionOptions struct {
+	// A unique identifier for the director site in which the virtual data center was created.
+	SiteID *string `json:"site_id" validate:"required,ne="`
+
+	// Connection type.
+	Type *string `json:"type" validate:"required"`
+
+	// Where to deploy the cluster.
+	DataCenterName *string `json:"data_center_name" validate:"required"`
+
+	// Connection speed. Optional field.
+	Speed *string `json:"speed,omitempty"`
+
+	// List of IP addresses allowed in the public connection. Optional field.
+	AllowList []string `json:"allow_list,omitempty"`
+
+	// Language.
+	AcceptLanguage *string `json:"Accept-Language,omitempty"`
+
+	// Transaction ID.
+	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
+
+	// Allows users to set headers on API requests
+	Headers map[string]string
+}
+
+// Constants associated with the CreateDirectorSitesVcdaConnectionOptions.Type property.
+// Connection type.
+const (
+	CreateDirectorSitesVcdaConnectionOptions_Type_Private = "private"
+	CreateDirectorSitesVcdaConnectionOptions_Type_Public = "public"
+)
+
+// Constants associated with the CreateDirectorSitesVcdaConnectionOptions.Speed property.
+// Connection speed. Optional field.
+const (
+	CreateDirectorSitesVcdaConnectionOptions_Speed_Shared = "shared"
+	CreateDirectorSitesVcdaConnectionOptions_Speed_Speed10g = "speed_10g"
+	CreateDirectorSitesVcdaConnectionOptions_Speed_Speed1g = "speed_1g"
+)
+
+// NewCreateDirectorSitesVcdaConnectionOptions : Instantiate CreateDirectorSitesVcdaConnectionOptions
+func (*VmwareV1) NewCreateDirectorSitesVcdaConnectionOptions(siteID string, typeVar string, dataCenterName string) *CreateDirectorSitesVcdaConnectionOptions {
+	return &CreateDirectorSitesVcdaConnectionOptions{
+		SiteID: core.StringPtr(siteID),
+		Type: core.StringPtr(typeVar),
+		DataCenterName: core.StringPtr(dataCenterName),
+	}
+}
+
+// SetSiteID : Allow user to set SiteID
+func (_options *CreateDirectorSitesVcdaConnectionOptions) SetSiteID(siteID string) *CreateDirectorSitesVcdaConnectionOptions {
+	_options.SiteID = core.StringPtr(siteID)
+	return _options
+}
+
+// SetType : Allow user to set Type
+func (_options *CreateDirectorSitesVcdaConnectionOptions) SetType(typeVar string) *CreateDirectorSitesVcdaConnectionOptions {
+	_options.Type = core.StringPtr(typeVar)
+	return _options
+}
+
+// SetDataCenterName : Allow user to set DataCenterName
+func (_options *CreateDirectorSitesVcdaConnectionOptions) SetDataCenterName(dataCenterName string) *CreateDirectorSitesVcdaConnectionOptions {
+	_options.DataCenterName = core.StringPtr(dataCenterName)
+	return _options
+}
+
+// SetSpeed : Allow user to set Speed
+func (_options *CreateDirectorSitesVcdaConnectionOptions) SetSpeed(speed string) *CreateDirectorSitesVcdaConnectionOptions {
+	_options.Speed = core.StringPtr(speed)
+	return _options
+}
+
+// SetAllowList : Allow user to set AllowList
+func (_options *CreateDirectorSitesVcdaConnectionOptions) SetAllowList(allowList []string) *CreateDirectorSitesVcdaConnectionOptions {
+	_options.AllowList = allowList
+	return _options
+}
+
+// SetAcceptLanguage : Allow user to set AcceptLanguage
+func (_options *CreateDirectorSitesVcdaConnectionOptions) SetAcceptLanguage(acceptLanguage string) *CreateDirectorSitesVcdaConnectionOptions {
+	_options.AcceptLanguage = core.StringPtr(acceptLanguage)
+	return _options
+}
+
+// SetXGlobalTransactionID : Allow user to set XGlobalTransactionID
+func (_options *CreateDirectorSitesVcdaConnectionOptions) SetXGlobalTransactionID(xGlobalTransactionID string) *CreateDirectorSitesVcdaConnectionOptions {
+	_options.XGlobalTransactionID = core.StringPtr(xGlobalTransactionID)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateDirectorSitesVcdaConnectionOptions) SetHeaders(param map[string]string) *CreateDirectorSitesVcdaConnectionOptions {
+	options.Headers = param
+	return options
+}
+
 // CreateVdcOptions : The CreateVdc options.
 type CreateVdcOptions struct {
 	// A human readable identifier for the Virtual Data Center. Use a name that is unique to your region.
@@ -1969,13 +2342,22 @@ type CreateVdcOptions struct {
 	// If not specified, the default resource group in the account is used.
 	ResourceGroup *ResourceGroupIdentity `json:"resource_group,omitempty"`
 
-	// The vCPU usage limit on the Virtual Data Center. Required for Virtual Data Centers deployed on a multitenant
-	// director site.
+	// The vCPU usage limit on the Virtual Data Center. Supported for Virtual Data Centers deployed on a multitenant
+	// director site. A value of 0 for Virtual Data Centers deployed on a PVDC with an /"on_demand/" provider type
+	// corresponds to unlimited vCPU usage.
 	Cpu *int64 `json:"cpu,omitempty"`
 
-	// The RAM usage limit on the Virtual Data Center in GB (1024^3 bytes). Required for Virtual Data Centers deployed on a
-	// multitenant director site.
+	// The RAM usage limit on the Virtual Data Center in GB (1024^3 bytes). Supported for Virtual Data Centers deployed on
+	// a multitenant director site. A value of 0 for Virtual Data Centers deployed on a PVDC with an /"on_demand/" provider
+	// type corresponds to unlimited RAM usage.
 	Ram *int64 `json:"ram,omitempty"`
+
+	// Indicates if the RHEL VMs will be using the license from IBM or the customer will use their own license (BYOL).
+	RhelByol *bool `json:"rhel_byol,omitempty"`
+
+	// Indicates if the Microsoft Windows VMs will be using the license from IBM or the customer will use their own license
+	// (BYOL).
+	WindowsByol *bool `json:"windows_byol,omitempty"`
 
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
@@ -2031,6 +2413,18 @@ func (_options *CreateVdcOptions) SetCpu(cpu int64) *CreateVdcOptions {
 // SetRam : Allow user to set Ram
 func (_options *CreateVdcOptions) SetRam(ram int64) *CreateVdcOptions {
 	_options.Ram = core.Int64Ptr(ram)
+	return _options
+}
+
+// SetRhelByol : Allow user to set RhelByol
+func (_options *CreateVdcOptions) SetRhelByol(rhelByol bool) *CreateVdcOptions {
+	_options.RhelByol = core.BoolPtr(rhelByol)
+	return _options
+}
+
+// SetWindowsByol : Allow user to set WindowsByol
+func (_options *CreateVdcOptions) SetWindowsByol(windowsByol bool) *CreateVdcOptions {
+	_options.WindowsByol = core.BoolPtr(windowsByol)
 	return _options
 }
 
@@ -2256,14 +2650,14 @@ type DirectorSite struct {
 	// List of VMware provider virtual data centers to deploy on the instance.
 	Pvdcs []PVDC `json:"pvdcs" validate:"required"`
 
-	// Workload domain type.
+	// Director site type.
 	Type *string `json:"type" validate:"required"`
 
-	// services on workload domain. Optional field.
+	// Services on the director site. Optional field.
 	Services []Service `json:"services" validate:"required"`
 
-	// rhel_activation_key. Optional field.
-	RhelVmActivationKey interface{} `json:"rhel_vm_activation_key,omitempty"`
+	// RHEL activation key. Optional field.
+	RhelVmActivationKey *string `json:"rhel_vm_activation_key,omitempty"`
 }
 
 // Constants associated with the DirectorSite.Status property.
@@ -2277,7 +2671,7 @@ const (
 )
 
 // Constants associated with the DirectorSite.Type property.
-// Workload domain type.
+// Director site type.
 const (
 	DirectorSite_Type_MultiTenant = "multi_tenant"
 	DirectorSite_Type_SingleTenant = "single_tenant"
@@ -3531,36 +3925,21 @@ type Service struct {
 	// The time that the instance is created.
 	ProvisionedAt *strfmt.DateTime `json:"provisioned_at,omitempty"`
 
-	// A unique identifier for the Director site.
-	DirectorSiteID *string `json:"director_site_id" validate:"required"`
-
-	// A unique identifier for the sddc domain.
-	SddcDomainID *string `json:"sddc_domain_id" validate:"required"`
-
-	// Management network.
-	ManagementNetwork *string `json:"management_network" validate:"required"`
-
-	// THe cluster status.
+	// The cluster status.
 	Status *string `json:"status" validate:"required"`
 
-	// Management subnet identifier.
-	ManagementSubnetID *string `json:"management_subnet_id" validate:"required"`
+	// Service console URL. Optional field.
+	ConsoleURL *string `json:"console_url,omitempty"`
 
-	// Storage network.
-	StorageNetwork *string `json:"storage_network" validate:"required"`
+	// Replicators for the VCDA instance. Optional field.
+	Replicators *int64 `json:"replicators,omitempty"`
 
-	// Storage network identifier.
-	StorageSubnetID *string `json:"storage_subnet_id" validate:"required"`
-
-	// Veeam console url.
-	VeeamConsoleURL *string `json:"veeam_console_url" validate:"required"`
-
-	// Veeam url.
-	VeeamURL *string `json:"veeam_url" validate:"required"`
+	// Connection on a VCDA instance. Optional field.
+	Connections []VcdaConnection `json:"connections,omitempty"`
 }
 
 // Constants associated with the Service.Status property.
-// THe cluster status.
+// The cluster status.
 const (
 	Service_Status_Creating = "creating"
 	Service_Status_Deleted = "deleted"
@@ -3588,39 +3967,19 @@ func UnmarshalService(m map[string]json.RawMessage, result interface{}) (err err
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "director_site_id", &obj.DirectorSiteID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "sddc_domain_id", &obj.SddcDomainID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "management_network", &obj.ManagementNetwork)
-	if err != nil {
-		return
-	}
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "management_subnet_id", &obj.ManagementSubnetID)
+	err = core.UnmarshalPrimitive(m, "console_url", &obj.ConsoleURL)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "storage_network", &obj.StorageNetwork)
+	err = core.UnmarshalPrimitive(m, "replicators", &obj.Replicators)
 	if err != nil {
 		return
 	}
-	err = core.UnmarshalPrimitive(m, "storage_subnet_id", &obj.StorageSubnetID)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "veeam_console_url", &obj.VeeamConsoleURL)
-	if err != nil {
-		return
-	}
-	err = core.UnmarshalPrimitive(m, "veeam_url", &obj.VeeamURL)
+	err = core.UnmarshalModel(m, "connections", &obj.Connections, UnmarshalVcdaConnection)
 	if err != nil {
 		return
 	}
@@ -3987,8 +4346,9 @@ type VDC struct {
 	// The time after which the Virtual Data Center is considered usable.
 	ProvisionedAt *strfmt.DateTime `json:"provisioned_at,omitempty"`
 
-	// The vCPU usage limit on the Virtual Data Center. Required for Virtual Data Centers deployed on a multitenant
-	// director site.
+	// The vCPU usage limit on the Virtual Data Center. Supported for Virtual Data Centers deployed on a multitenant
+	// director site. A value of 0 for Virtual Data Centers deployed on a PVDC with an /"on_demand/" provider type
+	// corresponds to unlimited vCPU usage.
 	Cpu *int64 `json:"cpu,omitempty"`
 
 	// A unique identifier for the Virtual Data Center in IBM Cloud.
@@ -4019,8 +4379,9 @@ type VDC struct {
 	// organizations.
 	OrgName *string `json:"org_name" validate:"required"`
 
-	// The RAM usage limit on the Virtual Data Center in GB (1024^3 bytes). Required for Virtual Data Centers deployed on a
-	// multitenant director site.
+	// The RAM usage limit on the Virtual Data Center in GB (1024^3 bytes). Supported for Virtual Data Centers deployed on
+	// a multitenant director site. A value of 0 for Virtual Data Centers deployed on a PVDC with an /"on_demand/" provider
+	// type corresponds to unlimited RAM usage.
 	Ram *int64 `json:"ram,omitempty"`
 
 	// Determines the state of the virtual data center.
@@ -4031,6 +4392,13 @@ type VDC struct {
 
 	// Determines whether this virtual data center has fast provisioning enabled or not.
 	FastProvisioningEnabled *bool `json:"fast_provisioning_enabled" validate:"required"`
+
+	// Indicates if the RHEL VMs will be using the license from IBM or the customer will use their own license (BYOL).
+	RhelByol *bool `json:"rhel_byol" validate:"required"`
+
+	// Indicates if the Microsoft Windows VMs will be using the license from IBM or the customer will use their own license
+	// (BYOL).
+	WindowsByol *bool `json:"windows_byol" validate:"required"`
 }
 
 // Constants associated with the VDC.Status property.
@@ -4115,6 +4483,14 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "fast_provisioning_enabled", &obj.FastProvisioningEnabled)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "rhel_byol", &obj.RhelByol)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "windows_byol", &obj.WindowsByol)
 	if err != nil {
 		return
 	}
@@ -4255,14 +4631,16 @@ func UnmarshalVDCEdgePrototype(m map[string]json.RawMessage, result interface{})
 // VDCPatch : Information required to update a Virtual Data Center.
 type VDCPatch struct {
 	// The vCPU usage limit on the Virtual Data Center. Supported for Virtual Data Centers deployed on a multitenant
-	// director site.
+	// director site. A value of 0 for Virtual Data Centers deployed on a PVDC with an /"on_demand/" provider type
+	// corresponds to unlimited vCPU usage.
 	Cpu *int64 `json:"cpu,omitempty"`
 
 	// Flag to determine whether to enable or not fast provisioning.
 	FastProvisioningEnabled *bool `json:"fast_provisioning_enabled,omitempty"`
 
 	// The RAM usage limit on the Virtual Data Center in GB (1024^3 bytes). Supported for Virtual Data Centers deployed on
-	// a multitenant director site.
+	// a multitenant director site. A value of 0 for Virtual Data Centers deployed on a PVDC with an /"on_demand/" provider
+	// type corresponds to unlimited RAM usage.
 	Ram *int64 `json:"ram,omitempty"`
 }
 
@@ -4323,6 +4701,83 @@ func (*VmwareV1) NewVDCProviderType(name string) (_model *VDCProviderType, err e
 func UnmarshalVDCProviderType(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(VDCProviderType)
 	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// VcdaConnection : Created VCDA connection.
+type VcdaConnection struct {
+	// ID of the VCDA connection on the director site.
+	ID *string `json:"id" validate:"required"`
+
+	// Status of the VCDA connection.
+	Status *string `json:"status" validate:"required"`
+
+	// Connection type.
+	Type *string `json:"type" validate:"required"`
+
+	// Connection speed. Optional field.
+	Speed *string `json:"speed,omitempty"`
+
+	// Where to deploy the cluster.
+	DataCenterName *string `json:"data_center_name" validate:"required"`
+
+	// List of IP addresses allowed in the public connection. Optional field.
+	AllowList []string `json:"allow_list,omitempty"`
+}
+
+// Constants associated with the VcdaConnection.Status property.
+// Status of the VCDA connection.
+const (
+	VcdaConnection_Status_Creating = "creating"
+	VcdaConnection_Status_Deleted = "deleted"
+	VcdaConnection_Status_Deleting = "deleting"
+	VcdaConnection_Status_ReadyToUse = "ready_to_use"
+	VcdaConnection_Status_Updating = "updating"
+)
+
+// Constants associated with the VcdaConnection.Type property.
+// Connection type.
+const (
+	VcdaConnection_Type_Private = "private"
+	VcdaConnection_Type_Public = "public"
+)
+
+// Constants associated with the VcdaConnection.Speed property.
+// Connection speed. Optional field.
+const (
+	VcdaConnection_Speed_Shared = "shared"
+	VcdaConnection_Speed_Speed10g = "speed_10g"
+	VcdaConnection_Speed_Speed1g = "speed_1g"
+)
+
+// UnmarshalVcdaConnection unmarshals an instance of VcdaConnection from the specified map of raw messages.
+func UnmarshalVcdaConnection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VcdaConnection)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "speed", &obj.Speed)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "data_center_name", &obj.DataCenterName)
+	if err != nil {
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "allow_list", &obj.AllowList)
 	if err != nil {
 		return
 	}

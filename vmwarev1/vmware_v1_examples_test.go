@@ -1,3 +1,4 @@
+//go:build examples
 // +build examples
 
 /**
@@ -24,8 +25,6 @@ import (
 	"os"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	. "github.com/onsi/ginkgo"
-	. "github.com/onsi/gomega"
 	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
 )
 
@@ -48,7 +47,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 	var (
 		vmwareService *vmwarev1.VmwareV1
-		config       map[string]string
+		config        map[string]string
 	)
 
 	var shouldSkipTest = func() {
@@ -106,20 +105,19 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nCreateDirectorSites() result:")
 			// begin-create_director_sites
 
-			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
-			}
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name: core.StringPtr("testString"),
-				HostCount: core.Int64Ptr(int64(2)),
+				Name:        core.StringPtr("testString"),
+				HostCount:   core.Int64Ptr(int64(2)),
 				HostProfile: core.StringPtr("testString"),
-				FileShares: fileSharesPrototypeModel,
+				FileShares:  fileSharesPrototypeModel,
 			}
 
 			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
-				Name: core.StringPtr("testString"),
+				Name:           core.StringPtr("testString"),
 				DataCenterName: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
+				Clusters:       []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 			}
 
 			createDirectorSitesOptions := vmwareService.NewCreateDirectorSitesOptions(
@@ -180,6 +178,29 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSite).ToNot(BeNil())
 		})
+		It(`CreateDirectorSitesVcdaConnection request example`, func() {
+			fmt.Println("\nCreateDirectorSitesVcdaConnection() result:")
+			// begin-create_director_sites_vcda_connection
+
+			createDirectorSitesVcdaConnectionOptions := vmwareService.NewCreateDirectorSitesVcdaConnectionOptions(
+				"testString",
+				"private",
+				"testString",
+			)
+
+			vcdaConnection, response, err := vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(vcdaConnection, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_director_sites_vcda_connection
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaConnection).ToNot(BeNil())
+		})
 		It(`ListDirectorSitesPvdcs request example`, func() {
 			fmt.Println("\nListDirectorSitesPvdcs() result:")
 			// begin-list_director_sites_pvdcs
@@ -205,14 +226,13 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nCreateDirectorSitesPvdcs() result:")
 			// begin-create_director_sites_pvdcs
 
-			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
-			}
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name: core.StringPtr("testString"),
-				HostCount: core.Int64Ptr(int64(2)),
+				Name:        core.StringPtr("testString"),
+				HostCount:   core.Int64Ptr(int64(2)),
 				HostProfile: core.StringPtr("testString"),
-				FileShares: fileSharesPrototypeModel,
+				FileShares:  fileSharesPrototypeModel,
 			}
 
 			createDirectorSitesPvdcsOptions := vmwareService.NewCreateDirectorSitesPvdcsOptions(
@@ -279,6 +299,34 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(clusterCollection).ToNot(BeNil())
 		})
+		It(`CreateDirectorSitesPvdcsClusters request example`, func() {
+			fmt.Println("\nCreateDirectorSitesPvdcsClusters() result:")
+			// begin-create_director_sites_pvdcs_clusters
+
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
+
+			createDirectorSitesPvdcsClustersOptions := vmwareService.NewCreateDirectorSitesPvdcsClustersOptions(
+				"testString",
+				"testString",
+				"testString",
+				int64(2),
+				"testString",
+				fileSharesPrototypeModel,
+			)
+
+			cluster, response, err := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(cluster, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_director_sites_pvdcs_clusters
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(cluster).ToNot(BeNil())
+		})
 		It(`GetDirectorInstancesPvdcsCluster request example`, func() {
 			fmt.Println("\nGetDirectorInstancesPvdcsCluster() result:")
 			// begin-get_director_instances_pvdcs_cluster
@@ -306,8 +354,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nUpdateDirectorSitesPvdcsCluster() result:")
 			// begin-update_director_sites_pvdcs_cluster
 
-			clusterPatchModel := &vmwarev1.ClusterPatch{
-			}
+			clusterPatchModel := &vmwarev1.ClusterPatch{}
 			clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
 
@@ -439,7 +486,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			}
 
 			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
-				ID: core.StringPtr("testString"),
+				ID:   core.StringPtr("testString"),
 				Pvdc: directorSitePvdcModel,
 			}
 
@@ -486,8 +533,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nUpdateVdc() result:")
 			// begin-update_vdc
 
-			vdcPatchModel := &vmwarev1.VDCPatch{
-			}
+			vdcPatchModel := &vmwarev1.VDCPatch{}
 			vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
 

@@ -175,6 +175,28 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`CreateDirectorSitesVcdaConnection - Create a VCDA connection`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptions *CreateDirectorSitesVcdaConnectionOptions)`, func() {
+			createDirectorSitesVcdaConnectionOptions := &vmwarev1.CreateDirectorSitesVcdaConnectionOptions{
+				SiteID: core.StringPtr("testString"),
+				Type: core.StringPtr("private"),
+				DataCenterName: core.StringPtr("testString"),
+				Speed: core.StringPtr("shared"),
+				AllowList: []string{"testString"},
+				AcceptLanguage: core.StringPtr("testString"),
+				XGlobalTransactionID: core.StringPtr("testString"),
+			}
+
+			vcdaConnection, response, err := vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaConnection).ToNot(BeNil())
+		})
+	})
+
 	Describe(`ListDirectorSitesPvdcs - List the provider virtual data centers in a director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -263,6 +285,36 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(clusterCollection).ToNot(BeNil())
+		})
+	})
+
+	Describe(`CreateDirectorSitesPvdcsClusters - Create a cluster`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions)`, func() {
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
+				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
+			}
+
+			createDirectorSitesPvdcsClustersOptions := &vmwarev1.CreateDirectorSitesPvdcsClustersOptions{
+				SiteID: core.StringPtr("testString"),
+				PvdcID: core.StringPtr("testString"),
+				Name: core.StringPtr("testString"),
+				HostCount: core.Int64Ptr(int64(2)),
+				HostProfile: core.StringPtr("testString"),
+				FileShares: fileSharesPrototypeModel,
+				AcceptLanguage: core.StringPtr("testString"),
+				XGlobalTransactionID: core.StringPtr("testString"),
+			}
+
+			cluster, response, err := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(cluster).ToNot(BeNil())
 		})
 	})
 
@@ -387,7 +439,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`ListVdcs - List Virtual Data Centers`, func() {
+	Describe(`ListVdcs - List virtual data centers`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -403,7 +455,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`CreateVdc - Create a Virtual Data Center`, func() {
+	Describe(`CreateVdc - Create a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -437,8 +489,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				Edge: vdcEdgePrototypeModel,
 				FastProvisioningEnabled: core.BoolPtr(true),
 				ResourceGroup: resourceGroupIdentityModel,
-				Cpu: core.Int64Ptr(int64(1)),
-				Ram: core.Int64Ptr(int64(1)),
+				Cpu: core.Int64Ptr(int64(0)),
+				Ram: core.Int64Ptr(int64(0)),
+				RhelByol: core.BoolPtr(false),
+				WindowsByol: core.BoolPtr(false),
 				AcceptLanguage: core.StringPtr("testString"),
 			}
 
@@ -449,7 +503,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetVdc - Get a Virtual Data Center`, func() {
+	Describe(`GetVdc - Get a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -466,15 +520,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`UpdateVdc - Update a virtual data center with the specified ID`, func() {
+	Describe(`UpdateVdc - Update a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`UpdateVdc(updateVdcOptions *UpdateVdcOptions)`, func() {
 			vdcPatchModel := &vmwarev1.VDCPatch{
-				Cpu: core.Int64Ptr(int64(1)),
+				Cpu: core.Int64Ptr(int64(0)),
 				FastProvisioningEnabled: core.BoolPtr(true),
-				Ram: core.Int64Ptr(int64(1)),
+				Ram: core.Int64Ptr(int64(0)),
 			}
 			vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
@@ -492,7 +546,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteVdc - Delete a Virtual Data Center`, func() {
+	Describe(`DeleteVdc - Delete a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})

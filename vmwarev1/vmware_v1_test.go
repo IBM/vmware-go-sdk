@@ -298,7 +298,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "director_site_id": "DirectorSiteID", "sddc_domain_id": "SddcDomainID", "management_network": "ManagementNetwork", "status": "creating", "management_subnet_id": "ManagementSubnetID", "storage_network": "StorageNetwork", "storage_subnet_id": "StorageSubnetID", "veeam_console_url": "VeeamConsoleURL", "veeam_url": "VeeamURL"}], "rhel_vm_activation_key": "anyValue"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully with retries`, func() {
@@ -405,7 +405,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "director_site_id": "DirectorSiteID", "sddc_domain_id": "SddcDomainID", "management_network": "ManagementNetwork", "status": "creating", "management_subnet_id": "ManagementSubnetID", "storage_network": "StorageNetwork", "storage_subnet_id": "StorageSubnetID", "veeam_console_url": "VeeamConsoleURL", "veeam_url": "VeeamURL"}], "rhel_vm_activation_key": "anyValue"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully`, func() {
@@ -671,7 +671,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "director_site_id": "DirectorSiteID", "sddc_domain_id": "SddcDomainID", "management_network": "ManagementNetwork", "status": "creating", "management_subnet_id": "ManagementSubnetID", "storage_network": "StorageNetwork", "storage_subnet_id": "StorageSubnetID", "veeam_console_url": "VeeamConsoleURL", "veeam_url": "VeeamURL"}], "rhel_vm_activation_key": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully with retries`, func() {
@@ -730,7 +730,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "director_site_id": "DirectorSiteID", "sddc_domain_id": "SddcDomainID", "management_network": "ManagementNetwork", "status": "creating", "management_subnet_id": "ManagementSubnetID", "storage_network": "StorageNetwork", "storage_subnet_id": "StorageSubnetID", "veeam_console_url": "VeeamConsoleURL", "veeam_url": "VeeamURL"}], "rhel_vm_activation_key": "anyValue"}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully`, func() {
@@ -894,7 +894,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "director_site_id": "DirectorSiteID", "sddc_domain_id": "SddcDomainID", "management_network": "ManagementNetwork", "status": "creating", "management_subnet_id": "ManagementSubnetID", "storage_network": "StorageNetwork", "storage_subnet_id": "StorageSubnetID", "veeam_console_url": "VeeamConsoleURL", "veeam_url": "VeeamURL"}], "rhel_vm_activation_key": "anyValue"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully with retries`, func() {
@@ -954,7 +954,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "director_site_id": "DirectorSiteID", "sddc_domain_id": "SddcDomainID", "management_network": "ManagementNetwork", "status": "creating", "management_subnet_id": "ManagementSubnetID", "storage_network": "StorageNetwork", "storage_subnet_id": "StorageSubnetID", "veeam_console_url": "VeeamConsoleURL", "veeam_url": "VeeamURL"}], "rhel_vm_activation_key": "anyValue"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully`, func() {
@@ -1128,7 +1128,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "director_site_id": "DirectorSiteID", "sddc_domain_id": "SddcDomainID", "management_network": "ManagementNetwork", "status": "creating", "management_subnet_id": "ManagementSubnetID", "storage_network": "StorageNetwork", "storage_subnet_id": "StorageSubnetID", "veeam_console_url": "VeeamConsoleURL", "veeam_url": "VeeamURL"}], "rhel_vm_activation_key": "anyValue"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully with retries`, func() {
@@ -1188,7 +1188,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "director_site_id": "DirectorSiteID", "sddc_domain_id": "SddcDomainID", "management_network": "ManagementNetwork", "status": "creating", "management_subnet_id": "ManagementSubnetID", "storage_network": "StorageNetwork", "storage_subnet_id": "StorageSubnetID", "veeam_console_url": "VeeamConsoleURL", "veeam_url": "VeeamURL"}], "rhel_vm_activation_key": "anyValue"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "Name", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully`, func() {
@@ -1279,6 +1279,292 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Invoke operation
 				result, response, operationErr := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptions *CreateDirectorSitesVcdaConnectionOptions) - Operation response error`, func() {
+		createDirectorSitesVcdaConnectionPath := "/director_sites/testString/vcda_connections"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaConnectionPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnection with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionOptions model
+				createDirectorSitesVcdaConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionOptions)
+				createDirectorSitesVcdaConnectionOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Speed = core.StringPtr("shared")
+				createDirectorSitesVcdaConnectionOptionsModel.AllowList = []string{"testString"}
+				createDirectorSitesVcdaConnectionOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptions *CreateDirectorSitesVcdaConnectionOptions)`, func() {
+		createDirectorSitesVcdaConnectionPath := "/director_sites/testString/vcda_connections"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaConnectionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnection successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionOptions model
+				createDirectorSitesVcdaConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionOptions)
+				createDirectorSitesVcdaConnectionOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Speed = core.StringPtr("shared")
+				createDirectorSitesVcdaConnectionOptionsModel.AllowList = []string{"testString"}
+				createDirectorSitesVcdaConnectionOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.CreateDirectorSitesVcdaConnectionWithContext(ctx, createDirectorSitesVcdaConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.CreateDirectorSitesVcdaConnectionWithContext(ctx, createDirectorSitesVcdaConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaConnectionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "type": "private", "speed": "shared", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnection successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnection(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionOptions model
+				createDirectorSitesVcdaConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionOptions)
+				createDirectorSitesVcdaConnectionOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Speed = core.StringPtr("shared")
+				createDirectorSitesVcdaConnectionOptionsModel.AllowList = []string{"testString"}
+				createDirectorSitesVcdaConnectionOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnection with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionOptions model
+				createDirectorSitesVcdaConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionOptions)
+				createDirectorSitesVcdaConnectionOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Speed = core.StringPtr("shared")
+				createDirectorSitesVcdaConnectionOptionsModel.AllowList = []string{"testString"}
+				createDirectorSitesVcdaConnectionOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateDirectorSitesVcdaConnectionOptions model with no property values
+				createDirectorSitesVcdaConnectionOptionsModelNew := new(vmwarev1.CreateDirectorSitesVcdaConnectionOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnection successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionOptions model
+				createDirectorSitesVcdaConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionOptions)
+				createDirectorSitesVcdaConnectionOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Speed = core.StringPtr("shared")
+				createDirectorSitesVcdaConnectionOptionsModel.AllowList = []string{"testString"}
+				createDirectorSitesVcdaConnectionOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -2342,6 +2628,332 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Invoke operation
 				result, response, operationErr := vmwareService.ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions) - Operation response error`, func() {
+		createDirectorSitesPvdcsClustersPath := "/director_sites/testString/pvdcs/testString/clusters"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPvdcsClustersPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesPvdcsClusters with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
+				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions)`, func() {
+		createDirectorSitesPvdcsClustersPath := "/director_sites/testString/pvdcs/testString/clusters"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPvdcsClustersPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesPvdcsClusters successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
+				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.CreateDirectorSitesPvdcsClustersWithContext(ctx, createDirectorSitesPvdcsClustersOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.CreateDirectorSitesPvdcsClustersWithContext(ctx, createDirectorSitesPvdcsClustersOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPvdcsClustersPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesPvdcsClusters successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.CreateDirectorSitesPvdcsClusters(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
+				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateDirectorSitesPvdcsClusters with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
+				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateDirectorSitesPvdcsClustersOptions model with no property values
+				createDirectorSitesPvdcsClustersOptionsModelNew := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesPvdcsClusters successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
+				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -4132,7 +4744,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully with retries`, func() {
@@ -4188,7 +4800,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully`, func() {
@@ -4332,8 +4944,10 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
 				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
-				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(1))
-				createVdcOptionsModel.Ram = core.Int64Ptr(int64(1))
+				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
+				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -4389,7 +5003,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully with retries`, func() {
@@ -4431,8 +5045,10 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
 				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
-				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(1))
-				createVdcOptionsModel.Ram = core.Int64Ptr(int64(1))
+				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
+				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4491,7 +5107,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully`, func() {
@@ -4538,8 +5154,10 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
 				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
-				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(1))
-				createVdcOptionsModel.Ram = core.Int64Ptr(int64(1))
+				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
+				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4588,8 +5206,10 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
 				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
-				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(1))
-				createVdcOptionsModel.Ram = core.Int64Ptr(int64(1))
+				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
+				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -4659,8 +5279,10 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
 				createVdcOptionsModel.ResourceGroup = resourceGroupIdentityModel
-				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(1))
-				createVdcOptionsModel.Ram = core.Int64Ptr(int64(1))
+				createVdcOptionsModel.Cpu = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
+				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
+				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
 				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -4744,7 +5366,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully with retries`, func() {
@@ -4801,7 +5423,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully`, func() {
@@ -4967,7 +5589,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully with retries`, func() {
@@ -5024,7 +5646,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully`, func() {
@@ -5150,9 +5772,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the VDCPatch model
 				vdcPatchModel := new(vmwarev1.VDCPatch)
-				vdcPatchModel.Cpu = core.Int64Ptr(int64(1))
+				vdcPatchModel.Cpu = core.Int64Ptr(int64(0))
 				vdcPatchModel.FastProvisioningEnabled = core.BoolPtr(true)
-				vdcPatchModel.Ram = core.Int64Ptr(int64(1))
+				vdcPatchModel.Ram = core.Int64Ptr(int64(0))
 				vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -5215,7 +5837,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully with retries`, func() {
@@ -5229,9 +5851,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the VDCPatch model
 				vdcPatchModel := new(vmwarev1.VDCPatch)
-				vdcPatchModel.Cpu = core.Int64Ptr(int64(1))
+				vdcPatchModel.Cpu = core.Int64Ptr(int64(0))
 				vdcPatchModel.FastProvisioningEnabled = core.BoolPtr(true)
-				vdcPatchModel.Ram = core.Int64Ptr(int64(1))
+				vdcPatchModel.Ram = core.Int64Ptr(int64(0))
 				vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -5297,7 +5919,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 1, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 1, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully`, func() {
@@ -5316,9 +5938,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the VDCPatch model
 				vdcPatchModel := new(vmwarev1.VDCPatch)
-				vdcPatchModel.Cpu = core.Int64Ptr(int64(1))
+				vdcPatchModel.Cpu = core.Int64Ptr(int64(0))
 				vdcPatchModel.FastProvisioningEnabled = core.BoolPtr(true)
-				vdcPatchModel.Ram = core.Int64Ptr(int64(1))
+				vdcPatchModel.Ram = core.Int64Ptr(int64(0))
 				vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -5346,9 +5968,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the VDCPatch model
 				vdcPatchModel := new(vmwarev1.VDCPatch)
-				vdcPatchModel.Cpu = core.Int64Ptr(int64(1))
+				vdcPatchModel.Cpu = core.Int64Ptr(int64(0))
 				vdcPatchModel.FastProvisioningEnabled = core.BoolPtr(true)
-				vdcPatchModel.Ram = core.Int64Ptr(int64(1))
+				vdcPatchModel.Ram = core.Int64Ptr(int64(0))
 				vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -5397,9 +6019,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the VDCPatch model
 				vdcPatchModel := new(vmwarev1.VDCPatch)
-				vdcPatchModel.Cpu = core.Int64Ptr(int64(1))
+				vdcPatchModel.Cpu = core.Int64Ptr(int64(0))
 				vdcPatchModel.FastProvisioningEnabled = core.BoolPtr(true)
-				vdcPatchModel.Ram = core.Int64Ptr(int64(1))
+				vdcPatchModel.Ram = core.Int64Ptr(int64(0))
 				vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 				Expect(asPatchErr).To(BeNil())
 
@@ -5504,6 +6126,47 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(createDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewCreateDirectorSitesPvdcsClustersOptions successfully`, func() {
+				// Construct an instance of the FileSharesPrototype model
+				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
+				Expect(fileSharesPrototypeModel).ToNot(BeNil())
+				fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+				fileSharesPrototypeModel.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+				Expect(fileSharesPrototypeModel.STORAGEPOINTTWOFIVEIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGETWOIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGEFOURIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(fileSharesPrototypeModel.STORAGETENIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
+
+				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
+				siteID := "testString"
+				pvdcID := "testString"
+				createDirectorSitesPvdcsClustersOptionsName := "testString"
+				createDirectorSitesPvdcsClustersOptionsHostCount := int64(2)
+				createDirectorSitesPvdcsClustersOptionsHostProfile := "testString"
+				var createDirectorSitesPvdcsClustersOptionsFileShares *vmwarev1.FileSharesPrototype = nil
+				createDirectorSitesPvdcsClustersOptionsModel := vmwareService.NewCreateDirectorSitesPvdcsClustersOptions(siteID, pvdcID, createDirectorSitesPvdcsClustersOptionsName, createDirectorSitesPvdcsClustersOptionsHostCount, createDirectorSitesPvdcsClustersOptionsHostProfile, createDirectorSitesPvdcsClustersOptionsFileShares)
+				createDirectorSitesPvdcsClustersOptionsModel.SetSiteID("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetPvdcID("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetName("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetHostCount(int64(2))
+				createDirectorSitesPvdcsClustersOptionsModel.SetHostProfile("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetFileShares(fileSharesPrototypeModel)
+				createDirectorSitesPvdcsClustersOptionsModel.SetAcceptLanguage("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetXGlobalTransactionID("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createDirectorSitesPvdcsClustersOptionsModel).ToNot(BeNil())
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.FileShares).To(Equal(fileSharesPrototypeModel))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewCreateDirectorSitesPvdcsOptions successfully`, func() {
 				// Construct an instance of the FileSharesPrototype model
 				fileSharesPrototypeModel := new(vmwarev1.FileSharesPrototype)
@@ -5551,6 +6214,30 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(createDirectorSitesPvdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewCreateDirectorSitesVcdaConnectionOptions successfully`, func() {
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionOptions model
+				siteID := "testString"
+				createDirectorSitesVcdaConnectionOptionsType := "private"
+				createDirectorSitesVcdaConnectionOptionsDataCenterName := "testString"
+				createDirectorSitesVcdaConnectionOptionsModel := vmwareService.NewCreateDirectorSitesVcdaConnectionOptions(siteID, createDirectorSitesVcdaConnectionOptionsType, createDirectorSitesVcdaConnectionOptionsDataCenterName)
+				createDirectorSitesVcdaConnectionOptionsModel.SetSiteID("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.SetType("private")
+				createDirectorSitesVcdaConnectionOptionsModel.SetDataCenterName("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.SetSpeed("shared")
+				createDirectorSitesVcdaConnectionOptionsModel.SetAllowList([]string{"testString"})
+				createDirectorSitesVcdaConnectionOptionsModel.SetAcceptLanguage("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.SetXGlobalTransactionID("testString")
+				createDirectorSitesVcdaConnectionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createDirectorSitesVcdaConnectionOptionsModel).ToNot(BeNil())
+				Expect(createDirectorSitesVcdaConnectionOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesVcdaConnectionOptionsModel.Type).To(Equal(core.StringPtr("private")))
+				Expect(createDirectorSitesVcdaConnectionOptionsModel.DataCenterName).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesVcdaConnectionOptionsModel.Speed).To(Equal(core.StringPtr("shared")))
+				Expect(createDirectorSitesVcdaConnectionOptionsModel.AllowList).To(Equal([]string{"testString"}))
+				Expect(createDirectorSitesVcdaConnectionOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesVcdaConnectionOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesVcdaConnectionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewCreateVdcOptions successfully`, func() {
 				// Construct an instance of the VDCProviderType model
 				vdcProviderTypeModel := new(vmwarev1.VDCProviderType)
@@ -5597,8 +6284,10 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.SetEdge(vdcEdgePrototypeModel)
 				createVdcOptionsModel.SetFastProvisioningEnabled(true)
 				createVdcOptionsModel.SetResourceGroup(resourceGroupIdentityModel)
-				createVdcOptionsModel.SetCpu(int64(1))
-				createVdcOptionsModel.SetRam(int64(1))
+				createVdcOptionsModel.SetCpu(int64(0))
+				createVdcOptionsModel.SetRam(int64(0))
+				createVdcOptionsModel.SetRhelByol(false)
+				createVdcOptionsModel.SetWindowsByol(false)
 				createVdcOptionsModel.SetAcceptLanguage("testString")
 				createVdcOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createVdcOptionsModel).ToNot(BeNil())
@@ -5607,8 +6296,10 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(createVdcOptionsModel.Edge).To(Equal(vdcEdgePrototypeModel))
 				Expect(createVdcOptionsModel.FastProvisioningEnabled).To(Equal(core.BoolPtr(true)))
 				Expect(createVdcOptionsModel.ResourceGroup).To(Equal(resourceGroupIdentityModel))
-				Expect(createVdcOptionsModel.Cpu).To(Equal(core.Int64Ptr(int64(1))))
-				Expect(createVdcOptionsModel.Ram).To(Equal(core.Int64Ptr(int64(1))))
+				Expect(createVdcOptionsModel.Cpu).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(createVdcOptionsModel.Ram).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(createVdcOptionsModel.RhelByol).To(Equal(core.BoolPtr(false)))
+				Expect(createVdcOptionsModel.WindowsByol).To(Equal(core.BoolPtr(false)))
 				Expect(createVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(createVdcOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
