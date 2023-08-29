@@ -121,7 +121,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			serviceIdentityModel := &vmwarev1.ServiceIdentity{
-				Name: core.StringPtr("testString"),
+				Name: core.StringPtr("veeam"),
 			}
 
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
@@ -172,28 +172,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSite).ToNot(BeNil())
-		})
-	})
-
-	Describe(`CreateDirectorSitesVcdaConnection - Create a VCDA connection`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptions *CreateDirectorSitesVcdaConnectionOptions)`, func() {
-			createDirectorSitesVcdaConnectionOptions := &vmwarev1.CreateDirectorSitesVcdaConnectionOptions{
-				SiteID: core.StringPtr("testString"),
-				Type: core.StringPtr("private"),
-				DataCenterName: core.StringPtr("testString"),
-				Speed: core.StringPtr("shared"),
-				AllowList: []string{"testString"},
-				AcceptLanguage: core.StringPtr("testString"),
-				XGlobalTransactionID: core.StringPtr("testString"),
-			}
-
-			vcdaConnection, response, err := vmwareService.CreateDirectorSitesVcdaConnection(createDirectorSitesVcdaConnectionOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(vcdaConnection).ToNot(BeNil())
 		})
 	})
 
@@ -390,6 +368,23 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`ListMultitenantDirectorSites - List multitenant director sites`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListMultitenantDirectorSites(listMultitenantDirectorSitesOptions *ListMultitenantDirectorSitesOptions)`, func() {
+			listMultitenantDirectorSitesOptions := &vmwarev1.ListMultitenantDirectorSitesOptions{
+				AcceptLanguage: core.StringPtr("testString"),
+				XGlobalTransactionID: core.StringPtr("testString"),
+			}
+
+			multitenantDirectorSiteCollection, response, err := vmwareService.ListMultitenantDirectorSites(listMultitenantDirectorSitesOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(multitenantDirectorSiteCollection).ToNot(BeNil())
+		})
+	})
+
 	Describe(`ListDirectorSiteHostProfiles - List host profiles`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -404,38 +399,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSiteHostProfileCollection).ToNot(BeNil())
-		})
-	})
-
-	Describe(`GetOidcConfiguration - Get an OpenID Connect (OIDC) configuration`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetOidcConfiguration(getOidcConfigurationOptions *GetOidcConfigurationOptions)`, func() {
-			getOidcConfigurationOptions := &vmwarev1.GetOidcConfigurationOptions{
-				SiteID: core.StringPtr("testString"),
-			}
-
-			oidc, response, err := vmwareService.GetOidcConfiguration(getOidcConfigurationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(oidc).ToNot(BeNil())
-		})
-	})
-
-	Describe(`SetOidcConfiguration - Create an OpenID Connect (OIDC) configuration`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions)`, func() {
-			setOidcConfigurationOptions := &vmwarev1.SetOidcConfigurationOptions{
-				SiteID: core.StringPtr("testString"),
-			}
-
-			oidc, response, err := vmwareService.SetOidcConfiguration(setOidcConfigurationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(oidc).ToNot(BeNil())
 		})
 	})
 
