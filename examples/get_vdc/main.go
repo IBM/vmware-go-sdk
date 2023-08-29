@@ -11,11 +11,15 @@ var (
 )
 
 func main() {
-	getVdcOptions := vmwareService.NewGetVdcOptions(
+	vdcPatchModel := &vmwarev1.VDCPatch{}
+	vdcPatchModelAsPatch, _ := vdcPatchModel.AsPatch()
+
+	updateVdcOptions := vmwareService.NewUpdateVdcOptions(
 		"vdc_id",
+		vdcPatchModelAsPatch,
 	)
 
-	vdc, response, err := vmwareService.GetVdc(getVdcOptions)
+	vdc, response, err := vmwareService.UpdateVdc(updateVdcOptions)
 	if err != nil {
 		panic(err)
 	}

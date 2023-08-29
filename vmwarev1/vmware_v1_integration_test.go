@@ -121,7 +121,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			serviceIdentityModel := &vmwarev1.ServiceIdentity{
-				Name: core.StringPtr("testString"),
+				Name: core.StringPtr("veeam"),
 			}
 
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
@@ -266,6 +266,36 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`CreateDirectorSitesPvdcsClusters - Create a cluster`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions)`, func() {
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
+				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
+			}
+
+			createDirectorSitesPvdcsClustersOptions := &vmwarev1.CreateDirectorSitesPvdcsClustersOptions{
+				SiteID: core.StringPtr("testString"),
+				PvdcID: core.StringPtr("testString"),
+				Name: core.StringPtr("testString"),
+				HostCount: core.Int64Ptr(int64(2)),
+				HostProfile: core.StringPtr("testString"),
+				FileShares: fileSharesPrototypeModel,
+				AcceptLanguage: core.StringPtr("testString"),
+				XGlobalTransactionID: core.StringPtr("testString"),
+			}
+
+			cluster, response, err := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(cluster).ToNot(BeNil())
+		})
+	})
+
 	Describe(`GetDirectorInstancesPvdcsCluster - Get a cluster`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -338,6 +368,23 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`ListMultitenantDirectorSites - List multitenant director sites`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListMultitenantDirectorSites(listMultitenantDirectorSitesOptions *ListMultitenantDirectorSitesOptions)`, func() {
+			listMultitenantDirectorSitesOptions := &vmwarev1.ListMultitenantDirectorSitesOptions{
+				AcceptLanguage: core.StringPtr("testString"),
+				XGlobalTransactionID: core.StringPtr("testString"),
+			}
+
+			multitenantDirectorSiteCollection, response, err := vmwareService.ListMultitenantDirectorSites(listMultitenantDirectorSitesOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(multitenantDirectorSiteCollection).ToNot(BeNil())
+		})
+	})
+
 	Describe(`ListDirectorSiteHostProfiles - List host profiles`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -355,39 +402,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetOidcConfiguration - Get an OpenID Connect (OIDC) configuration`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`GetOidcConfiguration(getOidcConfigurationOptions *GetOidcConfigurationOptions)`, func() {
-			getOidcConfigurationOptions := &vmwarev1.GetOidcConfigurationOptions{
-				SiteID: core.StringPtr("testString"),
-			}
-
-			oidc, response, err := vmwareService.GetOidcConfiguration(getOidcConfigurationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(oidc).ToNot(BeNil())
-		})
-	})
-
-	Describe(`SetOidcConfiguration - Create an OpenID Connect (OIDC) configuration`, func() {
-		BeforeEach(func() {
-			shouldSkipTest()
-		})
-		It(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions)`, func() {
-			setOidcConfigurationOptions := &vmwarev1.SetOidcConfigurationOptions{
-				SiteID: core.StringPtr("testString"),
-			}
-
-			oidc, response, err := vmwareService.SetOidcConfiguration(setOidcConfigurationOptions)
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(oidc).ToNot(BeNil())
-		})
-	})
-
-	Describe(`ListVdcs - List Virtual Data Centers`, func() {
+	Describe(`ListVdcs - List virtual data centers`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -403,7 +418,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`CreateVdc - Create a Virtual Data Center`, func() {
+	Describe(`CreateVdc - Create a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -437,8 +452,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				Edge: vdcEdgePrototypeModel,
 				FastProvisioningEnabled: core.BoolPtr(true),
 				ResourceGroup: resourceGroupIdentityModel,
-				Cpu: core.Int64Ptr(int64(1)),
-				Ram: core.Int64Ptr(int64(1)),
+				Cpu: core.Int64Ptr(int64(0)),
+				Ram: core.Int64Ptr(int64(0)),
+				RhelByol: core.BoolPtr(false),
+				WindowsByol: core.BoolPtr(false),
 				AcceptLanguage: core.StringPtr("testString"),
 			}
 
@@ -449,7 +466,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetVdc - Get a Virtual Data Center`, func() {
+	Describe(`GetVdc - Get a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -466,15 +483,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`UpdateVdc - Update a virtual data center with the specified ID`, func() {
+	Describe(`UpdateVdc - Update a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`UpdateVdc(updateVdcOptions *UpdateVdcOptions)`, func() {
 			vdcPatchModel := &vmwarev1.VDCPatch{
-				Cpu: core.Int64Ptr(int64(1)),
+				Cpu: core.Int64Ptr(int64(0)),
 				FastProvisioningEnabled: core.BoolPtr(true),
-				Ram: core.Int64Ptr(int64(1)),
+				Ram: core.Int64Ptr(int64(0)),
 			}
 			vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
@@ -492,7 +509,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteVdc - Delete a Virtual Data Center`, func() {
+	Describe(`DeleteVdc - Delete a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})

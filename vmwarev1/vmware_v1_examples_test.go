@@ -279,6 +279,35 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(clusterCollection).ToNot(BeNil())
 		})
+		It(`CreateDirectorSitesPvdcsClusters request example`, func() {
+			fmt.Println("\nCreateDirectorSitesPvdcsClusters() result:")
+			// begin-create_director_sites_pvdcs_clusters
+
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
+			}
+
+			createDirectorSitesPvdcsClustersOptions := vmwareService.NewCreateDirectorSitesPvdcsClustersOptions(
+				"testString",
+				"testString",
+				"testString",
+				int64(2),
+				"testString",
+				fileSharesPrototypeModel,
+			)
+
+			cluster, response, err := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(cluster, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_director_sites_pvdcs_clusters
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(cluster).ToNot(BeNil())
+		})
 		It(`GetDirectorInstancesPvdcsCluster request example`, func() {
 			fmt.Println("\nGetDirectorInstancesPvdcsCluster() result:")
 			// begin-get_director_instances_pvdcs_cluster
@@ -350,6 +379,25 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSiteRegionCollection).ToNot(BeNil())
 		})
+		It(`ListMultitenantDirectorSites request example`, func() {
+			fmt.Println("\nListMultitenantDirectorSites() result:")
+			// begin-list_multitenant_director_sites
+
+			listMultitenantDirectorSitesOptions := vmwareService.NewListMultitenantDirectorSitesOptions()
+
+			multitenantDirectorSiteCollection, response, err := vmwareService.ListMultitenantDirectorSites(listMultitenantDirectorSitesOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(multitenantDirectorSiteCollection, "", "  ")
+			fmt.Println(string(b))
+
+			// end-list_multitenant_director_sites
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(multitenantDirectorSiteCollection).ToNot(BeNil())
+		})
 		It(`ListDirectorSiteHostProfiles request example`, func() {
 			fmt.Println("\nListDirectorSiteHostProfiles() result:")
 			// begin-list_director_site_host_profiles
@@ -368,48 +416,6 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSiteHostProfileCollection).ToNot(BeNil())
-		})
-		It(`GetOidcConfiguration request example`, func() {
-			fmt.Println("\nGetOidcConfiguration() result:")
-			// begin-get_oidc_configuration
-
-			getOidcConfigurationOptions := vmwareService.NewGetOidcConfigurationOptions(
-				"testString",
-			)
-
-			oidc, response, err := vmwareService.GetOidcConfiguration(getOidcConfigurationOptions)
-			if err != nil {
-				panic(err)
-			}
-			b, _ := json.MarshalIndent(oidc, "", "  ")
-			fmt.Println(string(b))
-
-			// end-get_oidc_configuration
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(200))
-			Expect(oidc).ToNot(BeNil())
-		})
-		It(`SetOidcConfiguration request example`, func() {
-			fmt.Println("\nSetOidcConfiguration() result:")
-			// begin-set_oidc_configuration
-
-			setOidcConfigurationOptions := vmwareService.NewSetOidcConfigurationOptions(
-				"testString",
-			)
-
-			oidc, response, err := vmwareService.SetOidcConfiguration(setOidcConfigurationOptions)
-			if err != nil {
-				panic(err)
-			}
-			b, _ := json.MarshalIndent(oidc, "", "  ")
-			fmt.Println(string(b))
-
-			// end-set_oidc_configuration
-
-			Expect(err).To(BeNil())
-			Expect(response.StatusCode).To(Equal(202))
-			Expect(oidc).ToNot(BeNil())
 		})
 		It(`ListVdcs request example`, func() {
 			fmt.Println("\nListVdcs() result:")

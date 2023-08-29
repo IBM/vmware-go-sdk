@@ -13,7 +13,7 @@ var (
 func main() {
 	deleteDirectorSitesPvdcsClusterOptions := vmwareService.NewDeleteDirectorSitesPvdcsClusterOptions(
 		"site_id",
-		"cluster_id",
+		"id",
 		"pvdc_id",
 	)
 

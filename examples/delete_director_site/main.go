@@ -12,7 +12,7 @@ var (
 
 func main() {
 	deleteDirectorSiteOptions := vmwareService.NewDeleteDirectorSiteOptions(
-		"site_id",
+		"id",
 	)
 
 	directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
