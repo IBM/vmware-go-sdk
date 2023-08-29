@@ -11,21 +11,13 @@ var (
 )
 
 func main() {
-	clusterPatchModel := &vmwarev1.ClusterPatch{}
-	clusterPatchModelAsPatch, _ := clusterPatchModel.AsPatch()
+	listDirectorSiteRegionsOptions := vmwareService.NewListDirectorSiteRegionsOptions()
 
-	updateDirectorSitesPvdcsClusterOptions := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(
-		"site_id",
-		"cluster_id",
-		"pvdc_id",
-		clusterPatchModelAsPatch,
-	)
-
-	updateCluster, response, err := vmwareService.UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions)
+	directorSiteRegionCollection, response, err := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptions)
 	if err != nil {
 		panic(err)
 	}
-	b, _ := json.MarshalIndent(updateCluster, "", "  ")
+	b, _ := json.MarshalIndent(directorSiteRegionCollection, "", "  ")
 	fmt.Println(string(b))
 	fmt.Println(response)
 }
