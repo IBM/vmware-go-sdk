@@ -11,13 +11,13 @@ var (
 )
 
 func main() {
-	listDirectorSiteRegionsOptions := vmwareService.NewListDirectorSiteRegionsOptions()
+	listMultitenantDirectorSitesOptions := vmwareService.NewListMultitenantDirectorSitesOptions()
 
-	directorSiteRegionCollection, response, err := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptions)
+	multitenantDirectorSiteCollection, response, err := vmwareService.ListMultitenantDirectorSites(listMultitenantDirectorSitesOptions)
 	if err != nil {
 		panic(err)
 	}
-	b, _ := json.MarshalIndent(directorSiteRegionCollection, "", "  ")
+	b, _ := json.MarshalIndent(multitenantDirectorSiteCollection, "", "  ")
 	fmt.Println(string(b))
 	fmt.Println(response)
 }
