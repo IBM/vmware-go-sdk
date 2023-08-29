@@ -13,7 +13,7 @@ var (
 func main() {
 	getDirectorInstancesPvdcsClusterOptions := vmwareService.NewGetDirectorInstancesPvdcsClusterOptions(
 		"site_id",
-		"cluster_id",
+		"id",
 		"pvdc_id",
 	)
 

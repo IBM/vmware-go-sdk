@@ -15,8 +15,8 @@ func main() {
 	fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 	clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-		Name:        core.StringPtr("my_director_site"),
-		HostCount:   core.Int64Ptr(int64(3)),
+		Name:        core.StringPtr("cluster_1"),
+		HostCount:   core.Int64Ptr(int64(2)),
 		HostProfile: core.StringPtr("BM_2S_20_CORES_192_GB"),
 		FileShares:  fileSharesPrototypeModel,
 	}
@@ -28,7 +28,7 @@ func main() {
 	}
 
 	createDirectorSitesOptions := vmwareService.NewCreateDirectorSitesOptions(
-		"cluster_1",
+		"my_director_site",
 		[]vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
 	)
 

@@ -15,7 +15,7 @@ func main() {
 	clusterPatchModelAsPatch, _ := clusterPatchModel.AsPatch()
 
 	updateDirectorSitesPvdcsClusterOptions := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(
-		"side_id",
+		"site_id",
 		"cluster_id",
 		"pvdc_id",
 		clusterPatchModelAsPatch,
