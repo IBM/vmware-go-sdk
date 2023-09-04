@@ -11,19 +11,15 @@ var (
 )
 
 func main() {
-	vdcPatchModel := &vmwarev1.VDCPatch{}
-	vdcPatchModelAsPatch, _ := vdcPatchModel.AsPatch()
-
-	updateVdcOptions := vmwareService.NewUpdateVdcOptions(
-		"vdc_id",
-		vdcPatchModelAsPatch,
+	getVdcOptions := vmwareService.NewGetVdcOptions(
+		"testString",
 	)
 
-	vdc, response, err := vmwareService.UpdateVdc(updateVdcOptions)
+	vdc, response, err := vmwareService.GetVdc(getVdcOptions)
 	if err != nil {
 		panic(err)
 	}
 	b, _ := json.MarshalIndent(vdc, "", "  ")
-	fmt.Println(string(b))
+	fmt.Println(string(b))Z
 	fmt.Println(response)
 }
