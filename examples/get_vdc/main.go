@@ -20,6 +20,6 @@ func main() {
 		panic(err)
 	}
 	b, _ := json.MarshalIndent(vdc, "", "  ")
-	fmt.Println(string(b))Z
+	fmt.Println(string(b))
 	fmt.Println(response)
 }
