@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/IBM/go-sdk-core/v5/core"
-	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
+	"github.com/IBM/vmware-go-sdk/vmwarev1"
 )
 
 var (
