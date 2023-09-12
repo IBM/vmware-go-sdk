@@ -6009,12 +6009,12 @@ var _ = Describe(`VmwareV1`, func() {
 				siteID := "testString"
 				id := "testString"
 				pvdcID := "testString"
-				body := make(map[string]interface{})
+				body := map[string]interface{}{"anyKey": "anyValue"}
 				updateDirectorSitesPvdcsClusterOptionsModel := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(siteID, id, pvdcID, body)
 				updateDirectorSitesPvdcsClusterOptionsModel.SetSiteID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetPvdcID("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.SetBody(make(map[string]interface{}))
+				updateDirectorSitesPvdcsClusterOptionsModel.SetBody(map[string]interface{}{"anyKey": "anyValue"})
 				updateDirectorSitesPvdcsClusterOptionsModel.SetAcceptLanguage("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetXGlobalTransactionID("testString")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -6022,7 +6022,7 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.ID).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
-				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Body).To(Equal(make(map[string]interface{})))
+				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Body).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -6030,15 +6030,15 @@ var _ = Describe(`VmwareV1`, func() {
 			It(`Invoke NewUpdateVdcOptions successfully`, func() {
 				// Construct an instance of the UpdateVdcOptions model
 				id := "testString"
-				vdcPatch := make(map[string]interface{})
+				vdcPatch := map[string]interface{}{"anyKey": "anyValue"}
 				updateVdcOptionsModel := vmwareService.NewUpdateVdcOptions(id, vdcPatch)
 				updateVdcOptionsModel.SetID("testString")
-				updateVdcOptionsModel.SetVDCPatch(make(map[string]interface{}))
+				updateVdcOptionsModel.SetVDCPatch(map[string]interface{}{"anyKey": "anyValue"})
 				updateVdcOptionsModel.SetAcceptLanguage("testString")
 				updateVdcOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateVdcOptionsModel).ToNot(BeNil())
 				Expect(updateVdcOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(updateVdcOptionsModel.VDCPatch).To(Equal(make(map[string]interface{})))
+				Expect(updateVdcOptionsModel.VDCPatch).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
 				Expect(updateVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
 				Expect(updateVdcOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})

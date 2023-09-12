@@ -515,26 +515,26 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(vdc).ToNot(BeNil())
 		})
-		It(`DeleteVdc request example`, func() {
-			fmt.Println("\nDeleteVdc() result:")
-			// begin-delete_vdc
+		It(`DeleteDirectorSite request example`, func() {
+			fmt.Println("\nDeleteDirectorSite() result:")
+			// begin-delete_director_site
 
-			deleteVdcOptions := vmwareService.NewDeleteVdcOptions(
+			deleteDirectorSiteOptions := vmwareService.NewDeleteDirectorSiteOptions(
 				"testString",
 			)
 
-			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
+			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(vdc, "", "  ")
+			b, _ := json.MarshalIndent(directorSite, "", "  ")
 			fmt.Println(string(b))
 
-			// end-delete_vdc
+			// end-delete_director_site
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(vdc).ToNot(BeNil())
+			Expect(directorSite).ToNot(BeNil())
 		})
 		It(`DeleteDirectorSitesPvdcsCluster request example`, func() {
 			fmt.Println("\nDeleteDirectorSitesPvdcsCluster() result:")
@@ -559,26 +559,26 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(clusterSummary).ToNot(BeNil())
 		})
-		It(`DeleteDirectorSite request example`, func() {
-			fmt.Println("\nDeleteDirectorSite() result:")
-			// begin-delete_director_site
+		It(`DeleteVdc request example`, func() {
+			fmt.Println("\nDeleteVdc() result:")
+			// begin-delete_vdc
 
-			deleteDirectorSiteOptions := vmwareService.NewDeleteDirectorSiteOptions(
+			deleteVdcOptions := vmwareService.NewDeleteVdcOptions(
 				"testString",
 			)
 
-			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
+			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
 			if err != nil {
 				panic(err)
 			}
-			b, _ := json.MarshalIndent(directorSite, "", "  ")
+			b, _ := json.MarshalIndent(vdc, "", "  ")
 			fmt.Println(string(b))
 
-			// end-delete_director_site
+			// end-delete_vdc
 
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(directorSite).ToNot(BeNil())
+			Expect(vdc).ToNot(BeNil())
 		})
 	})
 })

@@ -509,20 +509,21 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteVdc - Delete a virtual data center`, func() {
+	Describe(`DeleteDirectorSite - Delete a director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
-			deleteVdcOptions := &vmwarev1.DeleteVdcOptions{
+		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
+			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
 				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
+				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
+			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(vdc).ToNot(BeNil())
+			Expect(directorSite).ToNot(BeNil())
 		})
 	})
 
@@ -546,21 +547,20 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteDirectorSite - Delete a director site instance`, func() {
+	Describe(`DeleteVdc - Delete a virtual data center`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
-		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
-			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
+		It(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
+			deleteVdcOptions := &vmwarev1.DeleteVdcOptions{
 				ID: core.StringPtr("testString"),
 				AcceptLanguage: core.StringPtr("testString"),
-				XGlobalTransactionID: core.StringPtr("testString"),
 			}
 
-			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
+			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
-			Expect(directorSite).ToNot(BeNil())
+			Expect(vdc).ToNot(BeNil())
 		})
 	})
 })
