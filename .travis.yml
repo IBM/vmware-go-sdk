@@ -3,8 +3,9 @@ language: go
 dist: bionic
 
 go:
-- 1.18.x
-- 1.19.x
+  - 1.19.x
+  - 1.20.x
+  - 1.21.x
 
 
 notifications:
@@ -40,5 +41,5 @@ deploy:
     script: npx semantic-release
     skip_cleanup: true
     on:
-      go: '1.18.x'
+      go: '1.19.x'
       branch: master
