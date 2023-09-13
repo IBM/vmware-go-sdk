@@ -30,8 +30,8 @@ import (
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	common "github.com/IBM/vmware-go-sdk/common"
 	"github.com/go-openapi/strfmt"
+	common "github.ibm.com/VMWSolutions/vmware-go-sdk/common"
 )
 
 // VmwareV1 : IBM Cloud for VMware as a Service API
@@ -615,7 +615,7 @@ func (vmware *VmwareV1) GetDirectorSitesPvdcsWithContext(ctx context.Context, ge
 
 	pathParamsMap := map[string]string{
 		"site_id": *getDirectorSitesPvdcsOptions.SiteID,
-		"id": *getDirectorSitesPvdcsOptions.ID,
+		"id":      *getDirectorSitesPvdcsOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -835,7 +835,7 @@ func (vmware *VmwareV1) GetDirectorInstancesPvdcsClusterWithContext(ctx context.
 
 	pathParamsMap := map[string]string{
 		"site_id": *getDirectorInstancesPvdcsClusterOptions.SiteID,
-		"id": *getDirectorInstancesPvdcsClusterOptions.ID,
+		"id":      *getDirectorInstancesPvdcsClusterOptions.ID,
 		"pvdc_id": *getDirectorInstancesPvdcsClusterOptions.PvdcID,
 	}
 
@@ -904,7 +904,7 @@ func (vmware *VmwareV1) DeleteDirectorSitesPvdcsClusterWithContext(ctx context.C
 
 	pathParamsMap := map[string]string{
 		"site_id": *deleteDirectorSitesPvdcsClusterOptions.SiteID,
-		"id": *deleteDirectorSitesPvdcsClusterOptions.ID,
+		"id":      *deleteDirectorSitesPvdcsClusterOptions.ID,
 		"pvdc_id": *deleteDirectorSitesPvdcsClusterOptions.PvdcID,
 	}
 
@@ -973,7 +973,7 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 
 	pathParamsMap := map[string]string{
 		"site_id": *updateDirectorSitesPvdcsClusterOptions.SiteID,
-		"id": *updateDirectorSitesPvdcsClusterOptions.ID,
+		"id":      *updateDirectorSitesPvdcsClusterOptions.ID,
 		"pvdc_id": *updateDirectorSitesPvdcsClusterOptions.PvdcID,
 	}
 
@@ -1731,10 +1731,10 @@ type ClusterPrototype struct {
 // NewClusterPrototype : Instantiate ClusterPrototype (Generic Model Constructor)
 func (*VmwareV1) NewClusterPrototype(name string, hostCount int64, hostProfile string, fileShares *FileSharesPrototype) (_model *ClusterPrototype, err error) {
 	_model = &ClusterPrototype{
-		Name: core.StringPtr(name),
-		HostCount: core.Int64Ptr(hostCount),
+		Name:        core.StringPtr(name),
+		HostCount:   core.Int64Ptr(hostCount),
 		HostProfile: core.StringPtr(hostProfile),
-		FileShares: fileShares,
+		FileShares:  fileShares,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -1860,7 +1860,7 @@ type CreateDirectorSitesOptions struct {
 // NewCreateDirectorSitesOptions : Instantiate CreateDirectorSitesOptions
 func (*VmwareV1) NewCreateDirectorSitesOptions(name string, pvdcs []PVDCPrototype) *CreateDirectorSitesOptions {
 	return &CreateDirectorSitesOptions{
-		Name: core.StringPtr(name),
+		Name:  core.StringPtr(name),
 		Pvdcs: pvdcs,
 	}
 }
@@ -1942,12 +1942,12 @@ type CreateDirectorSitesPvdcsClustersOptions struct {
 // NewCreateDirectorSitesPvdcsClustersOptions : Instantiate CreateDirectorSitesPvdcsClustersOptions
 func (*VmwareV1) NewCreateDirectorSitesPvdcsClustersOptions(siteID string, pvdcID string, name string, hostCount int64, hostProfile string, fileShares *FileSharesPrototype) *CreateDirectorSitesPvdcsClustersOptions {
 	return &CreateDirectorSitesPvdcsClustersOptions{
-		SiteID: core.StringPtr(siteID),
-		PvdcID: core.StringPtr(pvdcID),
-		Name: core.StringPtr(name),
-		HostCount: core.Int64Ptr(hostCount),
+		SiteID:      core.StringPtr(siteID),
+		PvdcID:      core.StringPtr(pvdcID),
+		Name:        core.StringPtr(name),
+		HostCount:   core.Int64Ptr(hostCount),
 		HostProfile: core.StringPtr(hostProfile),
-		FileShares: fileShares,
+		FileShares:  fileShares,
 	}
 }
 
@@ -2033,10 +2033,10 @@ type CreateDirectorSitesPvdcsOptions struct {
 // NewCreateDirectorSitesPvdcsOptions : Instantiate CreateDirectorSitesPvdcsOptions
 func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, name string, dataCenterName string, clusters []ClusterPrototype) *CreateDirectorSitesPvdcsOptions {
 	return &CreateDirectorSitesPvdcsOptions{
-		SiteID: core.StringPtr(siteID),
-		Name: core.StringPtr(name),
+		SiteID:         core.StringPtr(siteID),
+		Name:           core.StringPtr(name),
 		DataCenterName: core.StringPtr(dataCenterName),
-		Clusters: clusters,
+		Clusters:       clusters,
 	}
 }
 
@@ -2125,7 +2125,7 @@ type CreateVdcOptions struct {
 // NewCreateVdcOptions : Instantiate CreateVdcOptions
 func (*VmwareV1) NewCreateVdcOptions(name string, directorSite *VDCDirectorSitePrototype) *CreateVdcOptions {
 	return &CreateVdcOptions{
-		Name: core.StringPtr(name),
+		Name:         core.StringPtr(name),
 		DirectorSite: directorSite,
 	}
 }
@@ -2298,7 +2298,7 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 func (*VmwareV1) NewDeleteDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string) *DeleteDirectorSitesPvdcsClusterOptions {
 	return &DeleteDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 		PvdcID: core.StringPtr(pvdcID),
 	}
 }
@@ -2419,17 +2419,17 @@ type DirectorSite struct {
 // Constants associated with the DirectorSite.Status property.
 // The status of director site.
 const (
-	DirectorSite_Status_Creating = "creating"
-	DirectorSite_Status_Deleted = "deleted"
-	DirectorSite_Status_Deleting = "deleting"
+	DirectorSite_Status_Creating   = "creating"
+	DirectorSite_Status_Deleted    = "deleted"
+	DirectorSite_Status_Deleting   = "deleting"
 	DirectorSite_Status_ReadyToUse = "ready_to_use"
-	DirectorSite_Status_Updating = "updating"
+	DirectorSite_Status_Updating   = "updating"
 )
 
 // Constants associated with the DirectorSite.Type property.
 // Director site type.
 const (
-	DirectorSite_Type_Multitenant = "multitenant"
+	DirectorSite_Type_Multitenant  = "multitenant"
 	DirectorSite_Type_SingleTenant = "single_tenant"
 )
 
@@ -2740,16 +2740,16 @@ type Edge struct {
 // which the Virtual Data Center was created to be deployed.
 const (
 	Edge_Size_ExtraLarge = "extra_large"
-	Edge_Size_Large = "large"
-	Edge_Size_Medium = "medium"
+	Edge_Size_Large      = "large"
+	Edge_Size_Medium     = "medium"
 )
 
 // Constants associated with the Edge.Status property.
 // Determines the state of the edge.
 const (
-	Edge_Status_Creating = "creating"
-	Edge_Status_Deleted = "deleted"
-	Edge_Status_Deleting = "deleting"
+	Edge_Status_Creating   = "creating"
+	Edge_Status_Deleted    = "deleted"
+	Edge_Status_Deleting   = "deleting"
 	Edge_Status_ReadyToUse = "ready_to_use"
 )
 
@@ -2759,7 +2759,7 @@ const (
 // Efficiency edges allow for multiple VDCs to share some edge resources. Performance edges do not share resources
 // between VDCs.
 const (
-	Edge_Type_Efficiency = "efficiency"
+	Edge_Type_Efficiency  = "efficiency"
 	Edge_Type_Performance = "performance"
 )
 
@@ -2891,7 +2891,7 @@ type GetDirectorInstancesPvdcsClusterOptions struct {
 func (*VmwareV1) NewGetDirectorInstancesPvdcsClusterOptions(siteID string, id string, pvdcID string) *GetDirectorInstancesPvdcsClusterOptions {
 	return &GetDirectorInstancesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 		PvdcID: core.StringPtr(pvdcID),
 	}
 }
@@ -3000,7 +3000,7 @@ type GetDirectorSitesPvdcsOptions struct {
 func (*VmwareV1) NewGetDirectorSitesPvdcsOptions(siteID string, id string) *GetDirectorSitesPvdcsOptions {
 	return &GetDirectorSitesPvdcsOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 	}
 }
 
@@ -3362,7 +3362,7 @@ type MultitenantDirectorSite struct {
 
 // Constants associated with the MultitenantDirectorSite.Services property.
 const (
-	MultitenantDirectorSite_Services_Vcda = "vcda"
+	MultitenantDirectorSite_Services_Vcda  = "vcda"
 	MultitenantDirectorSite_Services_Veeam = "veeam"
 )
 
@@ -3480,11 +3480,11 @@ type PVDC struct {
 // Constants associated with the PVDC.Status property.
 // The status of the provider virtual data center.
 const (
-	PVDC_Status_Creating = "creating"
-	PVDC_Status_Deleted = "deleted"
-	PVDC_Status_Deleting = "deleting"
+	PVDC_Status_Creating   = "creating"
+	PVDC_Status_Deleted    = "deleted"
+	PVDC_Status_Deleting   = "deleting"
 	PVDC_Status_ReadyToUse = "ready_to_use"
-	PVDC_Status_Updating = "updating"
+	PVDC_Status_Updating   = "updating"
 )
 
 // UnmarshalPVDC unmarshals an instance of PVDC from the specified map of raw messages.
@@ -3555,9 +3555,9 @@ type PVDCPrototype struct {
 // NewPVDCPrototype : Instantiate PVDCPrototype (Generic Model Constructor)
 func (*VmwareV1) NewPVDCPrototype(name string, dataCenterName string, clusters []ClusterPrototype) (_model *PVDCPrototype, err error) {
 	_model = &PVDCPrototype{
-		Name: core.StringPtr(name),
+		Name:           core.StringPtr(name),
 		DataCenterName: core.StringPtr(dataCenterName),
-		Clusters: clusters,
+		Clusters:       clusters,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -3688,18 +3688,18 @@ type Service struct {
 // Constants associated with the Service.Name property.
 // Name of the service.
 const (
-	Service_Name_Vcda = "vcda"
+	Service_Name_Vcda  = "vcda"
 	Service_Name_Veeam = "veeam"
 )
 
 // Constants associated with the Service.Status property.
 // The service instance status.
 const (
-	Service_Status_Creating = "creating"
-	Service_Status_Deleted = "deleted"
-	Service_Status_Deleting = "deleting"
+	Service_Status_Creating   = "creating"
+	Service_Status_Deleted    = "deleted"
+	Service_Status_Deleting   = "deleting"
 	Service_Status_ReadyToUse = "ready_to_use"
-	Service_Status_Updating = "updating"
+	Service_Status_Updating   = "updating"
 )
 
 // UnmarshalService unmarshals an instance of Service from the specified map of raw messages.
@@ -3742,7 +3742,7 @@ type ServiceIdentity struct {
 // Constants associated with the ServiceIdentity.Name property.
 // Name of the service.
 const (
-	ServiceIdentity_Name_Vcda = "vcda"
+	ServiceIdentity_Name_Vcda  = "vcda"
 	ServiceIdentity_Name_Veeam = "veeam"
 )
 
@@ -3781,9 +3781,9 @@ type StatusReason struct {
 // Constants associated with the StatusReason.Code property.
 // An error code specific to the error encountered.
 const (
-	StatusReason_Code_InsufficentCpu = "insufficent_cpu"
+	StatusReason_Code_InsufficentCpu       = "insufficent_cpu"
 	StatusReason_Code_InsufficentCpuAndRam = "insufficent_cpu_and_ram"
-	StatusReason_Code_InsufficentRam = "insufficent_ram"
+	StatusReason_Code_InsufficentRam       = "insufficent_ram"
 )
 
 // UnmarshalStatusReason unmarshals an instance of StatusReason from the specified map of raw messages.
@@ -3960,9 +3960,9 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string, body map[string]interface{}) *UpdateDirectorSitesPvdcsClusterOptions {
 	return &UpdateDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 		PvdcID: core.StringPtr(pvdcID),
-		Body: body,
+		Body:   body,
 	}
 }
 
@@ -4026,7 +4026,7 @@ type UpdateVdcOptions struct {
 // NewUpdateVdcOptions : Instantiate UpdateVdcOptions
 func (*VmwareV1) NewUpdateVdcOptions(id string, vDCPatch map[string]interface{}) *UpdateVdcOptions {
 	return &UpdateVdcOptions{
-		ID: core.StringPtr(id),
+		ID:       core.StringPtr(id),
 		VDCPatch: vDCPatch,
 	}
 }
@@ -4127,18 +4127,18 @@ type VDC struct {
 // Constants associated with the VDC.Status property.
 // Determines the state of the virtual data center.
 const (
-	VDC_Status_Creating = "creating"
-	VDC_Status_Deleted = "deleted"
-	VDC_Status_Deleting = "deleting"
-	VDC_Status_Failed = "failed"
-	VDC_Status_Modifying = "modifying"
+	VDC_Status_Creating   = "creating"
+	VDC_Status_Deleted    = "deleted"
+	VDC_Status_Deleting   = "deleting"
+	VDC_Status_Failed     = "failed"
+	VDC_Status_Modifying  = "modifying"
 	VDC_Status_ReadyToUse = "ready_to_use"
 )
 
 // Constants associated with the VDC.Type property.
 // Determines whether this virtual data center is in a single-tenant or multitenant director site.
 const (
-	VDC_Type_Multitenant = "multitenant"
+	VDC_Type_Multitenant  = "multitenant"
 	VDC_Type_SingleTenant = "single_tenant"
 )
 
@@ -4281,7 +4281,7 @@ type VDCDirectorSitePrototype struct {
 // NewVDCDirectorSitePrototype : Instantiate VDCDirectorSitePrototype (Generic Model Constructor)
 func (*VmwareV1) NewVDCDirectorSitePrototype(id string, pvdc *DirectorSitePVDC) (_model *VDCDirectorSitePrototype, err error) {
 	_model = &VDCDirectorSitePrototype{
-		ID: core.StringPtr(id),
+		ID:   core.StringPtr(id),
 		Pvdc: pvdc,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -4316,14 +4316,14 @@ type VDCEdgePrototype struct {
 // The size of the Edge. Only used for Edges of type performance.
 const (
 	VDCEdgePrototype_Size_ExtraLarge = "extra_large"
-	VDCEdgePrototype_Size_Large = "large"
-	VDCEdgePrototype_Size_Medium = "medium"
+	VDCEdgePrototype_Size_Large      = "large"
+	VDCEdgePrototype_Size_Medium     = "medium"
 )
 
 // Constants associated with the VDCEdgePrototype.Type property.
 // The type of Edge to be deployed on the Virtual Data Center.
 const (
-	VDCEdgePrototype_Type_Efficiency = "efficiency"
+	VDCEdgePrototype_Type_Efficiency  = "efficiency"
 	VDCEdgePrototype_Type_Performance = "performance"
 )
 
@@ -4405,7 +4405,7 @@ type VDCProviderType struct {
 // The name of the provider type.
 const (
 	VDCProviderType_Name_OnDemand = "on_demand"
-	VDCProviderType_Name_Paygo = "paygo"
+	VDCProviderType_Name_Paygo    = "paygo"
 	VDCProviderType_Name_Reserved = "reserved"
 )
 

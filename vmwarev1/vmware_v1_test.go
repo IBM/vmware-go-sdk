@@ -27,10 +27,10 @@ import (
 	"time"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/IBM/vmware-go-sdk/vmwarev1"
 	"github.com/go-openapi/strfmt"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
 )
 
 var _ = Describe(`VmwareV1`, func() {
@@ -66,14 +66,13 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_URL": "https://vmwarev1/api",
+				"VMWARE_URL":       "https://vmwarev1/api",
 				"VMWARE_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
-				})
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
 				Expect(vmwareService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -102,8 +101,7 @@ var _ = Describe(`VmwareV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
-				})
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
 				err := vmwareService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
@@ -121,13 +119,12 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_URL": "https://vmwarev1/api",
+				"VMWARE_URL":       "https://vmwarev1/api",
 				"VMWARE_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
-			})
+			vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(vmwareService).To(BeNil())
@@ -138,7 +135,7 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_AUTH_TYPE":   "NOAuth",
+				"VMWARE_AUTH_TYPE": "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
