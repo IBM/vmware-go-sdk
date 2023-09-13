@@ -1,3 +1,13 @@
+## [0.0.3](https://github.ibm.com/VMWSolutions/vmware-go-sdk/compare/v0.0.2...v0.0.3) (2023-09-13)
+
+
+### Bug Fixes
+
+* fix semantic-release usage ([#17](https://github.ibm.com/VMWSolutions/vmware-go-sdk/issues/17)) ([f4ebcdb](https://github.ibm.com/VMWSolutions/vmware-go-sdk/commit/f4ebcdbe1cd478f6d50a50f71da21a70217cb5aa))
+* fix the module name in go.mod ([424d000](https://github.ibm.com/VMWSolutions/vmware-go-sdk/commit/424d000d342fc0e9fa994c50ab2899f5e4a29208))
+* revert import sdk path name for internal testing before publish ([8c52b13](https://github.ibm.com/VMWSolutions/vmware-go-sdk/commit/8c52b13e9bf47684756d0937d10c14e986144d54))
+* testing on semantic-release usage ([#21](https://github.ibm.com/VMWSolutions/vmware-go-sdk/issues/21)) ([7357047](https://github.ibm.com/VMWSolutions/vmware-go-sdk/commit/73570476329613466b96f8594be89fdfe77528a3))
+
 ## [0.0.2](https://github.ibm.com/VMWSolutions/vmware-go-sdk/compare/v0.0.1...v0.0.2) (2023-01-06)
 
 
