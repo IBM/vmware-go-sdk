@@ -1,3 +1,4 @@
+//go:build examples
 // +build examples
 
 /**
@@ -24,12 +25,11 @@ import (
 	"os"
 
 	"github.com/IBM/go-sdk-core/v5/core"
-	"github.com/IBM/vmware-go-sdk/vmwarev1"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
+	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
 )
 
-//
 // This file provides an example of how to use the vmware service.
 //
 // The following configuration properties are assumed to be defined:
@@ -41,14 +41,13 @@ import (
 // These configuration properties can be exported as environment variables, or stored
 // in a configuration file and then:
 // export IBM_CREDENTIALS_FILE=<name of configuration file>
-//
 var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 	const externalConfigFile = "../vmware_v1.env"
 
 	var (
 		vmwareService *vmwarev1.VmwareV1
-		config       map[string]string
+		config        map[string]string
 	)
 
 	var shouldSkipTest = func() {
@@ -106,20 +105,19 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nCreateDirectorSites() result:")
 			// begin-create_director_sites
 
-			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
-			}
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name: core.StringPtr("testString"),
-				HostCount: core.Int64Ptr(int64(2)),
+				Name:        core.StringPtr("testString"),
+				HostCount:   core.Int64Ptr(int64(2)),
 				HostProfile: core.StringPtr("testString"),
-				FileShares: fileSharesPrototypeModel,
+				FileShares:  fileSharesPrototypeModel,
 			}
 
 			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
-				Name: core.StringPtr("testString"),
+				Name:           core.StringPtr("testString"),
 				DataCenterName: core.StringPtr("testString"),
-				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
+				Clusters:       []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 			}
 
 			createDirectorSitesOptions := vmwareService.NewCreateDirectorSitesOptions(
@@ -205,14 +203,13 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nCreateDirectorSitesPvdcs() result:")
 			// begin-create_director_sites_pvdcs
 
-			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
-			}
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name: core.StringPtr("testString"),
-				HostCount: core.Int64Ptr(int64(2)),
+				Name:        core.StringPtr("testString"),
+				HostCount:   core.Int64Ptr(int64(2)),
 				HostProfile: core.StringPtr("testString"),
-				FileShares: fileSharesPrototypeModel,
+				FileShares:  fileSharesPrototypeModel,
 			}
 
 			createDirectorSitesPvdcsOptions := vmwareService.NewCreateDirectorSitesPvdcsOptions(
@@ -283,8 +280,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nCreateDirectorSitesPvdcsClusters() result:")
 			// begin-create_director_sites_pvdcs_clusters
 
-			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
-			}
+			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 			createDirectorSitesPvdcsClustersOptions := vmwareService.NewCreateDirectorSitesPvdcsClustersOptions(
 				"testString",
@@ -335,8 +331,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nUpdateDirectorSitesPvdcsCluster() result:")
 			// begin-update_director_sites_pvdcs_cluster
 
-			clusterPatchModel := &vmwarev1.ClusterPatch{
-			}
+			clusterPatchModel := &vmwarev1.ClusterPatch{}
 			clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
 
@@ -445,7 +440,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			}
 
 			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
-				ID: core.StringPtr("testString"),
+				ID:   core.StringPtr("testString"),
 				Pvdc: directorSitePvdcModel,
 			}
 
@@ -492,8 +487,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fmt.Println("\nUpdateVdc() result:")
 			// begin-update_vdc
 
-			vdcPatchModel := &vmwarev1.VDCPatch{
-			}
+			vdcPatchModel := &vmwarev1.VDCPatch{}
 			vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
 
