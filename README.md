@@ -1,7 +1,7 @@
 [![Build Status](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
-# IBM Cloud VMware Go SDK Version 0.0.2
+# IBM Cloud VMware Go SDK Version 0.0.3
 Go client library to interact with the various [IBM Cloud VMware Service APIs](https://test.cloud.ibm.com/apidocs/vmware-service#vmware-service).
 
 Disclaimer: this SDK is being released initially as a **pre-release** version.
@@ -55,7 +55,7 @@ Service Name | Package name
 * Go version 1.19 or above.
 
 ## Installation
-The current version of this SDK: 0.0.2
+The current version of this SDK: 0.0.3
 
 ### Go modules  
 If your application uses Go modules for dependency management (recommended), just add an import for each service 
