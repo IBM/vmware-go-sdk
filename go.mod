@@ -1,4 +1,4 @@
-module github.com/IBM/vmware-go-sdk
+module github.ibm.com/VMWSolutions/vmware-go-sdk
 
 go 1.19
 
