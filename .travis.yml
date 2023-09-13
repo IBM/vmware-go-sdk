@@ -25,7 +25,7 @@ install:
 
 script:
   - make travis-ci
-    
+
 before_deploy:
   - nvm install 14
   - npm install -g npm@6.x
