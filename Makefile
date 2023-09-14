@@ -2,26 +2,26 @@
 GO=go
 LINT=golangci-lint
 GOSEC=gosec
-
+TEST_TAGS=
 COVERAGE = -coverprofile=coverage.txt -covermode=atomic
 
 all: tidy test lint
-travis-ci: test-cov lint scan-gosec tidy
+travis-ci: tidy test-cov lint scan-gosec
 
 test:
-	${GO} test `${GO} list ./...`
+	${GO} test ./... ${TEST_TAGS}
 
 test-cov:
-	${GO} test `${GO} list ./...` ${COVERAGE}
+	${GO} test ./... ${TEST_TAGS} ${COVERAGE}
 
 test-int:
-	${GO} test `${GO} list ./...` -tags=integration
+	${GO} test ./... -tags=integration
 
 test-int-cov:
-	${GO} test `${GO} list ./...` -tags=integration ${COVERAGE}
+	${GO} test ./... -tags=integration ${COVERAGE}
 
 lint:
-	${LINT} run --build-tags=integration,examples
+	${LINT} run --build-tags=integration,examples --timeout 3m
 
 scan-gosec:
 	${GOSEC} ./...
