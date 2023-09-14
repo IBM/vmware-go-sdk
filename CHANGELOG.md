@@ -1,3 +1,10 @@
+## [0.0.4](https://github.ibm.com/VMWSolutions/vmware-go-sdk/compare/v0.0.3...v0.0.4) (2023-09-14)
+
+
+### Bug Fixes
+
+* update the Makefile ([#25](https://github.ibm.com/VMWSolutions/vmware-go-sdk/issues/25)) ([6e998f9](https://github.ibm.com/VMWSolutions/vmware-go-sdk/commit/6e998f9cf49043445e1d7274c779d7451b37db70))
+
 ## [0.0.3](https://github.ibm.com/VMWSolutions/vmware-go-sdk/compare/v0.0.2...v0.0.3) (2023-09-13)
 
 
