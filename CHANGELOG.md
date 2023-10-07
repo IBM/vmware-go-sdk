@@ -1,3 +1,10 @@
+## [0.0.5](https://github.ibm.com/VMWSolutions/vmware-go-sdk/compare/v0.0.4...v0.0.5) (2023-10-07)
+
+
+### Bug Fixes
+
+* Replace example values with API Definition values ([#26](https://github.ibm.com/VMWSolutions/vmware-go-sdk/issues/26)) ([ce5bf1b](https://github.ibm.com/VMWSolutions/vmware-go-sdk/commit/ce5bf1b0b9ea67bedbfc4330f1b93f77c8602915))
+
 ## [0.0.4](https://github.ibm.com/VMWSolutions/vmware-go-sdk/compare/v0.0.3...v0.0.4) (2023-09-14)
 
 
