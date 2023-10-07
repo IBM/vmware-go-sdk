@@ -2341,7 +2341,7 @@ func (options *DeleteDirectorSitesPvdcsClusterOptions) SetHeaders(param map[stri
 
 // DeleteVdcOptions : The DeleteVdc options.
 type DeleteVdcOptions struct {
-	// A unique identifier for a speficied virtual data center.
+	// A unique identifier for a specified virtual data center.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Language.
@@ -3036,7 +3036,7 @@ func (options *GetDirectorSitesPvdcsOptions) SetHeaders(param map[string]string)
 
 // GetVdcOptions : The GetVdc options.
 type GetVdcOptions struct {
-	// A unique identifier for a speficied virtual data center.
+	// A unique identifier for a specified virtual data center.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// Language.
@@ -3467,7 +3467,7 @@ type PVDC struct {
 	// The hyperlink of the provider virtual data center resource.
 	Href *string `json:"href" validate:"required"`
 
-	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availibility boundaries.
+	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availability boundaries.
 	Clusters []ClusterSummary `json:"clusters,omitempty"`
 
 	// The status of the provider virtual data center.
@@ -4010,7 +4010,7 @@ func (options *UpdateDirectorSitesPvdcsClusterOptions) SetHeaders(param map[stri
 
 // UpdateVdcOptions : The UpdateVdc options.
 type UpdateVdcOptions struct {
-	// A unique identifier for a speficied virtual data center.
+	// A unique identifier for a specified virtual data center.
 	ID *string `json:"id" validate:"required,ne="`
 
 	// JSON Merge-Patch content for update_vdc.

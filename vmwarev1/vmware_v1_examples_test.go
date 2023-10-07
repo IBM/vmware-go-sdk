@@ -30,6 +30,7 @@ import (
 	"github.ibm.com/VMWSolutions/vmware-go-sdk/vmwarev1"
 )
 
+//
 // This file provides an example of how to use the vmware service.
 //
 // The following configuration properties are assumed to be defined:
@@ -41,6 +42,7 @@ import (
 // These configuration properties can be exported as environment variables, or stored
 // in a configuration file and then:
 // export IBM_CREDENTIALS_FILE=<name of configuration file>
+//
 var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 	const externalConfigFile = "../vmware_v1.env"
@@ -108,22 +110,24 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name:        core.StringPtr("testString"),
+				Name:        core.StringPtr("cluster_1"),
 				HostCount:   core.Int64Ptr(int64(2)),
-				HostProfile: core.StringPtr("testString"),
+				HostProfile: core.StringPtr("BM_2S_20_CORES_192_GB"),
 				FileShares:  fileSharesPrototypeModel,
 			}
 
 			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
-				Name:           core.StringPtr("testString"),
-				DataCenterName: core.StringPtr("testString"),
+				Name:           core.StringPtr("pvdc-1"),
+				DataCenterName: core.StringPtr("dal10"),
 				Clusters:       []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 			}
 
 			createDirectorSitesOptions := vmwareService.NewCreateDirectorSitesOptions(
-				"testString",
+				"my_director_site",
 				[]vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
 			)
+			createDirectorSitesOptions.SetAcceptLanguage("en-us")
+			createDirectorSitesOptions.SetXGlobalTransactionID("transaction1")
 
 			directorSite, response, err := vmwareService.CreateDirectorSites(createDirectorSitesOptions)
 			if err != nil {
@@ -143,6 +147,8 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-list_director_sites
 
 			listDirectorSitesOptions := vmwareService.NewListDirectorSitesOptions()
+			listDirectorSitesOptions.SetAcceptLanguage("en-us")
+			listDirectorSitesOptions.SetXGlobalTransactionID("transaction1")
 
 			directorSiteCollection, response, err := vmwareService.ListDirectorSites(listDirectorSitesOptions)
 			if err != nil {
@@ -162,8 +168,10 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-get_director_site
 
 			getDirectorSiteOptions := vmwareService.NewGetDirectorSiteOptions(
-				"testString",
+				"site_id",
 			)
+			getDirectorSiteOptions.SetAcceptLanguage("en-us")
+			getDirectorSiteOptions.SetXGlobalTransactionID("transaction1")
 
 			directorSite, response, err := vmwareService.GetDirectorSite(getDirectorSiteOptions)
 			if err != nil {
@@ -183,8 +191,10 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-list_director_sites_pvdcs
 
 			listDirectorSitesPvdcsOptions := vmwareService.NewListDirectorSitesPvdcsOptions(
-				"testString",
+				"site_id",
 			)
+			listDirectorSitesPvdcsOptions.SetAcceptLanguage("en-us")
+			listDirectorSitesPvdcsOptions.SetXGlobalTransactionID("transaction1")
 
 			pvdcCollection, response, err := vmwareService.ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions)
 			if err != nil {
@@ -206,18 +216,20 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name:        core.StringPtr("testString"),
+				Name:        core.StringPtr("cluster_1"),
 				HostCount:   core.Int64Ptr(int64(2)),
-				HostProfile: core.StringPtr("testString"),
+				HostProfile: core.StringPtr("BM_2S_20_CORES_192_GB"),
 				FileShares:  fileSharesPrototypeModel,
 			}
 
 			createDirectorSitesPvdcsOptions := vmwareService.NewCreateDirectorSitesPvdcsOptions(
-				"testString",
-				"testString",
-				"testString",
+				"site_id",
+				"pvdc-1",
+				"dal10",
 				[]vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 			)
+			createDirectorSitesPvdcsOptions.SetAcceptLanguage("en-us")
+			createDirectorSitesPvdcsOptions.SetXGlobalTransactionID("transaction1")
 
 			pvdc, response, err := vmwareService.CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions)
 			if err != nil {
@@ -237,9 +249,11 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-get_director_sites_pvdcs
 
 			getDirectorSitesPvdcsOptions := vmwareService.NewGetDirectorSitesPvdcsOptions(
-				"testString",
-				"testString",
+				"site_id",
+				"pvdc_id",
 			)
+			getDirectorSitesPvdcsOptions.SetAcceptLanguage("en-us")
+			getDirectorSitesPvdcsOptions.SetXGlobalTransactionID("transaction1")
 
 			pvdc, response, err := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions)
 			if err != nil {
@@ -259,9 +273,11 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-list_director_sites_pvdcs_clusters
 
 			listDirectorSitesPvdcsClustersOptions := vmwareService.NewListDirectorSitesPvdcsClustersOptions(
-				"testString",
-				"testString",
+				"site_id",
+				"pvdc_id",
 			)
+			listDirectorSitesPvdcsClustersOptions.SetAcceptLanguage("en-us")
+			listDirectorSitesPvdcsClustersOptions.SetXGlobalTransactionID("transaction1")
 
 			clusterCollection, response, err := vmwareService.ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions)
 			if err != nil {
@@ -283,13 +299,15 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{}
 
 			createDirectorSitesPvdcsClustersOptions := vmwareService.NewCreateDirectorSitesPvdcsClustersOptions(
-				"testString",
-				"testString",
-				"testString",
+				"site_id",
+				"pvdc_id",
+				"cluster_1",
 				int64(2),
-				"testString",
+				"BM_2S_20_CORES_192_GB",
 				fileSharesPrototypeModel,
 			)
+			createDirectorSitesPvdcsClustersOptions.SetAcceptLanguage("en-us")
+			createDirectorSitesPvdcsClustersOptions.SetXGlobalTransactionID("transaction1")
 
 			cluster, response, err := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions)
 			if err != nil {
@@ -309,10 +327,12 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-get_director_instances_pvdcs_cluster
 
 			getDirectorInstancesPvdcsClusterOptions := vmwareService.NewGetDirectorInstancesPvdcsClusterOptions(
-				"testString",
-				"testString",
-				"testString",
+				"site_id",
+				"cluster_id",
+				"pvdc_id",
 			)
+			getDirectorInstancesPvdcsClusterOptions.SetAcceptLanguage("en-us")
+			getDirectorInstancesPvdcsClusterOptions.SetXGlobalTransactionID("transaction1")
 
 			cluster, response, err := vmwareService.GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptions)
 			if err != nil {
@@ -336,11 +356,13 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(asPatchErr).To(BeNil())
 
 			updateDirectorSitesPvdcsClusterOptions := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(
-				"testString",
-				"testString",
-				"testString",
+				"site_id",
+				"cluster_id",
+				"pvdc_id",
 				clusterPatchModelAsPatch,
 			)
+			updateDirectorSitesPvdcsClusterOptions.SetAcceptLanguage("en-us")
+			updateDirectorSitesPvdcsClusterOptions.SetXGlobalTransactionID("transaction1")
 
 			updateCluster, response, err := vmwareService.UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions)
 			if err != nil {
@@ -360,6 +382,8 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-list_director_site_regions
 
 			listDirectorSiteRegionsOptions := vmwareService.NewListDirectorSiteRegionsOptions()
+			listDirectorSiteRegionsOptions.SetAcceptLanguage("en-us")
+			listDirectorSiteRegionsOptions.SetXGlobalTransactionID("transaction1")
 
 			directorSiteRegionCollection, response, err := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptions)
 			if err != nil {
@@ -379,6 +403,8 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-list_multitenant_director_sites
 
 			listMultitenantDirectorSitesOptions := vmwareService.NewListMultitenantDirectorSitesOptions()
+			listMultitenantDirectorSitesOptions.SetAcceptLanguage("en-us")
+			listMultitenantDirectorSitesOptions.SetXGlobalTransactionID("transaction1")
 
 			multitenantDirectorSiteCollection, response, err := vmwareService.ListMultitenantDirectorSites(listMultitenantDirectorSitesOptions)
 			if err != nil {
@@ -398,6 +424,8 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-list_director_site_host_profiles
 
 			listDirectorSiteHostProfilesOptions := vmwareService.NewListDirectorSiteHostProfilesOptions()
+			listDirectorSiteHostProfilesOptions.SetAcceptLanguage("en-us")
+			listDirectorSiteHostProfilesOptions.SetXGlobalTransactionID("transaction1")
 
 			directorSiteHostProfileCollection, response, err := vmwareService.ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions)
 			if err != nil {
@@ -417,6 +445,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-list_vdcs
 
 			listVdcsOptions := vmwareService.NewListVdcsOptions()
+			listVdcsOptions.SetAcceptLanguage("en-us")
 
 			vdcCollection, response, err := vmwareService.ListVdcs(listVdcsOptions)
 			if err != nil {
@@ -436,18 +465,19 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-create_vdc
 
 			directorSitePvdcModel := &vmwarev1.DirectorSitePVDC{
-				ID: core.StringPtr("testString"),
+				ID: core.StringPtr("pvdc_id"),
 			}
 
 			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
-				ID:   core.StringPtr("testString"),
+				ID:   core.StringPtr("site_id"),
 				Pvdc: directorSitePvdcModel,
 			}
 
 			createVdcOptions := vmwareService.NewCreateVdcOptions(
-				"testString",
+				"sampleVDC",
 				vdcDirectorSitePrototypeModel,
 			)
+			createVdcOptions.SetAcceptLanguage("en-us")
 
 			vdc, response, err := vmwareService.CreateVdc(createVdcOptions)
 			if err != nil {
@@ -467,8 +497,9 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-get_vdc
 
 			getVdcOptions := vmwareService.NewGetVdcOptions(
-				"testString",
+				"vdc_id",
 			)
+			getVdcOptions.SetAcceptLanguage("en-us")
 
 			vdc, response, err := vmwareService.GetVdc(getVdcOptions)
 			if err != nil {
@@ -492,9 +523,10 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(asPatchErr).To(BeNil())
 
 			updateVdcOptions := vmwareService.NewUpdateVdcOptions(
-				"testString",
+				"vdc_id",
 				vdcPatchModelAsPatch,
 			)
+			updateVdcOptions.SetAcceptLanguage("en-us")
 
 			vdc, response, err := vmwareService.UpdateVdc(updateVdcOptions)
 			if err != nil {
@@ -514,8 +546,10 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-delete_director_site
 
 			deleteDirectorSiteOptions := vmwareService.NewDeleteDirectorSiteOptions(
-				"testString",
+				"site_id",
 			)
+			deleteDirectorSiteOptions.SetAcceptLanguage("en-us")
+			deleteDirectorSiteOptions.SetXGlobalTransactionID("transaction1")
 
 			directorSite, response, err := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptions)
 			if err != nil {
@@ -535,10 +569,12 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-delete_director_sites_pvdcs_cluster
 
 			deleteDirectorSitesPvdcsClusterOptions := vmwareService.NewDeleteDirectorSitesPvdcsClusterOptions(
-				"testString",
-				"testString",
-				"testString",
+				"site_id",
+				"cluster_id",
+				"pvdc_id",
 			)
+			deleteDirectorSitesPvdcsClusterOptions.SetAcceptLanguage("en-us")
+			deleteDirectorSitesPvdcsClusterOptions.SetXGlobalTransactionID("transaction1")
 
 			clusterSummary, response, err := vmwareService.DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions)
 			if err != nil {
@@ -558,8 +594,9 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-delete_vdc
 
 			deleteVdcOptions := vmwareService.NewDeleteVdcOptions(
-				"testString",
+				"vdc_id",
 			)
+			deleteVdcOptions.SetAcceptLanguage("en-us")
 
 			vdc, response, err := vmwareService.DeleteVdc(deleteVdcOptions)
 			if err != nil {

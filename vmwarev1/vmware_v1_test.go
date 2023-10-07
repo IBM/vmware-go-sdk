@@ -187,9 +187,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -212,20 +212,20 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the PVDCPrototype model
 				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
-				pvdcPrototypeModel.Name = core.StringPtr("testString")
-				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Name = core.StringPtr("pvdc-1")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("dal10")
 				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the ServiceIdentity model
 				serviceIdentityModel := new(vmwarev1.ServiceIdentity)
@@ -233,12 +233,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
-				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.Name = core.StringPtr("my_director_site")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
-				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.CreateDirectorSites(createDirectorSitesOptionsModel)
@@ -286,16 +286,16 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully with retries`, func() {
@@ -316,20 +316,20 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the PVDCPrototype model
 				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
-				pvdcPrototypeModel.Name = core.StringPtr("testString")
-				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Name = core.StringPtr("pvdc-1")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("dal10")
 				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the ServiceIdentity model
 				serviceIdentityModel := new(vmwarev1.ServiceIdentity)
@@ -337,12 +337,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
-				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.Name = core.StringPtr("my_director_site")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
-				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -396,13 +396,13 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully`, func() {
@@ -428,20 +428,20 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the PVDCPrototype model
 				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
-				pvdcPrototypeModel.Name = core.StringPtr("testString")
-				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Name = core.StringPtr("pvdc-1")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("dal10")
 				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the ServiceIdentity model
 				serviceIdentityModel := new(vmwarev1.ServiceIdentity)
@@ -449,12 +449,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
-				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.Name = core.StringPtr("my_director_site")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
-				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -481,20 +481,20 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the PVDCPrototype model
 				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
-				pvdcPrototypeModel.Name = core.StringPtr("testString")
-				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Name = core.StringPtr("pvdc-1")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("dal10")
 				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the ServiceIdentity model
 				serviceIdentityModel := new(vmwarev1.ServiceIdentity)
@@ -502,12 +502,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
-				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.Name = core.StringPtr("my_director_site")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
-				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -555,20 +555,20 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the PVDCPrototype model
 				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
-				pvdcPrototypeModel.Name = core.StringPtr("testString")
-				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Name = core.StringPtr("pvdc-1")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("dal10")
 				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the ServiceIdentity model
 				serviceIdentityModel := new(vmwarev1.ServiceIdentity)
@@ -576,12 +576,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesOptions model
 				createDirectorSitesOptionsModel := new(vmwarev1.CreateDirectorSitesOptions)
-				createDirectorSitesOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.Name = core.StringPtr("my_director_site")
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
-				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -608,9 +608,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listDirectorSitesPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -626,8 +626,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesOptions model
 				listDirectorSitesOptionsModel := new(vmwarev1.ListDirectorSitesOptions)
-				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.ListDirectorSites(listDirectorSitesOptionsModel)
@@ -659,16 +659,16 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully with retries`, func() {
@@ -682,8 +682,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesOptions model
 				listDirectorSitesOptionsModel := new(vmwarev1.ListDirectorSitesOptions)
-				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -721,13 +721,13 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully`, func() {
@@ -746,8 +746,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesOptions model
 				listDirectorSitesOptionsModel := new(vmwarev1.ListDirectorSitesOptions)
-				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -767,8 +767,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesOptions model
 				listDirectorSitesOptionsModel := new(vmwarev1.ListDirectorSitesOptions)
-				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -802,8 +802,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesOptions model
 				listDirectorSitesOptionsModel := new(vmwarev1.ListDirectorSitesOptions)
-				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -820,7 +820,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`GetDirectorSite(getDirectorSiteOptions *GetDirectorSiteOptions) - Operation response error`, func() {
-		getDirectorSitePath := "/director_sites/testString"
+		getDirectorSitePath := "/director_sites/site_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -830,9 +830,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getDirectorSitePath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -848,9 +848,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSiteOptions model
 				getDirectorSiteOptionsModel := new(vmwarev1.GetDirectorSiteOptions)
-				getDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.GetDirectorSite(getDirectorSiteOptionsModel)
@@ -871,7 +871,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`GetDirectorSite(getDirectorSiteOptions *GetDirectorSiteOptions)`, func() {
-		getDirectorSitePath := "/director_sites/testString"
+		getDirectorSitePath := "/director_sites/site_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -882,16 +882,16 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully with retries`, func() {
@@ -905,9 +905,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSiteOptions model
 				getDirectorSiteOptionsModel := new(vmwarev1.GetDirectorSiteOptions)
-				getDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -945,13 +945,13 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully`, func() {
@@ -970,9 +970,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSiteOptions model
 				getDirectorSiteOptionsModel := new(vmwarev1.GetDirectorSiteOptions)
-				getDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -992,9 +992,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSiteOptions model
 				getDirectorSiteOptionsModel := new(vmwarev1.GetDirectorSiteOptions)
-				getDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -1035,9 +1035,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSiteOptions model
 				getDirectorSiteOptionsModel := new(vmwarev1.GetDirectorSiteOptions)
-				getDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				getDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1054,7 +1054,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions) - Operation response error`, func() {
-		deleteDirectorSitePath := "/director_sites/testString"
+		deleteDirectorSitePath := "/director_sites/site_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1064,9 +1064,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitePath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -1082,9 +1082,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
-				deleteDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptionsModel)
@@ -1105,7 +1105,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
-		deleteDirectorSitePath := "/director_sites/testString"
+		deleteDirectorSitePath := "/director_sites/site_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1116,16 +1116,16 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully with retries`, func() {
@@ -1139,9 +1139,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
-				deleteDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1179,13 +1179,13 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully`, func() {
@@ -1204,9 +1204,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
-				deleteDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1226,9 +1226,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
-				deleteDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -1269,9 +1269,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSiteOptions model
 				deleteDirectorSiteOptionsModel := new(vmwarev1.DeleteDirectorSiteOptions)
-				deleteDirectorSiteOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSiteOptionsModel.ID = core.StringPtr("site_id")
+				deleteDirectorSiteOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSiteOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSiteOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1288,7 +1288,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions) - Operation response error`, func() {
-		listDirectorSitesPvdcsPath := "/director_sites/testString/pvdcs"
+		listDirectorSitesPvdcsPath := "/director_sites/site_id/pvdcs"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1298,9 +1298,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listDirectorSitesPvdcsPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -1316,9 +1316,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsOptions model
 				listDirectorSitesPvdcsOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsOptions)
-				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptionsModel)
@@ -1339,7 +1339,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions)`, func() {
-		listDirectorSitesPvdcsPath := "/director_sites/testString/pvdcs"
+		listDirectorSitesPvdcsPath := "/director_sites/site_id/pvdcs"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1350,16 +1350,16 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcs successfully with retries`, func() {
@@ -1373,9 +1373,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsOptions model
 				listDirectorSitesPvdcsOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsOptions)
-				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1413,13 +1413,13 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"pvdcs": [{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}]}`)
+					fmt.Fprintf(res, "%s", `{"pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcs successfully`, func() {
@@ -1438,9 +1438,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsOptions model
 				listDirectorSitesPvdcsOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsOptions)
-				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1460,9 +1460,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsOptions model
 				listDirectorSitesPvdcsOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsOptions)
-				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -1503,9 +1503,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsOptions model
 				listDirectorSitesPvdcsOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsOptions)
-				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1522,7 +1522,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions) - Operation response error`, func() {
-		createDirectorSitesPvdcsPath := "/director_sites/testString/pvdcs"
+		createDirectorSitesPvdcsPath := "/director_sites/site_id/pvdcs"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1532,9 +1532,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPvdcsPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -1557,19 +1557,19 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
-				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("pvdc-1")
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("dal10")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
-				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptionsModel)
@@ -1590,7 +1590,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions)`, func() {
-		createDirectorSitesPvdcsPath := "/director_sites/testString/pvdcs"
+		createDirectorSitesPvdcsPath := "/director_sites/site_id/pvdcs"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1617,16 +1617,16 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSitesPvdcs successfully with retries`, func() {
@@ -1647,19 +1647,19 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
-				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("pvdc-1")
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("dal10")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
-				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -1713,13 +1713,13 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSitesPvdcs successfully`, func() {
@@ -1745,19 +1745,19 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
-				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("pvdc-1")
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("dal10")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
-				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -1784,19 +1784,19 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
-				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("pvdc-1")
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("dal10")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
-				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -1844,19 +1844,19 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
 				createDirectorSitesPvdcsOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsOptions)
-				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsOptionsModel.Name = core.StringPtr("pvdc-1")
+				createDirectorSitesPvdcsOptionsModel.DataCenterName = core.StringPtr("dal10")
 				createDirectorSitesPvdcsOptionsModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
-				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -1873,7 +1873,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions) - Operation response error`, func() {
-		getDirectorSitesPvdcsPath := "/director_sites/testString/pvdcs/testString"
+		getDirectorSitesPvdcsPath := "/director_sites/site_id/pvdcs/pvdc_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1883,9 +1883,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getDirectorSitesPvdcsPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -1901,10 +1901,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSitesPvdcsOptions model
 				getDirectorSitesPvdcsOptionsModel := new(vmwarev1.GetDirectorSitesPvdcsOptions)
-				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("pvdc_id")
+				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptionsModel)
@@ -1925,7 +1925,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions)`, func() {
-		getDirectorSitesPvdcsPath := "/director_sites/testString/pvdcs/testString"
+		getDirectorSitesPvdcsPath := "/director_sites/site_id/pvdcs/pvdc_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -1936,16 +1936,16 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSitesPvdcs successfully with retries`, func() {
@@ -1959,10 +1959,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSitesPvdcsOptions model
 				getDirectorSitesPvdcsOptionsModel := new(vmwarev1.GetDirectorSitesPvdcsOptions)
-				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("pvdc_id")
+				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2000,13 +2000,13 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "data_center_name": "DataCenterName", "id": "ID", "href": "Href", "clusters": [{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}`)
+					fmt.Fprintf(res, "%s", `{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSitesPvdcs successfully`, func() {
@@ -2025,10 +2025,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSitesPvdcsOptions model
 				getDirectorSitesPvdcsOptionsModel := new(vmwarev1.GetDirectorSitesPvdcsOptions)
-				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("pvdc_id")
+				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2048,10 +2048,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSitesPvdcsOptions model
 				getDirectorSitesPvdcsOptionsModel := new(vmwarev1.GetDirectorSitesPvdcsOptions)
-				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("pvdc_id")
+				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -2092,10 +2092,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorSitesPvdcsOptions model
 				getDirectorSitesPvdcsOptionsModel := new(vmwarev1.GetDirectorSitesPvdcsOptions)
-				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorSitesPvdcsOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorSitesPvdcsOptionsModel.ID = core.StringPtr("pvdc_id")
+				getDirectorSitesPvdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorSitesPvdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2112,7 +2112,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions *ListDirectorSitesPvdcsClustersOptions) - Operation response error`, func() {
-		listDirectorSitesPvdcsClustersPath := "/director_sites/testString/pvdcs/testString/clusters"
+		listDirectorSitesPvdcsClustersPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2122,9 +2122,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listDirectorSitesPvdcsClustersPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -2140,10 +2140,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsClustersOptions model
 				listDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsClustersOptions)
-				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptionsModel)
@@ -2164,7 +2164,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions *ListDirectorSitesPvdcsClustersOptions)`, func() {
-		listDirectorSitesPvdcsClustersPath := "/director_sites/testString/pvdcs/testString/clusters"
+		listDirectorSitesPvdcsClustersPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2175,9 +2175,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -2198,10 +2198,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsClustersOptions model
 				listDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsClustersOptions)
-				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2239,9 +2239,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2264,10 +2264,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsClustersOptions model
 				listDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsClustersOptions)
-				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2287,10 +2287,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsClustersOptions model
 				listDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsClustersOptions)
-				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -2331,10 +2331,10 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSitesPvdcsClustersOptions model
 				listDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.ListDirectorSitesPvdcsClustersOptions)
-				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				listDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2351,7 +2351,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions) - Operation response error`, func() {
-		createDirectorSitesPvdcsClustersPath := "/director_sites/testString/pvdcs/testString/clusters"
+		createDirectorSitesPvdcsClustersPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2361,9 +2361,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesPvdcsClustersPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -2386,14 +2386,14 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
 				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
-				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("cluster_1")
 				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
-				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
-				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptionsModel)
@@ -2414,7 +2414,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions)`, func() {
-		createDirectorSitesPvdcsClustersPath := "/director_sites/testString/pvdcs/testString/clusters"
+		createDirectorSitesPvdcsClustersPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2441,9 +2441,9 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -2471,14 +2471,14 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
 				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
-				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("cluster_1")
 				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
-				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
-				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2532,9 +2532,9 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
@@ -2564,14 +2564,14 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
 				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
-				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("cluster_1")
 				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
-				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
-				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2598,14 +2598,14 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
 				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
-				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("cluster_1")
 				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
-				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
-				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -2653,14 +2653,14 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
 				createDirectorSitesPvdcsClustersOptionsModel := new(vmwarev1.CreateDirectorSitesPvdcsClustersOptions)
-				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesPvdcsClustersOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				createDirectorSitesPvdcsClustersOptionsModel.Name = core.StringPtr("cluster_1")
 				createDirectorSitesPvdcsClustersOptionsModel.HostCount = core.Int64Ptr(int64(2))
-				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				createDirectorSitesPvdcsClustersOptionsModel.FileShares = fileSharesPrototypeModel
-				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesPvdcsClustersOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2677,7 +2677,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptions *GetDirectorInstancesPvdcsClusterOptions) - Operation response error`, func() {
-		getDirectorInstancesPvdcsClusterPath := "/director_sites/testString/pvdcs/testString/clusters/testString"
+		getDirectorInstancesPvdcsClusterPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters/cluster_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2687,9 +2687,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getDirectorInstancesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -2705,11 +2705,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorInstancesPvdcsClusterOptions model
 				getDirectorInstancesPvdcsClusterOptionsModel := new(vmwarev1.GetDirectorInstancesPvdcsClusterOptions)
-				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorInstancesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptionsModel)
@@ -2730,7 +2730,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptions *GetDirectorInstancesPvdcsClusterOptions)`, func() {
-		getDirectorInstancesPvdcsClusterPath := "/director_sites/testString/pvdcs/testString/clusters/testString"
+		getDirectorInstancesPvdcsClusterPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters/cluster_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2741,9 +2741,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -2764,11 +2764,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorInstancesPvdcsClusterOptions model
 				getDirectorInstancesPvdcsClusterOptionsModel := new(vmwarev1.GetDirectorInstancesPvdcsClusterOptions)
-				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorInstancesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -2806,9 +2806,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -2831,11 +2831,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorInstancesPvdcsClusterOptions model
 				getDirectorInstancesPvdcsClusterOptionsModel := new(vmwarev1.GetDirectorInstancesPvdcsClusterOptions)
-				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorInstancesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -2855,11 +2855,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorInstancesPvdcsClusterOptions model
 				getDirectorInstancesPvdcsClusterOptionsModel := new(vmwarev1.GetDirectorInstancesPvdcsClusterOptions)
-				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorInstancesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -2900,11 +2900,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetDirectorInstancesPvdcsClusterOptions model
 				getDirectorInstancesPvdcsClusterOptionsModel := new(vmwarev1.GetDirectorInstancesPvdcsClusterOptions)
-				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				getDirectorInstancesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				getDirectorInstancesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -2921,7 +2921,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions *DeleteDirectorSitesPvdcsClusterOptions) - Operation response error`, func() {
-		deleteDirectorSitesPvdcsClusterPath := "/director_sites/testString/pvdcs/testString/clusters/testString"
+		deleteDirectorSitesPvdcsClusterPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters/cluster_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2931,9 +2931,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -2949,11 +2949,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSitesPvdcsClusterOptions model
 				deleteDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.DeleteDirectorSitesPvdcsClusterOptions)
-				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptionsModel)
@@ -2974,7 +2974,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions *DeleteDirectorSitesPvdcsClusterOptions)`, func() {
-		deleteDirectorSitesPvdcsClusterPath := "/director_sites/testString/pvdcs/testString/clusters/testString"
+		deleteDirectorSitesPvdcsClusterPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters/cluster_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -2985,16 +2985,16 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSitesPvdcsCluster successfully with retries`, func() {
@@ -3008,11 +3008,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSitesPvdcsClusterOptions model
 				deleteDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.DeleteDirectorSitesPvdcsClusterOptions)
-				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3050,13 +3050,13 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"name": "Name", "host_count": 2, "host_profile": "HostProfile", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSitesPvdcsCluster successfully`, func() {
@@ -3075,11 +3075,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSitesPvdcsClusterOptions model
 				deleteDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.DeleteDirectorSitesPvdcsClusterOptions)
-				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3099,11 +3099,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSitesPvdcsClusterOptions model
 				deleteDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.DeleteDirectorSitesPvdcsClusterOptions)
-				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -3144,11 +3144,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteDirectorSitesPvdcsClusterOptions model
 				deleteDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.DeleteDirectorSitesPvdcsClusterOptions)
-				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				deleteDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -3165,7 +3165,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions) - Operation response error`, func() {
-		updateDirectorSitesPvdcsClusterPath := "/director_sites/testString/pvdcs/testString/clusters/testString"
+		updateDirectorSitesPvdcsClusterPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters/cluster_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3175,9 +3175,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesPvdcsClusterPath))
 					Expect(req.Method).To(Equal("PATCH"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -3207,12 +3207,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
-				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
-				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptionsModel)
@@ -3233,7 +3233,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions)`, func() {
-		updateDirectorSitesPvdcsClusterPath := "/director_sites/testString/pvdcs/testString/clusters/testString"
+		updateDirectorSitesPvdcsClusterPath := "/director_sites/site_id/pvdcs/pvdc_id/clusters/cluster_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -3260,9 +3260,9 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -3297,12 +3297,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
-				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
-				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3356,9 +3356,9 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -3395,12 +3395,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
-				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
-				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3434,12 +3434,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
-				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
-				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -3494,12 +3494,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
 				updateDirectorSitesPvdcsClusterOptionsModel := new(vmwarev1.UpdateDirectorSitesPvdcsClusterOptions)
-				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.ID = core.StringPtr("cluster_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.PvdcID = core.StringPtr("pvdc_id")
 				updateDirectorSitesPvdcsClusterOptionsModel.Body = clusterPatchModelAsPatch
-				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				updateDirectorSitesPvdcsClusterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -3526,9 +3526,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listDirectorSiteRegionsPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -3544,8 +3544,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteRegionsOptions model
 				listDirectorSiteRegionsOptionsModel := new(vmwarev1.ListDirectorSiteRegionsOptions)
-				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteRegionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.ListDirectorSiteRegions(listDirectorSiteRegionsOptionsModel)
@@ -3577,9 +3577,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -3600,8 +3600,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteRegionsOptions model
 				listDirectorSiteRegionsOptionsModel := new(vmwarev1.ListDirectorSiteRegionsOptions)
-				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteRegionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3639,9 +3639,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -3664,8 +3664,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteRegionsOptions model
 				listDirectorSiteRegionsOptionsModel := new(vmwarev1.ListDirectorSiteRegionsOptions)
-				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteRegionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3685,8 +3685,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteRegionsOptions model
 				listDirectorSiteRegionsOptionsModel := new(vmwarev1.ListDirectorSiteRegionsOptions)
-				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteRegionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -3720,8 +3720,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteRegionsOptions model
 				listDirectorSiteRegionsOptionsModel := new(vmwarev1.ListDirectorSiteRegionsOptions)
-				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteRegionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteRegionsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteRegionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -3748,9 +3748,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listMultitenantDirectorSitesPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -3766,8 +3766,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListMultitenantDirectorSitesOptions model
 				listMultitenantDirectorSitesOptionsModel := new(vmwarev1.ListMultitenantDirectorSitesOptions)
-				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listMultitenantDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.ListMultitenantDirectorSites(listMultitenantDirectorSitesOptionsModel)
@@ -3799,9 +3799,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -3822,8 +3822,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListMultitenantDirectorSitesOptions model
 				listMultitenantDirectorSitesOptionsModel := new(vmwarev1.ListMultitenantDirectorSitesOptions)
-				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listMultitenantDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -3861,9 +3861,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -3886,8 +3886,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListMultitenantDirectorSitesOptions model
 				listMultitenantDirectorSitesOptionsModel := new(vmwarev1.ListMultitenantDirectorSitesOptions)
-				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listMultitenantDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -3907,8 +3907,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListMultitenantDirectorSitesOptions model
 				listMultitenantDirectorSitesOptionsModel := new(vmwarev1.ListMultitenantDirectorSitesOptions)
-				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listMultitenantDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -3942,8 +3942,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListMultitenantDirectorSitesOptions model
 				listMultitenantDirectorSitesOptionsModel := new(vmwarev1.ListMultitenantDirectorSitesOptions)
-				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listMultitenantDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listMultitenantDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -3970,9 +3970,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listDirectorSiteHostProfilesPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -3988,8 +3988,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteHostProfilesOptions model
 				listDirectorSiteHostProfilesOptionsModel := new(vmwarev1.ListDirectorSiteHostProfilesOptions)
-				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteHostProfilesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptionsModel)
@@ -4021,9 +4021,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
@@ -4044,8 +4044,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteHostProfilesOptions model
 				listDirectorSiteHostProfilesOptionsModel := new(vmwarev1.ListDirectorSiteHostProfilesOptions)
-				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteHostProfilesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4083,9 +4083,9 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
-					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
@@ -4108,8 +4108,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteHostProfilesOptions model
 				listDirectorSiteHostProfilesOptionsModel := new(vmwarev1.ListDirectorSiteHostProfilesOptions)
-				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteHostProfilesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4129,8 +4129,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteHostProfilesOptions model
 				listDirectorSiteHostProfilesOptionsModel := new(vmwarev1.ListDirectorSiteHostProfilesOptions)
-				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteHostProfilesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -4164,8 +4164,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListDirectorSiteHostProfilesOptions model
 				listDirectorSiteHostProfilesOptionsModel := new(vmwarev1.ListDirectorSiteHostProfilesOptions)
-				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("testString")
-				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("testString")
+				listDirectorSiteHostProfilesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				listDirectorSiteHostProfilesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4192,7 +4192,7 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(listVdcsPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -4208,7 +4208,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListVdcsOptions model
 				listVdcsOptionsModel := new(vmwarev1.ListVdcsOptions)
-				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				listVdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.ListVdcs(listVdcsOptionsModel)
@@ -4240,14 +4240,14 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully with retries`, func() {
@@ -4261,7 +4261,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListVdcsOptions model
 				listVdcsOptionsModel := new(vmwarev1.ListVdcsOptions)
-				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				listVdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4299,11 +4299,11 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully`, func() {
@@ -4322,7 +4322,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListVdcsOptions model
 				listVdcsOptionsModel := new(vmwarev1.ListVdcsOptions)
-				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				listVdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4342,7 +4342,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListVdcsOptions model
 				listVdcsOptionsModel := new(vmwarev1.ListVdcsOptions)
-				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				listVdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -4376,7 +4376,7 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ListVdcsOptions model
 				listVdcsOptionsModel := new(vmwarev1.ListVdcsOptions)
-				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				listVdcsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				listVdcsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4403,7 +4403,7 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(createVdcPath))
 					Expect(req.Method).To(Equal("POST"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -4423,12 +4423,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DirectorSitePVDC model
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
-				directorSitePvdcModel.ID = core.StringPtr("testString")
+				directorSitePvdcModel.ID = core.StringPtr("pvdc_id")
 				directorSitePvdcModel.ProviderType = vdcProviderTypeModel
 
 				// Construct an instance of the VDCDirectorSitePrototype model
 				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
-				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("site_id")
 				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
 				// Construct an instance of the VDCEdgePrototype model
@@ -4438,11 +4438,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
-				createVdcOptionsModel.Name = core.StringPtr("testString")
+				createVdcOptionsModel.Name = core.StringPtr("sampleVDC")
 				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
@@ -4451,7 +4451,7 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
 				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
 				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
-				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.CreateVdc(createVdcOptionsModel)
@@ -4499,14 +4499,14 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully with retries`, func() {
@@ -4524,12 +4524,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DirectorSitePVDC model
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
-				directorSitePvdcModel.ID = core.StringPtr("testString")
+				directorSitePvdcModel.ID = core.StringPtr("pvdc_id")
 				directorSitePvdcModel.ProviderType = vdcProviderTypeModel
 
 				// Construct an instance of the VDCDirectorSitePrototype model
 				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
-				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("site_id")
 				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
 				// Construct an instance of the VDCEdgePrototype model
@@ -4539,11 +4539,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
-				createVdcOptionsModel.Name = core.StringPtr("testString")
+				createVdcOptionsModel.Name = core.StringPtr("sampleVDC")
 				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
@@ -4552,7 +4552,7 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
 				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
 				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
-				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4606,11 +4606,11 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully`, func() {
@@ -4633,12 +4633,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DirectorSitePVDC model
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
-				directorSitePvdcModel.ID = core.StringPtr("testString")
+				directorSitePvdcModel.ID = core.StringPtr("pvdc_id")
 				directorSitePvdcModel.ProviderType = vdcProviderTypeModel
 
 				// Construct an instance of the VDCDirectorSitePrototype model
 				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
-				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("site_id")
 				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
 				// Construct an instance of the VDCEdgePrototype model
@@ -4648,11 +4648,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
-				createVdcOptionsModel.Name = core.StringPtr("testString")
+				createVdcOptionsModel.Name = core.StringPtr("sampleVDC")
 				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
@@ -4661,7 +4661,7 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
 				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
 				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
-				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4685,12 +4685,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DirectorSitePVDC model
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
-				directorSitePvdcModel.ID = core.StringPtr("testString")
+				directorSitePvdcModel.ID = core.StringPtr("pvdc_id")
 				directorSitePvdcModel.ProviderType = vdcProviderTypeModel
 
 				// Construct an instance of the VDCDirectorSitePrototype model
 				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
-				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("site_id")
 				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
 				// Construct an instance of the VDCEdgePrototype model
@@ -4700,11 +4700,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
-				createVdcOptionsModel.Name = core.StringPtr("testString")
+				createVdcOptionsModel.Name = core.StringPtr("sampleVDC")
 				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
@@ -4713,7 +4713,7 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
 				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
 				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
-				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -4758,12 +4758,12 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DirectorSitePVDC model
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
-				directorSitePvdcModel.ID = core.StringPtr("testString")
+				directorSitePvdcModel.ID = core.StringPtr("pvdc_id")
 				directorSitePvdcModel.ProviderType = vdcProviderTypeModel
 
 				// Construct an instance of the VDCDirectorSitePrototype model
 				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
-				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("site_id")
 				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
 
 				// Construct an instance of the VDCEdgePrototype model
@@ -4773,11 +4773,11 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
 
 				// Construct an instance of the CreateVdcOptions model
 				createVdcOptionsModel := new(vmwarev1.CreateVdcOptions)
-				createVdcOptionsModel.Name = core.StringPtr("testString")
+				createVdcOptionsModel.Name = core.StringPtr("sampleVDC")
 				createVdcOptionsModel.DirectorSite = vdcDirectorSitePrototypeModel
 				createVdcOptionsModel.Edge = vdcEdgePrototypeModel
 				createVdcOptionsModel.FastProvisioningEnabled = core.BoolPtr(true)
@@ -4786,7 +4786,7 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.Ram = core.Int64Ptr(int64(0))
 				createVdcOptionsModel.RhelByol = core.BoolPtr(false)
 				createVdcOptionsModel.WindowsByol = core.BoolPtr(false)
-				createVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				createVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -4803,7 +4803,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`GetVdc(getVdcOptions *GetVdcOptions) - Operation response error`, func() {
-		getVdcPath := "/vdcs/testString"
+		getVdcPath := "/vdcs/vdc_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4813,7 +4813,7 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(getVdcPath))
 					Expect(req.Method).To(Equal("GET"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -4829,8 +4829,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetVdcOptions model
 				getVdcOptionsModel := new(vmwarev1.GetVdcOptions)
-				getVdcOptionsModel.ID = core.StringPtr("testString")
-				getVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				getVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				getVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				getVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.GetVdc(getVdcOptionsModel)
@@ -4851,7 +4851,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`GetVdc(getVdcOptions *GetVdcOptions)`, func() {
-		getVdcPath := "/vdcs/testString"
+		getVdcPath := "/vdcs/vdc_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -4862,14 +4862,14 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully with retries`, func() {
@@ -4883,8 +4883,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetVdcOptions model
 				getVdcOptionsModel := new(vmwarev1.GetVdcOptions)
-				getVdcOptionsModel.ID = core.StringPtr("testString")
-				getVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				getVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				getVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				getVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -4922,11 +4922,11 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("GET"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully`, func() {
@@ -4945,8 +4945,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetVdcOptions model
 				getVdcOptionsModel := new(vmwarev1.GetVdcOptions)
-				getVdcOptionsModel.ID = core.StringPtr("testString")
-				getVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				getVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				getVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				getVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -4966,8 +4966,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetVdcOptions model
 				getVdcOptionsModel := new(vmwarev1.GetVdcOptions)
-				getVdcOptionsModel.ID = core.StringPtr("testString")
-				getVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				getVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				getVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				getVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -5008,8 +5008,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the GetVdcOptions model
 				getVdcOptionsModel := new(vmwarev1.GetVdcOptions)
-				getVdcOptionsModel.ID = core.StringPtr("testString")
-				getVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				getVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				getVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				getVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -5026,7 +5026,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions) - Operation response error`, func() {
-		deleteVdcPath := "/vdcs/testString"
+		deleteVdcPath := "/vdcs/vdc_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5036,7 +5036,7 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(deleteVdcPath))
 					Expect(req.Method).To(Equal("DELETE"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -5052,8 +5052,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteVdcOptions model
 				deleteVdcOptionsModel := new(vmwarev1.DeleteVdcOptions)
-				deleteVdcOptionsModel.ID = core.StringPtr("testString")
-				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				deleteVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				deleteVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.DeleteVdc(deleteVdcOptionsModel)
@@ -5074,7 +5074,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
-		deleteVdcPath := "/vdcs/testString"
+		deleteVdcPath := "/vdcs/vdc_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5085,14 +5085,14 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully with retries`, func() {
@@ -5106,8 +5106,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteVdcOptions model
 				deleteVdcOptionsModel := new(vmwarev1.DeleteVdcOptions)
-				deleteVdcOptionsModel.ID = core.StringPtr("testString")
-				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				deleteVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				deleteVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -5145,11 +5145,11 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.Method).To(Equal("DELETE"))
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully`, func() {
@@ -5168,8 +5168,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteVdcOptions model
 				deleteVdcOptionsModel := new(vmwarev1.DeleteVdcOptions)
-				deleteVdcOptionsModel.ID = core.StringPtr("testString")
-				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				deleteVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				deleteVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -5189,8 +5189,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteVdcOptions model
 				deleteVdcOptionsModel := new(vmwarev1.DeleteVdcOptions)
-				deleteVdcOptionsModel.ID = core.StringPtr("testString")
-				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				deleteVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				deleteVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -5231,8 +5231,8 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the DeleteVdcOptions model
 				deleteVdcOptionsModel := new(vmwarev1.DeleteVdcOptions)
-				deleteVdcOptionsModel.ID = core.StringPtr("testString")
-				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				deleteVdcOptionsModel.ID = core.StringPtr("vdc_id")
+				deleteVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				deleteVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -5249,7 +5249,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`UpdateVdc(updateVdcOptions *UpdateVdcOptions) - Operation response error`, func() {
-		updateVdcPath := "/vdcs/testString"
+		updateVdcPath := "/vdcs/vdc_id"
 		Context(`Using mock server endpoint with invalid JSON response`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5259,7 +5259,7 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(updateVdcPath))
 					Expect(req.Method).To(Equal("PATCH"))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
 					fmt.Fprint(res, `} this is not valid json {`)
@@ -5283,9 +5283,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateVdcOptions model
 				updateVdcOptionsModel := new(vmwarev1.UpdateVdcOptions)
-				updateVdcOptionsModel.ID = core.StringPtr("testString")
+				updateVdcOptionsModel.ID = core.StringPtr("vdc_id")
 				updateVdcOptionsModel.VDCPatch = vdcPatchModelAsPatch
-				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				updateVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
 				result, response, operationErr := vmwareService.UpdateVdc(updateVdcOptionsModel)
@@ -5306,7 +5306,7 @@ var _ = Describe(`VmwareV1`, func() {
 		})
 	})
 	Describe(`UpdateVdc(updateVdcOptions *UpdateVdcOptions)`, func() {
-		updateVdcPath := "/vdcs/testString"
+		updateVdcPath := "/vdcs/vdc_id"
 		Context(`Using mock server endpoint with timeout`, func() {
 			BeforeEach(func() {
 				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
@@ -5333,14 +5333,14 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Sleep a short time to support a timeout test
 					time.Sleep(100 * time.Millisecond)
 
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully with retries`, func() {
@@ -5362,9 +5362,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateVdcOptions model
 				updateVdcOptionsModel := new(vmwarev1.UpdateVdcOptions)
-				updateVdcOptionsModel.ID = core.StringPtr("testString")
+				updateVdcOptionsModel.ID = core.StringPtr("vdc_id")
 				updateVdcOptionsModel.VDCPatch = vdcPatchModelAsPatch
-				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				updateVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with a Context to test a timeout error
@@ -5418,11 +5418,11 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
-					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "testString")))
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "ID", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully`, func() {
@@ -5449,9 +5449,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateVdcOptions model
 				updateVdcOptionsModel := new(vmwarev1.UpdateVdcOptions)
-				updateVdcOptionsModel.ID = core.StringPtr("testString")
+				updateVdcOptionsModel.ID = core.StringPtr("vdc_id")
 				updateVdcOptionsModel.VDCPatch = vdcPatchModelAsPatch
-				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				updateVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation with valid options model (positive test)
@@ -5479,9 +5479,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateVdcOptions model
 				updateVdcOptionsModel := new(vmwarev1.UpdateVdcOptions)
-				updateVdcOptionsModel.ID = core.StringPtr("testString")
+				updateVdcOptionsModel.ID = core.StringPtr("vdc_id")
 				updateVdcOptionsModel.VDCPatch = vdcPatchModelAsPatch
-				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				updateVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
 				err := vmwareService.SetServiceURL("")
@@ -5530,9 +5530,9 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Construct an instance of the UpdateVdcOptions model
 				updateVdcOptionsModel := new(vmwarev1.UpdateVdcOptions)
-				updateVdcOptionsModel.ID = core.StringPtr("testString")
+				updateVdcOptionsModel.ID = core.StringPtr("vdc_id")
 				updateVdcOptionsModel.VDCPatch = vdcPatchModelAsPatch
-				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("testString")
+				updateVdcOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				updateVdcOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
 				// Invoke operation
@@ -5555,9 +5555,9 @@ var _ = Describe(`VmwareV1`, func() {
 				Authenticator: &core.NoAuthAuthenticator{},
 			})
 			It(`Invoke NewClusterPrototype successfully`, func() {
-				name := "testString"
+				name := "cluster_1"
 				hostCount := int64(2)
-				hostProfile := "testString"
+				hostProfile := "BM_2S_20_CORES_192_GB"
 				var fileShares *vmwarev1.FileSharesPrototype = nil
 				_, err := vmwareService.NewClusterPrototype(name, hostCount, hostProfile, fileShares)
 				Expect(err).ToNot(BeNil())
@@ -5578,30 +5578,30 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
 				Expect(clusterPrototypeModel).ToNot(BeNil())
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
-				Expect(clusterPrototypeModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.Name).To(Equal(core.StringPtr("cluster_1")))
 				Expect(clusterPrototypeModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
-				Expect(clusterPrototypeModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.HostProfile).To(Equal(core.StringPtr("BM_2S_20_CORES_192_GB")))
 				Expect(clusterPrototypeModel.FileShares).To(Equal(fileSharesPrototypeModel))
 
 				// Construct an instance of the PVDCPrototype model
 				pvdcPrototypeModel := new(vmwarev1.PVDCPrototype)
 				Expect(pvdcPrototypeModel).ToNot(BeNil())
-				pvdcPrototypeModel.Name = core.StringPtr("testString")
-				pvdcPrototypeModel.DataCenterName = core.StringPtr("testString")
+				pvdcPrototypeModel.Name = core.StringPtr("pvdc-1")
+				pvdcPrototypeModel.DataCenterName = core.StringPtr("dal10")
 				pvdcPrototypeModel.Clusters = []vmwarev1.ClusterPrototype{*clusterPrototypeModel}
-				Expect(pvdcPrototypeModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(pvdcPrototypeModel.DataCenterName).To(Equal(core.StringPtr("testString")))
+				Expect(pvdcPrototypeModel.Name).To(Equal(core.StringPtr("pvdc-1")))
+				Expect(pvdcPrototypeModel.DataCenterName).To(Equal(core.StringPtr("dal10")))
 				Expect(pvdcPrototypeModel.Clusters).To(Equal([]vmwarev1.ClusterPrototype{*clusterPrototypeModel}))
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
 				Expect(resourceGroupIdentityModel).ToNot(BeNil())
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
-				Expect(resourceGroupIdentityModel.ID).To(Equal(core.StringPtr("testString")))
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
+				Expect(resourceGroupIdentityModel.ID).To(Equal(core.StringPtr("some_resourcegroupid")))
 
 				// Construct an instance of the ServiceIdentity model
 				serviceIdentityModel := new(vmwarev1.ServiceIdentity)
@@ -5610,23 +5610,23 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(serviceIdentityModel.Name).To(Equal(core.StringPtr("veeam")))
 
 				// Construct an instance of the CreateDirectorSitesOptions model
-				createDirectorSitesOptionsName := "testString"
+				createDirectorSitesOptionsName := "my_director_site"
 				createDirectorSitesOptionsPvdcs := []vmwarev1.PVDCPrototype{}
 				createDirectorSitesOptionsModel := vmwareService.NewCreateDirectorSitesOptions(createDirectorSitesOptionsName, createDirectorSitesOptionsPvdcs)
-				createDirectorSitesOptionsModel.SetName("testString")
+				createDirectorSitesOptionsModel.SetName("my_director_site")
 				createDirectorSitesOptionsModel.SetPvdcs([]vmwarev1.PVDCPrototype{*pvdcPrototypeModel})
 				createDirectorSitesOptionsModel.SetResourceGroup(resourceGroupIdentityModel)
 				createDirectorSitesOptionsModel.SetServices([]vmwarev1.ServiceIdentity{*serviceIdentityModel})
-				createDirectorSitesOptionsModel.SetAcceptLanguage("testString")
-				createDirectorSitesOptionsModel.SetXGlobalTransactionID("testString")
+				createDirectorSitesOptionsModel.SetAcceptLanguage("en-us")
+				createDirectorSitesOptionsModel.SetXGlobalTransactionID("transaction1")
 				createDirectorSitesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createDirectorSitesOptionsModel).ToNot(BeNil())
-				Expect(createDirectorSitesOptionsModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesOptionsModel.Name).To(Equal(core.StringPtr("my_director_site")))
 				Expect(createDirectorSitesOptionsModel.Pvdcs).To(Equal([]vmwarev1.PVDCPrototype{*pvdcPrototypeModel}))
 				Expect(createDirectorSitesOptionsModel.ResourceGroup).To(Equal(resourceGroupIdentityModel))
 				Expect(createDirectorSitesOptionsModel.Services).To(Equal([]vmwarev1.ServiceIdentity{*serviceIdentityModel}))
-				Expect(createDirectorSitesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(createDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(createDirectorSitesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateDirectorSitesPvdcsClustersOptions successfully`, func() {
@@ -5643,31 +5643,31 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(fileSharesPrototypeModel.STORAGETENIOPSGB).To(Equal(core.Int64Ptr(int64(0))))
 
 				// Construct an instance of the CreateDirectorSitesPvdcsClustersOptions model
-				siteID := "testString"
-				pvdcID := "testString"
-				createDirectorSitesPvdcsClustersOptionsName := "testString"
+				siteID := "site_id"
+				pvdcID := "pvdc_id"
+				createDirectorSitesPvdcsClustersOptionsName := "cluster_1"
 				createDirectorSitesPvdcsClustersOptionsHostCount := int64(2)
-				createDirectorSitesPvdcsClustersOptionsHostProfile := "testString"
+				createDirectorSitesPvdcsClustersOptionsHostProfile := "BM_2S_20_CORES_192_GB"
 				var createDirectorSitesPvdcsClustersOptionsFileShares *vmwarev1.FileSharesPrototype = nil
 				createDirectorSitesPvdcsClustersOptionsModel := vmwareService.NewCreateDirectorSitesPvdcsClustersOptions(siteID, pvdcID, createDirectorSitesPvdcsClustersOptionsName, createDirectorSitesPvdcsClustersOptionsHostCount, createDirectorSitesPvdcsClustersOptionsHostProfile, createDirectorSitesPvdcsClustersOptionsFileShares)
-				createDirectorSitesPvdcsClustersOptionsModel.SetSiteID("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.SetPvdcID("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.SetName("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetSiteID("site_id")
+				createDirectorSitesPvdcsClustersOptionsModel.SetPvdcID("pvdc_id")
+				createDirectorSitesPvdcsClustersOptionsModel.SetName("cluster_1")
 				createDirectorSitesPvdcsClustersOptionsModel.SetHostCount(int64(2))
-				createDirectorSitesPvdcsClustersOptionsModel.SetHostProfile("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetHostProfile("BM_2S_20_CORES_192_GB")
 				createDirectorSitesPvdcsClustersOptionsModel.SetFileShares(fileSharesPrototypeModel)
-				createDirectorSitesPvdcsClustersOptionsModel.SetAcceptLanguage("testString")
-				createDirectorSitesPvdcsClustersOptionsModel.SetXGlobalTransactionID("testString")
+				createDirectorSitesPvdcsClustersOptionsModel.SetAcceptLanguage("en-us")
+				createDirectorSitesPvdcsClustersOptionsModel.SetXGlobalTransactionID("transaction1")
 				createDirectorSitesPvdcsClustersOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createDirectorSitesPvdcsClustersOptionsModel).ToNot(BeNil())
-				Expect(createDirectorSitesPvdcsClustersOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesPvdcsClustersOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesPvdcsClustersOptionsModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.PvdcID).To(Equal(core.StringPtr("pvdc_id")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.Name).To(Equal(core.StringPtr("cluster_1")))
 				Expect(createDirectorSitesPvdcsClustersOptionsModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
-				Expect(createDirectorSitesPvdcsClustersOptionsModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.HostProfile).To(Equal(core.StringPtr("BM_2S_20_CORES_192_GB")))
 				Expect(createDirectorSitesPvdcsClustersOptionsModel.FileShares).To(Equal(fileSharesPrototypeModel))
-				Expect(createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(createDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(createDirectorSitesPvdcsClustersOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateDirectorSitesPvdcsOptions successfully`, func() {
@@ -5686,35 +5686,35 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the ClusterPrototype model
 				clusterPrototypeModel := new(vmwarev1.ClusterPrototype)
 				Expect(clusterPrototypeModel).ToNot(BeNil())
-				clusterPrototypeModel.Name = core.StringPtr("testString")
+				clusterPrototypeModel.Name = core.StringPtr("cluster_1")
 				clusterPrototypeModel.HostCount = core.Int64Ptr(int64(2))
-				clusterPrototypeModel.HostProfile = core.StringPtr("testString")
+				clusterPrototypeModel.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
 				clusterPrototypeModel.FileShares = fileSharesPrototypeModel
-				Expect(clusterPrototypeModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.Name).To(Equal(core.StringPtr("cluster_1")))
 				Expect(clusterPrototypeModel.HostCount).To(Equal(core.Int64Ptr(int64(2))))
-				Expect(clusterPrototypeModel.HostProfile).To(Equal(core.StringPtr("testString")))
+				Expect(clusterPrototypeModel.HostProfile).To(Equal(core.StringPtr("BM_2S_20_CORES_192_GB")))
 				Expect(clusterPrototypeModel.FileShares).To(Equal(fileSharesPrototypeModel))
 
 				// Construct an instance of the CreateDirectorSitesPvdcsOptions model
-				siteID := "testString"
-				createDirectorSitesPvdcsOptionsName := "testString"
-				createDirectorSitesPvdcsOptionsDataCenterName := "testString"
+				siteID := "site_id"
+				createDirectorSitesPvdcsOptionsName := "pvdc-1"
+				createDirectorSitesPvdcsOptionsDataCenterName := "dal10"
 				createDirectorSitesPvdcsOptionsClusters := []vmwarev1.ClusterPrototype{}
 				createDirectorSitesPvdcsOptionsModel := vmwareService.NewCreateDirectorSitesPvdcsOptions(siteID, createDirectorSitesPvdcsOptionsName, createDirectorSitesPvdcsOptionsDataCenterName, createDirectorSitesPvdcsOptionsClusters)
-				createDirectorSitesPvdcsOptionsModel.SetSiteID("testString")
-				createDirectorSitesPvdcsOptionsModel.SetName("testString")
-				createDirectorSitesPvdcsOptionsModel.SetDataCenterName("testString")
+				createDirectorSitesPvdcsOptionsModel.SetSiteID("site_id")
+				createDirectorSitesPvdcsOptionsModel.SetName("pvdc-1")
+				createDirectorSitesPvdcsOptionsModel.SetDataCenterName("dal10")
 				createDirectorSitesPvdcsOptionsModel.SetClusters([]vmwarev1.ClusterPrototype{*clusterPrototypeModel})
-				createDirectorSitesPvdcsOptionsModel.SetAcceptLanguage("testString")
-				createDirectorSitesPvdcsOptionsModel.SetXGlobalTransactionID("testString")
+				createDirectorSitesPvdcsOptionsModel.SetAcceptLanguage("en-us")
+				createDirectorSitesPvdcsOptionsModel.SetXGlobalTransactionID("transaction1")
 				createDirectorSitesPvdcsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createDirectorSitesPvdcsOptionsModel).ToNot(BeNil())
-				Expect(createDirectorSitesPvdcsOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesPvdcsOptionsModel.Name).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesPvdcsOptionsModel.DataCenterName).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(createDirectorSitesPvdcsOptionsModel.Name).To(Equal(core.StringPtr("pvdc-1")))
+				Expect(createDirectorSitesPvdcsOptionsModel.DataCenterName).To(Equal(core.StringPtr("dal10")))
 				Expect(createDirectorSitesPvdcsOptionsModel.Clusters).To(Equal([]vmwarev1.ClusterPrototype{*clusterPrototypeModel}))
-				Expect(createDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(createDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(createDirectorSitesPvdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateVdcOptions successfully`, func() {
@@ -5727,17 +5727,17 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the DirectorSitePVDC model
 				directorSitePvdcModel := new(vmwarev1.DirectorSitePVDC)
 				Expect(directorSitePvdcModel).ToNot(BeNil())
-				directorSitePvdcModel.ID = core.StringPtr("testString")
+				directorSitePvdcModel.ID = core.StringPtr("pvdc_id")
 				directorSitePvdcModel.ProviderType = vdcProviderTypeModel
-				Expect(directorSitePvdcModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(directorSitePvdcModel.ID).To(Equal(core.StringPtr("pvdc_id")))
 				Expect(directorSitePvdcModel.ProviderType).To(Equal(vdcProviderTypeModel))
 
 				// Construct an instance of the VDCDirectorSitePrototype model
 				vdcDirectorSitePrototypeModel := new(vmwarev1.VDCDirectorSitePrototype)
 				Expect(vdcDirectorSitePrototypeModel).ToNot(BeNil())
-				vdcDirectorSitePrototypeModel.ID = core.StringPtr("testString")
+				vdcDirectorSitePrototypeModel.ID = core.StringPtr("site_id")
 				vdcDirectorSitePrototypeModel.Pvdc = directorSitePvdcModel
-				Expect(vdcDirectorSitePrototypeModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(vdcDirectorSitePrototypeModel.ID).To(Equal(core.StringPtr("site_id")))
 				Expect(vdcDirectorSitePrototypeModel.Pvdc).To(Equal(directorSitePvdcModel))
 
 				// Construct an instance of the VDCEdgePrototype model
@@ -5751,14 +5751,14 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
 				Expect(resourceGroupIdentityModel).ToNot(BeNil())
-				resourceGroupIdentityModel.ID = core.StringPtr("testString")
-				Expect(resourceGroupIdentityModel.ID).To(Equal(core.StringPtr("testString")))
+				resourceGroupIdentityModel.ID = core.StringPtr("some_resourcegroupid")
+				Expect(resourceGroupIdentityModel.ID).To(Equal(core.StringPtr("some_resourcegroupid")))
 
 				// Construct an instance of the CreateVdcOptions model
-				createVdcOptionsName := "testString"
+				createVdcOptionsName := "sampleVDC"
 				var createVdcOptionsDirectorSite *vmwarev1.VDCDirectorSitePrototype = nil
 				createVdcOptionsModel := vmwareService.NewCreateVdcOptions(createVdcOptionsName, createVdcOptionsDirectorSite)
-				createVdcOptionsModel.SetName("testString")
+				createVdcOptionsModel.SetName("sampleVDC")
 				createVdcOptionsModel.SetDirectorSite(vdcDirectorSitePrototypeModel)
 				createVdcOptionsModel.SetEdge(vdcEdgePrototypeModel)
 				createVdcOptionsModel.SetFastProvisioningEnabled(true)
@@ -5767,10 +5767,10 @@ var _ = Describe(`VmwareV1`, func() {
 				createVdcOptionsModel.SetRam(int64(0))
 				createVdcOptionsModel.SetRhelByol(false)
 				createVdcOptionsModel.SetWindowsByol(false)
-				createVdcOptionsModel.SetAcceptLanguage("testString")
+				createVdcOptionsModel.SetAcceptLanguage("en-us")
 				createVdcOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(createVdcOptionsModel).ToNot(BeNil())
-				Expect(createVdcOptionsModel.Name).To(Equal(core.StringPtr("testString")))
+				Expect(createVdcOptionsModel.Name).To(Equal(core.StringPtr("sampleVDC")))
 				Expect(createVdcOptionsModel.DirectorSite).To(Equal(vdcDirectorSitePrototypeModel))
 				Expect(createVdcOptionsModel.Edge).To(Equal(vdcEdgePrototypeModel))
 				Expect(createVdcOptionsModel.FastProvisioningEnabled).To(Equal(core.BoolPtr(true)))
@@ -5779,218 +5779,218 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(createVdcOptionsModel.Ram).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(createVdcOptionsModel.RhelByol).To(Equal(core.BoolPtr(false)))
 				Expect(createVdcOptionsModel.WindowsByol).To(Equal(core.BoolPtr(false)))
-				Expect(createVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
+				Expect(createVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(createVdcOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteDirectorSiteOptions successfully`, func() {
 				// Construct an instance of the DeleteDirectorSiteOptions model
-				id := "testString"
+				id := "site_id"
 				deleteDirectorSiteOptionsModel := vmwareService.NewDeleteDirectorSiteOptions(id)
-				deleteDirectorSiteOptionsModel.SetID("testString")
-				deleteDirectorSiteOptionsModel.SetAcceptLanguage("testString")
-				deleteDirectorSiteOptionsModel.SetXGlobalTransactionID("testString")
+				deleteDirectorSiteOptionsModel.SetID("site_id")
+				deleteDirectorSiteOptionsModel.SetAcceptLanguage("en-us")
+				deleteDirectorSiteOptionsModel.SetXGlobalTransactionID("transaction1")
 				deleteDirectorSiteOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteDirectorSiteOptionsModel).ToNot(BeNil())
-				Expect(deleteDirectorSiteOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(deleteDirectorSiteOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(deleteDirectorSiteOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteDirectorSiteOptionsModel.ID).To(Equal(core.StringPtr("site_id")))
+				Expect(deleteDirectorSiteOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(deleteDirectorSiteOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(deleteDirectorSiteOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteDirectorSitesPvdcsClusterOptions successfully`, func() {
 				// Construct an instance of the DeleteDirectorSitesPvdcsClusterOptions model
-				siteID := "testString"
-				id := "testString"
-				pvdcID := "testString"
+				siteID := "site_id"
+				id := "cluster_id"
+				pvdcID := "pvdc_id"
 				deleteDirectorSitesPvdcsClusterOptionsModel := vmwareService.NewDeleteDirectorSitesPvdcsClusterOptions(siteID, id, pvdcID)
-				deleteDirectorSitesPvdcsClusterOptionsModel.SetSiteID("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.SetID("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.SetPvdcID("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.SetAcceptLanguage("testString")
-				deleteDirectorSitesPvdcsClusterOptionsModel.SetXGlobalTransactionID("testString")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SetSiteID("site_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SetID("cluster_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SetPvdcID("pvdc_id")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SetAcceptLanguage("en-us")
+				deleteDirectorSitesPvdcsClusterOptionsModel.SetXGlobalTransactionID("transaction1")
 				deleteDirectorSitesPvdcsClusterOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel).ToNot(BeNil())
-				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
-				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
-				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.ID).To(Equal(core.StringPtr("cluster_id")))
+				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("pvdc_id")))
+				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDeleteVdcOptions successfully`, func() {
 				// Construct an instance of the DeleteVdcOptions model
-				id := "testString"
+				id := "vdc_id"
 				deleteVdcOptionsModel := vmwareService.NewDeleteVdcOptions(id)
-				deleteVdcOptionsModel.SetID("testString")
-				deleteVdcOptionsModel.SetAcceptLanguage("testString")
+				deleteVdcOptionsModel.SetID("vdc_id")
+				deleteVdcOptionsModel.SetAcceptLanguage("en-us")
 				deleteVdcOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(deleteVdcOptionsModel).ToNot(BeNil())
-				Expect(deleteVdcOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(deleteVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
+				Expect(deleteVdcOptionsModel.ID).To(Equal(core.StringPtr("vdc_id")))
+				Expect(deleteVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(deleteVdcOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewDirectorSitePVDC successfully`, func() {
-				id := "testString"
+				id := "pvdc_id"
 				_model, err := vmwareService.NewDirectorSitePVDC(id)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewGetDirectorInstancesPvdcsClusterOptions successfully`, func() {
 				// Construct an instance of the GetDirectorInstancesPvdcsClusterOptions model
-				siteID := "testString"
-				id := "testString"
-				pvdcID := "testString"
+				siteID := "site_id"
+				id := "cluster_id"
+				pvdcID := "pvdc_id"
 				getDirectorInstancesPvdcsClusterOptionsModel := vmwareService.NewGetDirectorInstancesPvdcsClusterOptions(siteID, id, pvdcID)
-				getDirectorInstancesPvdcsClusterOptionsModel.SetSiteID("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.SetID("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.SetPvdcID("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.SetAcceptLanguage("testString")
-				getDirectorInstancesPvdcsClusterOptionsModel.SetXGlobalTransactionID("testString")
+				getDirectorInstancesPvdcsClusterOptionsModel.SetSiteID("site_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.SetID("cluster_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.SetPvdcID("pvdc_id")
+				getDirectorInstancesPvdcsClusterOptionsModel.SetAcceptLanguage("en-us")
+				getDirectorInstancesPvdcsClusterOptionsModel.SetXGlobalTransactionID("transaction1")
 				getDirectorInstancesPvdcsClusterOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getDirectorInstancesPvdcsClusterOptionsModel).ToNot(BeNil())
-				Expect(getDirectorInstancesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorInstancesPvdcsClusterOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorInstancesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(getDirectorInstancesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(getDirectorInstancesPvdcsClusterOptionsModel.ID).To(Equal(core.StringPtr("cluster_id")))
+				Expect(getDirectorInstancesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("pvdc_id")))
+				Expect(getDirectorInstancesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(getDirectorInstancesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(getDirectorInstancesPvdcsClusterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetDirectorSiteOptions successfully`, func() {
 				// Construct an instance of the GetDirectorSiteOptions model
-				id := "testString"
+				id := "site_id"
 				getDirectorSiteOptionsModel := vmwareService.NewGetDirectorSiteOptions(id)
-				getDirectorSiteOptionsModel.SetID("testString")
-				getDirectorSiteOptionsModel.SetAcceptLanguage("testString")
-				getDirectorSiteOptionsModel.SetXGlobalTransactionID("testString")
+				getDirectorSiteOptionsModel.SetID("site_id")
+				getDirectorSiteOptionsModel.SetAcceptLanguage("en-us")
+				getDirectorSiteOptionsModel.SetXGlobalTransactionID("transaction1")
 				getDirectorSiteOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getDirectorSiteOptionsModel).ToNot(BeNil())
-				Expect(getDirectorSiteOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorSiteOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorSiteOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(getDirectorSiteOptionsModel.ID).To(Equal(core.StringPtr("site_id")))
+				Expect(getDirectorSiteOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(getDirectorSiteOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(getDirectorSiteOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetDirectorSitesPvdcsOptions successfully`, func() {
 				// Construct an instance of the GetDirectorSitesPvdcsOptions model
-				siteID := "testString"
-				id := "testString"
+				siteID := "site_id"
+				id := "pvdc_id"
 				getDirectorSitesPvdcsOptionsModel := vmwareService.NewGetDirectorSitesPvdcsOptions(siteID, id)
-				getDirectorSitesPvdcsOptionsModel.SetSiteID("testString")
-				getDirectorSitesPvdcsOptionsModel.SetID("testString")
-				getDirectorSitesPvdcsOptionsModel.SetAcceptLanguage("testString")
-				getDirectorSitesPvdcsOptionsModel.SetXGlobalTransactionID("testString")
+				getDirectorSitesPvdcsOptionsModel.SetSiteID("site_id")
+				getDirectorSitesPvdcsOptionsModel.SetID("pvdc_id")
+				getDirectorSitesPvdcsOptionsModel.SetAcceptLanguage("en-us")
+				getDirectorSitesPvdcsOptionsModel.SetXGlobalTransactionID("transaction1")
 				getDirectorSitesPvdcsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getDirectorSitesPvdcsOptionsModel).ToNot(BeNil())
-				Expect(getDirectorSitesPvdcsOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorSitesPvdcsOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(getDirectorSitesPvdcsOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(getDirectorSitesPvdcsOptionsModel.ID).To(Equal(core.StringPtr("pvdc_id")))
+				Expect(getDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(getDirectorSitesPvdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetVdcOptions successfully`, func() {
 				// Construct an instance of the GetVdcOptions model
-				id := "testString"
+				id := "vdc_id"
 				getVdcOptionsModel := vmwareService.NewGetVdcOptions(id)
-				getVdcOptionsModel.SetID("testString")
-				getVdcOptionsModel.SetAcceptLanguage("testString")
+				getVdcOptionsModel.SetID("vdc_id")
+				getVdcOptionsModel.SetAcceptLanguage("en-us")
 				getVdcOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(getVdcOptionsModel).ToNot(BeNil())
-				Expect(getVdcOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(getVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
+				Expect(getVdcOptionsModel.ID).To(Equal(core.StringPtr("vdc_id")))
+				Expect(getVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(getVdcOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListDirectorSiteHostProfilesOptions successfully`, func() {
 				// Construct an instance of the ListDirectorSiteHostProfilesOptions model
 				listDirectorSiteHostProfilesOptionsModel := vmwareService.NewListDirectorSiteHostProfilesOptions()
-				listDirectorSiteHostProfilesOptionsModel.SetAcceptLanguage("testString")
-				listDirectorSiteHostProfilesOptionsModel.SetXGlobalTransactionID("testString")
+				listDirectorSiteHostProfilesOptionsModel.SetAcceptLanguage("en-us")
+				listDirectorSiteHostProfilesOptionsModel.SetXGlobalTransactionID("transaction1")
 				listDirectorSiteHostProfilesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listDirectorSiteHostProfilesOptionsModel).ToNot(BeNil())
-				Expect(listDirectorSiteHostProfilesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(listDirectorSiteHostProfilesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(listDirectorSiteHostProfilesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(listDirectorSiteHostProfilesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListDirectorSiteRegionsOptions successfully`, func() {
 				// Construct an instance of the ListDirectorSiteRegionsOptions model
 				listDirectorSiteRegionsOptionsModel := vmwareService.NewListDirectorSiteRegionsOptions()
-				listDirectorSiteRegionsOptionsModel.SetAcceptLanguage("testString")
-				listDirectorSiteRegionsOptionsModel.SetXGlobalTransactionID("testString")
+				listDirectorSiteRegionsOptionsModel.SetAcceptLanguage("en-us")
+				listDirectorSiteRegionsOptionsModel.SetXGlobalTransactionID("transaction1")
 				listDirectorSiteRegionsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listDirectorSiteRegionsOptionsModel).ToNot(BeNil())
-				Expect(listDirectorSiteRegionsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(listDirectorSiteRegionsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(listDirectorSiteRegionsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(listDirectorSiteRegionsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(listDirectorSiteRegionsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListDirectorSitesOptions successfully`, func() {
 				// Construct an instance of the ListDirectorSitesOptions model
 				listDirectorSitesOptionsModel := vmwareService.NewListDirectorSitesOptions()
-				listDirectorSitesOptionsModel.SetAcceptLanguage("testString")
-				listDirectorSitesOptionsModel.SetXGlobalTransactionID("testString")
+				listDirectorSitesOptionsModel.SetAcceptLanguage("en-us")
+				listDirectorSitesOptionsModel.SetXGlobalTransactionID("transaction1")
 				listDirectorSitesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listDirectorSitesOptionsModel).ToNot(BeNil())
-				Expect(listDirectorSitesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(listDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(listDirectorSitesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(listDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(listDirectorSitesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListDirectorSitesPvdcsClustersOptions successfully`, func() {
 				// Construct an instance of the ListDirectorSitesPvdcsClustersOptions model
-				siteID := "testString"
-				pvdcID := "testString"
+				siteID := "site_id"
+				pvdcID := "pvdc_id"
 				listDirectorSitesPvdcsClustersOptionsModel := vmwareService.NewListDirectorSitesPvdcsClustersOptions(siteID, pvdcID)
-				listDirectorSitesPvdcsClustersOptionsModel.SetSiteID("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.SetPvdcID("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.SetAcceptLanguage("testString")
-				listDirectorSitesPvdcsClustersOptionsModel.SetXGlobalTransactionID("testString")
+				listDirectorSitesPvdcsClustersOptionsModel.SetSiteID("site_id")
+				listDirectorSitesPvdcsClustersOptionsModel.SetPvdcID("pvdc_id")
+				listDirectorSitesPvdcsClustersOptionsModel.SetAcceptLanguage("en-us")
+				listDirectorSitesPvdcsClustersOptionsModel.SetXGlobalTransactionID("transaction1")
 				listDirectorSitesPvdcsClustersOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listDirectorSitesPvdcsClustersOptionsModel).ToNot(BeNil())
-				Expect(listDirectorSitesPvdcsClustersOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
-				Expect(listDirectorSitesPvdcsClustersOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
-				Expect(listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(listDirectorSitesPvdcsClustersOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(listDirectorSitesPvdcsClustersOptionsModel.PvdcID).To(Equal(core.StringPtr("pvdc_id")))
+				Expect(listDirectorSitesPvdcsClustersOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(listDirectorSitesPvdcsClustersOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(listDirectorSitesPvdcsClustersOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListDirectorSitesPvdcsOptions successfully`, func() {
 				// Construct an instance of the ListDirectorSitesPvdcsOptions model
-				siteID := "testString"
+				siteID := "site_id"
 				listDirectorSitesPvdcsOptionsModel := vmwareService.NewListDirectorSitesPvdcsOptions(siteID)
-				listDirectorSitesPvdcsOptionsModel.SetSiteID("testString")
-				listDirectorSitesPvdcsOptionsModel.SetAcceptLanguage("testString")
-				listDirectorSitesPvdcsOptionsModel.SetXGlobalTransactionID("testString")
+				listDirectorSitesPvdcsOptionsModel.SetSiteID("site_id")
+				listDirectorSitesPvdcsOptionsModel.SetAcceptLanguage("en-us")
+				listDirectorSitesPvdcsOptionsModel.SetXGlobalTransactionID("transaction1")
 				listDirectorSitesPvdcsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listDirectorSitesPvdcsOptionsModel).ToNot(BeNil())
-				Expect(listDirectorSitesPvdcsOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
-				Expect(listDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(listDirectorSitesPvdcsOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(listDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(listDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(listDirectorSitesPvdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListMultitenantDirectorSitesOptions successfully`, func() {
 				// Construct an instance of the ListMultitenantDirectorSitesOptions model
 				listMultitenantDirectorSitesOptionsModel := vmwareService.NewListMultitenantDirectorSitesOptions()
-				listMultitenantDirectorSitesOptionsModel.SetAcceptLanguage("testString")
-				listMultitenantDirectorSitesOptionsModel.SetXGlobalTransactionID("testString")
+				listMultitenantDirectorSitesOptionsModel.SetAcceptLanguage("en-us")
+				listMultitenantDirectorSitesOptionsModel.SetXGlobalTransactionID("transaction1")
 				listMultitenantDirectorSitesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listMultitenantDirectorSitesOptionsModel).ToNot(BeNil())
-				Expect(listMultitenantDirectorSitesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(listMultitenantDirectorSitesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(listMultitenantDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(listMultitenantDirectorSitesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewListVdcsOptions successfully`, func() {
 				// Construct an instance of the ListVdcsOptions model
 				listVdcsOptionsModel := vmwareService.NewListVdcsOptions()
-				listVdcsOptionsModel.SetAcceptLanguage("testString")
+				listVdcsOptionsModel.SetAcceptLanguage("en-us")
 				listVdcsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(listVdcsOptionsModel).ToNot(BeNil())
-				Expect(listVdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
+				Expect(listVdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(listVdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewPVDCPrototype successfully`, func() {
-				name := "testString"
-				dataCenterName := "testString"
+				name := "pvdc-1"
+				dataCenterName := "dal10"
 				clusters := []vmwarev1.ClusterPrototype{}
 				_model, err := vmwareService.NewPVDCPrototype(name, dataCenterName, clusters)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
 			It(`Invoke NewResourceGroupIdentity successfully`, func() {
-				id := "testString"
+				id := "some_resourcegroupid"
 				_model, err := vmwareService.NewResourceGroupIdentity(id)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
@@ -6003,44 +6003,44 @@ var _ = Describe(`VmwareV1`, func() {
 			})
 			It(`Invoke NewUpdateDirectorSitesPvdcsClusterOptions successfully`, func() {
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
-				siteID := "testString"
-				id := "testString"
-				pvdcID := "testString"
+				siteID := "site_id"
+				id := "cluster_id"
+				pvdcID := "pvdc_id"
 				body := map[string]interface{}{"anyKey": "anyValue"}
 				updateDirectorSitesPvdcsClusterOptionsModel := vmwareService.NewUpdateDirectorSitesPvdcsClusterOptions(siteID, id, pvdcID, body)
-				updateDirectorSitesPvdcsClusterOptionsModel.SetSiteID("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.SetID("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.SetPvdcID("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.SetSiteID("site_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.SetID("cluster_id")
+				updateDirectorSitesPvdcsClusterOptionsModel.SetPvdcID("pvdc_id")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetBody(map[string]interface{}{"anyKey": "anyValue"})
-				updateDirectorSitesPvdcsClusterOptionsModel.SetAcceptLanguage("testString")
-				updateDirectorSitesPvdcsClusterOptionsModel.SetXGlobalTransactionID("testString")
+				updateDirectorSitesPvdcsClusterOptionsModel.SetAcceptLanguage("en-us")
+				updateDirectorSitesPvdcsClusterOptionsModel.SetXGlobalTransactionID("transaction1")
 				updateDirectorSitesPvdcsClusterOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel).ToNot(BeNil())
-				Expect(updateDirectorSitesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("testString")))
-				Expect(updateDirectorSitesPvdcsClusterOptionsModel.ID).To(Equal(core.StringPtr("testString")))
-				Expect(updateDirectorSitesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("testString")))
+				Expect(updateDirectorSitesPvdcsClusterOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(updateDirectorSitesPvdcsClusterOptionsModel.ID).To(Equal(core.StringPtr("cluster_id")))
+				Expect(updateDirectorSitesPvdcsClusterOptionsModel.PvdcID).To(Equal(core.StringPtr("pvdc_id")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Body).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
-				Expect(updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("testString")))
+				Expect(updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateVdcOptions successfully`, func() {
 				// Construct an instance of the UpdateVdcOptions model
-				id := "testString"
+				id := "vdc_id"
 				vdcPatch := map[string]interface{}{"anyKey": "anyValue"}
 				updateVdcOptionsModel := vmwareService.NewUpdateVdcOptions(id, vdcPatch)
-				updateVdcOptionsModel.SetID("testString")
+				updateVdcOptionsModel.SetID("vdc_id")
 				updateVdcOptionsModel.SetVDCPatch(map[string]interface{}{"anyKey": "anyValue"})
-				updateVdcOptionsModel.SetAcceptLanguage("testString")
+				updateVdcOptionsModel.SetAcceptLanguage("en-us")
 				updateVdcOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(updateVdcOptionsModel).ToNot(BeNil())
-				Expect(updateVdcOptionsModel.ID).To(Equal(core.StringPtr("testString")))
+				Expect(updateVdcOptionsModel.ID).To(Equal(core.StringPtr("vdc_id")))
 				Expect(updateVdcOptionsModel.VDCPatch).To(Equal(map[string]interface{}{"anyKey": "anyValue"}))
-				Expect(updateVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("testString")))
+				Expect(updateVdcOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(updateVdcOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewVDCDirectorSitePrototype successfully`, func() {
-				id := "testString"
+				id := "site_id"
 				var pvdc *vmwarev1.DirectorSitePVDC = nil
 				_, err := vmwareService.NewVDCDirectorSitePrototype(id, pvdc)
 				Expect(err).ToNot(BeNil())
