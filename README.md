@@ -1,4 +1,3 @@
-[![Build Status](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)](https://travis.ibm.com/CloudEngineering/go-sdk-template.svg?token=eW5FVD71iyte6tTby8gr&branch=main)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 # IBM Cloud VMware Go SDK Version 0.0.5
@@ -122,7 +121,7 @@ documentation in the
 ## Using the SDK
 For general SDK usage information, please see [this link](https://github.com/IBM/ibm-cloud-sdk-common/blob/main/README.md).
 
-[//]: # (See [examples]&#40;https://github.ibm.com/VMWSolutions/vmware-go-sdk/tree/main/examples/&#41; for examples on using service operations.)
+[//]: # (See [examples]&#40;https://github.com/IBM/vmware-go-sdk/tree/main/examples/&#41; for examples on using service operations.)
 
 
 ## Questions
@@ -133,7 +132,7 @@ please ask a question at
 
 ## Issues
 If you encounter an issue with the project, you are welcome to submit a
-[bug report](https://github.ibm.com/VMWSolutions/vmware-go-sdk/issues).
+[bug report](https://github.com/IBM/vmware-go-sdk/issues).
 Before that, please search for similar issues. It's possible that someone has already reported the problem.
 
 ## Open source @ IBM
