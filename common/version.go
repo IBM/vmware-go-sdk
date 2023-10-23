@@ -17,5 +17,4 @@
 package common
 
 // Version of the SDK
-// Testing on semantic-release function
 const Version = "0.0.1"

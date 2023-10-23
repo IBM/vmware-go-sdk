@@ -25,13 +25,12 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
-	"net/http"
-	"reflect"
-	"time"
-
 	"github.com/IBM/go-sdk-core/v5/core"
 	common "github.com/IBM/vmware-go-sdk/common"
 	"github.com/go-openapi/strfmt"
+	"net/http"
+	"reflect"
+	"time"
 )
 
 // VmwareV1 : IBM Cloud for VMware as a Service API
