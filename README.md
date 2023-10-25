@@ -101,10 +101,10 @@ replacing the `<url>`, `<apikey>` and `<auth_url>` with your proper
 [authenticator properties][authenticator-properties] and [endpoint URLs][endpoint-urls].
 
 ```bash
-VMWARE_API_AUTH_TYPE=iam
-VMWARE_API_URL=<url>
-VMWARE_API_APIKEY=<apikey>
-VMWARE_API_AUTH_URL=<auth_url>
+VMWARE_AUTH_URL=iam
+VMWARE_URL=<url>
+VMWARE_APIKEY=<apikey>
+VMWARE_AUTH_TYPE=<auth_url>
 ```
 
 ### Authentication with external configuration
