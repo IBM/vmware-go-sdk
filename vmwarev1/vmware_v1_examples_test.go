@@ -2,7 +2,7 @@
 // +build examples
 
 /**
- * (C) Copyright IBM Corp. 2023.
+ * (C) Copyright IBM Corp. 2024.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,6 @@ import (
 	. "github.com/onsi/gomega"
 )
 
-//
 // This file provides an example of how to use the vmware service.
 //
 // The following configuration properties are assumed to be defined:
@@ -42,7 +41,6 @@ import (
 // These configuration properties can be exported as environment variables, or stored
 // in a configuration file and then:
 // export IBM_CREDENTIALS_FILE=<name of configuration file>
-//
 var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 	const externalConfigFile = "../vmware_v1.env"
