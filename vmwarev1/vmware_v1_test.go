@@ -237,6 +237,9 @@ var _ = Describe(`VmwareV1`, func() {
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
+				createDirectorSitesOptionsModel.PrivateOnly = core.BoolPtr(true)
+				createDirectorSitesOptionsModel.ConsoleConnectionType = core.StringPtr("private")
+				createDirectorSitesOptionsModel.IpAllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -295,7 +298,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully with retries`, func() {
@@ -341,6 +344,9 @@ var _ = Describe(`VmwareV1`, func() {
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
+				createDirectorSitesOptionsModel.PrivateOnly = core.BoolPtr(true)
+				createDirectorSitesOptionsModel.ConsoleConnectionType = core.StringPtr("private")
+				createDirectorSitesOptionsModel.IpAllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -402,7 +408,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully`, func() {
@@ -453,6 +459,9 @@ var _ = Describe(`VmwareV1`, func() {
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
+				createDirectorSitesOptionsModel.PrivateOnly = core.BoolPtr(true)
+				createDirectorSitesOptionsModel.ConsoleConnectionType = core.StringPtr("private")
+				createDirectorSitesOptionsModel.IpAllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -506,6 +515,9 @@ var _ = Describe(`VmwareV1`, func() {
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
+				createDirectorSitesOptionsModel.PrivateOnly = core.BoolPtr(true)
+				createDirectorSitesOptionsModel.ConsoleConnectionType = core.StringPtr("private")
+				createDirectorSitesOptionsModel.IpAllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -580,6 +592,9 @@ var _ = Describe(`VmwareV1`, func() {
 				createDirectorSitesOptionsModel.Pvdcs = []vmwarev1.PVDCPrototype{*pvdcPrototypeModel}
 				createDirectorSitesOptionsModel.ResourceGroup = resourceGroupIdentityModel
 				createDirectorSitesOptionsModel.Services = []vmwarev1.ServiceIdentity{*serviceIdentityModel}
+				createDirectorSitesOptionsModel.PrivateOnly = core.BoolPtr(true)
+				createDirectorSitesOptionsModel.ConsoleConnectionType = core.StringPtr("private")
+				createDirectorSitesOptionsModel.IpAllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
 				createDirectorSitesOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				createDirectorSitesOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
 				createDirectorSitesOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
@@ -668,7 +683,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully with retries`, func() {
@@ -727,7 +742,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully`, func() {
@@ -891,7 +906,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully with retries`, func() {
@@ -951,7 +966,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully`, func() {
@@ -1125,7 +1140,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully with retries`, func() {
@@ -1185,7 +1200,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL"}], "rhel_vm_activation_key": "RhelVmActivationKey"}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully`, func() {
@@ -1276,6 +1291,2054 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Invoke operation
 				result, response, operationErr := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptions *CreateDirectorSitesVcdaConnectionEndpointsOptions) - Operation response error`, func() {
+		createDirectorSitesVcdaConnectionEndpointsPath := "/director_sites/site_id/vcda/connection_endpoints"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnectionEndpoints with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionEndpointsOptions model
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionEndpointsOptions)
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.DataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1"}
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptions *CreateDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
+		createDirectorSitesVcdaConnectionEndpointsPath := "/director_sites/site_id/vcda/connection_endpoints"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnectionEndpoints successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionEndpointsOptions model
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionEndpointsOptions)
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.DataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1"}
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.CreateDirectorSitesVcdaConnectionEndpointsWithContext(ctx, createDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.CreateDirectorSitesVcdaConnectionEndpointsWithContext(ctx, createDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnectionEndpoints successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionEndpointsOptions model
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionEndpointsOptions)
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.DataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1"}
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnectionEndpoints with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionEndpointsOptions model
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionEndpointsOptions)
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.DataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1"}
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateDirectorSitesVcdaConnectionEndpointsOptions model with no property values
+				createDirectorSitesVcdaConnectionEndpointsOptionsModelNew := new(vmwarev1.CreateDirectorSitesVcdaConnectionEndpointsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaConnectionEndpoints successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionEndpointsOptions model
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaConnectionEndpointsOptions)
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Type = core.StringPtr("private")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.DataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1"}
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptions *DeleteDirectorSitesVcdaConnectionEndpointsOptions) - Operation response error`, func() {
+		deleteDirectorSitesVcdaConnectionEndpointsPath := "/director_sites/site_id/services/vcda/connection_endpoints/vcda_connections_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("DELETE"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke DeleteDirectorSitesVcdaConnectionEndpoints with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDirectorSitesVcdaConnectionEndpointsOptions model
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaConnectionEndpointsOptions)
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptions *DeleteDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
+		deleteDirectorSitesVcdaConnectionEndpointsPath := "/director_sites/site_id/services/vcda/connection_endpoints/vcda_connections_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}`)
+				}))
+			})
+			It(`Invoke DeleteDirectorSitesVcdaConnectionEndpoints successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the DeleteDirectorSitesVcdaConnectionEndpointsOptions model
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaConnectionEndpointsOptions)
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.DeleteDirectorSitesVcdaConnectionEndpointsWithContext(ctx, deleteDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.DeleteDirectorSitesVcdaConnectionEndpointsWithContext(ctx, deleteDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}`)
+				}))
+			})
+			It(`Invoke DeleteDirectorSitesVcdaConnectionEndpoints successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the DeleteDirectorSitesVcdaConnectionEndpointsOptions model
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaConnectionEndpointsOptions)
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke DeleteDirectorSitesVcdaConnectionEndpoints with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDirectorSitesVcdaConnectionEndpointsOptions model
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaConnectionEndpointsOptions)
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the DeleteDirectorSitesVcdaConnectionEndpointsOptions model with no property values
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModelNew := new(vmwarev1.DeleteDirectorSitesVcdaConnectionEndpointsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke DeleteDirectorSitesVcdaConnectionEndpoints successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDirectorSitesVcdaConnectionEndpointsOptions model
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaConnectionEndpointsOptions)
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptions *UpdateDirectorSitesVcdaConnectionEndpointsOptions) - Operation response error`, func() {
+		updateDirectorSitesVcdaConnectionEndpointsPath := "/director_sites/site_id/services/vcda/connection_endpoints/vcda_connections_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("PATCH"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateDirectorSitesVcdaConnectionEndpoints with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateDirectorSitesVcdaConnectionEndpointsOptions model
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaConnectionEndpointsOptions)
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptions *UpdateDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
+		updateDirectorSitesVcdaConnectionEndpointsPath := "/director_sites/site_id/services/vcda/connection_endpoints/vcda_connections_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "9165a9a4-cb70-4248-99ce-661106d89b83", "status": "updating"}`)
+				}))
+			})
+			It(`Invoke UpdateDirectorSitesVcdaConnectionEndpoints successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateDirectorSitesVcdaConnectionEndpointsOptions model
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaConnectionEndpointsOptions)
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.UpdateDirectorSitesVcdaConnectionEndpointsWithContext(ctx, updateDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.UpdateDirectorSitesVcdaConnectionEndpointsWithContext(ctx, updateDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesVcdaConnectionEndpointsPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "9165a9a4-cb70-4248-99ce-661106d89b83", "status": "updating"}`)
+				}))
+			})
+			It(`Invoke UpdateDirectorSitesVcdaConnectionEndpoints successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UpdateDirectorSitesVcdaConnectionEndpointsOptions model
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaConnectionEndpointsOptions)
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateDirectorSitesVcdaConnectionEndpoints with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateDirectorSitesVcdaConnectionEndpointsOptions model
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaConnectionEndpointsOptions)
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateDirectorSitesVcdaConnectionEndpointsOptions model with no property values
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModelNew := new(vmwarev1.UpdateDirectorSitesVcdaConnectionEndpointsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke UpdateDirectorSitesVcdaConnectionEndpoints successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateDirectorSitesVcdaConnectionEndpointsOptions model
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaConnectionEndpointsOptions)
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.ID = core.StringPtr("vcda_connections_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList = []string{"1.1.1.1/24", "2.2.2.2/24"}
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptions *CreateDirectorSitesVcdaC2cConnectionOptions) - Operation response error`, func() {
+		createDirectorSitesVcdaC2cConnectionPath := "/director_sites/site_id/services/vcda/c2c_connections"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaC2cConnection with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaC2cConnectionOptions model
+				createDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaC2cConnectionOptions)
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalDataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalSiteName = core.StringPtr("ddirw002-gr80d10vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerSiteName = core.StringPtr("dirw274t02vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerRegion = core.StringPtr("jp-tok")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptions *CreateDirectorSitesVcdaC2cConnectionOptions)`, func() {
+		createDirectorSitesVcdaC2cConnectionPath := "/director_sites/site_id/services/vcda/c2c_connections"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "peer_offering": "PeerOffering", "local_data_center_name": "dal10", "local_site_name": "LocalSiteName", "peer_site_name": "PeerSiteName", "peer_region": "PeerRegion", "note": "Note"}`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaC2cConnection successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the CreateDirectorSitesVcdaC2cConnectionOptions model
+				createDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaC2cConnectionOptions)
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalDataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalSiteName = core.StringPtr("ddirw002-gr80d10vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerSiteName = core.StringPtr("dirw274t02vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerRegion = core.StringPtr("jp-tok")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.CreateDirectorSitesVcdaC2cConnectionWithContext(ctx, createDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.CreateDirectorSitesVcdaC2cConnectionWithContext(ctx, createDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(createDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "peer_offering": "PeerOffering", "local_data_center_name": "dal10", "local_site_name": "LocalSiteName", "peer_site_name": "PeerSiteName", "peer_region": "PeerRegion", "note": "Note"}`)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaC2cConnection successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaC2cConnection(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaC2cConnectionOptions model
+				createDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaC2cConnectionOptions)
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalDataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalSiteName = core.StringPtr("ddirw002-gr80d10vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerSiteName = core.StringPtr("dirw274t02vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerRegion = core.StringPtr("jp-tok")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke CreateDirectorSitesVcdaC2cConnection with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaC2cConnectionOptions model
+				createDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaC2cConnectionOptions)
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalDataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalSiteName = core.StringPtr("ddirw002-gr80d10vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerSiteName = core.StringPtr("dirw274t02vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerRegion = core.StringPtr("jp-tok")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the CreateDirectorSitesVcdaC2cConnectionOptions model with no property values
+				createDirectorSitesVcdaC2cConnectionOptionsModelNew := new(vmwarev1.CreateDirectorSitesVcdaC2cConnectionOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke CreateDirectorSitesVcdaC2cConnection successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the CreateDirectorSitesVcdaC2cConnectionOptions model
+				createDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.CreateDirectorSitesVcdaC2cConnectionOptions)
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalDataCenterName = core.StringPtr("dal10")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.LocalSiteName = core.StringPtr("ddirw002-gr80d10vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerSiteName = core.StringPtr("dirw274t02vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.PeerRegion = core.StringPtr("jp-tok")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptions *DeleteDirectorSitesVcdaC2cConnectionOptions) - Operation response error`, func() {
+		deleteDirectorSitesVcdaC2cConnectionPath := "/director_sites/site_id/services/vcda/c2c_connections/connection_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("DELETE"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke DeleteDirectorSitesVcdaC2cConnection with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDirectorSitesVcdaC2cConnectionOptions model
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaC2cConnectionOptions)
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptions *DeleteDirectorSitesVcdaC2cConnectionOptions)`, func() {
+		deleteDirectorSitesVcdaC2cConnectionPath := "/director_sites/site_id/services/vcda/c2c_connections/connection_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "peer_offering": "PeerOffering", "local_data_center_name": "dal10", "local_site_name": "LocalSiteName", "peer_site_name": "PeerSiteName", "peer_region": "PeerRegion", "note": "Note"}`)
+				}))
+			})
+			It(`Invoke DeleteDirectorSitesVcdaC2cConnection successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the DeleteDirectorSitesVcdaC2cConnectionOptions model
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaC2cConnectionOptions)
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.DeleteDirectorSitesVcdaC2cConnectionWithContext(ctx, deleteDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.DeleteDirectorSitesVcdaC2cConnectionWithContext(ctx, deleteDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(deleteDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "status": "creating", "peer_offering": "PeerOffering", "local_data_center_name": "dal10", "local_site_name": "LocalSiteName", "peer_site_name": "PeerSiteName", "peer_region": "PeerRegion", "note": "Note"}`)
+				}))
+			})
+			It(`Invoke DeleteDirectorSitesVcdaC2cConnection successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaC2cConnection(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the DeleteDirectorSitesVcdaC2cConnectionOptions model
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaC2cConnectionOptions)
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke DeleteDirectorSitesVcdaC2cConnection with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDirectorSitesVcdaC2cConnectionOptions model
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaC2cConnectionOptions)
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the DeleteDirectorSitesVcdaC2cConnectionOptions model with no property values
+				deleteDirectorSitesVcdaC2cConnectionOptionsModelNew := new(vmwarev1.DeleteDirectorSitesVcdaC2cConnectionOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke DeleteDirectorSitesVcdaC2cConnection successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the DeleteDirectorSitesVcdaC2cConnectionOptions model
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.DeleteDirectorSitesVcdaC2cConnectionOptions)
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptions *UpdateDirectorSitesVcdaC2cConnectionOptions) - Operation response error`, func() {
+		updateDirectorSitesVcdaC2cConnectionPath := "/director_sites/site_id/services/vcda/c2c_connections/connection_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("PATCH"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke UpdateDirectorSitesVcdaC2cConnection with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateDirectorSitesVcdaC2cConnectionOptions model
+				updateDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaC2cConnectionOptions)
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptions *UpdateDirectorSitesVcdaC2cConnectionOptions)`, func() {
+		updateDirectorSitesVcdaC2cConnectionPath := "/director_sites/site_id/services/vcda/c2c_connections/connection_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "note": "Note"}`)
+				}))
+			})
+			It(`Invoke UpdateDirectorSitesVcdaC2cConnection successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the UpdateDirectorSitesVcdaC2cConnectionOptions model
+				updateDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaC2cConnectionOptions)
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.UpdateDirectorSitesVcdaC2cConnectionWithContext(ctx, updateDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.UpdateDirectorSitesVcdaC2cConnectionWithContext(ctx, updateDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(updateDirectorSitesVcdaC2cConnectionPath))
+					Expect(req.Method).To(Equal("PATCH"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "note": "Note"}`)
+				}))
+			})
+			It(`Invoke UpdateDirectorSitesVcdaC2cConnection successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaC2cConnection(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the UpdateDirectorSitesVcdaC2cConnectionOptions model
+				updateDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaC2cConnectionOptions)
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke UpdateDirectorSitesVcdaC2cConnection with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateDirectorSitesVcdaC2cConnectionOptions model
+				updateDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaC2cConnectionOptions)
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the UpdateDirectorSitesVcdaC2cConnectionOptions model with no property values
+				updateDirectorSitesVcdaC2cConnectionOptionsModelNew := new(vmwarev1.UpdateDirectorSitesVcdaC2cConnectionOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke UpdateDirectorSitesVcdaC2cConnection successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the UpdateDirectorSitesVcdaC2cConnectionOptions model
+				updateDirectorSitesVcdaC2cConnectionOptionsModel := new(vmwarev1.UpdateDirectorSitesVcdaC2cConnectionOptions)
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SiteID = core.StringPtr("site_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.ID = core.StringPtr("connection_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Note = core.StringPtr("Text of the note...")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetOidcConfiguration(getOidcConfigurationOptions *GetOidcConfigurationOptions) - Operation response error`, func() {
+		getOidcConfigurationPath := "/director_sites/site_id/oidc_configuration"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getOidcConfigurationPath))
+					Expect(req.Method).To(Equal("GET"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke GetOidcConfiguration with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the GetOidcConfigurationOptions model
+				getOidcConfigurationOptionsModel := new(vmwarev1.GetOidcConfigurationOptions)
+				getOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				getOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.GetOidcConfiguration(getOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.GetOidcConfiguration(getOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`GetOidcConfiguration(getOidcConfigurationOptions *GetOidcConfigurationOptions)`, func() {
+		getOidcConfigurationPath := "/director_sites/site_id/oidc_configuration"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getOidcConfigurationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"status": "pending", "last_set_at": "2019-01-01T12:00:00.000Z"}`)
+				}))
+			})
+			It(`Invoke GetOidcConfiguration successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the GetOidcConfigurationOptions model
+				getOidcConfigurationOptionsModel := new(vmwarev1.GetOidcConfigurationOptions)
+				getOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				getOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.GetOidcConfigurationWithContext(ctx, getOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.GetOidcConfiguration(getOidcConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.GetOidcConfigurationWithContext(ctx, getOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(getOidcConfigurationPath))
+					Expect(req.Method).To(Equal("GET"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"status": "pending", "last_set_at": "2019-01-01T12:00:00.000Z"}`)
+				}))
+			})
+			It(`Invoke GetOidcConfiguration successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.GetOidcConfiguration(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the GetOidcConfigurationOptions model
+				getOidcConfigurationOptionsModel := new(vmwarev1.GetOidcConfigurationOptions)
+				getOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				getOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.GetOidcConfiguration(getOidcConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke GetOidcConfiguration with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the GetOidcConfigurationOptions model
+				getOidcConfigurationOptionsModel := new(vmwarev1.GetOidcConfigurationOptions)
+				getOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				getOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.GetOidcConfiguration(getOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the GetOidcConfigurationOptions model with no property values
+				getOidcConfigurationOptionsModelNew := new(vmwarev1.GetOidcConfigurationOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.GetOidcConfiguration(getOidcConfigurationOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke GetOidcConfiguration successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the GetOidcConfigurationOptions model
+				getOidcConfigurationOptionsModel := new(vmwarev1.GetOidcConfigurationOptions)
+				getOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				getOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				getOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.GetOidcConfiguration(getOidcConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions) - Operation response error`, func() {
+		setOidcConfigurationPath := "/director_sites/site_id/oidc_configuration"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(setOidcConfigurationPath))
+					Expect(req.Method).To(Equal("PUT"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke SetOidcConfiguration with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the SetOidcConfigurationOptions model
+				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
+				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.SetOidcConfiguration(setOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.SetOidcConfiguration(setOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions)`, func() {
+		setOidcConfigurationPath := "/director_sites/site_id/oidc_configuration"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(setOidcConfigurationPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"status": "pending", "last_set_at": "2019-01-01T12:00:00.000Z"}`)
+				}))
+			})
+			It(`Invoke SetOidcConfiguration successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the SetOidcConfigurationOptions model
+				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
+				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.SetOidcConfigurationWithContext(ctx, setOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.SetOidcConfiguration(setOidcConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.SetOidcConfigurationWithContext(ctx, setOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(setOidcConfigurationPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"status": "pending", "last_set_at": "2019-01-01T12:00:00.000Z"}`)
+				}))
+			})
+			It(`Invoke SetOidcConfiguration successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.SetOidcConfiguration(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the SetOidcConfigurationOptions model
+				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
+				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.SetOidcConfiguration(setOidcConfigurationOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke SetOidcConfiguration with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the SetOidcConfigurationOptions model
+				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
+				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.SetOidcConfiguration(setOidcConfigurationOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the SetOidcConfigurationOptions model with no property values
+				setOidcConfigurationOptionsModelNew := new(vmwarev1.SetOidcConfigurationOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.SetOidcConfiguration(setOidcConfigurationOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke SetOidcConfiguration successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the SetOidcConfigurationOptions model
+				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
+				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.SetOidcConfiguration(setOidcConfigurationOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -4247,7 +6310,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully with retries`, func() {
@@ -4303,7 +6366,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully`, func() {
@@ -4506,7 +6569,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully with retries`, func() {
@@ -4610,7 +6673,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully`, func() {
@@ -4869,7 +6932,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully with retries`, func() {
@@ -4926,7 +6989,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully`, func() {
@@ -5092,7 +7155,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully with retries`, func() {
@@ -5149,7 +7212,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully`, func() {
@@ -5340,7 +7403,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully with retries`, func() {
@@ -5422,7 +7485,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "type": "performance"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully`, func() {
@@ -5548,11 +7611,495 @@ var _ = Describe(`VmwareV1`, func() {
 			})
 		})
 	})
+	Describe(`AddTransitGatewayConnections(addTransitGatewayConnectionsOptions *AddTransitGatewayConnectionsOptions) - Operation response error`, func() {
+		addTransitGatewayConnectionsPath := "/vdcs/vdc_id/edges/edge_id/transit_gateways/transit_gateway_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
+					Expect(req.Method).To(Equal("PUT"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke AddTransitGatewayConnections with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the AddTransitGatewayConnectionsOptions model
+				addTransitGatewayConnectionsOptionsModel := new(vmwarev1.AddTransitGatewayConnectionsOptions)
+				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`AddTransitGatewayConnections(addTransitGatewayConnectionsOptions *AddTransitGatewayConnectionsOptions)`, func() {
+		addTransitGatewayConnectionsPath := "/vdcs/vdc_id/edges/edge_id/transit_gateways/transit_gateway_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}`)
+				}))
+			})
+			It(`Invoke AddTransitGatewayConnections successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the AddTransitGatewayConnectionsOptions model
+				addTransitGatewayConnectionsOptionsModel := new(vmwarev1.AddTransitGatewayConnectionsOptions)
+				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.AddTransitGatewayConnectionsWithContext(ctx, addTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.AddTransitGatewayConnectionsWithContext(ctx, addTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
+					Expect(req.Method).To(Equal("PUT"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}`)
+				}))
+			})
+			It(`Invoke AddTransitGatewayConnections successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.AddTransitGatewayConnections(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the AddTransitGatewayConnectionsOptions model
+				addTransitGatewayConnectionsOptionsModel := new(vmwarev1.AddTransitGatewayConnectionsOptions)
+				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke AddTransitGatewayConnections with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the AddTransitGatewayConnectionsOptions model
+				addTransitGatewayConnectionsOptionsModel := new(vmwarev1.AddTransitGatewayConnectionsOptions)
+				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the AddTransitGatewayConnectionsOptions model with no property values
+				addTransitGatewayConnectionsOptionsModelNew := new(vmwarev1.AddTransitGatewayConnectionsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke AddTransitGatewayConnections successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the AddTransitGatewayConnectionsOptions model
+				addTransitGatewayConnectionsOptionsModel := new(vmwarev1.AddTransitGatewayConnectionsOptions)
+				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptions *RemoveTransitGatewayConnectionsOptions) - Operation response error`, func() {
+		removeTransitGatewayConnectionsPath := "/vdcs/vdc_id/edges/edge_id/transit_gateways/transit_gateway_id"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(removeTransitGatewayConnectionsPath))
+					Expect(req.Method).To(Equal("DELETE"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke RemoveTransitGatewayConnections with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the RemoveTransitGatewayConnectionsOptions model
+				removeTransitGatewayConnectionsOptionsModel := new(vmwarev1.RemoveTransitGatewayConnectionsOptions)
+				removeTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				removeTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				removeTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				removeTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				removeTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptions *RemoveTransitGatewayConnectionsOptions)`, func() {
+		removeTransitGatewayConnectionsPath := "/vdcs/vdc_id/edges/edge_id/transit_gateways/transit_gateway_id"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(removeTransitGatewayConnectionsPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}`)
+				}))
+			})
+			It(`Invoke RemoveTransitGatewayConnections successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the RemoveTransitGatewayConnectionsOptions model
+				removeTransitGatewayConnectionsOptionsModel := new(vmwarev1.RemoveTransitGatewayConnectionsOptions)
+				removeTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				removeTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				removeTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				removeTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				removeTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.RemoveTransitGatewayConnectionsWithContext(ctx, removeTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.RemoveTransitGatewayConnectionsWithContext(ctx, removeTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(removeTransitGatewayConnectionsPath))
+					Expect(req.Method).To(Equal("DELETE"))
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(202)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}`)
+				}))
+			})
+			It(`Invoke RemoveTransitGatewayConnections successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.RemoveTransitGatewayConnections(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the RemoveTransitGatewayConnectionsOptions model
+				removeTransitGatewayConnectionsOptionsModel := new(vmwarev1.RemoveTransitGatewayConnectionsOptions)
+				removeTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				removeTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				removeTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				removeTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				removeTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke RemoveTransitGatewayConnections with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the RemoveTransitGatewayConnectionsOptions model
+				removeTransitGatewayConnectionsOptionsModel := new(vmwarev1.RemoveTransitGatewayConnectionsOptions)
+				removeTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				removeTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				removeTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				removeTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				removeTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the RemoveTransitGatewayConnectionsOptions model with no property values
+				removeTransitGatewayConnectionsOptionsModelNew := new(vmwarev1.RemoveTransitGatewayConnectionsOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(202)
+				}))
+			})
+			It(`Invoke RemoveTransitGatewayConnections successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the RemoveTransitGatewayConnectionsOptions model
+				removeTransitGatewayConnectionsOptionsModel := new(vmwarev1.RemoveTransitGatewayConnectionsOptions)
+				removeTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
+				removeTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
+				removeTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				removeTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				removeTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
 	Describe(`Model constructor tests`, func() {
 		Context(`Using a service client instance`, func() {
 			vmwareService, _ := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
 				URL:           "http://vmwarev1modelgenerator.com",
 				Authenticator: &core.NoAuthAuthenticator{},
+			})
+			It(`Invoke NewAddTransitGatewayConnectionsOptions successfully`, func() {
+				// Construct an instance of the AddTransitGatewayConnectionsOptions model
+				vdcID := "vdc_id"
+				edgeID := "edge_id"
+				id := "transit_gateway_id"
+				addTransitGatewayConnectionsOptionsModel := vmwareService.NewAddTransitGatewayConnectionsOptions(vdcID, edgeID, id)
+				addTransitGatewayConnectionsOptionsModel.SetVdcID("vdc_id")
+				addTransitGatewayConnectionsOptionsModel.SetEdgeID("edge_id")
+				addTransitGatewayConnectionsOptionsModel.SetID("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.SetAcceptLanguage("en-us")
+				addTransitGatewayConnectionsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(addTransitGatewayConnectionsOptionsModel).ToNot(BeNil())
+				Expect(addTransitGatewayConnectionsOptionsModel.VdcID).To(Equal(core.StringPtr("vdc_id")))
+				Expect(addTransitGatewayConnectionsOptionsModel.EdgeID).To(Equal(core.StringPtr("edge_id")))
+				Expect(addTransitGatewayConnectionsOptionsModel.ID).To(Equal(core.StringPtr("transit_gateway_id")))
+				Expect(addTransitGatewayConnectionsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(addTransitGatewayConnectionsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewClusterPrototype successfully`, func() {
 				name := "cluster_1"
@@ -5617,6 +8164,9 @@ var _ = Describe(`VmwareV1`, func() {
 				createDirectorSitesOptionsModel.SetPvdcs([]vmwarev1.PVDCPrototype{*pvdcPrototypeModel})
 				createDirectorSitesOptionsModel.SetResourceGroup(resourceGroupIdentityModel)
 				createDirectorSitesOptionsModel.SetServices([]vmwarev1.ServiceIdentity{*serviceIdentityModel})
+				createDirectorSitesOptionsModel.SetPrivateOnly(true)
+				createDirectorSitesOptionsModel.SetConsoleConnectionType("private")
+				createDirectorSitesOptionsModel.SetIpAllowList([]string{"1.1.1.1/24", "2.2.2.2/24"})
 				createDirectorSitesOptionsModel.SetAcceptLanguage("en-us")
 				createDirectorSitesOptionsModel.SetXGlobalTransactionID("transaction1")
 				createDirectorSitesOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
@@ -5625,6 +8175,9 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(createDirectorSitesOptionsModel.Pvdcs).To(Equal([]vmwarev1.PVDCPrototype{*pvdcPrototypeModel}))
 				Expect(createDirectorSitesOptionsModel.ResourceGroup).To(Equal(resourceGroupIdentityModel))
 				Expect(createDirectorSitesOptionsModel.Services).To(Equal([]vmwarev1.ServiceIdentity{*serviceIdentityModel}))
+				Expect(createDirectorSitesOptionsModel.PrivateOnly).To(Equal(core.BoolPtr(true)))
+				Expect(createDirectorSitesOptionsModel.ConsoleConnectionType).To(Equal(core.StringPtr("private")))
+				Expect(createDirectorSitesOptionsModel.IpAllowList).To(Equal([]string{"1.1.1.1/24", "2.2.2.2/24"}))
 				Expect(createDirectorSitesOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(createDirectorSitesOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(createDirectorSitesOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
@@ -5716,6 +8269,56 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(createDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(createDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(createDirectorSitesPvdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewCreateDirectorSitesVcdaC2cConnectionOptions successfully`, func() {
+				// Construct an instance of the CreateDirectorSitesVcdaC2cConnectionOptions model
+				siteID := "site_id"
+				createDirectorSitesVcdaC2cConnectionOptionsLocalDataCenterName := "dal10"
+				createDirectorSitesVcdaC2cConnectionOptionsLocalSiteName := "ddirw002-gr80d10vcda"
+				createDirectorSitesVcdaC2cConnectionOptionsPeerSiteName := "dirw274t02vcda"
+				createDirectorSitesVcdaC2cConnectionOptionsPeerRegion := "jp-tok"
+				createDirectorSitesVcdaC2cConnectionOptionsModel := vmwareService.NewCreateDirectorSitesVcdaC2cConnectionOptions(siteID, createDirectorSitesVcdaC2cConnectionOptionsLocalDataCenterName, createDirectorSitesVcdaC2cConnectionOptionsLocalSiteName, createDirectorSitesVcdaC2cConnectionOptionsPeerSiteName, createDirectorSitesVcdaC2cConnectionOptionsPeerRegion)
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetSiteID("site_id")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetLocalDataCenterName("dal10")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetLocalSiteName("ddirw002-gr80d10vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetPeerSiteName("dirw274t02vcda")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetPeerRegion("jp-tok")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetNote("Text of the note...")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetAcceptLanguage("en-us")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetXGlobalTransactionID("transaction1")
+				createDirectorSitesVcdaC2cConnectionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel).ToNot(BeNil())
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.LocalDataCenterName).To(Equal(core.StringPtr("dal10")))
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.LocalSiteName).To(Equal(core.StringPtr("ddirw002-gr80d10vcda")))
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.PeerSiteName).To(Equal(core.StringPtr("dirw274t02vcda")))
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.PeerRegion).To(Equal(core.StringPtr("jp-tok")))
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.Note).To(Equal(core.StringPtr("Text of the note...")))
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
+				Expect(createDirectorSitesVcdaC2cConnectionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewCreateDirectorSitesVcdaConnectionEndpointsOptions successfully`, func() {
+				// Construct an instance of the CreateDirectorSitesVcdaConnectionEndpointsOptions model
+				siteID := "site_id"
+				createDirectorSitesVcdaConnectionEndpointsOptionsType := "private"
+				createDirectorSitesVcdaConnectionEndpointsOptionsDataCenterName := "dal10"
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel := vmwareService.NewCreateDirectorSitesVcdaConnectionEndpointsOptions(siteID, createDirectorSitesVcdaConnectionEndpointsOptionsType, createDirectorSitesVcdaConnectionEndpointsOptionsDataCenterName)
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SetSiteID("site_id")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SetType("private")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SetDataCenterName("dal10")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SetAllowList([]string{"1.1.1.1"})
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SetAcceptLanguage("en-us")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SetXGlobalTransactionID("transaction1")
+				createDirectorSitesVcdaConnectionEndpointsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(createDirectorSitesVcdaConnectionEndpointsOptionsModel).ToNot(BeNil())
+				Expect(createDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(createDirectorSitesVcdaConnectionEndpointsOptionsModel.Type).To(Equal(core.StringPtr("private")))
+				Expect(createDirectorSitesVcdaConnectionEndpointsOptionsModel.DataCenterName).To(Equal(core.StringPtr("dal10")))
+				Expect(createDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList).To(Equal([]string{"1.1.1.1"}))
+				Expect(createDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(createDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
+				Expect(createDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewCreateVdcOptions successfully`, func() {
 				// Construct an instance of the VDCProviderType model
@@ -5816,6 +8419,40 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(deleteDirectorSitesPvdcsClusterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
+			It(`Invoke NewDeleteDirectorSitesVcdaC2cConnectionOptions successfully`, func() {
+				// Construct an instance of the DeleteDirectorSitesVcdaC2cConnectionOptions model
+				siteID := "site_id"
+				id := "connection_id"
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel := vmwareService.NewDeleteDirectorSitesVcdaC2cConnectionOptions(siteID, id)
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SetSiteID("site_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SetID("connection_id")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SetAcceptLanguage("en-us")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SetXGlobalTransactionID("transaction1")
+				deleteDirectorSitesVcdaC2cConnectionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteDirectorSitesVcdaC2cConnectionOptionsModel).ToNot(BeNil())
+				Expect(deleteDirectorSitesVcdaC2cConnectionOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(deleteDirectorSitesVcdaC2cConnectionOptionsModel.ID).To(Equal(core.StringPtr("connection_id")))
+				Expect(deleteDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(deleteDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
+				Expect(deleteDirectorSitesVcdaC2cConnectionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewDeleteDirectorSitesVcdaConnectionEndpointsOptions successfully`, func() {
+				// Construct an instance of the DeleteDirectorSitesVcdaConnectionEndpointsOptions model
+				siteID := "site_id"
+				id := "vcda_connections_id"
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel := vmwareService.NewDeleteDirectorSitesVcdaConnectionEndpointsOptions(siteID, id)
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SetSiteID("site_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SetID("vcda_connections_id")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SetAcceptLanguage("en-us")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SetXGlobalTransactionID("transaction1")
+				deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel).ToNot(BeNil())
+				Expect(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.ID).To(Equal(core.StringPtr("vcda_connections_id")))
+				Expect(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
+				Expect(deleteDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewDeleteVdcOptions successfully`, func() {
 				// Construct an instance of the DeleteVdcOptions model
 				id := "vdc_id"
@@ -5884,6 +8521,18 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(getDirectorSitesPvdcsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(getDirectorSitesPvdcsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(getDirectorSitesPvdcsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewGetOidcConfigurationOptions successfully`, func() {
+				// Construct an instance of the GetOidcConfigurationOptions model
+				siteID := "site_id"
+				getOidcConfigurationOptionsModel := vmwareService.NewGetOidcConfigurationOptions(siteID)
+				getOidcConfigurationOptionsModel.SetSiteID("site_id")
+				getOidcConfigurationOptionsModel.SetAcceptLanguage("en-us")
+				getOidcConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(getOidcConfigurationOptionsModel).ToNot(BeNil())
+				Expect(getOidcConfigurationOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(getOidcConfigurationOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(getOidcConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewGetVdcOptions successfully`, func() {
 				// Construct an instance of the GetVdcOptions model
@@ -5989,6 +8638,24 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewRemoveTransitGatewayConnectionsOptions successfully`, func() {
+				// Construct an instance of the RemoveTransitGatewayConnectionsOptions model
+				vdcID := "vdc_id"
+				edgeID := "edge_id"
+				id := "transit_gateway_id"
+				removeTransitGatewayConnectionsOptionsModel := vmwareService.NewRemoveTransitGatewayConnectionsOptions(vdcID, edgeID, id)
+				removeTransitGatewayConnectionsOptionsModel.SetVdcID("vdc_id")
+				removeTransitGatewayConnectionsOptionsModel.SetEdgeID("edge_id")
+				removeTransitGatewayConnectionsOptionsModel.SetID("transit_gateway_id")
+				removeTransitGatewayConnectionsOptionsModel.SetAcceptLanguage("en-us")
+				removeTransitGatewayConnectionsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(removeTransitGatewayConnectionsOptionsModel).ToNot(BeNil())
+				Expect(removeTransitGatewayConnectionsOptionsModel.VdcID).To(Equal(core.StringPtr("vdc_id")))
+				Expect(removeTransitGatewayConnectionsOptionsModel.EdgeID).To(Equal(core.StringPtr("edge_id")))
+				Expect(removeTransitGatewayConnectionsOptionsModel.ID).To(Equal(core.StringPtr("transit_gateway_id")))
+				Expect(removeTransitGatewayConnectionsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(removeTransitGatewayConnectionsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewResourceGroupIdentity successfully`, func() {
 				id := "some_resourcegroupid"
 				_model, err := vmwareService.NewResourceGroupIdentity(id)
@@ -6000,6 +8667,18 @@ var _ = Describe(`VmwareV1`, func() {
 				_model, err := vmwareService.NewServiceIdentity(name)
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
+			})
+			It(`Invoke NewSetOidcConfigurationOptions successfully`, func() {
+				// Construct an instance of the SetOidcConfigurationOptions model
+				siteID := "site_id"
+				setOidcConfigurationOptionsModel := vmwareService.NewSetOidcConfigurationOptions(siteID)
+				setOidcConfigurationOptionsModel.SetSiteID("site_id")
+				setOidcConfigurationOptionsModel.SetAcceptLanguage("en-us")
+				setOidcConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(setOidcConfigurationOptionsModel).ToNot(BeNil())
+				Expect(setOidcConfigurationOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(setOidcConfigurationOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(setOidcConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateDirectorSitesPvdcsClusterOptions successfully`, func() {
 				// Construct an instance of the UpdateDirectorSitesPvdcsClusterOptions model
@@ -6023,6 +8702,45 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
 				Expect(updateDirectorSitesPvdcsClusterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewUpdateDirectorSitesVcdaC2cConnectionOptions successfully`, func() {
+				// Construct an instance of the UpdateDirectorSitesVcdaC2cConnectionOptions model
+				siteID := "site_id"
+				id := "connection_id"
+				updateDirectorSitesVcdaC2cConnectionOptionsNote := "Text of the note..."
+				updateDirectorSitesVcdaC2cConnectionOptionsModel := vmwareService.NewUpdateDirectorSitesVcdaC2cConnectionOptions(siteID, id, updateDirectorSitesVcdaC2cConnectionOptionsNote)
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SetSiteID("site_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SetID("connection_id")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SetNote("Text of the note...")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SetAcceptLanguage("en-us")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SetXGlobalTransactionID("transaction1")
+				updateDirectorSitesVcdaC2cConnectionOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateDirectorSitesVcdaC2cConnectionOptionsModel).ToNot(BeNil())
+				Expect(updateDirectorSitesVcdaC2cConnectionOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(updateDirectorSitesVcdaC2cConnectionOptionsModel.ID).To(Equal(core.StringPtr("connection_id")))
+				Expect(updateDirectorSitesVcdaC2cConnectionOptionsModel.Note).To(Equal(core.StringPtr("Text of the note...")))
+				Expect(updateDirectorSitesVcdaC2cConnectionOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(updateDirectorSitesVcdaC2cConnectionOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
+				Expect(updateDirectorSitesVcdaC2cConnectionOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewUpdateDirectorSitesVcdaConnectionEndpointsOptions successfully`, func() {
+				// Construct an instance of the UpdateDirectorSitesVcdaConnectionEndpointsOptions model
+				siteID := "site_id"
+				id := "vcda_connections_id"
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel := vmwareService.NewUpdateDirectorSitesVcdaConnectionEndpointsOptions(siteID, id)
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SetSiteID("site_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SetID("vcda_connections_id")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SetAllowList([]string{"1.1.1.1/24", "2.2.2.2/24"})
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SetAcceptLanguage("en-us")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SetXGlobalTransactionID("transaction1")
+				updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(updateDirectorSitesVcdaConnectionEndpointsOptionsModel).ToNot(BeNil())
+				Expect(updateDirectorSitesVcdaConnectionEndpointsOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(updateDirectorSitesVcdaConnectionEndpointsOptionsModel.ID).To(Equal(core.StringPtr("vcda_connections_id")))
+				Expect(updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AllowList).To(Equal([]string{"1.1.1.1/24", "2.2.2.2/24"}))
+				Expect(updateDirectorSitesVcdaConnectionEndpointsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(updateDirectorSitesVcdaConnectionEndpointsOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
+				Expect(updateDirectorSitesVcdaConnectionEndpointsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
 			It(`Invoke NewUpdateVdcOptions successfully`, func() {
 				// Construct an instance of the UpdateVdcOptions model

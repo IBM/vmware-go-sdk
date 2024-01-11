@@ -1,5 +1,4 @@
 //go:build examples
-// +build examples
 
 /**
  * (C) Copyright IBM Corp. 2024.
@@ -183,6 +182,151 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSite).ToNot(BeNil())
+		})
+		It(`CreateDirectorSitesVcdaConnectionEndpoints request example`, func() {
+			fmt.Println("\nCreateDirectorSitesVcdaConnectionEndpoints() result:")
+			// begin-create_director_sites_vcda_connection_endpoints
+
+			createDirectorSitesVcdaConnectionEndpointsOptions := vmwareService.NewCreateDirectorSitesVcdaConnectionEndpointsOptions(
+				"site_id",
+				"private",
+				"dal10",
+			)
+			createDirectorSitesVcdaConnectionEndpointsOptions.SetAcceptLanguage("en-us")
+			createDirectorSitesVcdaConnectionEndpointsOptions.SetXGlobalTransactionID("transaction1")
+
+			vcdaConnection, response, err := vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(vcdaConnection, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_director_sites_vcda_connection_endpoints
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaConnection).ToNot(BeNil())
+		})
+		It(`UpdateDirectorSitesVcdaConnectionEndpoints request example`, func() {
+			fmt.Println("\nUpdateDirectorSitesVcdaConnectionEndpoints() result:")
+			// begin-update_director_sites_vcda_connection_endpoints
+
+			updateDirectorSitesVcdaConnectionEndpointsOptions := vmwareService.NewUpdateDirectorSitesVcdaConnectionEndpointsOptions(
+				"site_id",
+				"vcda_connections_id",
+			)
+			updateDirectorSitesVcdaConnectionEndpointsOptions.SetAcceptLanguage("en-us")
+			updateDirectorSitesVcdaConnectionEndpointsOptions.SetXGlobalTransactionID("transaction1")
+
+			updatedVcdaConnection, response, err := vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(updatedVcdaConnection, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_director_sites_vcda_connection_endpoints
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(updatedVcdaConnection).ToNot(BeNil())
+		})
+		It(`CreateDirectorSitesVcdaC2cConnection request example`, func() {
+			fmt.Println("\nCreateDirectorSitesVcdaC2cConnection() result:")
+			// begin-create_director_sites_vcda_c2c_connection
+
+			createDirectorSitesVcdaC2cConnectionOptions := vmwareService.NewCreateDirectorSitesVcdaC2cConnectionOptions(
+				"site_id",
+				"dal10",
+				"ddirw002-gr80d10vcda",
+				"dirw274t02vcda",
+				"jp-tok",
+			)
+			createDirectorSitesVcdaC2cConnectionOptions.SetAcceptLanguage("en-us")
+			createDirectorSitesVcdaC2cConnectionOptions.SetXGlobalTransactionID("transaction1")
+
+			vcdaC2c, response, err := vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(vcdaC2c, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_director_sites_vcda_c2c_connection
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaC2c).ToNot(BeNil())
+		})
+		It(`UpdateDirectorSitesVcdaC2cConnection request example`, func() {
+			fmt.Println("\nUpdateDirectorSitesVcdaC2cConnection() result:")
+			// begin-update_director_sites_vcda_c2c_connection
+
+			updateDirectorSitesVcdaC2cConnectionOptions := vmwareService.NewUpdateDirectorSitesVcdaC2cConnectionOptions(
+				"site_id",
+				"connection_id",
+				"Text of the note...",
+			)
+			updateDirectorSitesVcdaC2cConnectionOptions.SetAcceptLanguage("en-us")
+			updateDirectorSitesVcdaC2cConnectionOptions.SetXGlobalTransactionID("transaction1")
+
+			updatedVcdaC2c, response, err := vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(updatedVcdaC2c, "", "  ")
+			fmt.Println(string(b))
+
+			// end-update_director_sites_vcda_c2c_connection
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(updatedVcdaC2c).ToNot(BeNil())
+		})
+		It(`GetOidcConfiguration request example`, func() {
+			fmt.Println("\nGetOidcConfiguration() result:")
+			// begin-get_oidc_configuration
+
+			getOidcConfigurationOptions := vmwareService.NewGetOidcConfigurationOptions(
+				"site_id",
+			)
+			getOidcConfigurationOptions.SetAcceptLanguage("en-us")
+
+			oidc, response, err := vmwareService.GetOidcConfiguration(getOidcConfigurationOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(oidc, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_oidc_configuration
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(oidc).ToNot(BeNil())
+		})
+		It(`SetOidcConfiguration request example`, func() {
+			fmt.Println("\nSetOidcConfiguration() result:")
+			// begin-set_oidc_configuration
+
+			setOidcConfigurationOptions := vmwareService.NewSetOidcConfigurationOptions(
+				"site_id",
+			)
+			setOidcConfigurationOptions.SetAcceptLanguage("en-us")
+
+			oidc, response, err := vmwareService.SetOidcConfiguration(setOidcConfigurationOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(oidc, "", "  ")
+			fmt.Println(string(b))
+
+			// end-set_oidc_configuration
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(oidc).ToNot(BeNil())
 		})
 		It(`ListDirectorSitesPvdcs request example`, func() {
 			fmt.Println("\nListDirectorSitesPvdcs() result:")
@@ -539,6 +683,30 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(vdc).ToNot(BeNil())
 		})
+		It(`AddTransitGatewayConnections request example`, func() {
+			fmt.Println("\nAddTransitGatewayConnections() result:")
+			// begin-add_transit_gateway_connections
+
+			addTransitGatewayConnectionsOptions := vmwareService.NewAddTransitGatewayConnectionsOptions(
+				"vdc_id",
+				"edge_id",
+				"transit_gateway_id",
+			)
+			addTransitGatewayConnectionsOptions.SetAcceptLanguage("en-us")
+
+			transitGateway, response, err := vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(transitGateway, "", "  ")
+			fmt.Println(string(b))
+
+			// end-add_transit_gateway_connections
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(transitGateway).ToNot(BeNil())
+		})
 		It(`DeleteDirectorSite request example`, func() {
 			fmt.Println("\nDeleteDirectorSite() result:")
 			// begin-delete_director_site
@@ -561,6 +729,54 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(directorSite).ToNot(BeNil())
+		})
+		It(`DeleteDirectorSitesVcdaConnectionEndpoints request example`, func() {
+			fmt.Println("\nDeleteDirectorSitesVcdaConnectionEndpoints() result:")
+			// begin-delete_director_sites_vcda_connection_endpoints
+
+			deleteDirectorSitesVcdaConnectionEndpointsOptions := vmwareService.NewDeleteDirectorSitesVcdaConnectionEndpointsOptions(
+				"site_id",
+				"vcda_connections_id",
+			)
+			deleteDirectorSitesVcdaConnectionEndpointsOptions.SetAcceptLanguage("en-us")
+			deleteDirectorSitesVcdaConnectionEndpointsOptions.SetXGlobalTransactionID("transaction1")
+
+			vcdaConnection, response, err := vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(vcdaConnection, "", "  ")
+			fmt.Println(string(b))
+
+			// end-delete_director_sites_vcda_connection_endpoints
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaConnection).ToNot(BeNil())
+		})
+		It(`DeleteDirectorSitesVcdaC2cConnection request example`, func() {
+			fmt.Println("\nDeleteDirectorSitesVcdaC2cConnection() result:")
+			// begin-delete_director_sites_vcda_c2c_connection
+
+			deleteDirectorSitesVcdaC2cConnectionOptions := vmwareService.NewDeleteDirectorSitesVcdaC2cConnectionOptions(
+				"site_id",
+				"connection_id",
+			)
+			deleteDirectorSitesVcdaC2cConnectionOptions.SetAcceptLanguage("en-us")
+			deleteDirectorSitesVcdaC2cConnectionOptions.SetXGlobalTransactionID("transaction1")
+
+			vcdaC2c, response, err := vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(vcdaC2c, "", "  ")
+			fmt.Println(string(b))
+
+			// end-delete_director_sites_vcda_c2c_connection
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaC2c).ToNot(BeNil())
 		})
 		It(`DeleteDirectorSitesPvdcsCluster request example`, func() {
 			fmt.Println("\nDeleteDirectorSitesPvdcsCluster() result:")
@@ -608,6 +824,30 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(vdc).ToNot(BeNil())
+		})
+		It(`RemoveTransitGatewayConnections request example`, func() {
+			fmt.Println("\nRemoveTransitGatewayConnections() result:")
+			// begin-remove_transit_gateway_connections
+
+			removeTransitGatewayConnectionsOptions := vmwareService.NewRemoveTransitGatewayConnectionsOptions(
+				"vdc_id",
+				"edge_id",
+				"transit_gateway_id",
+			)
+			removeTransitGatewayConnectionsOptions.SetAcceptLanguage("en-us")
+
+			transitGateway, response, err := vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(transitGateway, "", "  ")
+			fmt.Println(string(b))
+
+			// end-remove_transit_gateway_connections
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(transitGateway).ToNot(BeNil())
 		})
 	})
 })
