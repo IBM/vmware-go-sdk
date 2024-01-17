@@ -312,6 +312,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			setOidcConfigurationOptions := vmwareService.NewSetOidcConfigurationOptions(
 				"site_id",
+				int64(0),
 			)
 			setOidcConfigurationOptions.SetAcceptLanguage("en-us")
 
@@ -691,6 +692,7 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 				"vdc_id",
 				"edge_id",
 				"transit_gateway_id",
+				int64(0),
 			)
 			addTransitGatewayConnectionsOptions.SetAcceptLanguage("en-us")
 

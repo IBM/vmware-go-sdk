@@ -3137,6 +3137,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(setOidcConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
+					Expect(req.Header["Content-Length"]).ToNot(BeNil())
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					res.Header().Set("Content-type", "application/json")
@@ -3155,6 +3157,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the SetOidcConfigurationOptions model
 				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
 				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -3186,6 +3189,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(setOidcConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 
+					Expect(req.Header["Content-Length"]).ToNot(BeNil())
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Sleep a short time to support a timeout test
@@ -3209,6 +3214,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the SetOidcConfigurationOptions model
 				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
 				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -3246,6 +3252,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(setOidcConfigurationPath))
 					Expect(req.Method).To(Equal("PUT"))
 
+					Expect(req.Header["Content-Length"]).ToNot(BeNil())
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Set mock response
@@ -3271,6 +3279,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the SetOidcConfigurationOptions model
 				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
 				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -3292,6 +3301,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the SetOidcConfigurationOptions model
 				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
 				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -3334,6 +3344,7 @@ var _ = Describe(`VmwareV1`, func() {
 				// Construct an instance of the SetOidcConfigurationOptions model
 				setOidcConfigurationOptionsModel := new(vmwarev1.SetOidcConfigurationOptions)
 				setOidcConfigurationOptionsModel.SiteID = core.StringPtr("site_id")
+				setOidcConfigurationOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				setOidcConfigurationOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				setOidcConfigurationOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -7621,6 +7632,8 @@ var _ = Describe(`VmwareV1`, func() {
 					// Verify the contents of the request
 					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
 					Expect(req.Method).To(Equal("PUT"))
+					Expect(req.Header["Content-Length"]).ToNot(BeNil())
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					res.Header().Set("Content-type", "application/json")
@@ -7641,6 +7654,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -7672,6 +7686,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
 					Expect(req.Method).To(Equal("PUT"))
 
+					Expect(req.Header["Content-Length"]).ToNot(BeNil())
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Sleep a short time to support a timeout test
@@ -7697,6 +7713,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -7734,6 +7751,8 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
 					Expect(req.Method).To(Equal("PUT"))
 
+					Expect(req.Header["Content-Length"]).ToNot(BeNil())
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Set mock response
@@ -7761,6 +7780,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -7784,6 +7804,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -7828,6 +7849,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.VdcID = core.StringPtr("vdc_id")
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -8088,16 +8110,19 @@ var _ = Describe(`VmwareV1`, func() {
 				vdcID := "vdc_id"
 				edgeID := "edge_id"
 				id := "transit_gateway_id"
-				addTransitGatewayConnectionsOptionsModel := vmwareService.NewAddTransitGatewayConnectionsOptions(vdcID, edgeID, id)
+				contentLength := int64(0)
+				addTransitGatewayConnectionsOptionsModel := vmwareService.NewAddTransitGatewayConnectionsOptions(vdcID, edgeID, id, contentLength)
 				addTransitGatewayConnectionsOptionsModel.SetVdcID("vdc_id")
 				addTransitGatewayConnectionsOptionsModel.SetEdgeID("edge_id")
 				addTransitGatewayConnectionsOptionsModel.SetID("transit_gateway_id")
+				addTransitGatewayConnectionsOptionsModel.SetContentLength(int64(0))
 				addTransitGatewayConnectionsOptionsModel.SetAcceptLanguage("en-us")
 				addTransitGatewayConnectionsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(addTransitGatewayConnectionsOptionsModel).ToNot(BeNil())
 				Expect(addTransitGatewayConnectionsOptionsModel.VdcID).To(Equal(core.StringPtr("vdc_id")))
 				Expect(addTransitGatewayConnectionsOptionsModel.EdgeID).To(Equal(core.StringPtr("edge_id")))
 				Expect(addTransitGatewayConnectionsOptionsModel.ID).To(Equal(core.StringPtr("transit_gateway_id")))
+				Expect(addTransitGatewayConnectionsOptionsModel.ContentLength).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(addTransitGatewayConnectionsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(addTransitGatewayConnectionsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -8671,12 +8696,15 @@ var _ = Describe(`VmwareV1`, func() {
 			It(`Invoke NewSetOidcConfigurationOptions successfully`, func() {
 				// Construct an instance of the SetOidcConfigurationOptions model
 				siteID := "site_id"
-				setOidcConfigurationOptionsModel := vmwareService.NewSetOidcConfigurationOptions(siteID)
+				contentLength := int64(0)
+				setOidcConfigurationOptionsModel := vmwareService.NewSetOidcConfigurationOptions(siteID, contentLength)
 				setOidcConfigurationOptionsModel.SetSiteID("site_id")
+				setOidcConfigurationOptionsModel.SetContentLength(int64(0))
 				setOidcConfigurationOptionsModel.SetAcceptLanguage("en-us")
 				setOidcConfigurationOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(setOidcConfigurationOptionsModel).ToNot(BeNil())
 				Expect(setOidcConfigurationOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(setOidcConfigurationOptionsModel.ContentLength).To(Equal(core.Int64Ptr(int64(0))))
 				Expect(setOidcConfigurationOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(setOidcConfigurationOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})

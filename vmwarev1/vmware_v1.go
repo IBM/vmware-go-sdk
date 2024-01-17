@@ -555,7 +555,7 @@ func (vmware *VmwareV1) DeleteDirectorSitesVcdaConnectionEndpointsWithContext(ct
 
 	pathParamsMap := map[string]string{
 		"site_id": *deleteDirectorSitesVcdaConnectionEndpointsOptions.SiteID,
-		"id": *deleteDirectorSitesVcdaConnectionEndpointsOptions.ID,
+		"id":      *deleteDirectorSitesVcdaConnectionEndpointsOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -622,7 +622,7 @@ func (vmware *VmwareV1) UpdateDirectorSitesVcdaConnectionEndpointsWithContext(ct
 
 	pathParamsMap := map[string]string{
 		"site_id": *updateDirectorSitesVcdaConnectionEndpointsOptions.SiteID,
-		"id": *updateDirectorSitesVcdaConnectionEndpointsOptions.ID,
+		"id":      *updateDirectorSitesVcdaConnectionEndpointsOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -787,7 +787,7 @@ func (vmware *VmwareV1) DeleteDirectorSitesVcdaC2cConnectionWithContext(ctx cont
 
 	pathParamsMap := map[string]string{
 		"site_id": *deleteDirectorSitesVcdaC2cConnectionOptions.SiteID,
-		"id": *deleteDirectorSitesVcdaC2cConnectionOptions.ID,
+		"id":      *deleteDirectorSitesVcdaC2cConnectionOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -854,7 +854,7 @@ func (vmware *VmwareV1) UpdateDirectorSitesVcdaC2cConnectionWithContext(ctx cont
 
 	pathParamsMap := map[string]string{
 		"site_id": *updateDirectorSitesVcdaC2cConnectionOptions.SiteID,
-		"id": *updateDirectorSitesVcdaC2cConnectionOptions.ID,
+		"id":      *updateDirectorSitesVcdaC2cConnectionOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PATCH)
@@ -1013,6 +1013,9 @@ func (vmware *VmwareV1) SetOidcConfigurationWithContext(ctx context.Context, set
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
+	if setOidcConfigurationOptions.ContentLength != nil {
+		builder.AddHeader("Content-Length", fmt.Sprint(*setOidcConfigurationOptions.ContentLength))
+	}
 	if setOidcConfigurationOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*setOidcConfigurationOptions.AcceptLanguage))
 	}
@@ -1208,7 +1211,7 @@ func (vmware *VmwareV1) GetDirectorSitesPvdcsWithContext(ctx context.Context, ge
 
 	pathParamsMap := map[string]string{
 		"site_id": *getDirectorSitesPvdcsOptions.SiteID,
-		"id": *getDirectorSitesPvdcsOptions.ID,
+		"id":      *getDirectorSitesPvdcsOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.GET)
@@ -1428,7 +1431,7 @@ func (vmware *VmwareV1) GetDirectorInstancesPvdcsClusterWithContext(ctx context.
 
 	pathParamsMap := map[string]string{
 		"site_id": *getDirectorInstancesPvdcsClusterOptions.SiteID,
-		"id": *getDirectorInstancesPvdcsClusterOptions.ID,
+		"id":      *getDirectorInstancesPvdcsClusterOptions.ID,
 		"pvdc_id": *getDirectorInstancesPvdcsClusterOptions.PvdcID,
 	}
 
@@ -1497,7 +1500,7 @@ func (vmware *VmwareV1) DeleteDirectorSitesPvdcsClusterWithContext(ctx context.C
 
 	pathParamsMap := map[string]string{
 		"site_id": *deleteDirectorSitesPvdcsClusterOptions.SiteID,
-		"id": *deleteDirectorSitesPvdcsClusterOptions.ID,
+		"id":      *deleteDirectorSitesPvdcsClusterOptions.ID,
 		"pvdc_id": *deleteDirectorSitesPvdcsClusterOptions.PvdcID,
 	}
 
@@ -1566,7 +1569,7 @@ func (vmware *VmwareV1) UpdateDirectorSitesPvdcsClusterWithContext(ctx context.C
 
 	pathParamsMap := map[string]string{
 		"site_id": *updateDirectorSitesPvdcsClusterOptions.SiteID,
-		"id": *updateDirectorSitesPvdcsClusterOptions.ID,
+		"id":      *updateDirectorSitesPvdcsClusterOptions.ID,
 		"pvdc_id": *updateDirectorSitesPvdcsClusterOptions.PvdcID,
 	}
 
@@ -2158,9 +2161,9 @@ func (vmware *VmwareV1) AddTransitGatewayConnectionsWithContext(ctx context.Cont
 	}
 
 	pathParamsMap := map[string]string{
-		"vdc_id": *addTransitGatewayConnectionsOptions.VdcID,
+		"vdc_id":  *addTransitGatewayConnectionsOptions.VdcID,
 		"edge_id": *addTransitGatewayConnectionsOptions.EdgeID,
-		"id": *addTransitGatewayConnectionsOptions.ID,
+		"id":      *addTransitGatewayConnectionsOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.PUT)
@@ -2180,6 +2183,9 @@ func (vmware *VmwareV1) AddTransitGatewayConnectionsWithContext(ctx context.Cont
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
+	if addTransitGatewayConnectionsOptions.ContentLength != nil {
+		builder.AddHeader("Content-Length", fmt.Sprint(*addTransitGatewayConnectionsOptions.ContentLength))
+	}
 	if addTransitGatewayConnectionsOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*addTransitGatewayConnectionsOptions.AcceptLanguage))
 	}
@@ -2223,9 +2229,9 @@ func (vmware *VmwareV1) RemoveTransitGatewayConnectionsWithContext(ctx context.C
 	}
 
 	pathParamsMap := map[string]string{
-		"vdc_id": *removeTransitGatewayConnectionsOptions.VdcID,
+		"vdc_id":  *removeTransitGatewayConnectionsOptions.VdcID,
 		"edge_id": *removeTransitGatewayConnectionsOptions.EdgeID,
-		"id": *removeTransitGatewayConnectionsOptions.ID,
+		"id":      *removeTransitGatewayConnectionsOptions.ID,
 	}
 
 	builder := core.NewRequestBuilder(core.DELETE)
@@ -2281,6 +2287,9 @@ type AddTransitGatewayConnectionsOptions struct {
 	// A unique ID for a transit gateway.
 	ID *string `json:"id" validate:"required,ne="`
 
+	// size of the message body in bytes.
+	ContentLength *int64 `json:"Content-Length" validate:"required"`
+
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
@@ -2289,11 +2298,12 @@ type AddTransitGatewayConnectionsOptions struct {
 }
 
 // NewAddTransitGatewayConnectionsOptions : Instantiate AddTransitGatewayConnectionsOptions
-func (*VmwareV1) NewAddTransitGatewayConnectionsOptions(vdcID string, edgeID string, id string) *AddTransitGatewayConnectionsOptions {
+func (*VmwareV1) NewAddTransitGatewayConnectionsOptions(vdcID string, edgeID string, id string, contentLength int64) *AddTransitGatewayConnectionsOptions {
 	return &AddTransitGatewayConnectionsOptions{
-		VdcID: core.StringPtr(vdcID),
-		EdgeID: core.StringPtr(edgeID),
-		ID: core.StringPtr(id),
+		VdcID:         core.StringPtr(vdcID),
+		EdgeID:        core.StringPtr(edgeID),
+		ID:            core.StringPtr(id),
+		ContentLength: core.Int64Ptr(contentLength),
 	}
 }
 
@@ -2312,6 +2322,12 @@ func (_options *AddTransitGatewayConnectionsOptions) SetEdgeID(edgeID string) *A
 // SetID : Allow user to set ID
 func (_options *AddTransitGatewayConnectionsOptions) SetID(id string) *AddTransitGatewayConnectionsOptions {
 	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetContentLength : Allow user to set ContentLength
+func (_options *AddTransitGatewayConnectionsOptions) SetContentLength(contentLength int64) *AddTransitGatewayConnectionsOptions {
+	_options.ContentLength = core.Int64Ptr(contentLength)
 	return _options
 }
 
@@ -2511,10 +2527,10 @@ type ClusterPrototype struct {
 // NewClusterPrototype : Instantiate ClusterPrototype (Generic Model Constructor)
 func (*VmwareV1) NewClusterPrototype(name string, hostCount int64, hostProfile string, fileShares *FileSharesPrototype) (_model *ClusterPrototype, err error) {
 	_model = &ClusterPrototype{
-		Name: core.StringPtr(name),
-		HostCount: core.Int64Ptr(hostCount),
+		Name:        core.StringPtr(name),
+		HostCount:   core.Int64Ptr(hostCount),
 		HostProfile: core.StringPtr(hostProfile),
-		FileShares: fileShares,
+		FileShares:  fileShares,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -2649,13 +2665,13 @@ type CreateDirectorSitesOptions struct {
 // Type of console connection.
 const (
 	CreateDirectorSitesOptions_ConsoleConnectionType_Private = "private"
-	CreateDirectorSitesOptions_ConsoleConnectionType_Public = "public"
+	CreateDirectorSitesOptions_ConsoleConnectionType_Public  = "public"
 )
 
 // NewCreateDirectorSitesOptions : Instantiate CreateDirectorSitesOptions
 func (*VmwareV1) NewCreateDirectorSitesOptions(name string, pvdcs []PVDCPrototype) *CreateDirectorSitesOptions {
 	return &CreateDirectorSitesOptions{
-		Name: core.StringPtr(name),
+		Name:  core.StringPtr(name),
 		Pvdcs: pvdcs,
 	}
 }
@@ -2755,12 +2771,12 @@ type CreateDirectorSitesPvdcsClustersOptions struct {
 // NewCreateDirectorSitesPvdcsClustersOptions : Instantiate CreateDirectorSitesPvdcsClustersOptions
 func (*VmwareV1) NewCreateDirectorSitesPvdcsClustersOptions(siteID string, pvdcID string, name string, hostCount int64, hostProfile string, fileShares *FileSharesPrototype) *CreateDirectorSitesPvdcsClustersOptions {
 	return &CreateDirectorSitesPvdcsClustersOptions{
-		SiteID: core.StringPtr(siteID),
-		PvdcID: core.StringPtr(pvdcID),
-		Name: core.StringPtr(name),
-		HostCount: core.Int64Ptr(hostCount),
+		SiteID:      core.StringPtr(siteID),
+		PvdcID:      core.StringPtr(pvdcID),
+		Name:        core.StringPtr(name),
+		HostCount:   core.Int64Ptr(hostCount),
 		HostProfile: core.StringPtr(hostProfile),
-		FileShares: fileShares,
+		FileShares:  fileShares,
 	}
 }
 
@@ -2846,10 +2862,10 @@ type CreateDirectorSitesPvdcsOptions struct {
 // NewCreateDirectorSitesPvdcsOptions : Instantiate CreateDirectorSitesPvdcsOptions
 func (*VmwareV1) NewCreateDirectorSitesPvdcsOptions(siteID string, name string, dataCenterName string, clusters []ClusterPrototype) *CreateDirectorSitesPvdcsOptions {
 	return &CreateDirectorSitesPvdcsOptions{
-		SiteID: core.StringPtr(siteID),
-		Name: core.StringPtr(name),
+		SiteID:         core.StringPtr(siteID),
+		Name:           core.StringPtr(name),
 		DataCenterName: core.StringPtr(dataCenterName),
-		Clusters: clusters,
+		Clusters:       clusters,
 	}
 }
 
@@ -2928,11 +2944,11 @@ type CreateDirectorSitesVcdaC2cConnectionOptions struct {
 // NewCreateDirectorSitesVcdaC2cConnectionOptions : Instantiate CreateDirectorSitesVcdaC2cConnectionOptions
 func (*VmwareV1) NewCreateDirectorSitesVcdaC2cConnectionOptions(siteID string, localDataCenterName string, localSiteName string, peerSiteName string, peerRegion string) *CreateDirectorSitesVcdaC2cConnectionOptions {
 	return &CreateDirectorSitesVcdaC2cConnectionOptions{
-		SiteID: core.StringPtr(siteID),
+		SiteID:              core.StringPtr(siteID),
 		LocalDataCenterName: core.StringPtr(localDataCenterName),
-		LocalSiteName: core.StringPtr(localSiteName),
-		PeerSiteName: core.StringPtr(peerSiteName),
-		PeerRegion: core.StringPtr(peerRegion),
+		LocalSiteName:       core.StringPtr(localSiteName),
+		PeerSiteName:        core.StringPtr(peerSiteName),
+		PeerRegion:          core.StringPtr(peerRegion),
 	}
 }
 
@@ -3018,14 +3034,14 @@ type CreateDirectorSitesVcdaConnectionEndpointsOptions struct {
 // Connection type.
 const (
 	CreateDirectorSitesVcdaConnectionEndpointsOptions_Type_Private = "private"
-	CreateDirectorSitesVcdaConnectionEndpointsOptions_Type_Public = "public"
+	CreateDirectorSitesVcdaConnectionEndpointsOptions_Type_Public  = "public"
 )
 
 // NewCreateDirectorSitesVcdaConnectionEndpointsOptions : Instantiate CreateDirectorSitesVcdaConnectionEndpointsOptions
 func (*VmwareV1) NewCreateDirectorSitesVcdaConnectionEndpointsOptions(siteID string, typeVar string, dataCenterName string) *CreateDirectorSitesVcdaConnectionEndpointsOptions {
 	return &CreateDirectorSitesVcdaConnectionEndpointsOptions{
-		SiteID: core.StringPtr(siteID),
-		Type: core.StringPtr(typeVar),
+		SiteID:         core.StringPtr(siteID),
+		Type:           core.StringPtr(typeVar),
 		DataCenterName: core.StringPtr(dataCenterName),
 	}
 }
@@ -3115,7 +3131,7 @@ type CreateVdcOptions struct {
 // NewCreateVdcOptions : Instantiate CreateVdcOptions
 func (*VmwareV1) NewCreateVdcOptions(name string, directorSite *VDCDirectorSitePrototype) *CreateVdcOptions {
 	return &CreateVdcOptions{
-		Name: core.StringPtr(name),
+		Name:         core.StringPtr(name),
 		DirectorSite: directorSite,
 	}
 }
@@ -3288,7 +3304,7 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 func (*VmwareV1) NewDeleteDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string) *DeleteDirectorSitesPvdcsClusterOptions {
 	return &DeleteDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 		PvdcID: core.StringPtr(pvdcID),
 	}
 }
@@ -3351,7 +3367,7 @@ type DeleteDirectorSitesVcdaC2cConnectionOptions struct {
 func (*VmwareV1) NewDeleteDirectorSitesVcdaC2cConnectionOptions(siteID string, id string) *DeleteDirectorSitesVcdaC2cConnectionOptions {
 	return &DeleteDirectorSitesVcdaC2cConnectionOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 	}
 }
 
@@ -3407,7 +3423,7 @@ type DeleteDirectorSitesVcdaConnectionEndpointsOptions struct {
 func (*VmwareV1) NewDeleteDirectorSitesVcdaConnectionEndpointsOptions(siteID string, id string) *DeleteDirectorSitesVcdaConnectionEndpointsOptions {
 	return &DeleteDirectorSitesVcdaConnectionEndpointsOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 	}
 }
 
@@ -3530,17 +3546,17 @@ type DirectorSite struct {
 // Constants associated with the DirectorSite.Status property.
 // The status of director site.
 const (
-	DirectorSite_Status_Creating = "creating"
-	DirectorSite_Status_Deleted = "deleted"
-	DirectorSite_Status_Deleting = "deleting"
+	DirectorSite_Status_Creating   = "creating"
+	DirectorSite_Status_Deleted    = "deleted"
+	DirectorSite_Status_Deleting   = "deleting"
 	DirectorSite_Status_ReadyToUse = "ready_to_use"
-	DirectorSite_Status_Updating = "updating"
+	DirectorSite_Status_Updating   = "updating"
 )
 
 // Constants associated with the DirectorSite.Type property.
 // Director site type.
 const (
-	DirectorSite_Type_Multitenant = "multitenant"
+	DirectorSite_Type_Multitenant  = "multitenant"
 	DirectorSite_Type_SingleTenant = "single_tenant"
 )
 
@@ -3548,17 +3564,17 @@ const (
 // Type of director console connection.
 const (
 	DirectorSite_ConsoleConnectionType_Private = "private"
-	DirectorSite_ConsoleConnectionType_Public = "public"
+	DirectorSite_ConsoleConnectionType_Public  = "public"
 )
 
 // Constants associated with the DirectorSite.ConsoleConnectionStatus property.
 // Status of director console connection.
 const (
-	DirectorSite_ConsoleConnectionStatus_Creating = "creating"
-	DirectorSite_ConsoleConnectionStatus_Deleted = "deleted"
-	DirectorSite_ConsoleConnectionStatus_Deleting = "deleting"
+	DirectorSite_ConsoleConnectionStatus_Creating   = "creating"
+	DirectorSite_ConsoleConnectionStatus_Deleted    = "deleted"
+	DirectorSite_ConsoleConnectionStatus_Deleting   = "deleting"
 	DirectorSite_ConsoleConnectionStatus_ReadyToUse = "ready_to_use"
-	DirectorSite_ConsoleConnectionStatus_Updating = "updating"
+	DirectorSite_ConsoleConnectionStatus_Updating   = "updating"
 )
 
 // UnmarshalDirectorSite unmarshals an instance of DirectorSite from the specified map of raw messages.
@@ -3886,16 +3902,16 @@ type Edge struct {
 // which the Virtual Data Center was created to be deployed.
 const (
 	Edge_Size_ExtraLarge = "extra_large"
-	Edge_Size_Large = "large"
-	Edge_Size_Medium = "medium"
+	Edge_Size_Large      = "large"
+	Edge_Size_Medium     = "medium"
 )
 
 // Constants associated with the Edge.Status property.
 // Determines the state of the edge.
 const (
-	Edge_Status_Creating = "creating"
-	Edge_Status_Deleted = "deleted"
-	Edge_Status_Deleting = "deleting"
+	Edge_Status_Creating   = "creating"
+	Edge_Status_Deleted    = "deleted"
+	Edge_Status_Deleting   = "deleting"
 	Edge_Status_ReadyToUse = "ready_to_use"
 )
 
@@ -3905,7 +3921,7 @@ const (
 // Efficiency edges allow for multiple VDCs to share some edge resources. Performance edges do not share resources
 // between VDCs.
 const (
-	Edge_Type_Efficiency = "efficiency"
+	Edge_Type_Efficiency  = "efficiency"
 	Edge_Type_Performance = "performance"
 )
 
@@ -4045,7 +4061,7 @@ type GetDirectorInstancesPvdcsClusterOptions struct {
 func (*VmwareV1) NewGetDirectorInstancesPvdcsClusterOptions(siteID string, id string, pvdcID string) *GetDirectorInstancesPvdcsClusterOptions {
 	return &GetDirectorInstancesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 		PvdcID: core.StringPtr(pvdcID),
 	}
 }
@@ -4154,7 +4170,7 @@ type GetDirectorSitesPvdcsOptions struct {
 func (*VmwareV1) NewGetDirectorSitesPvdcsOptions(siteID string, id string) *GetDirectorSitesPvdcsOptions {
 	return &GetDirectorSitesPvdcsOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 	}
 }
 
@@ -4553,7 +4569,7 @@ type MultitenantDirectorSite struct {
 
 // Constants associated with the MultitenantDirectorSite.Services property.
 const (
-	MultitenantDirectorSite_Services_Vcda = "vcda"
+	MultitenantDirectorSite_Services_Vcda  = "vcda"
 	MultitenantDirectorSite_Services_Veeam = "veeam"
 )
 
@@ -4655,8 +4671,8 @@ type OIDC struct {
 // Constants associated with the OIDC.Status property.
 // Status of the OIDC configuration on a Cloud Director site.
 const (
-	OIDC_Status_Deleted = "deleted"
-	OIDC_Status_Pending = "pending"
+	OIDC_Status_Deleted    = "deleted"
+	OIDC_Status_Pending    = "pending"
 	OIDC_Status_ReadyToUse = "ready_to_use"
 )
 
@@ -4703,11 +4719,11 @@ type PVDC struct {
 // Constants associated with the PVDC.Status property.
 // The status of the provider virtual data center.
 const (
-	PVDC_Status_Creating = "creating"
-	PVDC_Status_Deleted = "deleted"
-	PVDC_Status_Deleting = "deleting"
+	PVDC_Status_Creating   = "creating"
+	PVDC_Status_Deleted    = "deleted"
+	PVDC_Status_Deleting   = "deleting"
 	PVDC_Status_ReadyToUse = "ready_to_use"
-	PVDC_Status_Updating = "updating"
+	PVDC_Status_Updating   = "updating"
 )
 
 // UnmarshalPVDC unmarshals an instance of PVDC from the specified map of raw messages.
@@ -4778,9 +4794,9 @@ type PVDCPrototype struct {
 // NewPVDCPrototype : Instantiate PVDCPrototype (Generic Model Constructor)
 func (*VmwareV1) NewPVDCPrototype(name string, dataCenterName string, clusters []ClusterPrototype) (_model *PVDCPrototype, err error) {
 	_model = &PVDCPrototype{
-		Name: core.StringPtr(name),
+		Name:           core.StringPtr(name),
 		DataCenterName: core.StringPtr(dataCenterName),
-		Clusters: clusters,
+		Clusters:       clusters,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
 	return
@@ -4850,9 +4866,9 @@ type RemoveTransitGatewayConnectionsOptions struct {
 // NewRemoveTransitGatewayConnectionsOptions : Instantiate RemoveTransitGatewayConnectionsOptions
 func (*VmwareV1) NewRemoveTransitGatewayConnectionsOptions(vdcID string, edgeID string, id string) *RemoveTransitGatewayConnectionsOptions {
 	return &RemoveTransitGatewayConnectionsOptions{
-		VdcID: core.StringPtr(vdcID),
+		VdcID:  core.StringPtr(vdcID),
 		EdgeID: core.StringPtr(edgeID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 	}
 }
 
@@ -4974,18 +4990,18 @@ type Service struct {
 // Constants associated with the Service.Name property.
 // Name of the service.
 const (
-	Service_Name_Vcda = "vcda"
+	Service_Name_Vcda  = "vcda"
 	Service_Name_Veeam = "veeam"
 )
 
 // Constants associated with the Service.Status property.
 // The service instance status.
 const (
-	Service_Status_Creating = "creating"
-	Service_Status_Deleted = "deleted"
-	Service_Status_Deleting = "deleting"
+	Service_Status_Creating   = "creating"
+	Service_Status_Deleted    = "deleted"
+	Service_Status_Deleting   = "deleting"
 	Service_Status_ReadyToUse = "ready_to_use"
-	Service_Status_Updating = "updating"
+	Service_Status_Updating   = "updating"
 )
 
 // UnmarshalService unmarshals an instance of Service from the specified map of raw messages.
@@ -5036,7 +5052,7 @@ type ServiceIdentity struct {
 // Constants associated with the ServiceIdentity.Name property.
 // Name of the service.
 const (
-	ServiceIdentity_Name_Vcda = "vcda"
+	ServiceIdentity_Name_Vcda  = "vcda"
 	ServiceIdentity_Name_Veeam = "veeam"
 )
 
@@ -5065,6 +5081,9 @@ type SetOidcConfigurationOptions struct {
 	// A unique identifier for the director site in which the virtual data center was created.
 	SiteID *string `json:"site_id" validate:"required,ne="`
 
+	// size of the message body in bytes.
+	ContentLength *int64 `json:"Content-Length" validate:"required"`
+
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
@@ -5073,15 +5092,22 @@ type SetOidcConfigurationOptions struct {
 }
 
 // NewSetOidcConfigurationOptions : Instantiate SetOidcConfigurationOptions
-func (*VmwareV1) NewSetOidcConfigurationOptions(siteID string) *SetOidcConfigurationOptions {
+func (*VmwareV1) NewSetOidcConfigurationOptions(siteID string, contentLength int64) *SetOidcConfigurationOptions {
 	return &SetOidcConfigurationOptions{
-		SiteID: core.StringPtr(siteID),
+		SiteID:        core.StringPtr(siteID),
+		ContentLength: core.Int64Ptr(contentLength),
 	}
 }
 
 // SetSiteID : Allow user to set SiteID
 func (_options *SetOidcConfigurationOptions) SetSiteID(siteID string) *SetOidcConfigurationOptions {
 	_options.SiteID = core.StringPtr(siteID)
+	return _options
+}
+
+// SetContentLength : Allow user to set ContentLength
+func (_options *SetOidcConfigurationOptions) SetContentLength(contentLength int64) *SetOidcConfigurationOptions {
+	_options.ContentLength = core.Int64Ptr(contentLength)
 	return _options
 }
 
@@ -5112,9 +5138,9 @@ type StatusReason struct {
 // Constants associated with the StatusReason.Code property.
 // An error code specific to the error encountered.
 const (
-	StatusReason_Code_InsufficentCpu = "insufficent_cpu"
+	StatusReason_Code_InsufficentCpu       = "insufficent_cpu"
 	StatusReason_Code_InsufficentCpuAndRam = "insufficent_cpu_and_ram"
-	StatusReason_Code_InsufficentRam = "insufficent_ram"
+	StatusReason_Code_InsufficentRam       = "insufficent_ram"
 )
 
 // UnmarshalStatusReason unmarshals an instance of StatusReason from the specified map of raw messages.
@@ -5151,9 +5177,9 @@ type TransitGateway struct {
 // Constants associated with the TransitGateway.Status property.
 // Determines the state of the transit gateway based on its connections.
 const (
-	TransitGateway_Status_Creating = "creating"
-	TransitGateway_Status_Deleting = "deleting"
-	TransitGateway_Status_Pending = "pending"
+	TransitGateway_Status_Creating   = "creating"
+	TransitGateway_Status_Deleting   = "deleting"
+	TransitGateway_Status_Pending    = "pending"
 	TransitGateway_Status_ReadyToUse = "ready_to_use"
 )
 
@@ -5221,10 +5247,10 @@ type TransitGatewayConnection struct {
 // Constants associated with the TransitGatewayConnection.Status property.
 // Determines the state of the connection.
 const (
-	TransitGatewayConnection_Status_Creating = "creating"
-	TransitGatewayConnection_Status_Deleting = "deleting"
-	TransitGatewayConnection_Status_Detached = "detached"
-	TransitGatewayConnection_Status_Pending = "pending"
+	TransitGatewayConnection_Status_Creating   = "creating"
+	TransitGatewayConnection_Status_Deleting   = "deleting"
+	TransitGatewayConnection_Status_Detached   = "detached"
+	TransitGatewayConnection_Status_Pending    = "pending"
 	TransitGatewayConnection_Status_ReadyToUse = "ready_to_use"
 )
 
@@ -5442,9 +5468,9 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 func (*VmwareV1) NewUpdateDirectorSitesPvdcsClusterOptions(siteID string, id string, pvdcID string, body map[string]interface{}) *UpdateDirectorSitesPvdcsClusterOptions {
 	return &UpdateDirectorSitesPvdcsClusterOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 		PvdcID: core.StringPtr(pvdcID),
-		Body: body,
+		Body:   body,
 	}
 }
 
@@ -5515,8 +5541,8 @@ type UpdateDirectorSitesVcdaC2cConnectionOptions struct {
 func (*VmwareV1) NewUpdateDirectorSitesVcdaC2cConnectionOptions(siteID string, id string, note string) *UpdateDirectorSitesVcdaC2cConnectionOptions {
 	return &UpdateDirectorSitesVcdaC2cConnectionOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
-		Note: core.StringPtr(note),
+		ID:     core.StringPtr(id),
+		Note:   core.StringPtr(note),
 	}
 }
 
@@ -5581,7 +5607,7 @@ type UpdateDirectorSitesVcdaConnectionEndpointsOptions struct {
 func (*VmwareV1) NewUpdateDirectorSitesVcdaConnectionEndpointsOptions(siteID string, id string) *UpdateDirectorSitesVcdaConnectionEndpointsOptions {
 	return &UpdateDirectorSitesVcdaConnectionEndpointsOptions{
 		SiteID: core.StringPtr(siteID),
-		ID: core.StringPtr(id),
+		ID:     core.StringPtr(id),
 	}
 }
 
@@ -5639,7 +5665,7 @@ type UpdateVdcOptions struct {
 // NewUpdateVdcOptions : Instantiate UpdateVdcOptions
 func (*VmwareV1) NewUpdateVdcOptions(id string, vDCPatch map[string]interface{}) *UpdateVdcOptions {
 	return &UpdateVdcOptions{
-		ID: core.StringPtr(id),
+		ID:       core.StringPtr(id),
 		VDCPatch: vDCPatch,
 	}
 }
@@ -5788,18 +5814,18 @@ type VDC struct {
 // Constants associated with the VDC.Status property.
 // Determines the state of the virtual data center.
 const (
-	VDC_Status_Creating = "creating"
-	VDC_Status_Deleted = "deleted"
-	VDC_Status_Deleting = "deleting"
-	VDC_Status_Failed = "failed"
-	VDC_Status_Modifying = "modifying"
+	VDC_Status_Creating   = "creating"
+	VDC_Status_Deleted    = "deleted"
+	VDC_Status_Deleting   = "deleting"
+	VDC_Status_Failed     = "failed"
+	VDC_Status_Modifying  = "modifying"
 	VDC_Status_ReadyToUse = "ready_to_use"
 )
 
 // Constants associated with the VDC.Type property.
 // Determines whether this virtual data center is in a single-tenant or multitenant director site.
 const (
-	VDC_Type_Multitenant = "multitenant"
+	VDC_Type_Multitenant  = "multitenant"
 	VDC_Type_SingleTenant = "single_tenant"
 )
 
@@ -5942,7 +5968,7 @@ type VDCDirectorSitePrototype struct {
 // NewVDCDirectorSitePrototype : Instantiate VDCDirectorSitePrototype (Generic Model Constructor)
 func (*VmwareV1) NewVDCDirectorSitePrototype(id string, pvdc *DirectorSitePVDC) (_model *VDCDirectorSitePrototype, err error) {
 	_model = &VDCDirectorSitePrototype{
-		ID: core.StringPtr(id),
+		ID:   core.StringPtr(id),
 		Pvdc: pvdc,
 	}
 	err = core.ValidateStruct(_model, "required parameters")
@@ -5977,14 +6003,14 @@ type VDCEdgePrototype struct {
 // The size of the Edge. Only used for Edges of type performance.
 const (
 	VDCEdgePrototype_Size_ExtraLarge = "extra_large"
-	VDCEdgePrototype_Size_Large = "large"
-	VDCEdgePrototype_Size_Medium = "medium"
+	VDCEdgePrototype_Size_Large      = "large"
+	VDCEdgePrototype_Size_Medium     = "medium"
 )
 
 // Constants associated with the VDCEdgePrototype.Type property.
 // The type of Edge to be deployed on the Virtual Data Center.
 const (
-	VDCEdgePrototype_Type_Efficiency = "efficiency"
+	VDCEdgePrototype_Type_Efficiency  = "efficiency"
 	VDCEdgePrototype_Type_Performance = "performance"
 )
 
@@ -6066,7 +6092,7 @@ type VDCProviderType struct {
 // The name of the provider type.
 const (
 	VDCProviderType_Name_OnDemand = "on_demand"
-	VDCProviderType_Name_Paygo = "paygo"
+	VDCProviderType_Name_Paygo    = "paygo"
 	VDCProviderType_Name_Reserved = "reserved"
 )
 
@@ -6098,7 +6124,7 @@ type VcdaC2c struct {
 	// Status of the VCDA connection.
 	Status *string `json:"status" validate:"required"`
 
-	// This field is about the offering of the peer site.
+	// The offering name of the peer site, "vmware_aas" or "vmware_shared".
 	PeerOffering *string `json:"peer_offering" validate:"required"`
 
 	// Where to deploy the cluster.
@@ -6120,11 +6146,11 @@ type VcdaC2c struct {
 // Constants associated with the VcdaC2c.Status property.
 // Status of the VCDA connection.
 const (
-	VcdaC2c_Status_Creating = "creating"
-	VcdaC2c_Status_Deleted = "deleted"
-	VcdaC2c_Status_Deleting = "deleting"
+	VcdaC2c_Status_Creating   = "creating"
+	VcdaC2c_Status_Deleted    = "deleted"
+	VcdaC2c_Status_Deleting   = "deleting"
 	VcdaC2c_Status_ReadyToUse = "ready_to_use"
-	VcdaC2c_Status_Updating = "updating"
+	VcdaC2c_Status_Updating   = "updating"
 )
 
 // UnmarshalVcdaC2c unmarshals an instance of VcdaC2c from the specified map of raw messages.
@@ -6190,18 +6216,18 @@ type VcdaConnection struct {
 // Constants associated with the VcdaConnection.Status property.
 // Status of the VCDA connection.
 const (
-	VcdaConnection_Status_Creating = "creating"
-	VcdaConnection_Status_Deleted = "deleted"
-	VcdaConnection_Status_Deleting = "deleting"
+	VcdaConnection_Status_Creating   = "creating"
+	VcdaConnection_Status_Deleted    = "deleted"
+	VcdaConnection_Status_Deleting   = "deleting"
 	VcdaConnection_Status_ReadyToUse = "ready_to_use"
-	VcdaConnection_Status_Updating = "updating"
+	VcdaConnection_Status_Updating   = "updating"
 )
 
 // Constants associated with the VcdaConnection.Type property.
 // Connection type.
 const (
 	VcdaConnection_Type_Private = "private"
-	VcdaConnection_Type_Public = "public"
+	VcdaConnection_Type_Public  = "public"
 )
 
 // Constants associated with the VcdaConnection.Speed property.

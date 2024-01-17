@@ -286,6 +286,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions)`, func() {
 			setOidcConfigurationOptions := &vmwarev1.SetOidcConfigurationOptions{
 				SiteID:         core.StringPtr("site_id"),
+				ContentLength:  core.Int64Ptr(int64(0)),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
@@ -639,6 +640,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				VdcID:          core.StringPtr("vdc_id"),
 				EdgeID:         core.StringPtr("edge_id"),
 				ID:             core.StringPtr("transit_gateway_id"),
+				ContentLength:  core.Int64Ptr(int64(0)),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
