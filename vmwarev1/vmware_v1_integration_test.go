@@ -1,5 +1,4 @@
 //go:build integration
-// +build integration
 
 /**
  * (C) Copyright IBM Corp. 2024.
@@ -126,12 +125,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
-				Name:                 core.StringPtr("my_director_site"),
-				Pvdcs:                []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
-				ResourceGroup:        resourceGroupIdentityModel,
-				Services:             []vmwarev1.ServiceIdentity{*serviceIdentityModel},
-				AcceptLanguage:       core.StringPtr("en-us"),
-				XGlobalTransactionID: core.StringPtr("transaction1"),
+				Name:                  core.StringPtr("my_director_site"),
+				Pvdcs:                 []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
+				ResourceGroup:         resourceGroupIdentityModel,
+				Services:              []vmwarev1.ServiceIdentity{*serviceIdentityModel},
+				PrivateOnly:           core.BoolPtr(true),
+				ConsoleConnectionType: core.StringPtr("private"),
+				IpAllowList:           []string{"1.1.1.1/24", "2.2.2.2/24"},
+				AcceptLanguage:        core.StringPtr("en-us"),
+				XGlobalTransactionID:  core.StringPtr("transaction1"),
 			}
 
 			directorSite, response, err := vmwareService.CreateDirectorSites(createDirectorSitesOptions)
@@ -173,6 +175,125 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(200))
 			Expect(directorSite).ToNot(BeNil())
+		})
+	})
+
+	Describe(`CreateDirectorSitesVcdaConnectionEndpoints - Create a VCDA connection`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptions *CreateDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
+			createDirectorSitesVcdaConnectionEndpointsOptions := &vmwarev1.CreateDirectorSitesVcdaConnectionEndpointsOptions{
+				SiteID:               core.StringPtr("site_id"),
+				Type:                 core.StringPtr("private"),
+				DataCenterName:       core.StringPtr("dal10"),
+				AllowList:            []string{"1.1.1.1"},
+				AcceptLanguage:       core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
+			}
+
+			vcdaConnection, response, err := vmwareService.CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaConnection).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateDirectorSitesVcdaConnectionEndpoints - Update VCDA connection allowlist`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptions *UpdateDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
+			updateDirectorSitesVcdaConnectionEndpointsOptions := &vmwarev1.UpdateDirectorSitesVcdaConnectionEndpointsOptions{
+				SiteID:               core.StringPtr("site_id"),
+				ID:                   core.StringPtr("vcda_connections_id"),
+				AllowList:            []string{"1.1.1.1/24", "2.2.2.2/24"},
+				AcceptLanguage:       core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
+			}
+
+			updatedVcdaConnection, response, err := vmwareService.UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(updatedVcdaConnection).ToNot(BeNil())
+		})
+	})
+
+	Describe(`CreateDirectorSitesVcdaC2cConnection - Create a VCDA cloud-to-cloud connection`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptions *CreateDirectorSitesVcdaC2cConnectionOptions)`, func() {
+			createDirectorSitesVcdaC2cConnectionOptions := &vmwarev1.CreateDirectorSitesVcdaC2cConnectionOptions{
+				SiteID:               core.StringPtr("site_id"),
+				LocalDataCenterName:  core.StringPtr("dal10"),
+				LocalSiteName:        core.StringPtr("ddirw002-gr80d10vcda"),
+				PeerSiteName:         core.StringPtr("dirw274t02vcda"),
+				PeerRegion:           core.StringPtr("jp-tok"),
+				Note:                 core.StringPtr("Text of the note..."),
+				AcceptLanguage:       core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
+			}
+
+			vcdaC2c, response, err := vmwareService.CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaC2c).ToNot(BeNil())
+		})
+	})
+
+	Describe(`UpdateDirectorSitesVcdaC2cConnection - Update note in the cloud-to-cloud connection`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptions *UpdateDirectorSitesVcdaC2cConnectionOptions)`, func() {
+			updateDirectorSitesVcdaC2cConnectionOptions := &vmwarev1.UpdateDirectorSitesVcdaC2cConnectionOptions{
+				SiteID:               core.StringPtr("site_id"),
+				ID:                   core.StringPtr("connection_id"),
+				Note:                 core.StringPtr("Text of the note..."),
+				AcceptLanguage:       core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
+			}
+
+			updatedVcdaC2c, response, err := vmwareService.UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(updatedVcdaC2c).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetOidcConfiguration - Get an OpenID Connect (OIDC) configuration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetOidcConfiguration(getOidcConfigurationOptions *GetOidcConfigurationOptions)`, func() {
+			getOidcConfigurationOptions := &vmwarev1.GetOidcConfigurationOptions{
+				SiteID:         core.StringPtr("site_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
+			}
+
+			oidc, response, err := vmwareService.GetOidcConfiguration(getOidcConfigurationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(oidc).ToNot(BeNil())
+		})
+	})
+
+	Describe(`SetOidcConfiguration - Set an OpenID Connect (OIDC) configuration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions)`, func() {
+			setOidcConfigurationOptions := &vmwarev1.SetOidcConfigurationOptions{
+				SiteID:         core.StringPtr("site_id"),
+				ContentLength:  core.Int64Ptr(int64(0)),
+				AcceptLanguage: core.StringPtr("en-us"),
+			}
+
+			oidc, response, err := vmwareService.SetOidcConfiguration(setOidcConfigurationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(oidc).ToNot(BeNil())
 		})
 	})
 
@@ -369,7 +490,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`ListMultitenantDirectorSites - List multitenant director sites`, func() {
+	Describe(`ListMultitenantDirectorSites - Get all multitenant Cloud Director sites`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
@@ -510,6 +631,26 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`AddTransitGatewayConnections - Add transit gateway connections to edge`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`AddTransitGatewayConnections(addTransitGatewayConnectionsOptions *AddTransitGatewayConnectionsOptions)`, func() {
+			addTransitGatewayConnectionsOptions := &vmwarev1.AddTransitGatewayConnectionsOptions{
+				VdcID:          core.StringPtr("vdc_id"),
+				EdgeID:         core.StringPtr("edge_id"),
+				ID:             core.StringPtr("transit_gateway_id"),
+				ContentLength:  core.Int64Ptr(int64(0)),
+				AcceptLanguage: core.StringPtr("en-us"),
+			}
+
+			transitGateway, response, err := vmwareService.AddTransitGatewayConnections(addTransitGatewayConnectionsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(transitGateway).ToNot(BeNil())
+		})
+	})
+
 	Describe(`DeleteDirectorSite - Delete a director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
@@ -525,6 +666,44 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(directorSite).ToNot(BeNil())
+		})
+	})
+
+	Describe(`DeleteDirectorSitesVcdaConnectionEndpoints - Delete a VCDA connection`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptions *DeleteDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
+			deleteDirectorSitesVcdaConnectionEndpointsOptions := &vmwarev1.DeleteDirectorSitesVcdaConnectionEndpointsOptions{
+				SiteID:               core.StringPtr("site_id"),
+				ID:                   core.StringPtr("vcda_connections_id"),
+				AcceptLanguage:       core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
+			}
+
+			vcdaConnection, response, err := vmwareService.DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaConnection).ToNot(BeNil())
+		})
+	})
+
+	Describe(`DeleteDirectorSitesVcdaC2cConnection - Delete a VCDA cloud-to-cloud connection`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptions *DeleteDirectorSitesVcdaC2cConnectionOptions)`, func() {
+			deleteDirectorSitesVcdaC2cConnectionOptions := &vmwarev1.DeleteDirectorSitesVcdaC2cConnectionOptions{
+				SiteID:               core.StringPtr("site_id"),
+				ID:                   core.StringPtr("connection_id"),
+				AcceptLanguage:       core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
+			}
+
+			vcdaC2c, response, err := vmwareService.DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(vcdaC2c).ToNot(BeNil())
 		})
 	})
 
@@ -562,6 +741,25 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(vdc).ToNot(BeNil())
+		})
+	})
+
+	Describe(`RemoveTransitGatewayConnections - Remove transit gateway connections from edge`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptions *RemoveTransitGatewayConnectionsOptions)`, func() {
+			removeTransitGatewayConnectionsOptions := &vmwarev1.RemoveTransitGatewayConnectionsOptions{
+				VdcID:          core.StringPtr("vdc_id"),
+				EdgeID:         core.StringPtr("edge_id"),
+				ID:             core.StringPtr("transit_gateway_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
+			}
+
+			transitGateway, response, err := vmwareService.RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(transitGateway).ToNot(BeNil())
 		})
 	})
 })
