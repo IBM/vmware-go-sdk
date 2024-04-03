@@ -19,6 +19,7 @@ package vmwarev1_test
 import (
 	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
 	"io"
 	"net/http"
@@ -66,13 +67,14 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_URL":       "https://vmwarev1/api",
+				"VMWARE_URL": "https://vmwarev1/api",
 				"VMWARE_AUTH_TYPE": "noauth",
 			}
 
 			It(`Create service client using external config successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
+				})
 				Expect(vmwareService).ToNot(BeNil())
 				Expect(serviceErr).To(BeNil())
 				ClearTestEnvironment(testEnvironment)
@@ -101,7 +103,8 @@ var _ = Describe(`VmwareV1`, func() {
 			})
 			It(`Create service client using external config and set url programatically successfully`, func() {
 				SetTestEnvironment(testEnvironment)
-				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
+				})
 				err := vmwareService.SetServiceURL("https://testService/api")
 				Expect(err).To(BeNil())
 				Expect(vmwareService).ToNot(BeNil())
@@ -119,12 +122,13 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid Auth`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_URL":       "https://vmwarev1/api",
+				"VMWARE_URL": "https://vmwarev1/api",
 				"VMWARE_AUTH_TYPE": "someOtherAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
-			vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{})
+			vmwareService, serviceErr := vmwarev1.NewVmwareV1UsingExternalConfig(&vmwarev1.VmwareV1Options{
+			})
 
 			It(`Instantiate service client with error`, func() {
 				Expect(vmwareService).To(BeNil())
@@ -135,7 +139,7 @@ var _ = Describe(`VmwareV1`, func() {
 		Context(`Using external config, construct service client instances with error: Invalid URL`, func() {
 			// Map containing environment variables used in testing.
 			var testEnvironment = map[string]string{
-				"VMWARE_AUTH_TYPE": "NOAuth",
+				"VMWARE_AUTH_TYPE":   "NOAuth",
 			}
 
 			SetTestEnvironment(testEnvironment)
@@ -1291,6 +1295,548 @@ var _ = Describe(`VmwareV1`, func() {
 
 				// Invoke operation
 				result, response, operationErr := vmwareService.DeleteDirectorSite(deleteDirectorSiteOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptions *EnableVeeamOnPvdcsListOptions) - Operation response error`, func() {
+		enableVeeamOnPvdcsListPath := "/director_sites/site_id/action/enable_veeam"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(enableVeeamOnPvdcsListPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke EnableVeeamOnPvdcsList with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the EnableVeeamOnPvdcsListOptions model
+				enableVeeamOnPvdcsListOptionsModel := new(vmwarev1.EnableVeeamOnPvdcsListOptions)
+				enableVeeamOnPvdcsListOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVeeamOnPvdcsListOptionsModel.Enable = core.BoolPtr(true)
+				enableVeeamOnPvdcsListOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVeeamOnPvdcsListOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVeeamOnPvdcsListOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptions *EnableVeeamOnPvdcsListOptions)`, func() {
+		enableVeeamOnPvdcsListPath := "/director_sites/site_id/action/enable_veeam"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(enableVeeamOnPvdcsListPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"message": "The request has been accepted."}`)
+				}))
+			})
+			It(`Invoke EnableVeeamOnPvdcsList successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the EnableVeeamOnPvdcsListOptions model
+				enableVeeamOnPvdcsListOptionsModel := new(vmwarev1.EnableVeeamOnPvdcsListOptions)
+				enableVeeamOnPvdcsListOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVeeamOnPvdcsListOptionsModel.Enable = core.BoolPtr(true)
+				enableVeeamOnPvdcsListOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVeeamOnPvdcsListOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVeeamOnPvdcsListOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.EnableVeeamOnPvdcsListWithContext(ctx, enableVeeamOnPvdcsListOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.EnableVeeamOnPvdcsListWithContext(ctx, enableVeeamOnPvdcsListOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(enableVeeamOnPvdcsListPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"message": "The request has been accepted."}`)
+				}))
+			})
+			It(`Invoke EnableVeeamOnPvdcsList successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.EnableVeeamOnPvdcsList(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the EnableVeeamOnPvdcsListOptions model
+				enableVeeamOnPvdcsListOptionsModel := new(vmwarev1.EnableVeeamOnPvdcsListOptions)
+				enableVeeamOnPvdcsListOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVeeamOnPvdcsListOptionsModel.Enable = core.BoolPtr(true)
+				enableVeeamOnPvdcsListOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVeeamOnPvdcsListOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVeeamOnPvdcsListOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke EnableVeeamOnPvdcsList with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the EnableVeeamOnPvdcsListOptions model
+				enableVeeamOnPvdcsListOptionsModel := new(vmwarev1.EnableVeeamOnPvdcsListOptions)
+				enableVeeamOnPvdcsListOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVeeamOnPvdcsListOptionsModel.Enable = core.BoolPtr(true)
+				enableVeeamOnPvdcsListOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVeeamOnPvdcsListOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVeeamOnPvdcsListOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the EnableVeeamOnPvdcsListOptions model with no property values
+				enableVeeamOnPvdcsListOptionsModelNew := new(vmwarev1.EnableVeeamOnPvdcsListOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke EnableVeeamOnPvdcsList successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the EnableVeeamOnPvdcsListOptions model
+				enableVeeamOnPvdcsListOptionsModel := new(vmwarev1.EnableVeeamOnPvdcsListOptions)
+				enableVeeamOnPvdcsListOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVeeamOnPvdcsListOptionsModel.Enable = core.BoolPtr(true)
+				enableVeeamOnPvdcsListOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVeeamOnPvdcsListOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVeeamOnPvdcsListOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+
+				// Verify a nil result
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptions *EnableVcdaOnDataCenterOptions) - Operation response error`, func() {
+		enableVcdaOnDataCenterPath := "/director_sites/site_id/action/enable_vcda"
+		Context(`Using mock server endpoint with invalid JSON response`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(enableVcdaOnDataCenterPath))
+					Expect(req.Method).To(Equal("POST"))
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprint(res, `} this is not valid json {`)
+				}))
+			})
+			It(`Invoke EnableVcdaOnDataCenter with error: Operation response processing error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the EnableVcdaOnDataCenterOptions model
+				enableVcdaOnDataCenterOptionsModel := new(vmwarev1.EnableVcdaOnDataCenterOptions)
+				enableVcdaOnDataCenterOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVcdaOnDataCenterOptionsModel.Enable = core.BoolPtr(true)
+				enableVcdaOnDataCenterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVcdaOnDataCenterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVcdaOnDataCenterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Expect response parsing to fail since we are receiving a text/plain response
+				result, response, operationErr := vmwareService.EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+
+				// Enable retries and test again
+				vmwareService.EnableRetries(0, 0)
+				result, response, operationErr = vmwareService.EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+	})
+	Describe(`EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptions *EnableVcdaOnDataCenterOptions)`, func() {
+		enableVcdaOnDataCenterPath := "/director_sites/site_id/action/enable_vcda"
+		Context(`Using mock server endpoint with timeout`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(enableVcdaOnDataCenterPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Sleep a short time to support a timeout test
+					time.Sleep(100 * time.Millisecond)
+
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"message": "The request has been accepted."}`)
+				}))
+			})
+			It(`Invoke EnableVcdaOnDataCenter successfully with retries`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+				vmwareService.EnableRetries(0, 0)
+
+				// Construct an instance of the EnableVcdaOnDataCenterOptions model
+				enableVcdaOnDataCenterOptionsModel := new(vmwarev1.EnableVcdaOnDataCenterOptions)
+				enableVcdaOnDataCenterOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVcdaOnDataCenterOptionsModel.Enable = core.BoolPtr(true)
+				enableVcdaOnDataCenterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVcdaOnDataCenterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVcdaOnDataCenterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with a Context to test a timeout error
+				ctx, cancelFunc := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc()
+				_, _, operationErr := vmwareService.EnableVcdaOnDataCenterWithContext(ctx, enableVcdaOnDataCenterOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+
+				// Disable retries and test again
+				vmwareService.DisableRetries()
+				result, response, operationErr := vmwareService.EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+				// Re-test the timeout error with retries disabled
+				ctx, cancelFunc2 := context.WithTimeout(context.Background(), 80*time.Millisecond)
+				defer cancelFunc2()
+				_, _, operationErr = vmwareService.EnableVcdaOnDataCenterWithContext(ctx, enableVcdaOnDataCenterOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring("deadline exceeded"))
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Verify the contents of the request
+					Expect(req.URL.EscapedPath()).To(Equal(enableVcdaOnDataCenterPath))
+					Expect(req.Method).To(Equal("POST"))
+
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
+					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
+					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
+					Expect(req.Header["X-Global-Transaction-Id"]).ToNot(BeNil())
+					Expect(req.Header["X-Global-Transaction-Id"][0]).To(Equal(fmt.Sprintf("%v", "transaction1")))
+					// Set mock response
+					res.Header().Set("Content-type", "application/json")
+					res.WriteHeader(200)
+					fmt.Fprintf(res, "%s", `{"message": "The request has been accepted."}`)
+				}))
+			})
+			It(`Invoke EnableVcdaOnDataCenter successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Invoke operation with nil options model (negative test)
+				result, response, operationErr := vmwareService.EnableVcdaOnDataCenter(nil)
+				Expect(operationErr).NotTo(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+
+				// Construct an instance of the EnableVcdaOnDataCenterOptions model
+				enableVcdaOnDataCenterOptionsModel := new(vmwarev1.EnableVcdaOnDataCenterOptions)
+				enableVcdaOnDataCenterOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVcdaOnDataCenterOptionsModel.Enable = core.BoolPtr(true)
+				enableVcdaOnDataCenterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVcdaOnDataCenterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVcdaOnDataCenterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation with valid options model (positive test)
+				result, response, operationErr = vmwareService.EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptionsModel)
+				Expect(operationErr).To(BeNil())
+				Expect(response).ToNot(BeNil())
+				Expect(result).ToNot(BeNil())
+
+			})
+			It(`Invoke EnableVcdaOnDataCenter with error: Operation validation and request error`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the EnableVcdaOnDataCenterOptions model
+				enableVcdaOnDataCenterOptionsModel := new(vmwarev1.EnableVcdaOnDataCenterOptions)
+				enableVcdaOnDataCenterOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVcdaOnDataCenterOptionsModel.Enable = core.BoolPtr(true)
+				enableVcdaOnDataCenterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVcdaOnDataCenterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVcdaOnDataCenterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+				// Invoke operation with empty URL (negative test)
+				err := vmwareService.SetServiceURL("")
+				Expect(err).To(BeNil())
+				result, response, operationErr := vmwareService.EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptionsModel)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(operationErr.Error()).To(ContainSubstring(core.ERRORMSG_SERVICE_URL_MISSING))
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+				// Construct a second instance of the EnableVcdaOnDataCenterOptions model with no property values
+				enableVcdaOnDataCenterOptionsModelNew := new(vmwarev1.EnableVcdaOnDataCenterOptions)
+				// Invoke operation with invalid model (negative test)
+				result, response, operationErr = vmwareService.EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptionsModelNew)
+				Expect(operationErr).ToNot(BeNil())
+				Expect(response).To(BeNil())
+				Expect(result).To(BeNil())
+			})
+			AfterEach(func() {
+				testServer.Close()
+			})
+		})
+		Context(`Using mock server endpoint with missing response body`, func() {
+			BeforeEach(func() {
+				testServer = httptest.NewServer(http.HandlerFunc(func(res http.ResponseWriter, req *http.Request) {
+					defer GinkgoRecover()
+
+					// Set success status code with no respoonse body
+					res.WriteHeader(200)
+				}))
+			})
+			It(`Invoke EnableVcdaOnDataCenter successfully`, func() {
+				vmwareService, serviceErr := vmwarev1.NewVmwareV1(&vmwarev1.VmwareV1Options{
+					URL:           testServer.URL,
+					Authenticator: &core.NoAuthAuthenticator{},
+				})
+				Expect(serviceErr).To(BeNil())
+				Expect(vmwareService).ToNot(BeNil())
+
+				// Construct an instance of the EnableVcdaOnDataCenterOptions model
+				enableVcdaOnDataCenterOptionsModel := new(vmwarev1.EnableVcdaOnDataCenterOptions)
+				enableVcdaOnDataCenterOptionsModel.SiteID = core.StringPtr("site_id")
+				enableVcdaOnDataCenterOptionsModel.Enable = core.BoolPtr(true)
+				enableVcdaOnDataCenterOptionsModel.AcceptLanguage = core.StringPtr("en-us")
+				enableVcdaOnDataCenterOptionsModel.XGlobalTransactionID = core.StringPtr("transaction1")
+				enableVcdaOnDataCenterOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
+
+				// Invoke operation
+				result, response, operationErr := vmwareService.EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptionsModel)
 				Expect(operationErr).To(BeNil())
 				Expect(response).ToNot(BeNil())
 
@@ -6321,7 +6867,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully with retries`, func() {
@@ -6377,7 +6923,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully`, func() {
@@ -6580,7 +7126,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully with retries`, func() {
@@ -6684,7 +7230,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully`, func() {
@@ -6943,7 +7489,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully with retries`, func() {
@@ -7000,7 +7546,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully`, func() {
@@ -7166,7 +7712,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully with retries`, func() {
@@ -7223,7 +7769,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully`, func() {
@@ -7414,7 +7960,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully with retries`, func() {
@@ -7496,7 +8042,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully`, func() {
@@ -8496,6 +9042,40 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(_model).ToNot(BeNil())
 				Expect(err).To(BeNil())
 			})
+			It(`Invoke NewEnableVcdaOnDataCenterOptions successfully`, func() {
+				// Construct an instance of the EnableVcdaOnDataCenterOptions model
+				siteID := "site_id"
+				enableVcdaOnDataCenterOptionsEnable := true
+				enableVcdaOnDataCenterOptionsModel := vmwareService.NewEnableVcdaOnDataCenterOptions(siteID, enableVcdaOnDataCenterOptionsEnable)
+				enableVcdaOnDataCenterOptionsModel.SetSiteID("site_id")
+				enableVcdaOnDataCenterOptionsModel.SetEnable(true)
+				enableVcdaOnDataCenterOptionsModel.SetAcceptLanguage("en-us")
+				enableVcdaOnDataCenterOptionsModel.SetXGlobalTransactionID("transaction1")
+				enableVcdaOnDataCenterOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(enableVcdaOnDataCenterOptionsModel).ToNot(BeNil())
+				Expect(enableVcdaOnDataCenterOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(enableVcdaOnDataCenterOptionsModel.Enable).To(Equal(core.BoolPtr(true)))
+				Expect(enableVcdaOnDataCenterOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(enableVcdaOnDataCenterOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
+				Expect(enableVcdaOnDataCenterOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
+			It(`Invoke NewEnableVeeamOnPvdcsListOptions successfully`, func() {
+				// Construct an instance of the EnableVeeamOnPvdcsListOptions model
+				siteID := "site_id"
+				enableVeeamOnPvdcsListOptionsEnable := true
+				enableVeeamOnPvdcsListOptionsModel := vmwareService.NewEnableVeeamOnPvdcsListOptions(siteID, enableVeeamOnPvdcsListOptionsEnable)
+				enableVeeamOnPvdcsListOptionsModel.SetSiteID("site_id")
+				enableVeeamOnPvdcsListOptionsModel.SetEnable(true)
+				enableVeeamOnPvdcsListOptionsModel.SetAcceptLanguage("en-us")
+				enableVeeamOnPvdcsListOptionsModel.SetXGlobalTransactionID("transaction1")
+				enableVeeamOnPvdcsListOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
+				Expect(enableVeeamOnPvdcsListOptionsModel).ToNot(BeNil())
+				Expect(enableVeeamOnPvdcsListOptionsModel.SiteID).To(Equal(core.StringPtr("site_id")))
+				Expect(enableVeeamOnPvdcsListOptionsModel.Enable).To(Equal(core.BoolPtr(true)))
+				Expect(enableVeeamOnPvdcsListOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
+				Expect(enableVeeamOnPvdcsListOptionsModel.XGlobalTransactionID).To(Equal(core.StringPtr("transaction1")))
+				Expect(enableVeeamOnPvdcsListOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
+			})
 			It(`Invoke NewGetDirectorInstancesPvdcsClusterOptions successfully`, func() {
 				// Construct an instance of the GetDirectorInstancesPvdcsClusterOptions model
 				siteID := "site_id"
@@ -8773,8 +9353,8 @@ var _ = Describe(`VmwareV1`, func() {
 			It(`Invoke NewUpdateVdcOptions successfully`, func() {
 				// Construct an instance of the UpdateVdcOptions model
 				id := "vdc_id"
-				vdcPatch := map[string]interface{}{"anyKey": "anyValue"}
-				updateVdcOptionsModel := vmwareService.NewUpdateVdcOptions(id, vdcPatch)
+				vDcPatch := map[string]interface{}{"anyKey": "anyValue"}
+				updateVdcOptionsModel := vmwareService.NewUpdateVdcOptions(id, vDcPatch)
 				updateVdcOptionsModel.SetID("vdc_id")
 				updateVdcOptionsModel.SetVDCPatch(map[string]interface{}{"anyKey": "anyValue"})
 				updateVdcOptionsModel.SetAcceptLanguage("en-us")
@@ -8805,6 +9385,221 @@ var _ = Describe(`VmwareV1`, func() {
 			})
 		})
 	})
+	Describe(`Model unmarshaling tests`, func() {
+		It(`Invoke UnmarshalClusterPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.ClusterPatch)
+			model.FileShares = nil
+			model.HostCount = core.Int64Ptr(int64(2))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.ClusterPatch
+			err = vmwarev1.UnmarshalClusterPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalClusterPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.ClusterPrototype)
+			model.Name = core.StringPtr("cluster_1")
+			model.HostCount = core.Int64Ptr(int64(2))
+			model.HostProfile = core.StringPtr("BM_2S_20_CORES_192_GB")
+			model.FileShares = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.ClusterPrototype
+			err = vmwarev1.UnmarshalClusterPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalDirectorSitePVDC successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.DirectorSitePVDC)
+			model.ID = core.StringPtr("pvdc_id")
+			model.ProviderType = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.DirectorSitePVDC
+			err = vmwarev1.UnmarshalDirectorSitePVDC(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalFileSharesPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.FileSharesPrototype)
+			model.STORAGEPOINTTWOFIVEIOPSGB = core.Int64Ptr(int64(0))
+			model.STORAGETWOIOPSGB = core.Int64Ptr(int64(0))
+			model.STORAGEFOURIOPSGB = core.Int64Ptr(int64(0))
+			model.STORAGETENIOPSGB = core.Int64Ptr(int64(0))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.FileSharesPrototype
+			err = vmwarev1.UnmarshalFileSharesPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalPVDCPrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.PVDCPrototype)
+			model.Name = core.StringPtr("pvdc-1")
+			model.DataCenterName = core.StringPtr("dal10")
+			model.Clusters = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.PVDCPrototype
+			err = vmwarev1.UnmarshalPVDCPrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalResourceGroupIdentity successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.ResourceGroupIdentity)
+			model.ID = core.StringPtr("some_resourcegroupid")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.ResourceGroupIdentity
+			err = vmwarev1.UnmarshalResourceGroupIdentity(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalServiceIdentity successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.ServiceIdentity)
+			model.Name = core.StringPtr("veeam")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.ServiceIdentity
+			err = vmwarev1.UnmarshalServiceIdentity(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalVDCDirectorSitePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.VDCDirectorSitePrototype)
+			model.ID = core.StringPtr("site_id")
+			model.Pvdc = nil
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.VDCDirectorSitePrototype
+			err = vmwarev1.UnmarshalVDCDirectorSitePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalVDCEdgePrototype successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.VDCEdgePrototype)
+			model.Size = core.StringPtr("medium")
+			model.Type = core.StringPtr("performance")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.VDCEdgePrototype
+			err = vmwarev1.UnmarshalVDCEdgePrototype(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalVDCPatch successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.VDCPatch)
+			model.Cpu = core.Int64Ptr(int64(0))
+			model.FastProvisioningEnabled = core.BoolPtr(true)
+			model.Ram = core.Int64Ptr(int64(0))
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.VDCPatch
+			err = vmwarev1.UnmarshalVDCPatch(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+		It(`Invoke UnmarshalVDCProviderType successfully`, func() {
+			// Construct an instance of the model.
+			model := new(vmwarev1.VDCProviderType)
+			model.Name = core.StringPtr("paygo")
+
+			b, err := json.Marshal(model)
+			Expect(err).To(BeNil())
+
+			var raw map[string]json.RawMessage
+			err = json.Unmarshal(b, &raw)
+			Expect(err).To(BeNil())
+
+			var result *vmwarev1.VDCProviderType
+			err = vmwarev1.UnmarshalVDCProviderType(raw, &result)
+			Expect(err).To(BeNil())
+			Expect(result).ToNot(BeNil())
+			Expect(result).To(Equal(model))
+		})
+	})
+
 	Describe(`Utility function tests`, func() {
 		It(`Invoke CreateMockByteArray() successfully`, func() {
 			mockByteArray := CreateMockByteArray("This is a test")
@@ -8834,8 +9629,7 @@ var _ = Describe(`VmwareV1`, func() {
 //
 
 func CreateMockByteArray(mockData string) *[]byte {
-	ba := make([]byte, 0)
-	ba = append(ba, mockData...)
+	ba := []byte(mockData)
 	return &ba
 }
 

@@ -42,10 +42,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 	const externalConfigFile = "../vmware_v1.env"
 
 	var (
-		err           error
+		err          error
 		vmwareService *vmwarev1.VmwareV1
-		serviceURL    string
-		config        map[string]string
+		serviceURL   string
+		config       map[string]string
 	)
 
 	var shouldSkipTest = func() {
@@ -91,29 +91,29 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`CreateDirectorSites - Create a director site instance`, func() {
+	Describe(`CreateDirectorSites - Create a Cloud Director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`CreateDirectorSites(createDirectorSitesOptions *CreateDirectorSitesOptions)`, func() {
 			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
-				STORAGETWOIOPSGB:          core.Int64Ptr(int64(0)),
-				STORAGEFOURIOPSGB:         core.Int64Ptr(int64(0)),
-				STORAGETENIOPSGB:          core.Int64Ptr(int64(0)),
+				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
 			}
 
 			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name:        core.StringPtr("cluster_1"),
-				HostCount:   core.Int64Ptr(int64(2)),
+				Name: core.StringPtr("cluster_1"),
+				HostCount: core.Int64Ptr(int64(2)),
 				HostProfile: core.StringPtr("BM_2S_20_CORES_192_GB"),
-				FileShares:  fileSharesPrototypeModel,
+				FileShares: fileSharesPrototypeModel,
 			}
 
 			pvdcPrototypeModel := &vmwarev1.PVDCPrototype{
-				Name:           core.StringPtr("pvdc-1"),
+				Name: core.StringPtr("pvdc-1"),
 				DataCenterName: core.StringPtr("dal10"),
-				Clusters:       []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
+				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
 			}
 
 			resourceGroupIdentityModel := &vmwarev1.ResourceGroupIdentity{
@@ -125,15 +125,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			createDirectorSitesOptions := &vmwarev1.CreateDirectorSitesOptions{
-				Name:                  core.StringPtr("my_director_site"),
-				Pvdcs:                 []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
-				ResourceGroup:         resourceGroupIdentityModel,
-				Services:              []vmwarev1.ServiceIdentity{*serviceIdentityModel},
-				PrivateOnly:           core.BoolPtr(true),
+				Name: core.StringPtr("my_director_site"),
+				Pvdcs: []vmwarev1.PVDCPrototype{*pvdcPrototypeModel},
+				ResourceGroup: resourceGroupIdentityModel,
+				Services: []vmwarev1.ServiceIdentity{*serviceIdentityModel},
+				PrivateOnly: core.BoolPtr(true),
 				ConsoleConnectionType: core.StringPtr("private"),
-				IpAllowList:           []string{"1.1.1.1/24", "2.2.2.2/24"},
-				AcceptLanguage:        core.StringPtr("en-us"),
-				XGlobalTransactionID:  core.StringPtr("transaction1"),
+				IpAllowList: []string{"1.1.1.1/24", "2.2.2.2/24"},
+				AcceptLanguage: core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
 			directorSite, response, err := vmwareService.CreateDirectorSites(createDirectorSitesOptions)
@@ -143,13 +143,13 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`ListDirectorSites - List director site instances`, func() {
+	Describe(`ListDirectorSites - List Cloud Director site instances`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`ListDirectorSites(listDirectorSitesOptions *ListDirectorSitesOptions)`, func() {
 			listDirectorSitesOptions := &vmwarev1.ListDirectorSitesOptions{
-				AcceptLanguage:       core.StringPtr("en-us"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -160,14 +160,14 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetDirectorSite - Get a director site instance`, func() {
+	Describe(`GetDirectorSite - Get a Cloud Director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`GetDirectorSite(getDirectorSiteOptions *GetDirectorSiteOptions)`, func() {
 			getDirectorSiteOptions := &vmwarev1.GetDirectorSiteOptions{
-				ID:                   core.StringPtr("site_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				ID: core.StringPtr("site_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -178,17 +178,55 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
+	Describe(`EnableVeeamOnPvdcsList - Enable or disable Veeam on a Cloud Director site`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptions *EnableVeeamOnPvdcsListOptions)`, func() {
+			enableVeeamOnPvdcsListOptions := &vmwarev1.EnableVeeamOnPvdcsListOptions{
+				SiteID: core.StringPtr("site_id"),
+				Enable: core.BoolPtr(true),
+				AcceptLanguage: core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
+			}
+
+			serviceEnabled, response, err := vmwareService.EnableVeeamOnPvdcsList(enableVeeamOnPvdcsListOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(serviceEnabled).ToNot(BeNil())
+		})
+	})
+
+	Describe(`EnableVcdaOnDataCenter - Enable or disable VCDA on a Cloud Director site`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptions *EnableVcdaOnDataCenterOptions)`, func() {
+			enableVcdaOnDataCenterOptions := &vmwarev1.EnableVcdaOnDataCenterOptions{
+				SiteID: core.StringPtr("site_id"),
+				Enable: core.BoolPtr(true),
+				AcceptLanguage: core.StringPtr("en-us"),
+				XGlobalTransactionID: core.StringPtr("transaction1"),
+			}
+
+			serviceEnabled, response, err := vmwareService.EnableVcdaOnDataCenter(enableVcdaOnDataCenterOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(serviceEnabled).ToNot(BeNil())
+		})
+	})
+
 	Describe(`CreateDirectorSitesVcdaConnectionEndpoints - Create a VCDA connection`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`CreateDirectorSitesVcdaConnectionEndpoints(createDirectorSitesVcdaConnectionEndpointsOptions *CreateDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
 			createDirectorSitesVcdaConnectionEndpointsOptions := &vmwarev1.CreateDirectorSitesVcdaConnectionEndpointsOptions{
-				SiteID:               core.StringPtr("site_id"),
-				Type:                 core.StringPtr("private"),
-				DataCenterName:       core.StringPtr("dal10"),
-				AllowList:            []string{"1.1.1.1"},
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				Type: core.StringPtr("private"),
+				DataCenterName: core.StringPtr("dal10"),
+				AllowList: []string{"1.1.1.1"},
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -205,10 +243,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`UpdateDirectorSitesVcdaConnectionEndpoints(updateDirectorSitesVcdaConnectionEndpointsOptions *UpdateDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
 			updateDirectorSitesVcdaConnectionEndpointsOptions := &vmwarev1.UpdateDirectorSitesVcdaConnectionEndpointsOptions{
-				SiteID:               core.StringPtr("site_id"),
-				ID:                   core.StringPtr("vcda_connections_id"),
-				AllowList:            []string{"1.1.1.1/24", "2.2.2.2/24"},
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				ID: core.StringPtr("vcda_connections_id"),
+				AllowList: []string{"1.1.1.1/24", "2.2.2.2/24"},
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -225,13 +263,13 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`CreateDirectorSitesVcdaC2cConnection(createDirectorSitesVcdaC2cConnectionOptions *CreateDirectorSitesVcdaC2cConnectionOptions)`, func() {
 			createDirectorSitesVcdaC2cConnectionOptions := &vmwarev1.CreateDirectorSitesVcdaC2cConnectionOptions{
-				SiteID:               core.StringPtr("site_id"),
-				LocalDataCenterName:  core.StringPtr("dal10"),
-				LocalSiteName:        core.StringPtr("ddirw002-gr80d10vcda"),
-				PeerSiteName:         core.StringPtr("dirw274t02vcda"),
-				PeerRegion:           core.StringPtr("jp-tok"),
-				Note:                 core.StringPtr("Text of the note..."),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				LocalDataCenterName: core.StringPtr("dal10"),
+				LocalSiteName: core.StringPtr("ddirw002-gr80d10vcda"),
+				PeerSiteName: core.StringPtr("dirw274t02vcda"),
+				PeerRegion: core.StringPtr("jp-tok"),
+				Note: core.StringPtr("Text of the note..."),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -248,10 +286,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`UpdateDirectorSitesVcdaC2cConnection(updateDirectorSitesVcdaC2cConnectionOptions *UpdateDirectorSitesVcdaC2cConnectionOptions)`, func() {
 			updateDirectorSitesVcdaC2cConnectionOptions := &vmwarev1.UpdateDirectorSitesVcdaC2cConnectionOptions{
-				SiteID:               core.StringPtr("site_id"),
-				ID:                   core.StringPtr("connection_id"),
-				Note:                 core.StringPtr("Text of the note..."),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				ID: core.StringPtr("connection_id"),
+				Note: core.StringPtr("Text of the note..."),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -262,13 +300,13 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetOidcConfiguration - Get an OpenID Connect (OIDC) configuration`, func() {
+	Describe(`GetOidcConfiguration - Get an OIDC configuration`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`GetOidcConfiguration(getOidcConfigurationOptions *GetOidcConfigurationOptions)`, func() {
 			getOidcConfigurationOptions := &vmwarev1.GetOidcConfigurationOptions{
-				SiteID:         core.StringPtr("site_id"),
+				SiteID: core.StringPtr("site_id"),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
@@ -279,14 +317,14 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`SetOidcConfiguration - Set an OpenID Connect (OIDC) configuration`, func() {
+	Describe(`SetOidcConfiguration - Set an OIDC configuration`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions)`, func() {
 			setOidcConfigurationOptions := &vmwarev1.SetOidcConfigurationOptions{
-				SiteID:         core.StringPtr("site_id"),
-				ContentLength:  core.Int64Ptr(int64(0)),
+				SiteID: core.StringPtr("site_id"),
+				ContentLength: core.Int64Ptr(int64(0)),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
@@ -297,14 +335,14 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`ListDirectorSitesPvdcs - List the provider virtual data centers in a director site instance`, func() {
+	Describe(`ListDirectorSitesPvdcs - List the resource pools in a Cloud Director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`ListDirectorSitesPvdcs(listDirectorSitesPvdcsOptions *ListDirectorSitesPvdcsOptions)`, func() {
 			listDirectorSitesPvdcsOptions := &vmwarev1.ListDirectorSitesPvdcsOptions{
-				SiteID:               core.StringPtr("site_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -315,31 +353,31 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`CreateDirectorSitesPvdcs - Create a provider virtual data center instance in a specified director site`, func() {
+	Describe(`CreateDirectorSitesPvdcs - Create a resource pool instance in a specified Cloud Director site`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`CreateDirectorSitesPvdcs(createDirectorSitesPvdcsOptions *CreateDirectorSitesPvdcsOptions)`, func() {
 			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
-				STORAGETWOIOPSGB:          core.Int64Ptr(int64(0)),
-				STORAGEFOURIOPSGB:         core.Int64Ptr(int64(0)),
-				STORAGETENIOPSGB:          core.Int64Ptr(int64(0)),
+				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
 			}
 
 			clusterPrototypeModel := &vmwarev1.ClusterPrototype{
-				Name:        core.StringPtr("cluster_1"),
-				HostCount:   core.Int64Ptr(int64(2)),
+				Name: core.StringPtr("cluster_1"),
+				HostCount: core.Int64Ptr(int64(2)),
 				HostProfile: core.StringPtr("BM_2S_20_CORES_192_GB"),
-				FileShares:  fileSharesPrototypeModel,
+				FileShares: fileSharesPrototypeModel,
 			}
 
 			createDirectorSitesPvdcsOptions := &vmwarev1.CreateDirectorSitesPvdcsOptions{
-				SiteID:               core.StringPtr("site_id"),
-				Name:                 core.StringPtr("pvdc-1"),
-				DataCenterName:       core.StringPtr("dal10"),
-				Clusters:             []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				Name: core.StringPtr("pvdc-1"),
+				DataCenterName: core.StringPtr("dal10"),
+				Clusters: []vmwarev1.ClusterPrototype{*clusterPrototypeModel},
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -350,15 +388,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`GetDirectorSitesPvdcs - Get the specified provider virtual data center in a director site instance`, func() {
+	Describe(`GetDirectorSitesPvdcs - Get the specified resource pool in a Cloud Director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`GetDirectorSitesPvdcs(getDirectorSitesPvdcsOptions *GetDirectorSitesPvdcsOptions)`, func() {
 			getDirectorSitesPvdcsOptions := &vmwarev1.GetDirectorSitesPvdcsOptions{
-				SiteID:               core.StringPtr("site_id"),
-				ID:                   core.StringPtr("pvdc_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				ID: core.StringPtr("pvdc_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -375,9 +413,9 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`ListDirectorSitesPvdcsClusters(listDirectorSitesPvdcsClustersOptions *ListDirectorSitesPvdcsClustersOptions)`, func() {
 			listDirectorSitesPvdcsClustersOptions := &vmwarev1.ListDirectorSitesPvdcsClustersOptions{
-				SiteID:               core.StringPtr("site_id"),
-				PvdcID:               core.StringPtr("pvdc_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				PvdcID: core.StringPtr("pvdc_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -395,19 +433,19 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`CreateDirectorSitesPvdcsClusters(createDirectorSitesPvdcsClustersOptions *CreateDirectorSitesPvdcsClustersOptions)`, func() {
 			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
-				STORAGETWOIOPSGB:          core.Int64Ptr(int64(0)),
-				STORAGEFOURIOPSGB:         core.Int64Ptr(int64(0)),
-				STORAGETENIOPSGB:          core.Int64Ptr(int64(0)),
+				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
 			}
 
 			createDirectorSitesPvdcsClustersOptions := &vmwarev1.CreateDirectorSitesPvdcsClustersOptions{
-				SiteID:               core.StringPtr("site_id"),
-				PvdcID:               core.StringPtr("pvdc_id"),
-				Name:                 core.StringPtr("cluster_1"),
-				HostCount:            core.Int64Ptr(int64(2)),
-				HostProfile:          core.StringPtr("BM_2S_20_CORES_192_GB"),
-				FileShares:           fileSharesPrototypeModel,
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				PvdcID: core.StringPtr("pvdc_id"),
+				Name: core.StringPtr("cluster_1"),
+				HostCount: core.Int64Ptr(int64(2)),
+				HostProfile: core.StringPtr("BM_2S_20_CORES_192_GB"),
+				FileShares: fileSharesPrototypeModel,
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -424,10 +462,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`GetDirectorInstancesPvdcsCluster(getDirectorInstancesPvdcsClusterOptions *GetDirectorInstancesPvdcsClusterOptions)`, func() {
 			getDirectorInstancesPvdcsClusterOptions := &vmwarev1.GetDirectorInstancesPvdcsClusterOptions{
-				SiteID:               core.StringPtr("site_id"),
-				ID:                   core.StringPtr("cluster_id"),
-				PvdcID:               core.StringPtr("pvdc_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				ID: core.StringPtr("cluster_id"),
+				PvdcID: core.StringPtr("pvdc_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -445,24 +483,24 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`UpdateDirectorSitesPvdcsCluster(updateDirectorSitesPvdcsClusterOptions *UpdateDirectorSitesPvdcsClusterOptions)`, func() {
 			fileSharesPrototypeModel := &vmwarev1.FileSharesPrototype{
 				STORAGEPOINTTWOFIVEIOPSGB: core.Int64Ptr(int64(0)),
-				STORAGETWOIOPSGB:          core.Int64Ptr(int64(0)),
-				STORAGEFOURIOPSGB:         core.Int64Ptr(int64(0)),
-				STORAGETENIOPSGB:          core.Int64Ptr(int64(0)),
+				STORAGETWOIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGEFOURIOPSGB: core.Int64Ptr(int64(0)),
+				STORAGETENIOPSGB: core.Int64Ptr(int64(0)),
 			}
 
 			clusterPatchModel := &vmwarev1.ClusterPatch{
 				FileShares: fileSharesPrototypeModel,
-				HostCount:  core.Int64Ptr(int64(2)),
+				HostCount: core.Int64Ptr(int64(2)),
 			}
 			clusterPatchModelAsPatch, asPatchErr := clusterPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
 
 			updateDirectorSitesPvdcsClusterOptions := &vmwarev1.UpdateDirectorSitesPvdcsClusterOptions{
-				SiteID:               core.StringPtr("site_id"),
-				ID:                   core.StringPtr("cluster_id"),
-				PvdcID:               core.StringPtr("pvdc_id"),
-				Body:                 clusterPatchModelAsPatch,
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				ID: core.StringPtr("cluster_id"),
+				PvdcID: core.StringPtr("pvdc_id"),
+				Body: clusterPatchModelAsPatch,
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -479,7 +517,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`ListDirectorSiteRegions(listDirectorSiteRegionsOptions *ListDirectorSiteRegionsOptions)`, func() {
 			listDirectorSiteRegionsOptions := &vmwarev1.ListDirectorSiteRegionsOptions{
-				AcceptLanguage:       core.StringPtr("en-us"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -496,7 +534,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`ListMultitenantDirectorSites(listMultitenantDirectorSitesOptions *ListMultitenantDirectorSitesOptions)`, func() {
 			listMultitenantDirectorSitesOptions := &vmwarev1.ListMultitenantDirectorSitesOptions{
-				AcceptLanguage:       core.StringPtr("en-us"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -513,7 +551,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`ListDirectorSiteHostProfiles(listDirectorSiteHostProfilesOptions *ListDirectorSiteHostProfilesOptions)`, func() {
 			listDirectorSiteHostProfilesOptions := &vmwarev1.ListDirectorSiteHostProfilesOptions{
-				AcceptLanguage:       core.StringPtr("en-us"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -550,12 +588,12 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			directorSitePvdcModel := &vmwarev1.DirectorSitePVDC{
-				ID:           core.StringPtr("pvdc_id"),
+				ID: core.StringPtr("pvdc_id"),
 				ProviderType: vdcProviderTypeModel,
 			}
 
 			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
-				ID:   core.StringPtr("site_id"),
+				ID: core.StringPtr("site_id"),
 				Pvdc: directorSitePvdcModel,
 			}
 
@@ -569,16 +607,16 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			createVdcOptions := &vmwarev1.CreateVdcOptions{
-				Name:                    core.StringPtr("sampleVDC"),
-				DirectorSite:            vdcDirectorSitePrototypeModel,
-				Edge:                    vdcEdgePrototypeModel,
+				Name: core.StringPtr("sampleVDC"),
+				DirectorSite: vdcDirectorSitePrototypeModel,
+				Edge: vdcEdgePrototypeModel,
 				FastProvisioningEnabled: core.BoolPtr(true),
-				ResourceGroup:           resourceGroupIdentityModel,
-				Cpu:                     core.Int64Ptr(int64(0)),
-				Ram:                     core.Int64Ptr(int64(0)),
-				RhelByol:                core.BoolPtr(false),
-				WindowsByol:             core.BoolPtr(false),
-				AcceptLanguage:          core.StringPtr("en-us"),
+				ResourceGroup: resourceGroupIdentityModel,
+				Cpu: core.Int64Ptr(int64(0)),
+				Ram: core.Int64Ptr(int64(0)),
+				RhelByol: core.BoolPtr(false),
+				WindowsByol: core.BoolPtr(false),
+				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
 			vdc, response, err := vmwareService.CreateVdc(createVdcOptions)
@@ -594,7 +632,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`GetVdc(getVdcOptions *GetVdcOptions)`, func() {
 			getVdcOptions := &vmwarev1.GetVdcOptions{
-				ID:             core.StringPtr("vdc_id"),
+				ID: core.StringPtr("vdc_id"),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
@@ -611,16 +649,16 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`UpdateVdc(updateVdcOptions *UpdateVdcOptions)`, func() {
 			vdcPatchModel := &vmwarev1.VDCPatch{
-				Cpu:                     core.Int64Ptr(int64(0)),
+				Cpu: core.Int64Ptr(int64(0)),
 				FastProvisioningEnabled: core.BoolPtr(true),
-				Ram:                     core.Int64Ptr(int64(0)),
+				Ram: core.Int64Ptr(int64(0)),
 			}
 			vdcPatchModelAsPatch, asPatchErr := vdcPatchModel.AsPatch()
 			Expect(asPatchErr).To(BeNil())
 
 			updateVdcOptions := &vmwarev1.UpdateVdcOptions{
-				ID:             core.StringPtr("vdc_id"),
-				VDCPatch:       vdcPatchModelAsPatch,
+				ID: core.StringPtr("vdc_id"),
+				VDCPatch: vdcPatchModelAsPatch,
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
@@ -631,16 +669,16 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`AddTransitGatewayConnections - Add transit gateway connections to edge`, func() {
+	Describe(`AddTransitGatewayConnections - Add IBM Transit Gateway connections to edge`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`AddTransitGatewayConnections(addTransitGatewayConnectionsOptions *AddTransitGatewayConnectionsOptions)`, func() {
 			addTransitGatewayConnectionsOptions := &vmwarev1.AddTransitGatewayConnectionsOptions{
-				VdcID:          core.StringPtr("vdc_id"),
-				EdgeID:         core.StringPtr("edge_id"),
-				ID:             core.StringPtr("transit_gateway_id"),
-				ContentLength:  core.Int64Ptr(int64(0)),
+				VdcID: core.StringPtr("vdc_id"),
+				EdgeID: core.StringPtr("edge_id"),
+				ID: core.StringPtr("transit_gateway_id"),
+				ContentLength: core.Int64Ptr(int64(0)),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
@@ -651,14 +689,14 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`DeleteDirectorSite - Delete a director site instance`, func() {
+	Describe(`DeleteDirectorSite - Delete a Cloud Director site instance`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`DeleteDirectorSite(deleteDirectorSiteOptions *DeleteDirectorSiteOptions)`, func() {
 			deleteDirectorSiteOptions := &vmwarev1.DeleteDirectorSiteOptions{
-				ID:                   core.StringPtr("site_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				ID: core.StringPtr("site_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -675,9 +713,9 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`DeleteDirectorSitesVcdaConnectionEndpoints(deleteDirectorSitesVcdaConnectionEndpointsOptions *DeleteDirectorSitesVcdaConnectionEndpointsOptions)`, func() {
 			deleteDirectorSitesVcdaConnectionEndpointsOptions := &vmwarev1.DeleteDirectorSitesVcdaConnectionEndpointsOptions{
-				SiteID:               core.StringPtr("site_id"),
-				ID:                   core.StringPtr("vcda_connections_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				ID: core.StringPtr("vcda_connections_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -694,9 +732,9 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`DeleteDirectorSitesVcdaC2cConnection(deleteDirectorSitesVcdaC2cConnectionOptions *DeleteDirectorSitesVcdaC2cConnectionOptions)`, func() {
 			deleteDirectorSitesVcdaC2cConnectionOptions := &vmwarev1.DeleteDirectorSitesVcdaC2cConnectionOptions{
-				SiteID:               core.StringPtr("site_id"),
-				ID:                   core.StringPtr("connection_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				ID: core.StringPtr("connection_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -713,10 +751,10 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`DeleteDirectorSitesPvdcsCluster(deleteDirectorSitesPvdcsClusterOptions *DeleteDirectorSitesPvdcsClusterOptions)`, func() {
 			deleteDirectorSitesPvdcsClusterOptions := &vmwarev1.DeleteDirectorSitesPvdcsClusterOptions{
-				SiteID:               core.StringPtr("site_id"),
-				ID:                   core.StringPtr("cluster_id"),
-				PvdcID:               core.StringPtr("pvdc_id"),
-				AcceptLanguage:       core.StringPtr("en-us"),
+				SiteID: core.StringPtr("site_id"),
+				ID: core.StringPtr("cluster_id"),
+				PvdcID: core.StringPtr("pvdc_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
 				XGlobalTransactionID: core.StringPtr("transaction1"),
 			}
 
@@ -733,7 +771,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`DeleteVdc(deleteVdcOptions *DeleteVdcOptions)`, func() {
 			deleteVdcOptions := &vmwarev1.DeleteVdcOptions{
-				ID:             core.StringPtr("vdc_id"),
+				ID: core.StringPtr("vdc_id"),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
@@ -744,15 +782,15 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 	})
 
-	Describe(`RemoveTransitGatewayConnections - Remove transit gateway connections from edge`, func() {
+	Describe(`RemoveTransitGatewayConnections - Remove IBM Transit Gateway connections from edge`, func() {
 		BeforeEach(func() {
 			shouldSkipTest()
 		})
 		It(`RemoveTransitGatewayConnections(removeTransitGatewayConnectionsOptions *RemoveTransitGatewayConnectionsOptions)`, func() {
 			removeTransitGatewayConnectionsOptions := &vmwarev1.RemoveTransitGatewayConnectionsOptions{
-				VdcID:          core.StringPtr("vdc_id"),
-				EdgeID:         core.StringPtr("edge_id"),
-				ID:             core.StringPtr("transit_gateway_id"),
+				VdcID: core.StringPtr("vdc_id"),
+				EdgeID: core.StringPtr("edge_id"),
+				ID: core.StringPtr("transit_gateway_id"),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
