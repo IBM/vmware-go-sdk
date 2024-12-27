@@ -600,6 +600,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			vdcEdgePrototypeModel := &vmwarev1.VDCEdgePrototype{
 				Size: core.StringPtr("medium"),
 				Type: core.StringPtr("performance"),
+				PrivateOnly: core.BoolPtr(true),
 			}
 
 			resourceGroupIdentityModel := &vmwarev1.ResourceGroupIdentity{
@@ -679,6 +680,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				EdgeID: core.StringPtr("edge_id"),
 				ID: core.StringPtr("transit_gateway_id"),
 				ContentLength: core.Int64Ptr(int64(0)),
+				Region: core.StringPtr("jp-tok"),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 

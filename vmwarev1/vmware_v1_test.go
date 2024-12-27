@@ -19,6 +19,7 @@ package vmwarev1_test
 import (
 	"bytes"
 	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -302,7 +303,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}], "sobrs": [{"id": "ID", "name": "Name", "size": 200, "data_center": "DataCenter", "immutability_time": 7, "storage_type": "vsan", "type": "default", "veeam_org_config_id": "VeeamOrgConfigID", "status": "creating", "created_at": "2019-01-01T12:00:00.000Z"}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully with retries`, func() {
@@ -412,7 +413,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}], "sobrs": [{"id": "ID", "name": "Name", "size": 200, "data_center": "DataCenter", "immutability_time": 7, "storage_type": "vsan", "type": "default", "veeam_org_config_id": "VeeamOrgConfigID", "status": "creating", "created_at": "2019-01-01T12:00:00.000Z"}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSites successfully`, func() {
@@ -687,7 +688,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}], "sobrs": [{"id": "ID", "name": "Name", "size": 200, "data_center": "DataCenter", "immutability_time": 7, "storage_type": "vsan", "type": "default", "veeam_org_config_id": "VeeamOrgConfigID", "status": "creating", "created_at": "2019-01-01T12:00:00.000Z"}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully with retries`, func() {
@@ -746,7 +747,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}]}`)
+					fmt.Fprintf(res, "%s", `{"director_sites": [{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}], "sobrs": [{"id": "ID", "name": "Name", "size": 200, "data_center": "DataCenter", "immutability_time": 7, "storage_type": "vsan", "type": "default", "veeam_org_config_id": "VeeamOrgConfigID", "status": "creating", "created_at": "2019-01-01T12:00:00.000Z"}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSites successfully`, func() {
@@ -910,7 +911,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}], "sobrs": [{"id": "ID", "name": "Name", "size": 200, "data_center": "DataCenter", "immutability_time": 7, "storage_type": "vsan", "type": "default", "veeam_org_config_id": "VeeamOrgConfigID", "status": "creating", "created_at": "2019-01-01T12:00:00.000Z"}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully with retries`, func() {
@@ -970,7 +971,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}], "sobrs": [{"id": "ID", "name": "Name", "size": 200, "data_center": "DataCenter", "immutability_time": 7, "storage_type": "vsan", "type": "default", "veeam_org_config_id": "VeeamOrgConfigID", "status": "creating", "created_at": "2019-01-01T12:00:00.000Z"}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke GetDirectorSite successfully`, func() {
@@ -1144,7 +1145,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}], "sobrs": [{"id": "ID", "name": "Name", "size": 200, "data_center": "DataCenter", "immutability_time": 7, "storage_type": "vsan", "type": "default", "veeam_org_config_id": "VeeamOrgConfigID", "status": "creating", "created_at": "2019-01-01T12:00:00.000Z"}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully with retries`, func() {
@@ -1204,7 +1205,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
+					fmt.Fprintf(res, "%s", `{"crn": "Crn", "href": "Href", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "name": "Name", "status": "creating", "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}, "pvdcs": [{"name": "pvdc-1", "data_center_name": "dal10", "id": "ID", "href": "Href", "clusters": [{"name": "cluster_1", "host_count": 2, "host_profile": "BM_2S_20_CORES_192_GB", "id": "ID", "data_center_name": "DataCenterName", "status": "Status", "href": "Href", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}], "status": "creating", "provider_types": [{"name": "on_demand"}]}], "type": "single_tenant", "services": [{"name": "veeam", "id": "ID", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "status": "creating", "console_url": "ConsoleURL", "replicators": 1, "connections": [{"id": "ID", "status": "creating", "type": "private", "speed": "speed_20g", "data_center_name": "DataCenterName", "allow_list": ["AllowList"]}], "sobrs": [{"id": "ID", "name": "Name", "size": 200, "data_center": "DataCenter", "immutability_time": 7, "storage_type": "vsan", "type": "default", "veeam_org_config_id": "VeeamOrgConfigID", "status": "creating", "created_at": "2019-01-01T12:00:00.000Z"}]}], "rhel_vm_activation_key": "RhelVmActivationKey", "console_connection_type": "public", "console_connection_status": "creating", "ip_allow_list": ["IpAllowList"]}`)
 				}))
 			})
 			It(`Invoke DeleteDirectorSite successfully`, func() {
@@ -4804,7 +4805,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
+					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 2, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcsClusters successfully with retries`, func() {
@@ -4865,7 +4866,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
+					fmt.Fprintf(res, "%s", `{"clusters": [{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 2, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSitesPvdcsClusters successfully`, func() {
@@ -5070,7 +5071,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 2, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSitesPvdcsClusters successfully with retries`, func() {
@@ -5158,7 +5159,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 2, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke CreateDirectorSitesPvdcsClusters successfully`, func() {
@@ -5370,7 +5371,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 2, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke GetDirectorInstancesPvdcsCluster successfully with retries`, func() {
@@ -5432,7 +5433,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 2, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}}`)
 				}))
 			})
 			It(`Invoke GetDirectorInstancesPvdcsCluster successfully`, func() {
@@ -5889,7 +5890,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 2, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
 				}))
 			})
 			It(`Invoke UpdateDirectorSitesPvdcsCluster successfully with retries`, func() {
@@ -5982,7 +5983,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 9, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "name": "Name", "href": "Href", "ordered_at": "2019-01-01T12:00:00.000Z", "provisioned_at": "2019-01-01T12:00:00.000Z", "host_count": 2, "status": "Status", "data_center_name": "DataCenterName", "director_site": {"crn": "Crn", "href": "Href", "id": "ID"}, "host_profile": "HostProfile", "storage_type": "nfs", "billing_plan": "monthly", "file_shares": {"STORAGE_POINT_TWO_FIVE_IOPS_GB": 0, "STORAGE_TWO_IOPS_GB": 0, "STORAGE_FOUR_IOPS_GB": 0, "STORAGE_TEN_IOPS_GB": 0}, "message": "The request has been accepted.", "operation_id": "OperationID"}`)
 				}))
 			})
 			It(`Invoke UpdateDirectorSitesPvdcsCluster successfully`, func() {
@@ -6428,7 +6429,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"multitenant_director_sites": [{"name": "Name", "display_name": "DisplayName", "id": "ID", "region": "Region", "pvdcs": [{"name": "Name", "id": "ID", "data_center_name": "DataCenterName", "provider_types": [{"name": "on_demand"}]}], "services": ["veeam"]}]}`)
+					fmt.Fprintf(res, "%s", `{"multitenant_director_sites": [{"name": "Name", "display_name": "DisplayName", "id": "ID", "private_only": false, "region": "Region", "pvdcs": [{"name": "Name", "id": "ID", "data_center_name": "DataCenterName", "private_only": false, "provider_types": [{"name": "on_demand"}]}], "services": ["veeam"]}]}`)
 				}))
 			})
 			It(`Invoke ListMultitenantDirectorSites successfully with retries`, func() {
@@ -6487,7 +6488,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"multitenant_director_sites": [{"name": "Name", "display_name": "DisplayName", "id": "ID", "region": "Region", "pvdcs": [{"name": "Name", "id": "ID", "data_center_name": "DataCenterName", "provider_types": [{"name": "on_demand"}]}], "services": ["veeam"]}]}`)
+					fmt.Fprintf(res, "%s", `{"multitenant_director_sites": [{"name": "Name", "display_name": "DisplayName", "id": "ID", "private_only": false, "region": "Region", "pvdcs": [{"name": "Name", "id": "ID", "data_center_name": "DataCenterName", "private_only": false, "provider_types": [{"name": "on_demand"}]}], "services": ["veeam"]}]}`)
 				}))
 			})
 			It(`Invoke ListMultitenantDirectorSites successfully`, func() {
@@ -6650,7 +6651,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_site_host_profiles": [{"id": "ID", "cpu": 3, "family": "Family", "processor": "Processor", "ram": 3, "socket": 6, "speed": "Speed", "manufacturer": "Manufacturer", "features": ["Features"]}]}`)
+					fmt.Fprintf(res, "%s", `{"director_site_host_profiles": [{"id": "ID", "cpu": 32, "family": "Family", "processor": "Processor", "ram": 192, "socket": 2, "speed": "Speed", "manufacturer": "Manufacturer", "features": ["Features"]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSiteHostProfiles successfully with retries`, func() {
@@ -6709,7 +6710,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"director_site_host_profiles": [{"id": "ID", "cpu": 3, "family": "Family", "processor": "Processor", "ram": 3, "socket": 6, "speed": "Speed", "manufacturer": "Manufacturer", "features": ["Features"]}]}`)
+					fmt.Fprintf(res, "%s", `{"director_site_host_profiles": [{"id": "ID", "cpu": 32, "family": "Family", "processor": "Processor", "ram": 192, "socket": 2, "speed": "Speed", "manufacturer": "Manufacturer", "features": ["Features"]}]}`)
 				}))
 			})
 			It(`Invoke ListDirectorSiteHostProfiles successfully`, func() {
@@ -6867,7 +6868,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully with retries`, func() {
@@ -6923,7 +6924,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}]}`)
+					fmt.Fprintf(res, "%s", `{"vdcs": [{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}]}`)
 				}))
 			})
 			It(`Invoke ListVdcs successfully`, func() {
@@ -7055,6 +7056,7 @@ var _ = Describe(`VmwareV1`, func() {
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
 				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
+				vdcEdgePrototypeModel.PrivateOnly = core.BoolPtr(true)
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -7126,7 +7128,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully with retries`, func() {
@@ -7156,6 +7158,7 @@ var _ = Describe(`VmwareV1`, func() {
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
 				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
+				vdcEdgePrototypeModel.PrivateOnly = core.BoolPtr(true)
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -7230,7 +7233,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke CreateVdc successfully`, func() {
@@ -7265,6 +7268,7 @@ var _ = Describe(`VmwareV1`, func() {
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
 				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
+				vdcEdgePrototypeModel.PrivateOnly = core.BoolPtr(true)
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -7317,6 +7321,7 @@ var _ = Describe(`VmwareV1`, func() {
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
 				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
+				vdcEdgePrototypeModel.PrivateOnly = core.BoolPtr(true)
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -7390,6 +7395,7 @@ var _ = Describe(`VmwareV1`, func() {
 				vdcEdgePrototypeModel := new(vmwarev1.VDCEdgePrototype)
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
 				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
+				vdcEdgePrototypeModel.PrivateOnly = core.BoolPtr(true)
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -7489,7 +7495,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully with retries`, func() {
@@ -7546,7 +7552,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(200)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke GetVdc successfully`, func() {
@@ -7712,7 +7718,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully with retries`, func() {
@@ -7769,7 +7775,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke DeleteVdc successfully`, func() {
@@ -7960,7 +7966,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully with retries`, func() {
@@ -8042,7 +8048,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false, "resource_group": {"id": "ID", "name": "Name", "crn": "Crn"}}`)
+					fmt.Fprintf(res, "%s", `{"href": "Href", "id": "ID", "provisioned_at": "2019-01-01T12:00:00.000Z", "cpu": 0, "crn": "Crn", "deleted_at": "2019-01-01T12:00:00.000Z", "director_site": {"id": "ID", "pvdc": {"id": "pvdc_id", "provider_type": {"name": "paygo"}}, "url": "URL"}, "edges": [{"id": "ID", "public_ips": ["PublicIps"], "private_ips": ["PrivateIps"], "private_only": false, "size": "medium", "status": "creating", "transit_gateways": [{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}], "type": "performance", "version": "Version"}], "status_reasons": [{"code": "insufficent_cpu", "message": "Message", "more_info": "MoreInfo"}], "name": "Name", "ordered_at": "2019-01-01T12:00:00.000Z", "org_href": "OrgHref", "org_name": "OrgName", "ram": 0, "status": "creating", "type": "single_tenant", "fast_provisioning_enabled": false, "rhel_byol": true, "windows_byol": false}`)
 				}))
 			})
 			It(`Invoke UpdateVdc successfully`, func() {
@@ -8201,6 +8207,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
 				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
+				addTransitGatewayConnectionsOptionsModel.Region = core.StringPtr("jp-tok")
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Expect response parsing to fail since we are receiving a text/plain response
@@ -8232,6 +8239,22 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
 					Expect(req.Method).To(Equal("PUT"))
 
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
 					Expect(req.Header["Content-Length"]).ToNot(BeNil())
 					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
@@ -8242,7 +8265,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}`)
 				}))
 			})
 			It(`Invoke AddTransitGatewayConnections successfully with retries`, func() {
@@ -8260,6 +8283,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
 				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
+				addTransitGatewayConnectionsOptionsModel.Region = core.StringPtr("jp-tok")
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -8297,6 +8321,22 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
 					Expect(req.Method).To(Equal("PUT"))
 
+					// For gzip-disabled operation, verify Content-Encoding is not set.
+					Expect(req.Header.Get("Content-Encoding")).To(BeEmpty())
+
+					// If there is a body, then make sure we can read it
+					bodyBuf := new(bytes.Buffer)
+					if req.Header.Get("Content-Encoding") == "gzip" {
+						body, err := core.NewGzipDecompressionReader(req.Body)
+						Expect(err).To(BeNil())
+						_, err = bodyBuf.ReadFrom(body)
+						Expect(err).To(BeNil())
+					} else {
+						_, err := bodyBuf.ReadFrom(req.Body)
+						Expect(err).To(BeNil())
+					}
+					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
+
 					Expect(req.Header["Content-Length"]).ToNot(BeNil())
 					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
@@ -8304,7 +8344,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}`)
 				}))
 			})
 			It(`Invoke AddTransitGatewayConnections successfully`, func() {
@@ -8327,6 +8367,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
 				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
+				addTransitGatewayConnectionsOptionsModel.Region = core.StringPtr("jp-tok")
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -8351,6 +8392,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
 				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
+				addTransitGatewayConnectionsOptionsModel.Region = core.StringPtr("jp-tok")
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 				// Invoke operation with empty URL (negative test)
@@ -8396,6 +8438,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.EdgeID = core.StringPtr("edge_id")
 				addTransitGatewayConnectionsOptionsModel.ID = core.StringPtr("transit_gateway_id")
 				addTransitGatewayConnectionsOptionsModel.ContentLength = core.Int64Ptr(int64(0))
+				addTransitGatewayConnectionsOptionsModel.Region = core.StringPtr("jp-tok")
 				addTransitGatewayConnectionsOptionsModel.AcceptLanguage = core.StringPtr("en-us")
 				addTransitGatewayConnectionsOptionsModel.Headers = map[string]string{"x-custom-header": "x-custom-value"}
 
@@ -8481,7 +8524,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}`)
 				}))
 			})
 			It(`Invoke RemoveTransitGatewayConnections successfully with retries`, func() {
@@ -8540,7 +8583,7 @@ var _ = Describe(`VmwareV1`, func() {
 					// Set mock response
 					res.Header().Set("Content-type", "application/json")
 					res.WriteHeader(202)
-					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 11, "remote_bgp_asn": 12, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending"}`)
+					fmt.Fprintf(res, "%s", `{"id": "ID", "connections": [{"name": "Name", "transit_gateway_connection_name": "TransitGatewayConnectionName", "status": "pending", "local_gateway_ip": "LocalGatewayIp", "remote_gateway_ip": "RemoteGatewayIp", "local_tunnel_ip": "LocalTunnelIp", "remote_tunnel_ip": "RemoteTunnelIp", "local_bgp_asn": 1, "remote_bgp_asn": 1, "network_account_id": "NetworkAccountID", "network_type": "NetworkType", "base_network_type": "BaseNetworkType", "zone": "Zone"}], "status": "pending", "region": "Region"}`)
 				}))
 			})
 			It(`Invoke RemoveTransitGatewayConnections successfully`, func() {
@@ -8662,6 +8705,7 @@ var _ = Describe(`VmwareV1`, func() {
 				addTransitGatewayConnectionsOptionsModel.SetEdgeID("edge_id")
 				addTransitGatewayConnectionsOptionsModel.SetID("transit_gateway_id")
 				addTransitGatewayConnectionsOptionsModel.SetContentLength(int64(0))
+				addTransitGatewayConnectionsOptionsModel.SetRegion("jp-tok")
 				addTransitGatewayConnectionsOptionsModel.SetAcceptLanguage("en-us")
 				addTransitGatewayConnectionsOptionsModel.SetHeaders(map[string]string{"foo": "bar"})
 				Expect(addTransitGatewayConnectionsOptionsModel).ToNot(BeNil())
@@ -8669,6 +8713,7 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(addTransitGatewayConnectionsOptionsModel.EdgeID).To(Equal(core.StringPtr("edge_id")))
 				Expect(addTransitGatewayConnectionsOptionsModel.ID).To(Equal(core.StringPtr("transit_gateway_id")))
 				Expect(addTransitGatewayConnectionsOptionsModel.ContentLength).To(Equal(core.Int64Ptr(int64(0))))
+				Expect(addTransitGatewayConnectionsOptionsModel.Region).To(Equal(core.StringPtr("jp-tok")))
 				Expect(addTransitGatewayConnectionsOptionsModel.AcceptLanguage).To(Equal(core.StringPtr("en-us")))
 				Expect(addTransitGatewayConnectionsOptionsModel.Headers).To(Equal(map[string]string{"foo": "bar"}))
 			})
@@ -8919,8 +8964,10 @@ var _ = Describe(`VmwareV1`, func() {
 				Expect(vdcEdgePrototypeModel).ToNot(BeNil())
 				vdcEdgePrototypeModel.Size = core.StringPtr("medium")
 				vdcEdgePrototypeModel.Type = core.StringPtr("performance")
+				vdcEdgePrototypeModel.PrivateOnly = core.BoolPtr(true)
 				Expect(vdcEdgePrototypeModel.Size).To(Equal(core.StringPtr("medium")))
 				Expect(vdcEdgePrototypeModel.Type).To(Equal(core.StringPtr("performance")))
+				Expect(vdcEdgePrototypeModel.PrivateOnly).To(Equal(core.BoolPtr(true)))
 
 				// Construct an instance of the ResourceGroupIdentity model
 				resourceGroupIdentityModel := new(vmwarev1.ResourceGroupIdentity)
@@ -9546,6 +9593,7 @@ var _ = Describe(`VmwareV1`, func() {
 			model := new(vmwarev1.VDCEdgePrototype)
 			model.Size = core.StringPtr("medium")
 			model.Type = core.StringPtr("performance")
+			model.PrivateOnly = core.BoolPtr(true)
 
 			b, err := json.Marshal(model)
 			Expect(err).To(BeNil())
@@ -9599,10 +9647,9 @@ var _ = Describe(`VmwareV1`, func() {
 			Expect(result).To(Equal(model))
 		})
 	})
-
 	Describe(`Utility function tests`, func() {
 		It(`Invoke CreateMockByteArray() successfully`, func() {
-			mockByteArray := CreateMockByteArray("This is a test")
+			mockByteArray := CreateMockByteArray("VGhpcyBpcyBhIHRlc3Qgb2YgdGhlIGVtZXJnZW5jeSBicm9hZGNhc3Qgc3lzdGVt")
 			Expect(mockByteArray).ToNot(BeNil())
 		})
 		It(`Invoke CreateMockUUID() successfully`, func() {
@@ -9628,8 +9675,11 @@ var _ = Describe(`VmwareV1`, func() {
 // Utility functions used by the generated test code
 //
 
-func CreateMockByteArray(mockData string) *[]byte {
-	ba := []byte(mockData)
+func CreateMockByteArray(encodedString string) *[]byte {
+	ba, err := base64.StdEncoding.DecodeString(encodedString)
+	if err != nil {
+		panic(err)
+	}
 	return &ba
 }
 

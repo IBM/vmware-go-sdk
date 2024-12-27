@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.88.0-b0b4c159-20240402-205910
+ * IBM OpenAPI SDK Code Generator Version: 3.98.0-8be2046a-20241205-162752
  */
 
 // Package vmwarev1 : Operations and models for the VmwareV1 service
@@ -34,7 +34,7 @@ import (
 	"github.com/go-openapi/strfmt"
 )
 
-// VmwareV1 : IBM Cloud for VMware as a Service API
+// VmwareV1 : IBM Cloud for VMware Cloud Foundation as a Service API
 //
 // API Version: 1.2.0
 type VmwareV1 struct {
@@ -2627,11 +2627,22 @@ func (vmware *VmwareV1) AddTransitGatewayConnectionsWithContext(ctx context.Cont
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
 	if addTransitGatewayConnectionsOptions.ContentLength != nil {
 		builder.AddHeader("Content-Length", fmt.Sprint(*addTransitGatewayConnectionsOptions.ContentLength))
 	}
 	if addTransitGatewayConnectionsOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*addTransitGatewayConnectionsOptions.AcceptLanguage))
+	}
+
+	body := make(map[string]interface{})
+	if addTransitGatewayConnectionsOptions.Region != nil {
+		body["region"] = addTransitGatewayConnectionsOptions.Region
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
 	}
 
 	request, err := builder.Build()
@@ -2750,10 +2761,13 @@ type AddTransitGatewayConnectionsOptions struct {
 	// Size of the message body in bytes.
 	ContentLength *int64 `json:"Content-Length" validate:"required"`
 
+	// The region where the IBM Transit Gateway is deployed.
+	Region *string `json:"region,omitempty"`
+
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -2788,6 +2802,12 @@ func (_options *AddTransitGatewayConnectionsOptions) SetID(id string) *AddTransi
 // SetContentLength : Allow user to set ContentLength
 func (_options *AddTransitGatewayConnectionsOptions) SetContentLength(contentLength int64) *AddTransitGatewayConnectionsOptions {
 	_options.ContentLength = core.Int64Ptr(contentLength)
+	return _options
+}
+
+// SetRegion : Allow user to set Region
+func (_options *AddTransitGatewayConnectionsOptions) SetRegion(region string) *AddTransitGatewayConnectionsOptions {
+	_options.Region = core.StringPtr(region)
 	return _options
 }
 
@@ -2975,14 +2995,14 @@ func UnmarshalClusterPatch(m map[string]json.RawMessage, result interface{}) (er
 
 // AsPatch returns a generic map representation of the ClusterPatch
 func (clusterPatch *ClusterPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(clusterPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(clusterPatch.FileShares) {
+		_patch["file_shares"] = clusterPatch.FileShares.asPatch()
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(clusterPatch.HostCount) {
+		_patch["host_count"] = clusterPatch.HostCount
 	}
+
 	return
 }
 
@@ -3151,7 +3171,7 @@ type CreateDirectorSitesOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3258,7 +3278,7 @@ type CreateDirectorSitesPvdcsClustersOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3349,7 +3369,7 @@ type CreateDirectorSitesPvdcsOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3431,7 +3451,7 @@ type CreateDirectorSitesVcdaC2cConnectionOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3520,7 +3540,7 @@ type CreateDirectorSitesVcdaConnectionEndpointsOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3618,7 +3638,7 @@ type CreateVdcOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3741,7 +3761,7 @@ type DeleteDirectorSiteOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3793,7 +3813,7 @@ type DeleteDirectorSitesPvdcsClusterOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3856,7 +3876,7 @@ type DeleteDirectorSitesVcdaC2cConnectionOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3912,7 +3932,7 @@ type DeleteDirectorSitesVcdaConnectionEndpointsOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -3962,7 +3982,7 @@ type DeleteVdcOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4031,13 +4051,13 @@ type DirectorSite struct {
 	RhelVmActivationKey *string `json:"rhel_vm_activation_key,omitempty"`
 
 	// Type of director console connection.
-	ConsoleConnectionType *string `json:"console_connection_type,omitempty"`
+	ConsoleConnectionType *string `json:"console_connection_type" validate:"required"`
 
 	// Status of director console connection.
-	ConsoleConnectionStatus *string `json:"console_connection_status,omitempty"`
+	ConsoleConnectionStatus *string `json:"console_connection_status" validate:"required"`
 
 	// Director console IP allowlist.
-	IpAllowList []string `json:"ip_allow_list,omitempty"`
+	IpAllowList []string `json:"ip_allow_list" validate:"required"`
 }
 
 // Constants associated with the DirectorSite.Status property.
@@ -4408,11 +4428,18 @@ type Edge struct {
 	// The public IP addresses assigned to the edge.
 	PublicIps []string `json:"public_ips" validate:"required"`
 
+	// The private IP addresses assigned to the edge.
+	PrivateIps []string `json:"private_ips" validate:"required"`
+
+	// Indicates whether the edge is private only. The default value is True for a private Cloud Director site and False
+	// for a public Cloud Director site.
+	PrivateOnly *bool `json:"private_only,omitempty"`
+
 	// The size of the edge.
 	//
 	// The size can be specified only for performance edges. Larger sizes require more capacity from the Cloud Director
 	// site in which the virtual data center (VDC) was created to be deployed.
-	Size *string `json:"size,omitempty"`
+	Size *string `json:"size" validate:"required"`
 
 	// Determines the state of the edge.
 	Status *string `json:"status" validate:"required"`
@@ -4473,6 +4500,16 @@ func UnmarshalEdge(m map[string]json.RawMessage, result interface{}) (err error)
 		err = core.SDKErrorf(err, "", "public_ips-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "private_ips", &obj.PrivateIps)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "private_ips-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_only", &obj.PrivateOnly)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "private_only-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "size", &obj.Size)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "size-error", common.GetComponentInfo())
@@ -4516,7 +4553,7 @@ type EnableVcdaOnDataCenterOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4572,7 +4609,7 @@ type EnableVeeamOnPvdcsListOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4698,6 +4735,25 @@ func UnmarshalFileSharesPrototype(m map[string]json.RawMessage, result interface
 	return
 }
 
+// asPatch returns a generic map representation of the FileSharesPrototype
+func (fileSharesPrototype *FileSharesPrototype) asPatch() (_patch map[string]interface{}) {
+	_patch = map[string]interface{}{}
+	if !core.IsNil(fileSharesPrototype.STORAGEPOINTTWOFIVEIOPSGB) {
+		_patch["STORAGE_POINT_TWO_FIVE_IOPS_GB"] = fileSharesPrototype.STORAGEPOINTTWOFIVEIOPSGB
+	}
+	if !core.IsNil(fileSharesPrototype.STORAGETWOIOPSGB) {
+		_patch["STORAGE_TWO_IOPS_GB"] = fileSharesPrototype.STORAGETWOIOPSGB
+	}
+	if !core.IsNil(fileSharesPrototype.STORAGEFOURIOPSGB) {
+		_patch["STORAGE_FOUR_IOPS_GB"] = fileSharesPrototype.STORAGEFOURIOPSGB
+	}
+	if !core.IsNil(fileSharesPrototype.STORAGETENIOPSGB) {
+		_patch["STORAGE_TEN_IOPS_GB"] = fileSharesPrototype.STORAGETENIOPSGB
+	}
+
+	return
+}
+
 // GetDirectorInstancesPvdcsClusterOptions : The GetDirectorInstancesPvdcsCluster options.
 type GetDirectorInstancesPvdcsClusterOptions struct {
 	// A unique ID for the Cloud Director site in which the virtual data center was created.
@@ -4715,7 +4771,7 @@ type GetDirectorInstancesPvdcsClusterOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4775,7 +4831,7 @@ type GetDirectorSiteOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4824,7 +4880,7 @@ type GetDirectorSitesPvdcsOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4874,7 +4930,7 @@ type GetOidcConfigurationOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4911,7 +4967,7 @@ type GetVdcOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4948,7 +5004,7 @@ type ListDirectorSiteHostProfilesOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -4983,7 +5039,7 @@ type ListDirectorSiteRegionsOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5018,7 +5074,7 @@ type ListDirectorSitesOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5059,7 +5115,7 @@ type ListDirectorSitesPvdcsClustersOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5112,7 +5168,7 @@ type ListDirectorSitesPvdcsOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5155,7 +5211,7 @@ type ListMultitenantDirectorSitesOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5187,7 +5243,7 @@ type ListVdcsOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5218,6 +5274,9 @@ type MultitenantDirectorSite struct {
 
 	// Multitenant Cloud Director site ID.
 	ID *string `json:"id" validate:"required"`
+
+	// Indicates whether the site is private only.
+	PrivateOnly *bool `json:"private_only" validate:"required"`
 
 	// Multitenant Cloud Director site region name.
 	Region *string `json:"region" validate:"required"`
@@ -5251,6 +5310,11 @@ func UnmarshalMultitenantDirectorSite(m map[string]json.RawMessage, result inter
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_only", &obj.PrivateOnly)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "private_only-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalPrimitive(m, "region", &obj.Region)
@@ -5301,6 +5365,9 @@ type MultitenantPVDC struct {
 	// Data center name.
 	DataCenterName *string `json:"data_center_name" validate:"required"`
 
+	// Indicates whether the resource pool is private only.
+	PrivateOnly *bool `json:"private_only" validate:"required"`
+
 	// List of resource pool types.
 	ProviderTypes []ProviderType `json:"provider_types" validate:"required"`
 }
@@ -5321,6 +5388,11 @@ func UnmarshalMultitenantPVDC(m map[string]json.RawMessage, result interface{}) 
 	err = core.UnmarshalPrimitive(m, "data_center_name", &obj.DataCenterName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "data_center_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_only", &obj.PrivateOnly)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "private_only-error", common.GetComponentInfo())
 		return
 	}
 	err = core.UnmarshalModel(m, "provider_types", &obj.ProviderTypes, UnmarshalProviderType)
@@ -5382,13 +5454,13 @@ type PVDC struct {
 	Href *string `json:"href" validate:"required"`
 
 	// List of VMware clusters to deploy on the instance. Clusters form VMware workload availability boundaries.
-	Clusters []ClusterSummary `json:"clusters,omitempty"`
+	Clusters []ClusterSummary `json:"clusters" validate:"required"`
 
 	// The status of the resource pool.
-	Status *string `json:"status,omitempty"`
+	Status *string `json:"status" validate:"required"`
 
 	// List of resource pool types.
-	ProviderTypes []ProviderType `json:"provider_types,omitempty"`
+	ProviderTypes []ProviderType `json:"provider_types" validate:"required"`
 }
 
 // Constants associated with the PVDC.Status property.
@@ -5549,7 +5621,7 @@ type RemoveTransitGatewayConnectionsOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5681,7 +5753,10 @@ type Service struct {
 	Replicators *int64 `json:"replicators,omitempty"`
 
 	// Connection on a VCDA instance.
-	Connections []VcdaConnection `json:"connections,omitempty"`
+	Connections []VcdaConnection `json:"connections" validate:"required"`
+
+	// Scale-out backup repositories created on the Veeam service instance.
+	Sobrs []Sobr `json:"sobrs" validate:"required"`
 }
 
 // Constants associated with the Service.Name property.
@@ -5742,6 +5817,11 @@ func UnmarshalService(m map[string]json.RawMessage, result interface{}) (err err
 	err = core.UnmarshalModel(m, "connections", &obj.Connections, UnmarshalVcdaConnection)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "connections-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "sobrs", &obj.Sobrs, UnmarshalSobr)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "sobrs-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -5814,7 +5894,7 @@ type SetOidcConfigurationOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -5902,6 +5982,9 @@ type TransitGateway struct {
 
 	// Determines the state of the IBM Transit Gateway based on its connections.
 	Status *string `json:"status" validate:"required"`
+
+	// The region where the IBM Transit Gateway is deployed.
+	Region *string `json:"region" validate:"required"`
 }
 
 // Constants associated with the TransitGateway.Status property.
@@ -5929,6 +6012,11 @@ func UnmarshalTransitGateway(m map[string]json.RawMessage, result interface{}) (
 	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "region", &obj.Region)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "region-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6221,7 +6309,7 @@ type UpdateDirectorSitesPvdcsClusterOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6294,7 +6382,7 @@ type UpdateDirectorSitesVcdaC2cConnectionOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6360,7 +6448,7 @@ type UpdateDirectorSitesVcdaConnectionEndpointsOptions struct {
 	// Transaction ID.
 	XGlobalTransactionID *string `json:"X-Global-Transaction-ID,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6419,7 +6507,7 @@ type UpdateVdcOptions struct {
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
-	// Allows users to set headers on API requests
+	// Allows users to set headers on API requests.
 	Headers map[string]string
 }
 
@@ -6549,6 +6637,9 @@ type VDC struct {
 	// The time that the virtual data center (VDC) is ordered.
 	OrderedAt *strfmt.DateTime `json:"ordered_at" validate:"required"`
 
+	// The URL of the organization that owns the VDC.
+	OrgHref *string `json:"org_href" validate:"required"`
+
 	// The name of the VMware Cloud Director organization that contains this virtual data center (VDC). VMware Cloud
 	// Director organizations are used to create strong boundaries between VDCs. There is a complete isolation of user
 	// administration, networking, workloads, and VMware Cloud Director catalogs between different Director organizations.
@@ -6573,9 +6664,6 @@ type VDC struct {
 	// Indicates if the Microsoft Windows VMs will be using the license from IBM or the customer will use their own license
 	// (BYOL).
 	WindowsByol *bool `json:"windows_byol" validate:"required"`
-
-	// The resource group information to associate with the resource instance.
-	ResourceGroup *ResourceGroupReference `json:"resource_group,omitempty"`
 }
 
 // Constants associated with the VDC.Status property.
@@ -6654,6 +6742,11 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 		err = core.SDKErrorf(err, "", "ordered_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "org_href", &obj.OrgHref)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "org_href-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalPrimitive(m, "org_name", &obj.OrgName)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "org_name-error", common.GetComponentInfo())
@@ -6687,11 +6780,6 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 	err = core.UnmarshalPrimitive(m, "windows_byol", &obj.WindowsByol)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "windows_byol-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalModel(m, "resource_group", &obj.ResourceGroup, UnmarshalResourceGroupReference)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "resource_group-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6796,6 +6884,10 @@ type VDCEdgePrototype struct {
 
 	// The type of edge to be deployed on the virtual data center (VDC).
 	Type *string `json:"type" validate:"required"`
+
+	// Indicates whether the edge is private only. The default value is True for a private Cloud Director site and False
+	// for a public Cloud Director site.
+	PrivateOnly *bool `json:"private_only,omitempty"`
 }
 
 // Constants associated with the VDCEdgePrototype.Size property.
@@ -6836,6 +6928,11 @@ func UnmarshalVDCEdgePrototype(m map[string]json.RawMessage, result interface{})
 	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "private_only", &obj.PrivateOnly)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "private_only-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6880,14 +6977,17 @@ func UnmarshalVDCPatch(m map[string]json.RawMessage, result interface{}) (err er
 
 // AsPatch returns a generic map representation of the VDCPatch
 func (vDCPatch *VDCPatch) AsPatch() (_patch map[string]interface{}, err error) {
-	var jsonData []byte
-	jsonData, err = json.Marshal(vDCPatch)
-	if err == nil {
-		err = json.Unmarshal(jsonData, &_patch)
+	_patch = map[string]interface{}{}
+	if !core.IsNil(vDCPatch.Cpu) {
+		_patch["cpu"] = vDCPatch.Cpu
 	}
-	if err != nil {
-		err = core.SDKErrorf(err, "", "unmarshal-patch-data-error", common.GetComponentInfo())
+	if !core.IsNil(vDCPatch.FastProvisioningEnabled) {
+		_patch["fast_provisioning_enabled"] = vDCPatch.FastProvisioningEnabled
 	}
+	if !core.IsNil(vDCPatch.Ram) {
+		_patch["ram"] = vDCPatch.Ram
+	}
+
 	return
 }
 
@@ -7026,13 +7126,13 @@ type VcdaConnection struct {
 	Type *string `json:"type" validate:"required"`
 
 	// Connection speed.
-	Speed *string `json:"speed,omitempty"`
+	Speed *string `json:"speed" validate:"required"`
 
 	// Where to deploy the cluster.
 	DataCenterName *string `json:"data_center_name" validate:"required"`
 
 	// List of IP addresses allowed in the public connection.
-	AllowList []string `json:"allow_list,omitempty"`
+	AllowList []string `json:"allow_list" validate:"required"`
 }
 
 // Constants associated with the VcdaConnection.Status property.
@@ -7089,6 +7189,121 @@ func UnmarshalVcdaConnection(m map[string]json.RawMessage, result interface{}) (
 	err = core.UnmarshalPrimitive(m, "allow_list", &obj.AllowList)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "allow_list-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// Sobr : Configuration details of the scale-out backup repository.
+type Sobr struct {
+	// The ID of the scale-out backup repository.
+	ID *string `json:"id,omitempty"`
+
+	// The name of the scale-out backup repository.
+	Name *string `json:"name,omitempty"`
+
+	// The size of the scale-out backup repository.
+	Size *int64 `json:"size,omitempty"`
+
+	// The data center location where to create the scale-out backup repository.
+	DataCenter *string `json:"data_center,omitempty"`
+
+	// The immutability time of the backup files stored in the scale-out backup repository.
+	ImmutabilityTime *int64 `json:"immutability_time,omitempty"`
+
+	// The type of storage for the scale-out backup repository.
+	StorageType *string `json:"storage_type" validate:"required"`
+
+	// The type of scale-out backup repository.
+	Type *string `json:"type" validate:"required"`
+
+	// The ID of the Veeam organization configuration.
+	VeeamOrgConfigID *string `json:"veeam_org_config_id,omitempty"`
+
+	// The status of the scale-out backup repository on the Veeam service instance.
+	Status *string `json:"status" validate:"required"`
+
+	// The date and time when the scale-out backup repository is ordered.
+	CreatedAt *strfmt.DateTime `json:"created_at,omitempty"`
+}
+
+// Constants associated with the Sobr.StorageType property.
+// The type of storage for the scale-out backup repository.
+const (
+	Sobr_StorageType_Cos = "cos"
+	Sobr_StorageType_Hybrid = "hybrid"
+	Sobr_StorageType_Vsan = "vsan"
+)
+
+// Constants associated with the Sobr.Type property.
+// The type of scale-out backup repository.
+const (
+	Sobr_Type_Custom = "custom"
+	Sobr_Type_Default = "default"
+)
+
+// Constants associated with the Sobr.Status property.
+// The status of the scale-out backup repository on the Veeam service instance.
+const (
+	Sobr_Status_Creating = "creating"
+	Sobr_Status_Deleted = "deleted"
+	Sobr_Status_Deleting = "deleting"
+	Sobr_Status_ReadyToUse = "ready_to_use"
+	Sobr_Status_Updating = "updating"
+)
+
+// UnmarshalSobr unmarshals an instance of Sobr from the specified map of raw messages.
+func UnmarshalSobr(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(Sobr)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "size", &obj.Size)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "size-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "data_center", &obj.DataCenter)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "data_center-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "immutability_time", &obj.ImmutabilityTime)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "immutability_time-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "storage_type", &obj.StorageType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "storage_type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "type", &obj.Type)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "type-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "veeam_org_config_id", &obj.VeeamOrgConfigID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "veeam_org_config_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
