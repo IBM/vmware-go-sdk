@@ -8185,7 +8185,7 @@ var _ = Describe(`VmwareV1`, func() {
 					Expect(req.URL.EscapedPath()).To(Equal(addTransitGatewayConnectionsPath))
 					Expect(req.Method).To(Equal("PUT"))
 					Expect(req.Header["Content-Length"]).ToNot(BeNil())
-					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(20))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					res.Header().Set("Content-type", "application/json")
@@ -8256,7 +8256,7 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Content-Length"]).ToNot(BeNil())
-					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(20))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Sleep a short time to support a timeout test
@@ -8338,7 +8338,7 @@ var _ = Describe(`VmwareV1`, func() {
 					fmt.Fprintf(GinkgoWriter, "  Request body: %s", bodyBuf.String())
 
 					Expect(req.Header["Content-Length"]).ToNot(BeNil())
-					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(0))))
+					Expect(req.Header["Content-Length"][0]).To(Equal(fmt.Sprintf("%v", int64(20))))
 					Expect(req.Header["Accept-Language"]).ToNot(BeNil())
 					Expect(req.Header["Accept-Language"][0]).To(Equal(fmt.Sprintf("%v", "en-us")))
 					// Set mock response
