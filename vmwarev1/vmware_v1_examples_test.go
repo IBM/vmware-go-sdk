@@ -1,7 +1,7 @@
 //go:build examples
 
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -363,7 +363,6 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 
 			setOidcConfigurationOptions := vmwareService.NewSetOidcConfigurationOptions(
 				"site_id",
-				int64(0),
 			)
 			setOidcConfigurationOptions.SetAcceptLanguage("en-us")
 
@@ -747,7 +746,6 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 				"vdc_id",
 				"edge_id",
 				"transit_gateway_id",
-				int64(0),
 			)
 			addTransitGatewayConnectionsOptions.SetAcceptLanguage("en-us")
 
@@ -763,6 +761,114 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(transitGateway).ToNot(BeNil())
+		})
+		It(`SwapHaEdgeSites request example`, func() {
+			fmt.Println("\nSwapHaEdgeSites() result:")
+			// begin-swap_ha_edge_sites
+
+			swapHaEdgeSitesOptions := vmwareService.NewSwapHaEdgeSitesOptions(
+				"vdc_id",
+				"edge_id",
+			)
+			swapHaEdgeSitesOptions.SetAcceptLanguage("en-us")
+
+			swapHaEdgeSitesResponse, response, err := vmwareService.SwapHaEdgeSites(swapHaEdgeSitesOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(swapHaEdgeSitesResponse, "", "  ")
+			fmt.Println(string(b))
+
+			// end-swap_ha_edge_sites
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(swapHaEdgeSitesResponse).ToNot(BeNil())
+		})
+		It(`ListLicenses request example`, func() {
+			fmt.Println("\nListLicenses() result:")
+			// begin-list_licenses
+
+			listLicensesOptions := vmwareService.NewListLicensesOptions()
+
+			licenseCollection, response, err := vmwareService.ListLicenses(listLicensesOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(licenseCollection, "", "  ")
+			fmt.Println(string(b))
+
+			// end-list_licenses
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(licenseCollection).ToNot(BeNil())
+		})
+		It(`ListUsageMeterRegistrations request example`, func() {
+			fmt.Println("\nListUsageMeterRegistrations() result:")
+			// begin-list_usage_meter_registrations
+
+			listUsageMeterRegistrationsOptions := vmwareService.NewListUsageMeterRegistrationsOptions()
+
+			usageMeterRegistrationCollection, response, err := vmwareService.ListUsageMeterRegistrations(listUsageMeterRegistrationsOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(usageMeterRegistrationCollection, "", "  ")
+			fmt.Println(string(b))
+
+			// end-list_usage_meter_registrations
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(usageMeterRegistrationCollection).ToNot(BeNil())
+		})
+		It(`CreateUsageMeterRegistration request example`, func() {
+			fmt.Println("\nCreateUsageMeterRegistration() result:")
+			// begin-create_usage_meter_registration
+
+			usageMeterIdentityModel := &vmwarev1.UsageMeterIdentity{
+				ID: core.StringPtr("4242b01d-2db2-4d7b-ad5d-0792c61295a8"),
+			}
+
+			createUsageMeterRegistrationOptions := vmwareService.NewCreateUsageMeterRegistrationOptions(
+				"string",
+				usageMeterIdentityModel,
+			)
+
+			usageMeterRegistration, response, err := vmwareService.CreateUsageMeterRegistration(createUsageMeterRegistrationOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(usageMeterRegistration, "", "  ")
+			fmt.Println(string(b))
+
+			// end-create_usage_meter_registration
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(usageMeterRegistration).ToNot(BeNil())
+		})
+		It(`GetUsageMeterRegistration request example`, func() {
+			fmt.Println("\nGetUsageMeterRegistration() result:")
+			// begin-get_usage_meter_registration
+
+			getUsageMeterRegistrationOptions := vmwareService.NewGetUsageMeterRegistrationOptions(
+				"testString",
+			)
+
+			usageMeterRegistration, response, err := vmwareService.GetUsageMeterRegistration(getUsageMeterRegistrationOptions)
+			if err != nil {
+				panic(err)
+			}
+			b, _ := json.MarshalIndent(usageMeterRegistration, "", "  ")
+			fmt.Println(string(b))
+
+			// end-get_usage_meter_registration
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(usageMeterRegistration).ToNot(BeNil())
 		})
 		It(`DeleteDirectorSite request example`, func() {
 			fmt.Println("\nDeleteDirectorSite() result:")
@@ -905,6 +1011,26 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(transitGateway).ToNot(BeNil())
+		})
+		It(`DeleteUsageMeterRegistration request example`, func() {
+			// begin-delete_usage_meter_registration
+
+			deleteUsageMeterRegistrationOptions := vmwareService.NewDeleteUsageMeterRegistrationOptions(
+				"testString",
+			)
+
+			response, err := vmwareService.DeleteUsageMeterRegistration(deleteUsageMeterRegistrationOptions)
+			if err != nil {
+				panic(err)
+			}
+			if response.StatusCode != 204 {
+				fmt.Printf("\nUnexpected response status code received from DeleteUsageMeterRegistration(): %d\n", response.StatusCode)
+			}
+
+			// end-delete_usage_meter_registration
+
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
 		})
 	})
 })

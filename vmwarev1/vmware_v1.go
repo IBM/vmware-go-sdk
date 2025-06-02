@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.98.0-8be2046a-20241205-162752
+ * IBM OpenAPI SDK Code Generator Version: 3.104.0-b4a47c49-20250418-184351
  */
 
 // Package vmwarev1 : Operations and models for the VmwareV1 service
@@ -1304,9 +1304,6 @@ func (vmware *VmwareV1) SetOidcConfigurationWithContext(ctx context.Context, set
 		builder.AddHeader(headerName, headerValue)
 	}
 	builder.AddHeader("Accept", "application/json")
-	if setOidcConfigurationOptions.ContentLength != nil {
-		builder.AddHeader("Content-Length", fmt.Sprint(*setOidcConfigurationOptions.ContentLength))
-	}
 	if setOidcConfigurationOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*setOidcConfigurationOptions.AcceptLanguage))
 	}
@@ -2628,9 +2625,6 @@ func (vmware *VmwareV1) AddTransitGatewayConnectionsWithContext(ctx context.Cont
 	}
 	builder.AddHeader("Accept", "application/json")
 	builder.AddHeader("Content-Type", "application/json")
-	if addTransitGatewayConnectionsOptions.ContentLength != nil {
-		builder.AddHeader("Content-Length", fmt.Sprint(*addTransitGatewayConnectionsOptions.ContentLength))
-	}
 	if addTransitGatewayConnectionsOptions.AcceptLanguage != nil {
 		builder.AddHeader("Accept-Language", fmt.Sprint(*addTransitGatewayConnectionsOptions.AcceptLanguage))
 	}
@@ -2743,6 +2737,406 @@ func (vmware *VmwareV1) RemoveTransitGatewayConnectionsWithContext(ctx context.C
 
 	return
 }
+
+// SwapHaEdgeSites : Swap primary and secondary locations for network regional HA edges
+// Swap the primary and secondary locations for network regional high availability (HA) edges.
+func (vmware *VmwareV1) SwapHaEdgeSites(swapHaEdgeSitesOptions *SwapHaEdgeSitesOptions) (result *SwapHaEdgeSitesResponse, response *core.DetailedResponse, err error) {
+	result, response, err = vmware.SwapHaEdgeSitesWithContext(context.Background(), swapHaEdgeSitesOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// SwapHaEdgeSitesWithContext is an alternate form of the SwapHaEdgeSites method which supports a Context parameter
+func (vmware *VmwareV1) SwapHaEdgeSitesWithContext(ctx context.Context, swapHaEdgeSitesOptions *SwapHaEdgeSitesOptions) (result *SwapHaEdgeSitesResponse, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(swapHaEdgeSitesOptions, "swapHaEdgeSitesOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(swapHaEdgeSitesOptions, "swapHaEdgeSitesOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"vdc_id": *swapHaEdgeSitesOptions.VdcID,
+		"edge_id": *swapHaEdgeSitesOptions.EdgeID,
+	}
+
+	builder := core.NewRequestBuilder(core.PATCH)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/vdcs/{vdc_id}/edges/{edge_id}/swap_primary_and_secondary_network_locations`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range swapHaEdgeSitesOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "SwapHaEdgeSites")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	if swapHaEdgeSitesOptions.AcceptLanguage != nil {
+		builder.AddHeader("Accept-Language", fmt.Sprint(*swapHaEdgeSitesOptions.AcceptLanguage))
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = vmware.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "swap_ha_edge_sites", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalSwapHaEdgeSitesResponse)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ListLicenses : List VMware licenses
+// List the VMware licenses provided by IBM if you are entitled to them.
+func (vmware *VmwareV1) ListLicenses(listLicensesOptions *ListLicensesOptions) (result *LicenseCollection, response *core.DetailedResponse, err error) {
+	result, response, err = vmware.ListLicensesWithContext(context.Background(), listLicensesOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// ListLicensesWithContext is an alternate form of the ListLicenses method which supports a Context parameter
+func (vmware *VmwareV1) ListLicensesWithContext(ctx context.Context, listLicensesOptions *ListLicensesOptions) (result *LicenseCollection, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(listLicensesOptions, "listLicensesOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/licenses`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range listLicensesOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "ListLicenses")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = vmware.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "list_licenses", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalLicenseCollection)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// ListUsageMeterRegistrations : List Usage Meter registrations
+// List all your Usage Meter registrations.
+func (vmware *VmwareV1) ListUsageMeterRegistrations(listUsageMeterRegistrationsOptions *ListUsageMeterRegistrationsOptions) (result *UsageMeterRegistrationCollection, response *core.DetailedResponse, err error) {
+	result, response, err = vmware.ListUsageMeterRegistrationsWithContext(context.Background(), listUsageMeterRegistrationsOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// ListUsageMeterRegistrationsWithContext is an alternate form of the ListUsageMeterRegistrations method which supports a Context parameter
+func (vmware *VmwareV1) ListUsageMeterRegistrationsWithContext(ctx context.Context, listUsageMeterRegistrationsOptions *ListUsageMeterRegistrationsOptions) (result *UsageMeterRegistrationCollection, response *core.DetailedResponse, err error) {
+	err = core.ValidateStruct(listUsageMeterRegistrationsOptions, "listUsageMeterRegistrationsOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/usage_meter_registrations`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range listUsageMeterRegistrationsOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "ListUsageMeterRegistrations")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = vmware.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "list_usage_meter_registrations", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUsageMeterRegistrationCollection)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// CreateUsageMeterRegistration : Create a Usage Meter registration
+// Register your Usage Meter to start reporting usage.
+func (vmware *VmwareV1) CreateUsageMeterRegistration(createUsageMeterRegistrationOptions *CreateUsageMeterRegistrationOptions) (result *UsageMeterRegistration, response *core.DetailedResponse, err error) {
+	result, response, err = vmware.CreateUsageMeterRegistrationWithContext(context.Background(), createUsageMeterRegistrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// CreateUsageMeterRegistrationWithContext is an alternate form of the CreateUsageMeterRegistration method which supports a Context parameter
+func (vmware *VmwareV1) CreateUsageMeterRegistrationWithContext(ctx context.Context, createUsageMeterRegistrationOptions *CreateUsageMeterRegistrationOptions) (result *UsageMeterRegistration, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(createUsageMeterRegistrationOptions, "createUsageMeterRegistrationOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(createUsageMeterRegistrationOptions, "createUsageMeterRegistrationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	builder := core.NewRequestBuilder(core.POST)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/usage_meter_registrations`, nil)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range createUsageMeterRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "CreateUsageMeterRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+	builder.AddHeader("Content-Type", "application/json")
+
+	body := make(map[string]interface{})
+	if createUsageMeterRegistrationOptions.Name != nil {
+		body["name"] = createUsageMeterRegistrationOptions.Name
+	}
+	if createUsageMeterRegistrationOptions.UsageMeter != nil {
+		body["usage_meter"] = createUsageMeterRegistrationOptions.UsageMeter
+	}
+	_, err = builder.SetBodyContentJSON(body)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "set-json-body-error", common.GetComponentInfo())
+		return
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = vmware.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "create_usage_meter_registration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUsageMeterRegistration)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// GetUsageMeterRegistration : Get a Usage Meter registration
+// Get a Usage Meter registration.
+func (vmware *VmwareV1) GetUsageMeterRegistration(getUsageMeterRegistrationOptions *GetUsageMeterRegistrationOptions) (result *UsageMeterRegistration, response *core.DetailedResponse, err error) {
+	result, response, err = vmware.GetUsageMeterRegistrationWithContext(context.Background(), getUsageMeterRegistrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// GetUsageMeterRegistrationWithContext is an alternate form of the GetUsageMeterRegistration method which supports a Context parameter
+func (vmware *VmwareV1) GetUsageMeterRegistrationWithContext(ctx context.Context, getUsageMeterRegistrationOptions *GetUsageMeterRegistrationOptions) (result *UsageMeterRegistration, response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(getUsageMeterRegistrationOptions, "getUsageMeterRegistrationOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(getUsageMeterRegistrationOptions, "getUsageMeterRegistrationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"id": *getUsageMeterRegistrationOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.GET)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/usage_meter_registrations/{id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range getUsageMeterRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "GetUsageMeterRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+	builder.AddHeader("Accept", "application/json")
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	var rawResponse map[string]json.RawMessage
+	response, err = vmware.Service.Request(request, &rawResponse)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "get_usage_meter_registration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+	if rawResponse != nil {
+		err = core.UnmarshalModel(rawResponse, "", &result, UnmarshalUsageMeterRegistration)
+		if err != nil {
+			err = core.SDKErrorf(err, "", "unmarshal-resp-error", common.GetComponentInfo())
+			return
+		}
+		response.Result = result
+	}
+
+	return
+}
+
+// DeleteUsageMeterRegistration : Delete a Usage Meter registration
+// Unregister your Usage Meter to stop reporting usage.
+func (vmware *VmwareV1) DeleteUsageMeterRegistration(deleteUsageMeterRegistrationOptions *DeleteUsageMeterRegistrationOptions) (response *core.DetailedResponse, err error) {
+	response, err = vmware.DeleteUsageMeterRegistrationWithContext(context.Background(), deleteUsageMeterRegistrationOptions)
+	err = core.RepurposeSDKProblem(err, "")
+	return
+}
+
+// DeleteUsageMeterRegistrationWithContext is an alternate form of the DeleteUsageMeterRegistration method which supports a Context parameter
+func (vmware *VmwareV1) DeleteUsageMeterRegistrationWithContext(ctx context.Context, deleteUsageMeterRegistrationOptions *DeleteUsageMeterRegistrationOptions) (response *core.DetailedResponse, err error) {
+	err = core.ValidateNotNil(deleteUsageMeterRegistrationOptions, "deleteUsageMeterRegistrationOptions cannot be nil")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "unexpected-nil-param", common.GetComponentInfo())
+		return
+	}
+	err = core.ValidateStruct(deleteUsageMeterRegistrationOptions, "deleteUsageMeterRegistrationOptions")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "struct-validation-error", common.GetComponentInfo())
+		return
+	}
+
+	pathParamsMap := map[string]string{
+		"id": *deleteUsageMeterRegistrationOptions.ID,
+	}
+
+	builder := core.NewRequestBuilder(core.DELETE)
+	builder = builder.WithContext(ctx)
+	builder.EnableGzipCompression = vmware.GetEnableGzipCompression()
+	_, err = builder.ResolveRequestURL(vmware.Service.Options.URL, `/usage_meter_registrations/{id}`, pathParamsMap)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "url-resolve-error", common.GetComponentInfo())
+		return
+	}
+
+	for headerName, headerValue := range deleteUsageMeterRegistrationOptions.Headers {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	sdkHeaders := common.GetSdkHeaders("vmware", "V1", "DeleteUsageMeterRegistration")
+	for headerName, headerValue := range sdkHeaders {
+		builder.AddHeader(headerName, headerValue)
+	}
+
+	request, err := builder.Build()
+	if err != nil {
+		err = core.SDKErrorf(err, "", "build-error", common.GetComponentInfo())
+		return
+	}
+
+	response, err = vmware.Service.Request(request, nil)
+	if err != nil {
+		core.EnrichHTTPProblem(err, "delete_usage_meter_registration", getServiceComponentInfo())
+		err = core.SDKErrorf(err, "", "http-request-err", common.GetComponentInfo())
+		return
+	}
+
+	return
+}
 func getServiceComponentInfo() *core.ProblemComponent {
 	return core.NewProblemComponent(DefaultServiceName, "1.2.0")
 }
@@ -2758,9 +3152,6 @@ type AddTransitGatewayConnectionsOptions struct {
 	// A unique ID for an IBM Transit Gateway.
 	ID *string `json:"id" validate:"required,ne="`
 
-	// Size of the message body in bytes.
-	ContentLength *int64 `json:"Content-Length" validate:"required"`
-
 	// The region where the IBM Transit Gateway is deployed.
 	Region *string `json:"region,omitempty"`
 
@@ -2772,12 +3163,11 @@ type AddTransitGatewayConnectionsOptions struct {
 }
 
 // NewAddTransitGatewayConnectionsOptions : Instantiate AddTransitGatewayConnectionsOptions
-func (*VmwareV1) NewAddTransitGatewayConnectionsOptions(vdcID string, edgeID string, id string, contentLength int64) *AddTransitGatewayConnectionsOptions {
+func (*VmwareV1) NewAddTransitGatewayConnectionsOptions(vdcID string, edgeID string, id string) *AddTransitGatewayConnectionsOptions {
 	return &AddTransitGatewayConnectionsOptions{
 		VdcID: core.StringPtr(vdcID),
 		EdgeID: core.StringPtr(edgeID),
 		ID: core.StringPtr(id),
-		ContentLength: core.Int64Ptr(contentLength),
 	}
 }
 
@@ -2796,12 +3186,6 @@ func (_options *AddTransitGatewayConnectionsOptions) SetEdgeID(edgeID string) *A
 // SetID : Allow user to set ID
 func (_options *AddTransitGatewayConnectionsOptions) SetID(id string) *AddTransitGatewayConnectionsOptions {
 	_options.ID = core.StringPtr(id)
-	return _options
-}
-
-// SetContentLength : Allow user to set ContentLength
-func (_options *AddTransitGatewayConnectionsOptions) SetContentLength(contentLength int64) *AddTransitGatewayConnectionsOptions {
-	_options.ContentLength = core.Int64Ptr(contentLength)
 	return _options
 }
 
@@ -3602,6 +3986,44 @@ func (options *CreateDirectorSitesVcdaConnectionEndpointsOptions) SetHeaders(par
 	return options
 }
 
+// CreateUsageMeterRegistrationOptions : The CreateUsageMeterRegistration options.
+type CreateUsageMeterRegistrationOptions struct {
+	// Human readable identifier.
+	Name *string `json:"name" validate:"required"`
+
+	// Details to identify a Usage Meter.
+	UsageMeter *UsageMeterIdentity `json:"usage_meter" validate:"required"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewCreateUsageMeterRegistrationOptions : Instantiate CreateUsageMeterRegistrationOptions
+func (*VmwareV1) NewCreateUsageMeterRegistrationOptions(name string, usageMeter *UsageMeterIdentity) *CreateUsageMeterRegistrationOptions {
+	return &CreateUsageMeterRegistrationOptions{
+		Name: core.StringPtr(name),
+		UsageMeter: usageMeter,
+	}
+}
+
+// SetName : Allow user to set Name
+func (_options *CreateUsageMeterRegistrationOptions) SetName(name string) *CreateUsageMeterRegistrationOptions {
+	_options.Name = core.StringPtr(name)
+	return _options
+}
+
+// SetUsageMeter : Allow user to set UsageMeter
+func (_options *CreateUsageMeterRegistrationOptions) SetUsageMeter(usageMeter *UsageMeterIdentity) *CreateUsageMeterRegistrationOptions {
+	_options.UsageMeter = usageMeter
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *CreateUsageMeterRegistrationOptions) SetHeaders(param map[string]string) *CreateUsageMeterRegistrationOptions {
+	options.Headers = param
+	return options
+}
+
 // CreateVdcOptions : The CreateVdc options.
 type CreateVdcOptions struct {
 	// A human readable ID for the virtual data center (VDC). Use a name that is unique to your region.
@@ -3974,6 +4396,34 @@ func (options *DeleteDirectorSitesVcdaConnectionEndpointsOptions) SetHeaders(par
 	return options
 }
 
+// DeleteUsageMeterRegistrationOptions : The DeleteUsageMeterRegistration options.
+type DeleteUsageMeterRegistrationOptions struct {
+	// Identifier for a Usage Meter registration.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewDeleteUsageMeterRegistrationOptions : Instantiate DeleteUsageMeterRegistrationOptions
+func (*VmwareV1) NewDeleteUsageMeterRegistrationOptions(id string) *DeleteUsageMeterRegistrationOptions {
+	return &DeleteUsageMeterRegistrationOptions{
+		ID: core.StringPtr(id),
+	}
+}
+
+// SetID : Allow user to set ID
+func (_options *DeleteUsageMeterRegistrationOptions) SetID(id string) *DeleteUsageMeterRegistrationOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *DeleteUsageMeterRegistrationOptions) SetHeaders(param map[string]string) *DeleteUsageMeterRegistrationOptions {
+	options.Headers = param
+	return options
+}
+
 // DeleteVdcOptions : The DeleteVdc options.
 type DeleteVdcOptions struct {
 	// A unique ID for a specified virtual data center.
@@ -4296,6 +4746,9 @@ func UnmarshalDirectorSiteHostProfileCollection(m map[string]json.RawMessage, re
 
 // DirectorSitePVDC : The resource pool within the Director Site in which to deploy the virtual data center (VDC).
 type DirectorSitePVDC struct {
+	// Specifies whether compute HA is enabled for this VDC.
+	ComputeHaEnabled *bool `json:"compute_ha_enabled,omitempty"`
+
 	// A unique ID for the resource pool.
 	ID *string `json:"id" validate:"required"`
 
@@ -4319,6 +4772,38 @@ func (*VmwareV1) NewDirectorSitePVDC(id string) (_model *DirectorSitePVDC, err e
 // UnmarshalDirectorSitePVDC unmarshals an instance of DirectorSitePVDC from the specified map of raw messages.
 func UnmarshalDirectorSitePVDC(m map[string]json.RawMessage, result interface{}) (err error) {
 	obj := new(DirectorSitePVDC)
+	err = core.UnmarshalPrimitive(m, "compute_ha_enabled", &obj.ComputeHaEnabled)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "compute_ha_enabled-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "provider_type", &obj.ProviderType, UnmarshalVDCProviderType)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "provider_type-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// DirectorSitePVDCResponse : The resource pool from the Cloud Director site in which to deploy the virtual data center (VDC).
+type DirectorSitePVDCResponse struct {
+	// A unique ID for the resource pool.
+	ID *string `json:"id" validate:"required"`
+
+	// Determines how resources are made available to the virtual data center (VDC). Required for VDCs deployed on a
+	// multitenant Cloud Director site.
+	ProviderType *VDCProviderType `json:"provider_type,omitempty"`
+}
+
+// UnmarshalDirectorSitePVDCResponse unmarshals an instance of DirectorSitePVDCResponse from the specified map of raw messages.
+func UnmarshalDirectorSitePVDCResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(DirectorSitePVDCResponse)
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
@@ -4455,6 +4940,18 @@ type Edge struct {
 
 	// The edge version.
 	Version *string `json:"version" validate:"required"`
+
+	// The name of the primary data center.
+	PrimaryDataCenterName *string `json:"primary_data_center_name,omitempty"`
+
+	// The name of the secondary data center.
+	SecondaryDataCenterName *string `json:"secondary_data_center_name,omitempty"`
+
+	// The ID of the primary resource pool.
+	PrimaryPvdcID *string `json:"primary_pvdc_id,omitempty"`
+
+	// The ID of the secondary resource pool.
+	SecondaryPvdcID *string `json:"secondary_pvdc_id,omitempty"`
 }
 
 // Constants associated with the Edge.Size property.
@@ -4533,6 +5030,26 @@ func UnmarshalEdge(m map[string]json.RawMessage, result interface{}) (err error)
 	err = core.UnmarshalPrimitive(m, "version", &obj.Version)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "version-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "primary_data_center_name", &obj.PrimaryDataCenterName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "primary_data_center_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secondary_data_center_name", &obj.SecondaryDataCenterName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secondary_data_center_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "primary_pvdc_id", &obj.PrimaryPvdcID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "primary_pvdc_id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secondary_pvdc_id", &obj.SecondaryPvdcID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secondary_pvdc_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -4959,6 +5476,34 @@ func (options *GetOidcConfigurationOptions) SetHeaders(param map[string]string) 
 	return options
 }
 
+// GetUsageMeterRegistrationOptions : The GetUsageMeterRegistration options.
+type GetUsageMeterRegistrationOptions struct {
+	// Identifier for a Usage Meter registration.
+	ID *string `json:"id" validate:"required,ne="`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewGetUsageMeterRegistrationOptions : Instantiate GetUsageMeterRegistrationOptions
+func (*VmwareV1) NewGetUsageMeterRegistrationOptions(id string) *GetUsageMeterRegistrationOptions {
+	return &GetUsageMeterRegistrationOptions{
+		ID: core.StringPtr(id),
+	}
+}
+
+// SetID : Allow user to set ID
+func (_options *GetUsageMeterRegistrationOptions) SetID(id string) *GetUsageMeterRegistrationOptions {
+	_options.ID = core.StringPtr(id)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *GetUsageMeterRegistrationOptions) SetHeaders(param map[string]string) *GetUsageMeterRegistrationOptions {
+	options.Headers = param
+	return options
+}
+
 // GetVdcOptions : The GetVdc options.
 type GetVdcOptions struct {
 	// A unique ID for a specified virtual data center.
@@ -4994,6 +5539,76 @@ func (_options *GetVdcOptions) SetAcceptLanguage(acceptLanguage string) *GetVdcO
 func (options *GetVdcOptions) SetHeaders(param map[string]string) *GetVdcOptions {
 	options.Headers = param
 	return options
+}
+
+// License : License struct
+type License struct {
+	// License keys for the specified version.
+	LicenseKeys []LicenseKey `json:"license_keys" validate:"required"`
+
+	// Version of VMware software.
+	Version *string `json:"version" validate:"required"`
+}
+
+// UnmarshalLicense unmarshals an instance of License from the specified map of raw messages.
+func UnmarshalLicense(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(License)
+	err = core.UnmarshalModel(m, "license_keys", &obj.LicenseKeys, UnmarshalLicenseKey)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "license_keys-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version", &obj.Version)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "version-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// LicenseCollection : Collection of licenses.
+type LicenseCollection struct {
+	// Licenses array.
+	Licenses []License `json:"licenses" validate:"required"`
+}
+
+// UnmarshalLicenseCollection unmarshals an instance of LicenseCollection from the specified map of raw messages.
+func UnmarshalLicenseCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(LicenseCollection)
+	err = core.UnmarshalModel(m, "licenses", &obj.Licenses, UnmarshalLicense)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "licenses-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// LicenseKey : LicenseKey struct
+type LicenseKey struct {
+	// License key value.
+	Value *string `json:"value" validate:"required"`
+
+	// Name of software associated to the license key.
+	Name *string `json:"name" validate:"required"`
+}
+
+// UnmarshalLicenseKey unmarshals an instance of LicenseKey from the specified map of raw messages.
+func UnmarshalLicenseKey(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(LicenseKey)
+	err = core.UnmarshalPrimitive(m, "value", &obj.Value)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "value-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
 }
 
 // ListDirectorSiteHostProfilesOptions : The ListDirectorSiteHostProfiles options.
@@ -5203,6 +5818,24 @@ func (options *ListDirectorSitesPvdcsOptions) SetHeaders(param map[string]string
 	return options
 }
 
+// ListLicensesOptions : The ListLicenses options.
+type ListLicensesOptions struct {
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewListLicensesOptions : Instantiate ListLicensesOptions
+func (*VmwareV1) NewListLicensesOptions() *ListLicensesOptions {
+	return &ListLicensesOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListLicensesOptions) SetHeaders(param map[string]string) *ListLicensesOptions {
+	options.Headers = param
+	return options
+}
+
 // ListMultitenantDirectorSitesOptions : The ListMultitenantDirectorSites options.
 type ListMultitenantDirectorSitesOptions struct {
 	// Language.
@@ -5234,6 +5867,24 @@ func (_options *ListMultitenantDirectorSitesOptions) SetXGlobalTransactionID(xGl
 
 // SetHeaders : Allow user to set Headers
 func (options *ListMultitenantDirectorSitesOptions) SetHeaders(param map[string]string) *ListMultitenantDirectorSitesOptions {
+	options.Headers = param
+	return options
+}
+
+// ListUsageMeterRegistrationsOptions : The ListUsageMeterRegistrations options.
+type ListUsageMeterRegistrationsOptions struct {
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewListUsageMeterRegistrationsOptions : Instantiate ListUsageMeterRegistrationsOptions
+func (*VmwareV1) NewListUsageMeterRegistrationsOptions() *ListUsageMeterRegistrationsOptions {
+	return &ListUsageMeterRegistrationsOptions{}
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *ListUsageMeterRegistrationsOptions) SetHeaders(param map[string]string) *ListUsageMeterRegistrationsOptions {
 	options.Headers = param
 	return options
 }
@@ -5888,9 +6539,6 @@ type SetOidcConfigurationOptions struct {
 	// A unique ID for the Cloud Director site in which the virtual data center was created.
 	SiteID *string `json:"site_id" validate:"required,ne="`
 
-	// Size of the message body in bytes.
-	ContentLength *int64 `json:"Content-Length" validate:"required"`
-
 	// Language.
 	AcceptLanguage *string `json:"Accept-Language,omitempty"`
 
@@ -5899,22 +6547,15 @@ type SetOidcConfigurationOptions struct {
 }
 
 // NewSetOidcConfigurationOptions : Instantiate SetOidcConfigurationOptions
-func (*VmwareV1) NewSetOidcConfigurationOptions(siteID string, contentLength int64) *SetOidcConfigurationOptions {
+func (*VmwareV1) NewSetOidcConfigurationOptions(siteID string) *SetOidcConfigurationOptions {
 	return &SetOidcConfigurationOptions{
 		SiteID: core.StringPtr(siteID),
-		ContentLength: core.Int64Ptr(contentLength),
 	}
 }
 
 // SetSiteID : Allow user to set SiteID
 func (_options *SetOidcConfigurationOptions) SetSiteID(siteID string) *SetOidcConfigurationOptions {
 	_options.SiteID = core.StringPtr(siteID)
-	return _options
-}
-
-// SetContentLength : Allow user to set ContentLength
-func (_options *SetOidcConfigurationOptions) SetContentLength(contentLength int64) *SetOidcConfigurationOptions {
-	_options.ContentLength = core.Int64Ptr(contentLength)
 	return _options
 }
 
@@ -5966,6 +6607,70 @@ func UnmarshalStatusReason(m map[string]json.RawMessage, result interface{}) (er
 	err = core.UnmarshalPrimitive(m, "more_info", &obj.MoreInfo)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "more_info-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// SwapHaEdgeSitesOptions : The SwapHaEdgeSites options.
+type SwapHaEdgeSitesOptions struct {
+	// A unique ID for a virtual data center.
+	VdcID *string `json:"vdc_id" validate:"required,ne="`
+
+	// A unique ID for an edge.
+	EdgeID *string `json:"edge_id" validate:"required,ne="`
+
+	// Language.
+	AcceptLanguage *string `json:"Accept-Language,omitempty"`
+
+	// Allows users to set headers on API requests.
+	Headers map[string]string
+}
+
+// NewSwapHaEdgeSitesOptions : Instantiate SwapHaEdgeSitesOptions
+func (*VmwareV1) NewSwapHaEdgeSitesOptions(vdcID string, edgeID string) *SwapHaEdgeSitesOptions {
+	return &SwapHaEdgeSitesOptions{
+		VdcID: core.StringPtr(vdcID),
+		EdgeID: core.StringPtr(edgeID),
+	}
+}
+
+// SetVdcID : Allow user to set VdcID
+func (_options *SwapHaEdgeSitesOptions) SetVdcID(vdcID string) *SwapHaEdgeSitesOptions {
+	_options.VdcID = core.StringPtr(vdcID)
+	return _options
+}
+
+// SetEdgeID : Allow user to set EdgeID
+func (_options *SwapHaEdgeSitesOptions) SetEdgeID(edgeID string) *SwapHaEdgeSitesOptions {
+	_options.EdgeID = core.StringPtr(edgeID)
+	return _options
+}
+
+// SetAcceptLanguage : Allow user to set AcceptLanguage
+func (_options *SwapHaEdgeSitesOptions) SetAcceptLanguage(acceptLanguage string) *SwapHaEdgeSitesOptions {
+	_options.AcceptLanguage = core.StringPtr(acceptLanguage)
+	return _options
+}
+
+// SetHeaders : Allow user to set Headers
+func (options *SwapHaEdgeSitesOptions) SetHeaders(param map[string]string) *SwapHaEdgeSitesOptions {
+	options.Headers = param
+	return options
+}
+
+// SwapHaEdgeSitesResponse : SwapHaEdgeSitesResponse struct
+type SwapHaEdgeSitesResponse struct {
+	Message *string `json:"message,omitempty"`
+}
+
+// UnmarshalSwapHaEdgeSitesResponse unmarshals an instance of SwapHaEdgeSitesResponse from the specified map of raw messages.
+func UnmarshalSwapHaEdgeSitesResponse(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(SwapHaEdgeSitesResponse)
+	err = core.UnmarshalPrimitive(m, "message", &obj.Message)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "message-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -6595,6 +7300,190 @@ func UnmarshalUpdatedVcdaConnection(m map[string]json.RawMessage, result interfa
 	return
 }
 
+// UsageMeter : Details of a Usage Meter.
+type UsageMeter struct {
+	// Unique identifier.
+	ID *string `json:"id" validate:"required"`
+
+	// Indicates if a Usage Meter reported usage. Possible values are "ok" (The Usage Meter is functioning correctly and
+	// reporting usage data), "error" (The Usage Meter encountered an issue and is unable to report usage), or "unknown"
+	// (The status of the Usage Meter cannot be determined).
+	Health *string `json:"health" validate:"required"`
+
+	// The software version of the Usage Meter.
+	Version *string `json:"version,omitempty"`
+}
+
+// Constants associated with the UsageMeter.Health property.
+// Indicates if a Usage Meter reported usage. Possible values are "ok" (The Usage Meter is functioning correctly and
+// reporting usage data), "error" (The Usage Meter encountered an issue and is unable to report usage), or "unknown"
+// (The status of the Usage Meter cannot be determined).
+const (
+	UsageMeter_Health_Error = "error"
+	UsageMeter_Health_Ok = "ok"
+	UsageMeter_Health_Unknown = "unknown"
+)
+
+// UnmarshalUsageMeter unmarshals an instance of UsageMeter from the specified map of raw messages.
+func UnmarshalUsageMeter(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UsageMeter)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "health", &obj.Health)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "health-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "version", &obj.Version)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "version-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UsageMeterIdentity : Details to identify a Usage Meter.
+type UsageMeterIdentity struct {
+	// Unique identifier.
+	ID *string `json:"id" validate:"required"`
+}
+
+// NewUsageMeterIdentity : Instantiate UsageMeterIdentity (Generic Model Constructor)
+func (*VmwareV1) NewUsageMeterIdentity(id string) (_model *UsageMeterIdentity, err error) {
+	_model = &UsageMeterIdentity{
+		ID: core.StringPtr(id),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+// UnmarshalUsageMeterIdentity unmarshals an instance of UsageMeterIdentity from the specified map of raw messages.
+func UnmarshalUsageMeterIdentity(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UsageMeterIdentity)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UsageMeterRegistration : Details of a Usage Meter registration.
+type UsageMeterRegistration struct {
+	// Unique identifier.
+	ID *string `json:"id" validate:"required"`
+
+	// The Cloud Resource Name (CRN) for this registration.
+	Crn *string `json:"crn" validate:"required"`
+
+	// Used to activate your Usage Meter after registration so that it can start to report usage.
+	AccessToken *string `json:"access_token,omitempty"`
+
+	// Human readable identifier.
+	Name *string `json:"name" validate:"required"`
+
+	// Indicates if a Usage Meter registration is active. If the value is "active", then the Usage Meter is currently
+	// registered and in use.
+	Status *string `json:"status" validate:"required"`
+
+	// Details of a Usage Meter.
+	UsageMeter *UsageMeter `json:"usage_meter" validate:"required"`
+
+	// Indicates if a Usage Meter registration is locked and cannot be deleted.
+	Locked *bool `json:"locked" validate:"required"`
+
+	// The date and time when the Usage Meter registration was created.
+	CreatedAt *strfmt.DateTime `json:"created_at" validate:"required"`
+
+	// The URL with ID as parameter.
+	Href *string `json:"href" validate:"required"`
+}
+
+// Constants associated with the UsageMeterRegistration.Status property.
+// Indicates if a Usage Meter registration is active. If the value is "active", then the Usage Meter is currently
+// registered and in use.
+const (
+	UsageMeterRegistration_Status_Active = "active"
+)
+
+// UnmarshalUsageMeterRegistration unmarshals an instance of UsageMeterRegistration from the specified map of raw messages.
+func UnmarshalUsageMeterRegistration(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UsageMeterRegistration)
+	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "crn", &obj.Crn)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "crn-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "access_token", &obj.AccessToken)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "access_token-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "name", &obj.Name)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "status", &obj.Status)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "status-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "usage_meter", &obj.UsageMeter, UnmarshalUsageMeter)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "usage_meter-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "locked", &obj.Locked)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "locked-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "href", &obj.Href)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "href-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// UsageMeterRegistrationCollection : Collection of Usage Meter registrations.
+type UsageMeterRegistrationCollection struct {
+	// List of Usage Meter registrations.
+	UsageMeterRegistrations []UsageMeterRegistration `json:"usage_meter_registrations" validate:"required"`
+}
+
+// UnmarshalUsageMeterRegistrationCollection unmarshals an instance of UsageMeterRegistrationCollection from the specified map of raw messages.
+func UnmarshalUsageMeterRegistrationCollection(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(UsageMeterRegistrationCollection)
+	err = core.UnmarshalModel(m, "usage_meter_registrations", &obj.UsageMeterRegistrations, UnmarshalUsageMeterRegistration)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "usage_meter_registrations-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
 // VDC : A VMware virtual data center (VDC). VMware VDCs are used to deploy and run VMware virtualized networking and run
 // VMware workloads. VMware VDCs form loose boundaries of networking and workload where networking and workload can be
 // shared or optionally isolated between VDCs. You can deploy one or more VDCs in an instance except when you are using
@@ -6620,6 +7509,10 @@ type VDC struct {
 
 	// The time that the virtual data center (VDC) is deleted.
 	DeletedAt *strfmt.DateTime `json:"deleted_at,omitempty"`
+
+	// Indicates if the VDC is HA-enabled for compute only, compute and network, or network only. If not present, the VDC
+	// is not HA-enabled.
+	Ha *string `json:"ha,omitempty"`
 
 	// The Cloud Director site in which to deploy the virtual data center (VDC).
 	DirectorSite *VDCDirectorSite `json:"director_site" validate:"required"`
@@ -6717,6 +7610,11 @@ func UnmarshalVDC(m map[string]json.RawMessage, result interface{}) (err error) 
 		err = core.SDKErrorf(err, "", "deleted_at-error", common.GetComponentInfo())
 		return
 	}
+	err = core.UnmarshalPrimitive(m, "ha", &obj.Ha)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "ha-error", common.GetComponentInfo())
+		return
+	}
 	err = core.UnmarshalModel(m, "director_site", &obj.DirectorSite, UnmarshalVDCDirectorSite)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "director_site-error", common.GetComponentInfo())
@@ -6809,8 +7707,8 @@ type VDCDirectorSite struct {
 	// A unique ID for the Cloud Director site.
 	ID *string `json:"id" validate:"required"`
 
-	// The resource pool within the Director Site in which to deploy the virtual data center (VDC).
-	Pvdc *DirectorSitePVDC `json:"pvdc" validate:"required"`
+	// The resource pool from the Cloud Director site in which to deploy the virtual data center (VDC).
+	Pvdc *DirectorSitePVDCResponse `json:"pvdc" validate:"required"`
 
 	// The URL of the VMware Cloud Director tenant portal where this virtual data center (VDC) can be managed.
 	URL *string `json:"url" validate:"required"`
@@ -6824,7 +7722,7 @@ func UnmarshalVDCDirectorSite(m map[string]json.RawMessage, result interface{}) 
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "pvdc", &obj.Pvdc, UnmarshalDirectorSitePVDC)
+	err = core.UnmarshalModel(m, "pvdc", &obj.Pvdc, UnmarshalDirectorSitePVDCResponse)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "pvdc-error", common.GetComponentInfo())
 		return
@@ -6888,6 +7786,9 @@ type VDCEdgePrototype struct {
 	// Indicates whether the edge is private only. The default value is True for a private Cloud Director site and False
 	// for a public Cloud Director site.
 	PrivateOnly *bool `json:"private_only,omitempty"`
+
+	// Information about the network regional HA edge to be deployed on the VDC.
+	NetworkHa VDCEdgePrototypeNetworkHaIntf `json:"network_ha,omitempty"`
 }
 
 // Constants associated with the VDCEdgePrototype.Size property.
@@ -6933,6 +7834,55 @@ func UnmarshalVDCEdgePrototype(m map[string]json.RawMessage, result interface{})
 	err = core.UnmarshalPrimitive(m, "private_only", &obj.PrivateOnly)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "private_only-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalModel(m, "network_ha", &obj.NetworkHa, UnmarshalVDCEdgePrototypeNetworkHa)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "network_ha-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// VDCEdgePrototypeNetworkHa : Information about the network regional HA edge to be deployed on the VDC.
+// Models which "extend" this model:
+// - VDCEdgePrototypeNetworkHaNetworkHaOnStretched
+// - VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched
+type VDCEdgePrototypeNetworkHa struct {
+	// The name of the primary data center.
+	PrimaryDataCenterName *string `json:"primary_data_center_name,omitempty"`
+
+	// The name of the secondary data center.
+	SecondaryDataCenterName *string `json:"secondary_data_center_name,omitempty"`
+
+	// The ID of the secondary resource pool.
+	SecondaryPvdcID *string `json:"secondary_pvdc_id,omitempty"`
+}
+func (*VDCEdgePrototypeNetworkHa) isaVDCEdgePrototypeNetworkHa() bool {
+	return true
+}
+
+type VDCEdgePrototypeNetworkHaIntf interface {
+	isaVDCEdgePrototypeNetworkHa() bool
+}
+
+// UnmarshalVDCEdgePrototypeNetworkHa unmarshals an instance of VDCEdgePrototypeNetworkHa from the specified map of raw messages.
+func UnmarshalVDCEdgePrototypeNetworkHa(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VDCEdgePrototypeNetworkHa)
+	err = core.UnmarshalPrimitive(m, "primary_data_center_name", &obj.PrimaryDataCenterName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "primary_data_center_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secondary_data_center_name", &obj.SecondaryDataCenterName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secondary_data_center_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secondary_pvdc_id", &obj.SecondaryPvdcID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secondary_pvdc_id-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
@@ -7304,6 +8254,85 @@ func UnmarshalSobr(m map[string]json.RawMessage, result interface{}) (err error)
 	err = core.UnmarshalPrimitive(m, "created_at", &obj.CreatedAt)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "created_at-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched : Information about the ID of the secondary resource pool for network regional HA.
+// This model "extends" VDCEdgePrototypeNetworkHa
+type VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched struct {
+	// The ID of the secondary resource pool.
+	SecondaryPvdcID *string `json:"secondary_pvdc_id" validate:"required"`
+}
+
+// NewVDCEdgePrototypeNetworkHaNetworkHaOnNonStretched : Instantiate VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched (Generic Model Constructor)
+func (*VmwareV1) NewVDCEdgePrototypeNetworkHaNetworkHaOnNonStretched(secondaryPvdcID string) (_model *VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched, err error) {
+	_model = &VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched{
+		SecondaryPvdcID: core.StringPtr(secondaryPvdcID),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched) isaVDCEdgePrototypeNetworkHa() bool {
+	return true
+}
+
+// UnmarshalVDCEdgePrototypeNetworkHaNetworkHaOnNonStretched unmarshals an instance of VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched from the specified map of raw messages.
+func UnmarshalVDCEdgePrototypeNetworkHaNetworkHaOnNonStretched(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VDCEdgePrototypeNetworkHaNetworkHaOnNonStretched)
+	err = core.UnmarshalPrimitive(m, "secondary_pvdc_id", &obj.SecondaryPvdcID)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secondary_pvdc_id-error", common.GetComponentInfo())
+		return
+	}
+	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
+	return
+}
+
+// VDCEdgePrototypeNetworkHaNetworkHaOnStretched : Information about data centers for network regional HA.
+// This model "extends" VDCEdgePrototypeNetworkHa
+type VDCEdgePrototypeNetworkHaNetworkHaOnStretched struct {
+	// The name of the primary data center.
+	PrimaryDataCenterName *string `json:"primary_data_center_name" validate:"required"`
+
+	// The name of the secondary data center.
+	SecondaryDataCenterName *string `json:"secondary_data_center_name" validate:"required"`
+}
+
+// NewVDCEdgePrototypeNetworkHaNetworkHaOnStretched : Instantiate VDCEdgePrototypeNetworkHaNetworkHaOnStretched (Generic Model Constructor)
+func (*VmwareV1) NewVDCEdgePrototypeNetworkHaNetworkHaOnStretched(primaryDataCenterName string, secondaryDataCenterName string) (_model *VDCEdgePrototypeNetworkHaNetworkHaOnStretched, err error) {
+	_model = &VDCEdgePrototypeNetworkHaNetworkHaOnStretched{
+		PrimaryDataCenterName: core.StringPtr(primaryDataCenterName),
+		SecondaryDataCenterName: core.StringPtr(secondaryDataCenterName),
+	}
+	err = core.ValidateStruct(_model, "required parameters")
+	if err != nil {
+		err = core.SDKErrorf(err, "", "model-missing-required", common.GetComponentInfo())
+	}
+	return
+}
+
+func (*VDCEdgePrototypeNetworkHaNetworkHaOnStretched) isaVDCEdgePrototypeNetworkHa() bool {
+	return true
+}
+
+// UnmarshalVDCEdgePrototypeNetworkHaNetworkHaOnStretched unmarshals an instance of VDCEdgePrototypeNetworkHaNetworkHaOnStretched from the specified map of raw messages.
+func UnmarshalVDCEdgePrototypeNetworkHaNetworkHaOnStretched(m map[string]json.RawMessage, result interface{}) (err error) {
+	obj := new(VDCEdgePrototypeNetworkHaNetworkHaOnStretched)
+	err = core.UnmarshalPrimitive(m, "primary_data_center_name", &obj.PrimaryDataCenterName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "primary_data_center_name-error", common.GetComponentInfo())
+		return
+	}
+	err = core.UnmarshalPrimitive(m, "secondary_data_center_name", &obj.SecondaryDataCenterName)
+	if err != nil {
+		err = core.SDKErrorf(err, "", "secondary_data_center_name-error", common.GetComponentInfo())
 		return
 	}
 	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
