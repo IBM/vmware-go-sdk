@@ -1,7 +1,7 @@
 //go:build integration
 
 /**
- * (C) Copyright IBM Corp. 2024.
+ * (C) Copyright IBM Corp. 2025.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -324,7 +324,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		It(`SetOidcConfiguration(setOidcConfigurationOptions *SetOidcConfigurationOptions)`, func() {
 			setOidcConfigurationOptions := &vmwarev1.SetOidcConfigurationOptions{
 				SiteID: core.StringPtr("site_id"),
-				ContentLength: core.Int64Ptr(int64(0)),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
 
@@ -588,6 +587,7 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			}
 
 			directorSitePvdcModel := &vmwarev1.DirectorSitePVDC{
+				ComputeHaEnabled: core.BoolPtr(false),
 				ID: core.StringPtr("pvdc_id"),
 				ProviderType: vdcProviderTypeModel,
 			}
@@ -597,10 +597,16 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				Pvdc: directorSitePvdcModel,
 			}
 
+			vdcEdgePrototypeNetworkHaModel := &vmwarev1.VDCEdgePrototypeNetworkHaNetworkHaOnStretched{
+				PrimaryDataCenterName: core.StringPtr("testString"),
+				SecondaryDataCenterName: core.StringPtr("testString"),
+			}
+
 			vdcEdgePrototypeModel := &vmwarev1.VDCEdgePrototype{
 				Size: core.StringPtr("medium"),
 				Type: core.StringPtr("performance"),
 				PrivateOnly: core.BoolPtr(true),
+				NetworkHa: vdcEdgePrototypeNetworkHaModel,
 			}
 
 			resourceGroupIdentityModel := &vmwarev1.ResourceGroupIdentity{
@@ -679,7 +685,6 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 				VdcID: core.StringPtr("vdc_id"),
 				EdgeID: core.StringPtr("edge_id"),
 				ID: core.StringPtr("transit_gateway_id"),
-				ContentLength: core.Int64Ptr(int64(0)),
 				Region: core.StringPtr("jp-tok"),
 				AcceptLanguage: core.StringPtr("en-us"),
 			}
@@ -688,6 +693,91 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(transitGateway).ToNot(BeNil())
+		})
+	})
+
+	Describe(`SwapHaEdgeSites - Swap primary and secondary locations for network regional HA edges`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`SwapHaEdgeSites(swapHaEdgeSitesOptions *SwapHaEdgeSitesOptions)`, func() {
+			swapHaEdgeSitesOptions := &vmwarev1.SwapHaEdgeSitesOptions{
+				VdcID: core.StringPtr("vdc_id"),
+				EdgeID: core.StringPtr("edge_id"),
+				AcceptLanguage: core.StringPtr("en-us"),
+			}
+
+			swapHaEdgeSitesResponse, response, err := vmwareService.SwapHaEdgeSites(swapHaEdgeSitesOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(202))
+			Expect(swapHaEdgeSitesResponse).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ListLicenses - List VMware licenses`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListLicenses(listLicensesOptions *ListLicensesOptions)`, func() {
+			listLicensesOptions := &vmwarev1.ListLicensesOptions{
+			}
+
+			licenseCollection, response, err := vmwareService.ListLicenses(listLicensesOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(licenseCollection).ToNot(BeNil())
+		})
+	})
+
+	Describe(`ListUsageMeterRegistrations - List Usage Meter registrations`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`ListUsageMeterRegistrations(listUsageMeterRegistrationsOptions *ListUsageMeterRegistrationsOptions)`, func() {
+			listUsageMeterRegistrationsOptions := &vmwarev1.ListUsageMeterRegistrationsOptions{
+			}
+
+			usageMeterRegistrationCollection, response, err := vmwareService.ListUsageMeterRegistrations(listUsageMeterRegistrationsOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(usageMeterRegistrationCollection).ToNot(BeNil())
+		})
+	})
+
+	Describe(`CreateUsageMeterRegistration - Create a Usage Meter registration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`CreateUsageMeterRegistration(createUsageMeterRegistrationOptions *CreateUsageMeterRegistrationOptions)`, func() {
+			usageMeterIdentityModel := &vmwarev1.UsageMeterIdentity{
+				ID: core.StringPtr("4242b01d-2db2-4d7b-ad5d-0792c61295a8"),
+			}
+
+			createUsageMeterRegistrationOptions := &vmwarev1.CreateUsageMeterRegistrationOptions{
+				Name: core.StringPtr("string"),
+				UsageMeter: usageMeterIdentityModel,
+			}
+
+			usageMeterRegistration, response, err := vmwareService.CreateUsageMeterRegistration(createUsageMeterRegistrationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(201))
+			Expect(usageMeterRegistration).ToNot(BeNil())
+		})
+	})
+
+	Describe(`GetUsageMeterRegistration - Get a Usage Meter registration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`GetUsageMeterRegistration(getUsageMeterRegistrationOptions *GetUsageMeterRegistrationOptions)`, func() {
+			getUsageMeterRegistrationOptions := &vmwarev1.GetUsageMeterRegistrationOptions{
+				ID: core.StringPtr("testString"),
+			}
+
+			usageMeterRegistration, response, err := vmwareService.GetUsageMeterRegistration(getUsageMeterRegistrationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(200))
+			Expect(usageMeterRegistration).ToNot(BeNil())
 		})
 	})
 
@@ -800,6 +890,21 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 			Expect(err).To(BeNil())
 			Expect(response.StatusCode).To(Equal(202))
 			Expect(transitGateway).ToNot(BeNil())
+		})
+	})
+
+	Describe(`DeleteUsageMeterRegistration - Delete a Usage Meter registration`, func() {
+		BeforeEach(func() {
+			shouldSkipTest()
+		})
+		It(`DeleteUsageMeterRegistration(deleteUsageMeterRegistrationOptions *DeleteUsageMeterRegistrationOptions)`, func() {
+			deleteUsageMeterRegistrationOptions := &vmwarev1.DeleteUsageMeterRegistrationOptions{
+				ID: core.StringPtr("testString"),
+			}
+
+			response, err := vmwareService.DeleteUsageMeterRegistration(deleteUsageMeterRegistrationOptions)
+			Expect(err).To(BeNil())
+			Expect(response.StatusCode).To(Equal(204))
 		})
 	})
 })
