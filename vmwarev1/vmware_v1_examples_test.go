@@ -661,11 +661,11 @@ var _ = Describe(`VmwareV1 Examples Tests`, func() {
 			// begin-create_vdc
 
 			directorSitePvdcModel := &vmwarev1.DirectorSitePVDC{
-				ID: core.StringPtr("pvdc_id"),
+				ID: core.StringPtr("ds_pvdc_id"),
 			}
 
 			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
-				ID: core.StringPtr("site_id"),
+				ID: core.StringPtr("ds_id"),
 				Pvdc: directorSitePvdcModel,
 			}
 
