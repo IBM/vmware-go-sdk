@@ -15,7 +15,7 @@
  */
 
 /*
- * IBM OpenAPI SDK Code Generator Version: 3.104.0-b4a47c49-20250418-184351
+ * IBM OpenAPI SDK Code Generator Version: 3.97.2-fc613b62-20241203-155509
  */
 
 // Package vmwarev1 : Operations and models for the VmwareV1 service
@@ -4791,33 +4791,6 @@ func UnmarshalDirectorSitePVDC(m map[string]json.RawMessage, result interface{})
 	return
 }
 
-// DirectorSitePVDCResponse : The resource pool from the Cloud Director site in which to deploy the virtual data center (VDC).
-type DirectorSitePVDCResponse struct {
-	// A unique ID for the resource pool.
-	ID *string `json:"id" validate:"required"`
-
-	// Determines how resources are made available to the virtual data center (VDC). Required for VDCs deployed on a
-	// multitenant Cloud Director site.
-	ProviderType *VDCProviderType `json:"provider_type,omitempty"`
-}
-
-// UnmarshalDirectorSitePVDCResponse unmarshals an instance of DirectorSitePVDCResponse from the specified map of raw messages.
-func UnmarshalDirectorSitePVDCResponse(m map[string]json.RawMessage, result interface{}) (err error) {
-	obj := new(DirectorSitePVDCResponse)
-	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
-		return
-	}
-	err = core.UnmarshalModel(m, "provider_type", &obj.ProviderType, UnmarshalVDCProviderType)
-	if err != nil {
-		err = core.SDKErrorf(err, "", "provider_type-error", common.GetComponentInfo())
-		return
-	}
-	reflect.ValueOf(result).Elem().Set(reflect.ValueOf(obj))
-	return
-}
-
 // DirectorSiteReference : Back link to associated Cloud Director site resource.
 type DirectorSiteReference struct {
 	// A unique ID for the Cloud Director site in IBM Cloud.
@@ -7707,8 +7680,8 @@ type VDCDirectorSite struct {
 	// A unique ID for the Cloud Director site.
 	ID *string `json:"id" validate:"required"`
 
-	// The resource pool from the Cloud Director site in which to deploy the virtual data center (VDC).
-	Pvdc *DirectorSitePVDCResponse `json:"pvdc" validate:"required"`
+	// The resource pool within the Director Site in which to deploy the virtual data center (VDC).
+	Pvdc *DirectorSitePVDC `json:"pvdc" validate:"required"`
 
 	// The URL of the VMware Cloud Director tenant portal where this virtual data center (VDC) can be managed.
 	URL *string `json:"url" validate:"required"`
@@ -7722,7 +7695,7 @@ func UnmarshalVDCDirectorSite(m map[string]json.RawMessage, result interface{}) 
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "pvdc", &obj.Pvdc, UnmarshalDirectorSitePVDCResponse)
+	err = core.UnmarshalModel(m, "pvdc", &obj.Pvdc, UnmarshalDirectorSitePVDC)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "pvdc-error", common.GetComponentInfo())
 		return

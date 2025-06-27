@@ -583,17 +583,17 @@ var _ = Describe(`VmwareV1 Integration Tests`, func() {
 		})
 		It(`CreateVdc(createVdcOptions *CreateVdcOptions)`, func() {
 			vdcProviderTypeModel := &vmwarev1.VDCProviderType{
-				Name: core.StringPtr("paygo"),
+				Name: core.StringPtr("on_demand"),
 			}
 
 			directorSitePvdcModel := &vmwarev1.DirectorSitePVDC{
 				ComputeHaEnabled: core.BoolPtr(false),
-				ID: core.StringPtr("pvdc_id"),
+				ID: core.StringPtr("ds_pvdc_id"),
 				ProviderType: vdcProviderTypeModel,
 			}
 
 			vdcDirectorSitePrototypeModel := &vmwarev1.VDCDirectorSitePrototype{
-				ID: core.StringPtr("site_id"),
+				ID: core.StringPtr("ds_id"),
 				Pvdc: directorSitePvdcModel,
 			}
 
