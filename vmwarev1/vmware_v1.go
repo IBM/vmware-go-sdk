@@ -4777,7 +4777,6 @@ func UnmarshalDirectorSitePVDC(m map[string]json.RawMessage, result interface{})
 		err = core.SDKErrorf(err, "", "compute_ha_enabled-error", common.GetComponentInfo())
 		return
 	}
-
 	err = core.UnmarshalPrimitive(m, "id", &obj.ID)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
@@ -7681,8 +7680,8 @@ type VDCDirectorSite struct {
 	// A unique ID for the Cloud Director site.
 	ID *string `json:"id" validate:"required"`
 
-	// The resource pool from the Cloud Director site in which to deploy the virtual data center (VDC).
-	Pvdc *DirectorSitePVDCResponse `json:"pvdc" validate:"required"`
+	// The resource pool within the Director Site in which to deploy the virtual data center (VDC).
+	Pvdc *DirectorSitePVDC `json:"pvdc" validate:"required"`
 
 	// The URL of the VMware Cloud Director tenant portal where this virtual data center (VDC) can be managed.
 	URL *string `json:"url" validate:"required"`
@@ -7696,7 +7695,7 @@ func UnmarshalVDCDirectorSite(m map[string]json.RawMessage, result interface{}) 
 		err = core.SDKErrorf(err, "", "id-error", common.GetComponentInfo())
 		return
 	}
-	err = core.UnmarshalModel(m, "pvdc", &obj.Pvdc, UnmarshalDirectorSitePVDCResponse)
+	err = core.UnmarshalModel(m, "pvdc", &obj.Pvdc, UnmarshalDirectorSitePVDC)
 	if err != nil {
 		err = core.SDKErrorf(err, "", "pvdc-error", common.GetComponentInfo())
 		return
